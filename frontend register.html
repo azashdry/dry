@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Naija Market</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <a href="index.html" class="logo">Naija<span>Market</span></a>
+        <h2>Create Seller Account</h2>
+        
+        <form id="registerForm">
+            <input type="text" id="fullName" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="tel" id="phone" placeholder="Phone Number" required>
+            <input type="password" id="password" placeholder="Password - Min 6 chars" required>
+            <button type="submit" class="btn-primary">Register</button>
+        </form>
+        
+        <p>Already have account? <a href="login.html">Login</a></p>
+        <p id="errorMsg" class="error"></p>
+    </div>
+
+    <script type="module" src="js/firebase.js"></script>
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

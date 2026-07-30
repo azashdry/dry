@@ -1,0 +1,62 @@
+/* ===== ROOT VARIABLES ===== */
+:root {
+    --primary-green: #16a34a;
+    --primary-dark: #15803d;
+    --bg-white: #ffffff;
+    --text-dark: #1f2937;
+    --text-gray: #6b7280;
+    --border: #e5e7eb;
+    --card-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    --transition: all 0.3s ease;
+}
+
+/* Dark Mode */
+body.dark {
+    --bg-white: #111827;
+    --text-dark: #f9fafb;
+    --text-gray: #9ca3af;
+    --border: #374151;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg-white);
+    color: var(--text-dark);
+    line-height: 1.6;
+    transition: var(--transition);
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.navbar .container { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { font-size: 1.5rem; font-weight: 800; color: var(--primary-green); text-decoration: none; }
+.logo span { color: var(--text-dark); }
+.search-bar { flex: 1; display: flex; max-width: 500px; }
+.search-bar input { width: 100%; padding: 10px 15px; border: 1px solid var(--border); border-radius: 8px 0 0 8px; }
+.search-bar button { background: var(--primary-green); color: white; border: none; padding: 10px 15px; border-radius: 0 8px 8px 0; cursor: pointer; }
+.btn-primary { background: var(--primary-green); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: var(--transition); }
+.btn-primary:hover { background: var(--primary-dark); }
+
+/* ===== HERO ===== */
+.hero { background: linear-gradient(135deg, var(--primary-green), #22c55e); color: white; padding: 80px 20px; text-align: center; }
+.hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+.hero p { font-size: 1.1rem; margin-bottom: 20px; }
+
+/* ===== CATEGORY CARDS ===== */
+.category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
+.category-card { background: var(--bg-white); border: 1px solid var(--border); padding: 20px; text-align: center; border-radius: 12px; text-decoration: none; color: var(--text-dark); box-shadow: var(--card-shadow); transition: var(--transition); }
+.category-card:hover { transform: translateY(-5px); border-color: var(--primary-green); }
+.category-card i { font-size: 2rem; color: var(--primary-green); margin-bottom: 10px; }
+
+.footer { text-align: center; padding: 30px 0; border-top: 1px solid var(--border); margin-top: 50px; color: var(--text-gray); }

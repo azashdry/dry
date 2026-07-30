@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Market - Nigeria's Tech Marketplace</title>
+    <meta name="description" content="Buy phones, laptops, accessories from verified sellers in Farm Centre Kano, Computer Village Lagos, Banex Abuja">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-store"></i> Naija<span>Market</span>
+            </a>
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search phones, laptops, markets...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="login.html">Login</a>
+                <a href="register.html" class="btn-primary">Sell on NaijaMarket</a>
+                <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Buy Tech Direct From Verified Sellers</h1>
+            <p>From Farm Centre Kano to Computer Village Lagos. 100% Authentic Gadgets.</p>
+            <a href="#markets" class="btn-primary">Explore Markets</a>
+        </div>
+    </section>
+
+    <!-- MARKETS SECTION -->
+    <section id="markets" class="markets">
+        <div class="container">
+            <h2>Shop By Market</h2>
+            <div class="market-grid" id="marketGrid">
+                <!-- Markets will load from Firestore -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORIES SECTION -->
+    <section class="categories">
+        <div class="container">
+            <h2>Browse Categories</h2>
+            <div class="category-grid">
+                <a href="category.html?cat=phones" class="category-card"><i class="fas fa-mobile-alt"></i> Phones</a>
+                <a href="category.html?cat=laptops" class="category-card"><i class="fas fa-laptop"></i> Laptops</a>
+                <a href="category.html?cat=accessories" class="category-card"><i class="fas fa-headphones"></i> Accessories</a>
+                <a href="category.html?cat=gaming" class="category-card"><i class="fas fa-gamepad"></i> Gaming</a>
+                <a href="category.html?cat=cctv" class="category-card"><i class="fas fa-video"></i> CCTV</a>
+                <a href="category.html?cat=repair" class="category-card"><i class="fas fa-tools"></i> Repair Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Naija Market. Built for Nigerian Tech Sellers.</p>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script type="module" src="js/firebase.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
