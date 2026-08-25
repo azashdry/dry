@@ -889,9 +889,7 @@ button{
 <body>
 
 
-<!-- ================================
-     LOGIN
-================================ -->
+<!-- LOGIN -->
 
 <section id="loginScreen">
 
@@ -956,10 +954,7 @@ Login
 </section>
 
 
-
-<!-- ================================
-     ADMIN APP
-================================ -->
+<!-- ADMIN APP -->
 
 <div id="adminApp">
 
@@ -1007,7 +1002,6 @@ Logout
 </header>
 
 
-
 <main class="admin-container">
 
 
@@ -1025,7 +1019,6 @@ Loading account...
 
 
 <div id="dashboardMessage" class="message"></div>
-
 
 
 <!-- COMPANY -->
@@ -1053,7 +1046,6 @@ Company
 </div>
 
 </div>
-
 
 
 <!-- SUBSCRIPTION -->
@@ -1088,7 +1080,6 @@ Loading
 </div>
 
 
-
 <div class="subscription-grid">
 
 
@@ -1097,7 +1088,7 @@ Loading
 <span>Plan</span>
 
 <strong id="subscriptionPlan">
-Premium
+--
 </strong>
 
 </div>
@@ -1108,7 +1099,7 @@ Premium
 <span>Amount</span>
 
 <strong id="subscriptionAmount">
-₦35,000
+--
 </strong>
 
 </div>
@@ -1169,7 +1160,7 @@ class="days-number"
 <span>Auto Renew</span>
 
 <strong id="subscriptionAutoRenew">
-Off
+--
 </strong>
 
 </div>
@@ -1188,7 +1179,6 @@ Off
 </div>
 
 
-
 <div class="subscription-actions">
 
 <button
@@ -1203,12 +1193,10 @@ Renew Subscription
 
 
 <p class="subscription-note">
-Your subscription status is calculated from Firestore.
-Paystack payment will be connected when live credentials are ready.
+Subscription plan and amount are loaded directly from Firestore.
 </p>
 
 </section>
-
 
 
 <!-- STATS -->
@@ -1261,9 +1249,7 @@ Paystack payment will be connected when live credentials are ready.
 </section>
 
 
-
 <div class="dashboard-grid">
-
 
 
 <!-- LEFT -->
@@ -1303,7 +1289,6 @@ required
 >
 
 </div>
-
 
 
 <div class="form-row">
@@ -1346,7 +1331,6 @@ Shop
 </div>
 
 
-
 <div class="form-group">
 
 <label>
@@ -1374,7 +1358,6 @@ Rented
 </div>
 
 
-
 <div class="form-group">
 
 <label>
@@ -1396,7 +1379,6 @@ For Rent
 </div>
 
 
-
 <div class="form-group">
 
 <label>
@@ -1411,7 +1393,6 @@ required
 >
 
 </div>
-
 
 
 <div class="form-group">
@@ -1429,9 +1410,6 @@ required
 
 </div>
 
-
-
-<!-- BEDROOM / BATHROOM -->
 
 <div class="form-row">
 
@@ -1469,12 +1447,8 @@ value="0"
 
 </div>
 
-
 </div>
 
-
-
-<!-- AREA -->
 
 <div class="form-group">
 
@@ -1491,7 +1465,6 @@ placeholder="e.g. 1200 sqm"
 </div>
 
 
-
 <!-- FIVE IMAGES -->
 
 <div class="image-section">
@@ -1504,9 +1477,6 @@ Property Photos
 Add up to 5 photos. Image 1 will be used as the main property image.
 </div>
 
-
-
-<!-- IMAGE 1 -->
 
 <div class="image-input-group">
 
@@ -1534,9 +1504,6 @@ class="image-preview"
 </div>
 
 
-
-<!-- IMAGE 2 -->
-
 <div class="image-input-group">
 
 <label for="propertyImage2">
@@ -1562,9 +1529,6 @@ class="image-preview"
 
 </div>
 
-
-
-<!-- IMAGE 3 -->
 
 <div class="image-input-group">
 
@@ -1592,9 +1556,6 @@ class="image-preview"
 </div>
 
 
-
-<!-- IMAGE 4 -->
-
 <div class="image-input-group">
 
 <label for="propertyImage4">
@@ -1620,9 +1581,6 @@ class="image-preview"
 
 </div>
 
-
-
-<!-- IMAGE 5 -->
 
 <div class="image-input-group">
 
@@ -1652,9 +1610,6 @@ class="image-preview"
 </div>
 
 
-
-<!-- DESCRIPTION -->
-
 <div class="form-group">
 
 <label>
@@ -1669,7 +1624,6 @@ placeholder="Property description..."
 </div>
 
 
-
 <div class="checkbox-row">
 
 <input
@@ -1682,7 +1636,6 @@ Featured Property
 </label>
 
 </div>
-
 
 
 <button
@@ -1706,7 +1659,6 @@ Cancel Edit
 </form>
 
 </section>
-
 
 
 <!-- COMPANY SETTINGS -->
@@ -1743,7 +1695,6 @@ required
 </div>
 
 
-
 <div class="form-group">
 
 <label>
@@ -1757,7 +1708,6 @@ placeholder="https://..."
 >
 
 </div>
-
 
 
 <div class="logo-preview">
@@ -1776,7 +1726,6 @@ No logo
 </div>
 
 
-
 <div class="form-group">
 
 <label>
@@ -1790,7 +1739,6 @@ placeholder="+234..."
 >
 
 </div>
-
 
 
 <div class="form-group">
@@ -1808,7 +1756,6 @@ placeholder="+234..."
 </div>
 
 
-
 <div class="form-group">
 
 <label>
@@ -1822,7 +1769,6 @@ placeholder="info@example.com"
 >
 
 </div>
-
 
 
 <div class="form-group">
@@ -1839,7 +1785,6 @@ placeholder="Company address..."
 </div>
 
 
-
 <div class="form-group">
 
 <label>
@@ -1852,7 +1797,6 @@ placeholder="About the company..."
 ></textarea>
 
 </div>
-
 
 
 <button
@@ -1868,7 +1812,6 @@ Save Company Settings
 </section>
 
 </div>
-
 
 
 <!-- RIGHT -->
@@ -1909,7 +1852,6 @@ Loading properties...
 </div>
 
 
-
 <!-- RENEW MODAL -->
 
 <div
@@ -1924,8 +1866,8 @@ Renew Subscription
 </h2>
 
 <p>
-Your EstatePro plan is
-<strong>Premium</strong>.
+Your current EstatePro plan is
+<strong id="renewPlanName">--</strong>.
 </p>
 
 
@@ -1939,7 +1881,9 @@ Checking subscription...
 
 <p>
 Subscription price:
-<strong>₦35,000</strong>
+<strong id="renewAmount">
+--
+</strong>
 </p>
 
 
@@ -1973,7 +1917,6 @@ Continue
 </div>
 
 </div>
-
 
 
 <script type="module">
@@ -2568,9 +2511,7 @@ async function loadCompanySettings(){
 
     if(!snapshot.exists()){
 
-        currentCompany = {
-            name:"EstatePro"
-        };
+        currentCompany = {};
 
         updateCompanyUI(
             currentCompany
@@ -2930,12 +2871,92 @@ async function loadSubscription(){
     }
 
     currentSubscription = {
-        id:snapshot.id,
+
+        id:
+        snapshot.id,
+
         ...snapshot.data()
+
     };
+
+    console.log(
+        "Subscription loaded from Firestore:",
+        currentSubscription
+    );
 
     renderSubscription(
         currentSubscription
+    );
+
+}
+
+
+/* =====================================================
+   SUBSCRIPTION AMOUNT
+   IMPORTANT:
+   NO DEFAULT PRICE
+===================================================== */
+
+function getSubscriptionAmount(data){
+
+    if(!data){
+        return null;
+    }
+
+    const rawAmount =
+    data.amount;
+
+    if(
+        rawAmount === undefined ||
+        rawAmount === null ||
+        rawAmount === ""
+    ){
+
+        return null;
+
+    }
+
+    const numericAmount =
+    Number(
+        String(rawAmount)
+        .replace(/[₦,\s]/g,"")
+    );
+
+    if(
+        !Number.isFinite(
+            numericAmount
+        )
+    ){
+
+        return null;
+
+    }
+
+    return numericAmount;
+
+}
+
+
+/* =====================================================
+   FORMAT SUBSCRIPTION AMOUNT
+===================================================== */
+
+function formatSubscriptionAmount(data){
+
+    const amount =
+    getSubscriptionAmount(data);
+
+    if(amount === null){
+
+        return "Price not set";
+
+    }
+
+    return (
+        "₦" +
+        amount.toLocaleString(
+            "en-NG"
+        )
     );
 
 }
@@ -3088,6 +3109,8 @@ function getEffectiveStatus(data){
 
 /* =====================================================
    NO SUBSCRIPTION
+   NO HARDCODED PLAN
+   NO HARDCODED PRICE
 ===================================================== */
 
 function renderNoSubscription(){
@@ -3108,12 +3131,12 @@ function renderNoSubscription(){
     document.getElementById(
         "subscriptionPlan"
     ).textContent =
-    "Premium";
+    "Not configured";
 
     document.getElementById(
         "subscriptionAmount"
     ).textContent =
-    "₦35,000";
+    "Price not set";
 
     document.getElementById(
         "subscriptionDays"
@@ -3139,6 +3162,16 @@ function renderNoSubscription(){
         "subscriptionAutoRenew"
     ).textContent =
     "Off";
+
+    document.getElementById(
+        "renewPlanName"
+    ).textContent =
+    "--";
+
+    document.getElementById(
+        "renewAmount"
+    ).textContent =
+    "Price not set";
 
     const status =
     document.getElementById(
@@ -3166,17 +3199,32 @@ function renderNoSubscription(){
 
 function renderSubscription(data){
 
+    /*
+    PLAN COMES FROM FIRESTORE
+    */
+
     const plan =
     String(
         data.plan ||
-        "premium"
-    );
+        data.planName ||
+        "Not configured"
+    ).trim();
+
+
+    /*
+    AMOUNT COMES FROM FIRESTORE
+
+    There is NO:
+    35000
+    35000 fallback
+    hardcoded price
+    */
 
     const amount =
-    Number(
-        data.amount ||
-        35000
+    getSubscriptionAmount(
+        data
     );
+
 
     const paymentStatus =
     String(
@@ -3184,32 +3232,43 @@ function renderSubscription(data){
         "pending"
     );
 
+
     const daysLeft =
     calculateDaysLeft(
         data.expiryDate
     );
 
+
     const effectiveStatus =
-    getEffectiveStatus(data);
+    getEffectiveStatus(
+        data
+    );
+
 
     document.getElementById(
         "subscriptionPlan"
     ).textContent =
-    plan.charAt(0).toUpperCase() +
-    plan.slice(1);
+    plan;
+
 
     document.getElementById(
         "subscriptionAmount"
     ).textContent =
+    amount === null
+    ?
+    "Price not set"
+    :
     "₦" +
     amount.toLocaleString(
         "en-NG"
     );
 
+
     document.getElementById(
         "subscriptionPayment"
     ).textContent =
     paymentStatus;
+
 
     document.getElementById(
         "subscriptionStart"
@@ -3218,6 +3277,7 @@ function renderSubscription(data){
         data.startDate
     );
 
+
     document.getElementById(
         "subscriptionExpiry"
     ).textContent =
@@ -3225,36 +3285,68 @@ function renderSubscription(data){
         data.expiryDate
     );
 
+
     document.getElementById(
         "subscriptionAutoRenew"
     ).textContent =
     data.autoRenew === true
-    ? "On"
-    : "Off";
+    ?
+    "On"
+    :
+    "Off";
+
+
+    /*
+    UPDATE RENEW MODAL FROM SAME FIRESTORE DATA
+    */
+
+    document.getElementById(
+        "renewPlanName"
+    ).textContent =
+    plan;
+
+
+    document.getElementById(
+        "renewAmount"
+    ).textContent =
+    amount === null
+    ?
+    "Price not set"
+    :
+    "₦" +
+    amount.toLocaleString(
+        "en-NG"
+    );
+
 
     const statusElement =
     document.getElementById(
         "subscriptionStatus"
     );
 
+
     const daysBox =
     document.getElementById(
         "daysLeftBox"
     );
+
 
     const card =
     document.getElementById(
         "subscriptionCard"
     );
 
+
     daysBox.classList.remove(
         "expired-days"
     );
+
 
     card.classList.remove(
         "active-card",
         "expired-card"
     );
+
 
     if(
         effectiveStatus === "active"
@@ -3302,10 +3394,12 @@ function renderSubscription(data){
 
     }
 
+
     const daysElement =
     document.getElementById(
         "subscriptionDays"
     );
+
 
     if(daysLeft === null){
 
@@ -3361,28 +3455,78 @@ renewSubscriptionButton.addEventListener(
         "renewModalMessage"
     );
 
-    const status =
-    currentSubscription
+
+    /*
+    ALWAYS USE CURRENT FIRESTORE DATA
+    */
+
+    if(!currentSubscription){
+
+        showMessage(
+            "renewModalMessage",
+            "Subscription information is not available.",
+            "error"
+        );
+
+        renewModal.classList.add(
+            "show"
+        );
+
+        return;
+
+    }
+
+
+    const amount =
+    getSubscriptionAmount(
+        currentSubscription
+    );
+
+
+    const plan =
+    String(
+        currentSubscription.plan ||
+        currentSubscription.planName ||
+        "Not configured"
+    );
+
+
+    document.getElementById(
+        "renewPlanName"
+    ).textContent =
+    plan;
+
+
+    document.getElementById(
+        "renewAmount"
+    ).textContent =
+    amount === null
     ?
+    "Price not set"
+    :
+    "₦" +
+    amount.toLocaleString(
+        "en-NG"
+    );
+
+
+    const status =
     getEffectiveStatus(
         currentSubscription
-    )
-    :
-    "expired";
+    );
+
 
     const days =
-    currentSubscription
-    ?
     calculateDaysLeft(
         currentSubscription.expiryDate
-    )
-    :
-    null;
+    );
+
 
     const currentStatus =
     document.getElementById(
         "renewCurrentStatus"
     );
+
 
     if(status === "active"){
 
@@ -3410,6 +3554,33 @@ renewSubscriptionButton.addEventListener(
 
     }
 
+
+    /*
+    Do not allow payment if Super Admin
+    has not configured an amount.
+    */
+
+    if(amount === null){
+
+        startPaymentButton.disabled =
+        true;
+
+        showMessage(
+            "renewModalMessage",
+            "Subscription price has not been configured by Super Admin.",
+            "error"
+        );
+
+    }
+
+    else{
+
+        startPaymentButton.disabled =
+        false;
+
+    }
+
+
     renewModal.classList.add(
         "show"
     );
@@ -3424,6 +3595,9 @@ cancelRenewButton.addEventListener(
     renewModal.classList.remove(
         "show"
     );
+
+    startPaymentButton.disabled =
+    false;
 
 });
 
@@ -3441,6 +3615,9 @@ event=>{
             "show"
         );
 
+        startPaymentButton.disabled =
+        false;
+
     }
 
 });
@@ -3454,9 +3631,54 @@ async()=>{
         "renewModalMessage"
     );
 
+
+    if(!currentSubscription){
+
+        showMessage(
+            "renewModalMessage",
+            "Subscription information is unavailable.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const amount =
+    getSubscriptionAmount(
+        currentSubscription
+    );
+
+
+    if(amount === null){
+
+        showMessage(
+            "renewModalMessage",
+            "Subscription price is not configured in Firestore.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /*
+    PAYMENT WILL USE THIS FIRESTORE AMOUNT.
+    NO FIXED PRICE.
+    */
+
+    console.log(
+        "Renewal amount from Firestore:",
+        amount
+    );
+
+
     showMessage(
         "renewModalMessage",
-        "Paystack live payment is not connected yet. No subscription was changed.",
+        "Paystack live payment is not connected yet. Amount ready from Firestore: ₦" +
+        amount.toLocaleString("en-NG"),
         "warning"
     );
 
@@ -3733,6 +3955,7 @@ async event=>{
         "propertyArea"
     ).value.trim();
 
+
     if(bedrooms > 20){
 
         showMessage(
@@ -3744,6 +3967,7 @@ async event=>{
         return;
 
     }
+
 
     if(bathrooms > 20){
 
@@ -3757,11 +3981,14 @@ async event=>{
 
     }
 
+
     savePropertyButton.disabled =
     true;
 
+
     const wasEditing =
     Boolean(editingPropertyId);
+
 
     savePropertyButton.textContent =
     wasEditing
@@ -3770,18 +3997,12 @@ async event=>{
     :
     "Saving...";
 
+
     try{
 
         const images =
         getPropertyImages();
 
-        /*
-        IMPORTANT:
-
-        imageUrl = first/main image
-        images   = all property images
-        area     = property area
-        */
 
         const propertyData = {
 
@@ -3849,6 +4070,7 @@ async event=>{
                 propertyData
             );
 
+
             showMessage(
                 "propertyMessage",
                 "Property updated successfully.",
@@ -3874,10 +4096,12 @@ async event=>{
 
             };
 
+
             await addDoc(
                 getPropertiesRef(),
                 newProperty
             );
+
 
             showMessage(
                 "propertyMessage",
@@ -3886,6 +4110,7 @@ async event=>{
             );
 
         }
+
 
         resetPropertyForm();
 
@@ -3937,6 +4162,7 @@ function editProperty(id){
         item.id === id
     );
 
+
     if(!property){
 
         showMessage(
@@ -3948,6 +4174,7 @@ function editProperty(id){
         return;
 
     }
+
 
     editingPropertyId =
     id;
@@ -4013,10 +4240,6 @@ function editProperty(id){
     );
 
 
-    /*
-    AREA
-    */
-
     document.getElementById(
         "propertyArea"
     ).value =
@@ -4025,17 +4248,8 @@ function editProperty(id){
     "";
 
 
-    /*
-    SUPPORT:
-
-    New:
-    images: []
-
-    Old:
-    imageUrl / image
-    */
-
     let propertyImages = [];
+
 
     if(
         Array.isArray(
@@ -4146,10 +4360,6 @@ function resetPropertyForm(){
     0;
 
 
-    /*
-    RESET AREA
-    */
-
     document.getElementById(
         "propertyArea"
     ).value =
@@ -4211,6 +4421,7 @@ function getImageCount(property){
         ).length;
 
     }
+
 
     return (
         property.imageUrl ||
@@ -4324,9 +4535,11 @@ function renderProperties(
 
             let statusClass = "";
 
+
             if(status === "sold"){
                 statusClass = "sold";
             }
+
 
             if(status === "rented"){
                 statusClass = "rented";
@@ -4553,6 +4766,7 @@ async function deleteProperty(id){
         item.id === id
     );
 
+
     const title =
     property?.title ||
     "this property";
@@ -4777,6 +4991,7 @@ async()=>{
     refreshButton.textContent =
     "Refreshing...";
 
+
     try{
 
         await loadAdminProfile(
@@ -4788,6 +5003,7 @@ async()=>{
         await loadSubscription();
 
         await loadProperties();
+
 
         showMessage(
             "dashboardMessage",
@@ -4803,6 +5019,7 @@ async()=>{
             "Refresh error:",
             error
         );
+
 
         showMessage(
             "dashboardMessage",
@@ -4843,6 +5060,10 @@ window.estatePro = {
 
     getCurrentSubscription:
     ()=>currentSubscription,
+
+    getSubscriptionAmount,
+
+    formatSubscriptionAmount,
 
     loadProperties,
 

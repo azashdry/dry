@@ -48,10 +48,7 @@ button{
     display:none!important;
 }
 
-
-/* ================================
-   HEADER
-================================ */
+/* HEADER */
 
 .header{
     background:#fff;
@@ -65,7 +62,6 @@ button{
     max-width:1100px;
     margin:auto;
     padding:14px 18px;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -81,18 +77,13 @@ button{
 .brand-icon{
     width:44px;
     height:44px;
-
     border-radius:12px;
-
     display:grid;
     place-items:center;
-
     background:#ecfdf5;
     color:#0f766e;
-
     font-weight:800;
     font-size:20px;
-
     overflow:hidden;
 }
 
@@ -132,18 +123,13 @@ button{
     border:1px solid #d7dde3;
     background:#fff;
     color:#334155;
-
     padding:8px 12px;
     border-radius:8px;
-
     font-size:11px;
     font-weight:700;
 }
 
-
-/* ================================
-   MAIN
-================================ */
+/* MAIN */
 
 .main{
     max-width:1100px;
@@ -157,32 +143,23 @@ button{
 
 .page-heading h1{
     margin:0 0 7px;
-
     font-size:clamp(28px,5vw,40px);
 }
 
 .page-heading p{
     margin:0;
-
     color:#64748b;
-
     line-height:1.6;
     font-size:14px;
 }
 
-
-/* ================================
-   LOADING
-================================ */
+/* LOADING */
 
 .loading{
     background:#fff;
-
     border:1px solid #e5e7eb;
     border-radius:18px;
-
     padding:55px 20px;
-
     text-align:center;
     color:#64748b;
 }
@@ -190,14 +167,10 @@ button{
 .spinner{
     width:35px;
     height:35px;
-
     margin:0 auto 15px;
-
     border:3px solid #d1fae5;
     border-top-color:#0f766e;
-
     border-radius:50%;
-
     animation:spin .8s linear infinite;
 }
 
@@ -207,19 +180,13 @@ button{
     }
 }
 
-
-/* ================================
-   ERROR
-================================ */
+/* ERROR */
 
 .error{
     background:#fff;
-
     border:1px solid #fecaca;
     border-radius:18px;
-
     padding:30px;
-
     color:#991b1b;
     text-align:center;
 }
@@ -232,88 +199,40 @@ button{
     line-height:1.6;
 }
 
-
-/* ================================
-   SUCCESS
-================================ */
+/* SUCCESS */
 
 .success{
     background:#ecfdf5;
-
     border:1px solid #a7f3d0;
-
     border-radius:14px;
-
     padding:15px;
-
     margin-bottom:18px;
-
     color:#065f46;
-
     font-size:13px;
     line-height:1.6;
 }
 
-
-/* ================================
-   WARNING
-================================ */
-
-.warning{
-    background:#fffbeb;
-
-    border:1px solid #fde68a;
-
-    border-radius:14px;
-
-    padding:15px;
-
-    margin-bottom:18px;
-
-    color:#92400e;
-
-    font-size:13px;
-    line-height:1.6;
-}
-
-
-/* ================================
-   SUBSCRIPTION CARD
-================================ */
+/* SUBSCRIPTION */
 
 .subscription-card{
     background:#fff;
-
     border:1px solid #e5e7eb;
     border-radius:20px;
-
     overflow:hidden;
-
-    box-shadow:
-        0 10px 35px rgba(15,23,42,.06);
-
+    box-shadow:0 10px 35px rgba(15,23,42,.06);
     margin-bottom:30px;
 }
 
 .subscription-top{
-    background:
-        linear-gradient(
-            135deg,
-            #0f766e,
-            #115e59
-        );
-
+    background:linear-gradient(135deg,#0f766e,#115e59);
     color:#fff;
-
     padding:28px;
 }
 
 .subscription-top-row{
     display:flex;
-
     justify-content:space-between;
     align-items:flex-start;
-
     gap:20px;
 }
 
@@ -336,20 +255,14 @@ button{
 
 .status{
     display:inline-flex;
-
     align-items:center;
     gap:6px;
-
     padding:7px 11px;
-
     border-radius:999px;
-
     background:#dcfce7;
     color:#166534;
-
     font-size:11px;
     font-weight:800;
-
     text-transform:uppercase;
 }
 
@@ -363,10 +276,7 @@ button{
     color:#92400e;
 }
 
-
-/* ================================
-   BODY
-================================ */
+/* BODY */
 
 .subscription-body{
     padding:28px;
@@ -374,116 +284,77 @@ button{
 
 .price-row{
     display:flex;
-
     align-items:flex-end;
-
     gap:8px;
-
     margin-bottom:25px;
 }
 
 .price{
     font-size:34px;
-
     font-weight:800;
-
     color:#0f766e;
 }
 
 .price-period{
     color:#64748b;
-
     font-size:13px;
-
     margin-bottom:7px;
 }
 
-
-/* ================================
-   INFO GRID
-================================ */
+/* INFO */
 
 .info-grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:12px;
-
     margin-bottom:25px;
 }
 
 .info-box{
     background:#f8fafc;
-
     border:1px solid #e2e8f0;
-
     border-radius:12px;
-
     padding:15px;
 }
 
 .info-label{
     color:#64748b;
-
     font-size:11px;
-
     margin-bottom:6px;
 }
 
 .info-value{
     font-size:14px;
-
     font-weight:700;
-
     word-break:break-word;
 }
 
-
-/* ================================
-   EXTRA INFO
-================================ */
-
 .extra-grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:12px;
-
     margin-bottom:25px;
 }
 
 .extra-box{
     background:#fff;
-
     border:1px solid #e2e8f0;
-
     border-radius:12px;
-
     padding:14px;
 }
 
 .extra-label{
     color:#64748b;
-
     font-size:10px;
-
     margin-bottom:6px;
 }
 
 .extra-value{
     font-size:13px;
-
     font-weight:700;
 }
 
-
-/* ================================
-   PROGRESS
-================================ */
+/* PROGRESS */
 
 .progress-wrapper{
     margin-bottom:25px;
@@ -491,39 +362,26 @@ button{
 
 .progress-header{
     display:flex;
-
     justify-content:space-between;
-
     gap:10px;
-
     margin-bottom:8px;
-
     font-size:12px;
-
     color:#64748b;
 }
 
 .progress{
     width:100%;
-
     height:9px;
-
     background:#e2e8f0;
-
     border-radius:999px;
-
     overflow:hidden;
 }
 
 .progress-bar{
     height:100%;
-
     width:0;
-
     background:#0f766e;
-
     border-radius:999px;
-
     transition:width .5s ease;
 }
 
@@ -535,30 +393,20 @@ button{
     background:#f59e0b;
 }
 
-
-/* ================================
-   ACTIONS
-================================ */
+/* ACTIONS */
 
 .actions{
     display:flex;
-
     flex-wrap:wrap;
-
     gap:10px;
 }
 
 .primary-button{
     border:0;
-
     background:#0f766e;
-
     color:#fff;
-
     padding:12px 18px;
-
     border-radius:9px;
-
     font-weight:700;
 }
 
@@ -568,28 +416,19 @@ button{
 
 .primary-button:disabled{
     opacity:.6;
-
     cursor:not-allowed;
 }
 
 .secondary-button{
     border:1px solid #d7dde3;
-
     background:#fff;
-
     color:#334155;
-
     padding:11px 18px;
-
     border-radius:9px;
-
     font-weight:700;
 }
 
-
-/* ================================
-   PLANS
-================================ */
+/* PLANS */
 
 .section-title{
     margin-bottom:18px;
@@ -597,48 +436,33 @@ button{
 
 .section-title h2{
     margin:0 0 5px;
-
     font-size:24px;
 }
 
 .section-title p{
     margin:0;
-
     color:#64748b;
-
     font-size:13px;
 }
 
 .plans{
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:18px;
 }
 
 .plan{
     background:#fff;
-
     border:1px solid #e5e7eb;
-
     border-radius:17px;
-
     padding:22px;
-
     position:relative;
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
+    transition:transform .2s ease,box-shadow .2s ease;
 }
 
 .plan:hover{
     transform:translateY(-3px);
-
-    box-shadow:
-        0 12px 30px rgba(15,23,42,.08);
+    box-shadow:0 12px 30px rgba(15,23,42,.08);
 }
 
 .plan.current{
@@ -647,66 +471,46 @@ button{
 
 .current-label{
     position:absolute;
-
     top:14px;
     right:14px;
-
     padding:5px 8px;
-
     background:#ecfdf5;
-
     color:#0f766e;
-
     border-radius:6px;
-
     font-size:9px;
-
     font-weight:800;
-
     text-transform:uppercase;
 }
 
 .plan-name-small{
     font-size:18px;
-
     font-weight:800;
-
     margin-bottom:8px;
 }
 
 .plan-price{
     font-size:26px;
-
     font-weight:800;
-
     color:#0f766e;
-
     margin-bottom:3px;
 }
 
 .plan-period{
     color:#64748b;
-
     font-size:11px;
-
     margin-bottom:18px;
 }
 
 .features{
     list-style:none;
-
     padding:0;
-
     margin:0 0 20px;
 }
 
 .features li{
     font-size:12px;
-
     color:#475569;
-
     padding:7px 0;
-
     border-bottom:1px solid #f1f5f9;
 }
 
@@ -716,17 +520,11 @@ button{
 
 .choose-plan{
     width:100%;
-
     border:1px solid #0f766e;
-
     background:#fff;
-
     color:#0f766e;
-
     padding:10px;
-
     border-radius:8px;
-
     font-weight:700;
 }
 
@@ -736,29 +534,19 @@ button{
 
 .choose-plan.current-button{
     background:#0f766e;
-
     color:#fff;
 }
 
-
-/* ================================
-   MODAL
-================================ */
+/* MODAL */
 
 .modal{
     position:fixed;
-
     inset:0;
-
     z-index:1000;
-
     display:none;
-
     align-items:center;
     justify-content:center;
-
     padding:18px;
-
     background:rgba(15,23,42,.7);
 }
 
@@ -768,35 +556,23 @@ button{
 
 .modal-box{
     width:100%;
-
     max-width:500px;
-
     background:#fff;
-
     border-radius:18px;
-
     padding:25px;
-
     position:relative;
 }
 
 .close{
     position:absolute;
-
     right:12px;
     top:12px;
-
     width:35px;
     height:35px;
-
     border:0;
-
     border-radius:50%;
-
     background:#f1f5f9;
-
     color:#334155;
-
     font-size:20px;
 }
 
@@ -806,27 +582,20 @@ button{
 
 .modal p{
     color:#64748b;
-
     font-size:13px;
-
     line-height:1.6;
 }
 
 .selected-plan{
     background:#f8fafc;
-
     border:1px solid #e2e8f0;
-
     border-radius:12px;
-
     padding:15px;
-
     margin:18px 0;
 }
 
 .selected-plan strong{
     display:block;
-
     margin-bottom:5px;
 }
 
@@ -836,23 +605,16 @@ button{
 
 .email-box label{
     display:block;
-
     font-size:12px;
-
     font-weight:700;
-
     margin-bottom:7px;
 }
 
 .email-box input{
     width:100%;
-
     padding:12px;
-
     border:1px solid #cbd5e1;
-
     border-radius:9px;
-
     outline:none;
 }
 
@@ -862,46 +624,31 @@ button{
 
 .modal-actions{
     display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns:1fr 1fr;
     gap:10px;
 }
 
-
-/* ================================
-   FOOTER
-================================ */
+/* FOOTER */
 
 .footer{
     background:#0f172a;
-
     color:#fff;
-
     text-align:center;
-
     padding:25px 18px;
 }
 
 .footer p{
     margin:5px 0;
-
     color:#94a3b8;
-
     font-size:11px;
 }
 
-
-/* ================================
-   RESPONSIVE
-================================ */
+/* RESPONSIVE */
 
 @media(max-width:1000px){
 
     .plans{
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
     }
 
 }
@@ -909,13 +656,11 @@ button{
 @media(max-width:850px){
 
     .info-grid{
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
     }
 
     .extra-grid{
-        grid-template-columns:
-            1fr 1fr;
+        grid-template-columns:1fr 1fr;
     }
 
 }
@@ -947,18 +692,15 @@ button{
     }
 
     .info-grid{
-        grid-template-columns:
-            1fr 1fr;
+        grid-template-columns:1fr 1fr;
     }
 
     .extra-grid{
-        grid-template-columns:
-            1fr;
+        grid-template-columns:1fr;
     }
 
     .plans{
-        grid-template-columns:
-            1fr;
+        grid-template-columns:1fr;
     }
 
     .actions{
@@ -970,8 +712,7 @@ button{
     }
 
     .modal-actions{
-        grid-template-columns:
-            1fr;
+        grid-template-columns:1fr;
     }
 
     .user-email{
@@ -984,13 +725,7 @@ button{
 
 </head>
 
-
 <body>
-
-
-<!-- ==========================================
-     HEADER
-========================================== -->
 
 <header class="header">
 
@@ -1022,7 +757,6 @@ button{
 
         </div>
 
-
         <div class="user-area">
 
             <span
@@ -1046,13 +780,7 @@ button{
 
 </header>
 
-
-<!-- ==========================================
-     MAIN
-========================================== -->
-
 <main class="main">
-
 
     <div class="page-heading">
 
@@ -1067,9 +795,7 @@ button{
 
     </div>
 
-
     <div id="message"></div>
-
 
     <div id="app">
 
@@ -1082,7 +808,6 @@ button{
         </div>
 
     </div>
-
 
     <section>
 
@@ -1098,7 +823,6 @@ button{
 
         </div>
 
-
         <div
             id="plans"
             class="plans"
@@ -1106,13 +830,7 @@ button{
 
     </section>
 
-
 </main>
-
-
-<!-- ==========================================
-     FOOTER
-========================================== -->
 
 <footer class="footer">
 
@@ -1126,18 +844,12 @@ button{
 
 </footer>
 
-
-<!-- ==========================================
-     PAYMENT MODAL
-========================================== -->
-
 <div
     id="renewModal"
     class="modal"
 >
 
     <div class="modal-box">
-
 
         <button
             id="closeModal"
@@ -1147,29 +859,23 @@ button{
             ×
         </button>
 
-
         <h2>
             Subscription Payment
         </h2>
-
 
         <p>
             Enter the company's email address
             to continue with Paystack payment.
         </p>
 
-
         <div
             id="selectedPlan"
             class="selected-plan"
         ></div>
 
-
         <div class="email-box">
 
-            <label
-                for="customerEmail"
-            >
+            <label for="customerEmail">
                 Email Address
             </label>
 
@@ -1182,7 +888,6 @@ button{
 
         </div>
 
-
         <div class="modal-actions">
 
             <button
@@ -1192,7 +897,6 @@ button{
             >
                 Cancel
             </button>
-
 
             <button
                 id="confirmRenew"
@@ -1204,28 +908,16 @@ button{
 
         </div>
 
-
     </div>
 
 </div>
 
-
-<!-- ==========================================
-     PAYSTACK
-========================================== -->
-
 <script src="https://js.paystack.co/v2/inline.js"></script>
-
-
-<!-- ==========================================
-     FIREBASE MODULE
-========================================== -->
 
 <script type="module">
 
-
 /* ==========================================
-   FIREBASE IMPORTS
+   FIREBASE
 ========================================== */
 
 import {
@@ -1234,15 +926,15 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-
 import {
     getFirestore,
     doc,
-    getDoc
+    getDoc,
+    collection,
+    getDocs
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
 
 import {
     getAuth,
@@ -1292,16 +984,14 @@ const PAYSTACK_PUBLIC_KEY =
 
 
 /* ==========================================
-   INITIALIZE
+   INIT
 ========================================== */
 
 const firebaseApp =
     initializeApp(firebaseConfig);
 
-
 const db =
     getFirestore(firebaseApp);
-
 
 const auth =
     getAuth(firebaseApp);
@@ -1340,7 +1030,7 @@ const logoutButton =
 
 
 /* ==========================================
-   COMPANY ID FROM URL
+   COMPANY ID
 ========================================== */
 
 function getRequestedCompanyId(){
@@ -1362,19 +1052,13 @@ function getRequestedCompanyId(){
 
     }
 
-    return "Company_001";
+    return null;
 
 }
 
 
 const requestedCompanyId =
     getRequestedCompanyId();
-
-
-console.log(
-    "Requested Company ID:",
-    requestedCompanyId
-);
 
 
 /* ==========================================
@@ -1395,107 +1079,7 @@ let currentPlan = null;
 
 let selectedPlanData = null;
 
-
-/* ==========================================
-   PLANS
-========================================== */
-
-const plans = [
-
-    {
-        id:"starter",
-
-        name:"Starter",
-
-        price:10000,
-
-        days:30,
-
-        features:[
-            "Professional property website",
-            "Property listings",
-            "Company information",
-            "WhatsApp contact",
-            "Basic support"
-        ]
-
-    },
-
-
-    {
-        id:"professional",
-
-        name:"Professional",
-
-        price:20000,
-
-        days:30,
-
-        features:[
-            "Everything in Starter",
-            "Unlimited properties",
-            "Advanced property management",
-            "Admin dashboard",
-            "Priority support",
-            "Professional branding"
-        ]
-
-    },
-
-
-    {
-        id:"business",
-
-        name:"Business",
-
-        price:35000,
-
-        days:30,
-
-        features:[
-            "Everything in Professional",
-            "Advanced business tools",
-            "Premium support",
-            "Priority updates",
-            "Business-level management",
-            "Future premium features"
-        ]
-
-    },
-
-
-    /*
-       IMPORTANT:
-
-       Your Firestore currently has:
-
-       plan = "premium"
-       amount = 35000
-
-       Therefore premium is included here.
-    */
-
-    {
-        id:"premium",
-
-        name:"Premium",
-
-        price:35000,
-
-        days:30,
-
-        features:[
-            "Everything in Professional",
-            "Advanced business tools",
-            "Premium support",
-            "Priority updates",
-            "Business-level management",
-            "Future premium features"
-        ]
-
-    }
-
-];
+let availablePlans = [];
 
 
 /* ==========================================
@@ -1508,11 +1092,8 @@ function formatMoney(amount){
         "en-NG",
         {
             style:"currency",
-
             currency:"NGN",
-
             maximumFractionDigits:0
-
         }
     ).format(
         Number(amount) || 0
@@ -1522,37 +1103,18 @@ function formatMoney(amount){
 
 
 /* ==========================================
-   ESCAPE HTML
+   ESCAPE
 ========================================== */
 
 function escapeHTML(value){
 
     return String(value ?? "")
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
@@ -1569,7 +1131,6 @@ function getDate(value){
 
     }
 
-
     if(
         typeof value === "object" &&
         typeof value.seconds === "number"
@@ -1581,7 +1142,6 @@ function getDate(value){
 
     }
 
-
     if(
         typeof value === "object" &&
         typeof value.toDate === "function"
@@ -1591,10 +1151,8 @@ function getDate(value){
 
     }
 
-
     const date =
         new Date(value);
-
 
     if(
         Number.isNaN(
@@ -1605,7 +1163,6 @@ function getDate(value){
         return null;
 
     }
-
 
     return date;
 
@@ -1621,21 +1178,17 @@ function formatDate(value){
     const date =
         getDate(value);
 
-
     if(!date){
 
         return "Not available";
 
     }
 
-
     return date.toLocaleDateString(
         "en-NG",
         {
             day:"numeric",
-
             month:"short",
-
             year:"numeric"
         }
     );
@@ -1661,16 +1214,13 @@ function daysBetween(
 
     }
 
-
     return Math.ceil(
 
         (
             end.getTime() -
             start.getTime()
         )
-
         /
-
         (
             1000 *
             60 *
@@ -1684,18 +1234,15 @@ function daysBetween(
 
 
 /* ==========================================
-   SHOW ERROR
+   ERROR
 ========================================== */
 
-function showError(
-    error
-){
+function showError(error){
 
     console.error(
-        "EstatePro Subscription Error:",
+        "Subscription Error:",
         error
     );
-
 
     appContainer.innerHTML = `
 
@@ -1712,20 +1259,26 @@ function showError(
                 )}
             </p>
 
-            <p>
-                <strong>
-                    Company ID:
-                </strong>
-
-                ${escapeHTML(
-                    requestedCompanyId
-                )}
-            </p>
+            ${
+                activeCompanyId
+                    ?
+                    `
+                    <p>
+                        <strong>
+                            Company ID:
+                        </strong>
+                        ${escapeHTML(
+                            activeCompanyId
+                        )}
+                    </p>
+                    `
+                    :
+                    ""
+            }
 
         </div>
 
     `;
-
 
     plansContainer.innerHTML = "";
 
@@ -1733,7 +1286,7 @@ function showError(
 
 
 /* ==========================================
-   SHOW ACCESS ERROR
+   ACCESS DENIED
 ========================================== */
 
 function showAccessDenied(){
@@ -1757,7 +1310,7 @@ function showAccessDenied(){
                 <strong>
                     ${escapeHTML(
                         userCompanyId ||
-                        "Unknown company"
+                        "Unknown"
                     )}
                 </strong>
             </p>
@@ -1767,7 +1320,8 @@ function showAccessDenied(){
 
                 <strong>
                     ${escapeHTML(
-                        requestedCompanyId
+                        requestedCompanyId ||
+                        "Not specified"
                     )}
                 </strong>
             </p>
@@ -1775,7 +1329,6 @@ function showAccessDenied(){
         </div>
 
     `;
-
 
     plansContainer.innerHTML = "";
 
@@ -1797,9 +1350,7 @@ async function loadUserRole(){
     }
 
 
-    /*
-       First check SUPER ADMIN
-    */
+    /* SUPER ADMIN */
 
     const superAdminRef =
         doc(
@@ -1808,12 +1359,10 @@ async function loadUserRole(){
             currentUser.uid
         );
 
-
     const superAdminSnapshot =
         await getDoc(
             superAdminRef
         );
-
 
     if(
         superAdminSnapshot.exists()
@@ -1822,7 +1371,6 @@ async function loadUserRole(){
         const data =
             superAdminSnapshot.data();
 
-
         if(
             data.active === true &&
             data.role === "superAdmin"
@@ -1830,14 +1378,16 @@ async function loadUserRole(){
 
             isSuperAdmin = true;
 
-            userCompanyId = null;
-
             activeCompanyId =
                 requestedCompanyId;
 
-            console.log(
-                "Logged in as SUPER ADMIN"
-            );
+            if(!activeCompanyId){
+
+                throw new Error(
+                    "Company ID is required."
+                );
+
+            }
 
             return;
 
@@ -1846,10 +1396,7 @@ async function loadUserRole(){
     }
 
 
-    /*
-       If not super admin,
-       check COMPANY ADMIN.
-    */
+    /* COMPANY ADMIN */
 
     const adminRef =
         doc(
@@ -1858,12 +1405,10 @@ async function loadUserRole(){
             currentUser.uid
         );
 
-
     const adminSnapshot =
         await getDoc(
             adminRef
         );
-
 
     if(
         !adminSnapshot.exists()
@@ -1875,17 +1420,13 @@ async function loadUserRole(){
 
     }
 
-
     const adminData =
         adminSnapshot.data();
 
-
     userCompanyId =
         String(
-            adminData.companyId ||
-            ""
+            adminData.companyId || ""
         ).trim();
-
 
     if(!userCompanyId){
 
@@ -1895,20 +1436,16 @@ async function loadUserRole(){
 
     }
 
-
     isSuperAdmin = false;
 
-
     /*
-       SECURITY:
-
-       Company Admin can only see
+       Company Admin can only access
        their own company.
     */
 
     if(
-        userCompanyId !==
-        requestedCompanyId
+        requestedCompanyId &&
+        userCompanyId !== requestedCompanyId
     ){
 
         showAccessDenied();
@@ -1919,19 +1456,8 @@ async function loadUserRole(){
 
     }
 
-
     activeCompanyId =
         userCompanyId;
-
-
-    console.log(
-        "Logged in as COMPANY ADMIN"
-    );
-
-    console.log(
-        "Company ID:",
-        activeCompanyId
-    );
 
 }
 
@@ -1949,81 +1475,54 @@ async function loadCompany(){
             activeCompanyId
         );
 
-
     const snapshot =
         await getDoc(
             companyRef
         );
 
-
-    if(
-        !snapshot.exists()
-    ){
-
-        console.warn(
-            "Company document not found:",
-            activeCompanyId
-        );
+    if(!snapshot.exists()){
 
         return;
 
     }
 
-
     const company =
         snapshot.data();
-
 
     const name =
         company.name ||
         company.companyName ||
         activeCompanyId;
 
-
     document
         .getElementById("brandName")
         .textContent =
             name;
-
 
     const logo =
         company.logo ||
         company.companyLogo ||
         "";
 
-
     const icon =
         document.getElementById(
             "brandIcon"
         );
 
-
     if(logo){
 
         icon.innerHTML = "";
 
-
         const img =
-            document.createElement(
-                "img"
-            );
+            document.createElement("img");
 
+        img.src = logo;
 
-        img.src =
-            logo;
+        img.alt = name;
 
+        icon.appendChild(img);
 
-        img.alt =
-            name;
-
-
-        icon.appendChild(
-            img
-        );
-
-    }
-
-    else{
+    }else{
 
         icon.textContent =
             name
@@ -2036,10 +1535,213 @@ async function loadCompany(){
 
 
 /* ==========================================
+   LOAD PLANS FROM FIRESTORE
+==========================================
+
+IMPORTANT:
+
+This page does NOT contain prices.
+
+It searches Firestore for plans created
+by Super Admin.
+
+Supported structure:
+
+subscriptionPlans/{planId}
+
+Example document:
+
+{
+    name: "Premium",
+    amount: 25000,
+    days: 30,
+    active: true,
+    features: [...]
+}
+
+========================================== */
+
+async function loadPlansFromFirestore(){
+
+    availablePlans = [];
+
+    const plansRef =
+        collection(
+            db,
+            "subscriptionPlans"
+        );
+
+    const snapshot =
+        await getDocs(
+            plansRef
+        );
+
+    snapshot.forEach(
+        planDoc => {
+
+            const data =
+                planDoc.data();
+
+            if(
+                data.active === false
+            ){
+
+                return;
+
+            }
+
+            const amount =
+                Number(
+                    data.amount ??
+                    data.price ??
+                    0
+                );
+
+            const days =
+                Number(
+                    data.days ??
+                    data.duration ??
+                    data.durationDays ??
+                    0
+                );
+
+            availablePlans.push({
+
+                id:
+                    planDoc.id,
+
+                name:
+                    String(
+                        data.name ||
+                        data.planName ||
+                        planDoc.id
+                    ),
+
+                amount:
+                    amount,
+
+                days:
+                    days,
+
+                features:
+                    Array.isArray(
+                        data.features
+                    )
+                        ?
+                        data.features
+                        :
+                        []
+
+            });
+
+        }
+    );
+
+
+    /*
+       Sort by amount.
+    */
+
+    availablePlans.sort(
+        (a,b) =>
+            a.amount - b.amount
+    );
+
+
+    if(
+        availablePlans.length === 0
+    ){
+
+        throw new Error(
+            "No active subscription plans were found in Firestore."
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   FIND CURRENT PLAN
+========================================== */
+
+function findCurrentPlan(){
+
+    const subscriptionPlan =
+        String(
+            subscription?.plan ||
+            ""
+        ).trim().toLowerCase();
+
+
+    currentPlan =
+        availablePlans.find(
+            plan =>
+                String(plan.id)
+                    .toLowerCase() ===
+                subscriptionPlan
+        )
+        ||
+        availablePlans.find(
+            plan =>
+                String(plan.name)
+                    .toLowerCase() ===
+                subscriptionPlan
+        )
+        ||
+        null;
+
+
+    /*
+       If the subscription contains
+       its own plan name but the plan
+       document is not found, use the
+       subscription data without inventing
+       a price.
+    */
+
+    if(!currentPlan){
+
+        currentPlan = {
+
+            id:
+                subscription.plan ||
+                "unknown",
+
+            name:
+                subscription.planName ||
+                subscription.plan ||
+                "Unknown Plan",
+
+            amount:
+                Number(
+                    subscription.amount
+                ) || 0,
+
+            days:
+                Number(
+                    subscription.days ||
+                    subscription.duration
+                ) || 0,
+
+            features:
+                []
+
+        };
+
+    }
+
+}
+
+
+/* ==========================================
    LOAD SUBSCRIPTION
 ========================================== */
 
 async function loadSubscription(){
+
+    await loadPlansFromFirestore();
+
 
     const subscriptionRef =
         doc(
@@ -2048,16 +1750,12 @@ async function loadSubscription(){
             activeCompanyId
         );
 
-
     const snapshot =
         await getDoc(
             subscriptionRef
         );
 
-
-    if(
-        !snapshot.exists()
-    ){
+    if(!snapshot.exists()){
 
         throw new Error(
             "No subscription found for " +
@@ -2066,73 +1764,11 @@ async function loadSubscription(){
 
     }
 
-
     subscription =
         snapshot.data();
 
 
-    /*
-       Find plan by plan ID.
-
-       Example:
-       Firestore:
-       plan = "premium"
-
-       This will now correctly find
-       Premium.
-    */
-
-    currentPlan =
-        plans.find(
-            plan =>
-                plan.id ===
-                String(
-                    subscription.plan ||
-                    ""
-                ).toLowerCase()
-        )
-        || null;
-
-
-    /*
-       If plan is not inside our local
-       plans list, build one from
-       Firestore amount.
-    */
-
-    if(!currentPlan){
-
-        currentPlan = {
-
-            id:
-                String(
-                    subscription.plan ||
-                    "custom"
-                ).toLowerCase(),
-
-            name:
-                String(
-                    subscription.plan ||
-                    "Custom"
-                ),
-
-            price:
-                Number(
-                    subscription.amount
-                ) || 0,
-
-            days:30,
-
-            features:[
-                "Active subscription",
-                "EstatePro platform access",
-                "Company management",
-                "Subscription support"
-            ]
-
-        };
-
-    }
+    findCurrentPlan();
 
 
     renderSubscription();
@@ -2154,33 +1790,27 @@ function isSubscriptionActive(){
             ""
         ).toLowerCase();
 
-
     if(
-        status !==
-        "active"
+        status !== "active"
     ){
 
         return false;
 
     }
-
 
     const expiry =
         getDate(
             subscription.expiryDate
         );
 
-
     if(
         expiry &&
-        expiry.getTime() <
-        Date.now()
+        expiry.getTime() < Date.now()
     ){
 
         return false;
 
     }
-
 
     return true;
 
@@ -2199,24 +1829,20 @@ function getSubscriptionStatus(){
             ""
         ).toLowerCase();
 
-
     const paymentStatus =
         String(
             subscription?.paymentStatus ||
             ""
         ).toLowerCase();
 
-
     const expiry =
         getDate(
             subscription?.expiryDate
         );
 
-
     if(
         expiry &&
-        expiry.getTime() <
-        Date.now()
+        expiry.getTime() < Date.now()
     ){
 
         return {
@@ -2226,10 +1852,8 @@ function getSubscriptionStatus(){
 
     }
 
-
     if(
-        firestoreStatus ===
-        "active"
+        firestoreStatus === "active"
     ){
 
         return {
@@ -2239,10 +1863,8 @@ function getSubscriptionStatus(){
 
     }
 
-
     if(
-        paymentStatus ===
-        "pending"
+        paymentStatus === "pending"
     ){
 
         return {
@@ -2252,15 +1874,13 @@ function getSubscriptionStatus(){
 
     }
 
-
     return {
 
         text:
             firestoreStatus ||
             "Unknown",
 
-        className:
-            "expired"
+        className:"expired"
 
     };
 
@@ -2276,12 +1896,10 @@ function renderSubscription(){
     const active =
         isSubscriptionActive();
 
-
     const expiryDate =
         getDate(
             subscription.expiryDate
         );
-
 
     let remaining =
         daysBetween(
@@ -2289,27 +1907,34 @@ function renderSubscription(){
             expiryDate
         );
 
-
-    if(
-        remaining < 0
-    ){
+    if(remaining < 0){
 
         remaining = 0;
 
     }
 
 
+    /*
+       Duration comes from Firestore plan.
+    */
+
     const totalDays =
-        currentPlan?.days ||
-        30;
+        Number(
+            currentPlan?.days
+        ) || 0;
 
 
-    let progress =
-        (
-            remaining /
-            totalDays
-        ) * 100;
+    let progress = 0;
 
+    if(totalDays > 0){
+
+        progress =
+            (
+                remaining /
+                totalDays
+            ) * 100;
+
+    }
 
     progress =
         Math.max(
@@ -2323,6 +1948,7 @@ function renderSubscription(){
 
     const planName =
         currentPlan?.name ||
+        subscription.planName ||
         subscription.plan ||
         "Unknown Plan";
 
@@ -2330,10 +1956,15 @@ function renderSubscription(){
     /*
        IMPORTANT:
 
-       Firestore amount has priority.
+       The amount displayed here comes
+       from Firestore.
 
-       Your data:
-       amount = 35000
+       Priority:
+
+       1. subscription.amount
+       2. plan.amount
+
+       There is NO fixed price.
     */
 
     const price =
@@ -2341,7 +1972,7 @@ function renderSubscription(){
             subscription.amount
         ) ||
         Number(
-            currentPlan?.price
+            currentPlan?.amount
         ) ||
         0;
 
@@ -2370,90 +2001,69 @@ function renderSubscription(){
 
         <div class="subscription-card">
 
-
             <div class="subscription-top">
 
                 <div class="subscription-top-row">
 
-
                     <div>
 
                         <div class="company-name">
-
                             ${escapeHTML(
                                 companyName
                             )}
-
                         </div>
 
-
                         <div class="plan-name">
-
                             ${escapeHTML(
                                 planName
                             )} Plan
-
                         </div>
 
-
                         <div class="company-id">
-
                             Company ID:
                             ${escapeHTML(
                                 activeCompanyId
                             )}
-
                         </div>
 
                     </div>
-
 
                     <div>
 
                         <span
                             class="status ${status.className}"
                         >
-
                             ●
                             ${escapeHTML(
                                 status.text
                             )}
-
                         </span>
 
                     </div>
-
 
                 </div>
 
             </div>
 
-
             <div class="subscription-body">
-
 
                 <div class="price-row">
 
                     <div class="price">
-
-                        ${formatMoney(
-                            price
-                        )}
-
+                        ${formatMoney(price)}
                     </div>
 
-
                     <div class="price-period">
-
-                        / ${totalDays} days
-
+                        ${
+                            totalDays > 0
+                                ? `/ ${totalDays} days`
+                                : ""
+                        }
                     </div>
 
                 </div>
 
-
                 <div class="info-grid">
-
 
                     <div class="info-box">
 
@@ -2462,15 +2072,12 @@ function renderSubscription(){
                         </div>
 
                         <div class="info-value">
-
                             ${escapeHTML(
                                 planName
                             )}
-
                         </div>
 
                     </div>
-
 
                     <div class="info-box">
 
@@ -2479,15 +2086,12 @@ function renderSubscription(){
                         </div>
 
                         <div class="info-value">
-
                             ${formatDate(
                                 subscription.startDate
                             )}
-
                         </div>
 
                     </div>
-
 
                     <div class="info-box">
 
@@ -2496,15 +2100,12 @@ function renderSubscription(){
                         </div>
 
                         <div class="info-value">
-
                             ${formatDate(
                                 subscription.expiryDate
                             )}
-
                         </div>
 
                     </div>
-
 
                     <div class="info-box">
 
@@ -2513,20 +2114,14 @@ function renderSubscription(){
                         </div>
 
                         <div class="info-value">
-
-                            ${remaining}
-                            days
-
+                            ${remaining} days
                         </div>
 
                     </div>
 
-
                 </div>
 
-
                 <div class="extra-grid">
-
 
                     <div class="extra-box">
 
@@ -2535,15 +2130,12 @@ function renderSubscription(){
                         </div>
 
                         <div class="extra-value">
-
                             ${escapeHTML(
                                 paymentStatus
                             )}
-
                         </div>
 
                     </div>
-
 
                     <div class="extra-box">
 
@@ -2552,13 +2144,10 @@ function renderSubscription(){
                         </div>
 
                         <div class="extra-value">
-
                             ${autoRenew}
-
                         </div>
 
                     </div>
-
 
                     <div class="extra-box">
 
@@ -2567,21 +2156,16 @@ function renderSubscription(){
                         </div>
 
                         <div class="extra-value">
-
                             ${formatDate(
                                 subscription.updatedAt
                             )}
-
                         </div>
 
                     </div>
 
-
                 </div>
 
-
                 <div class="progress-wrapper">
-
 
                     <div class="progress-header">
 
@@ -2589,19 +2173,14 @@ function renderSubscription(){
                             Subscription period
                         </span>
 
-
                         <span>
-
                             ${remaining}
                             days remaining
-
                         </span>
 
                     </div>
 
-
                     <div class="progress">
-
 
                         <div
                             class="progress-bar ${
@@ -2611,20 +2190,14 @@ function renderSubscription(){
                                         ? "warning"
                                         : ""
                             }"
-                            style="
-                                width:${progress}%
-                            "
+                            style="width:${progress}%"
                         ></div>
-
 
                     </div>
 
-
                 </div>
 
-
                 <div class="actions">
-
 
                     <button
                         class="primary-button"
@@ -2640,20 +2213,15 @@ function renderSubscription(){
 
                     </button>
 
-
                     <button
                         class="secondary-button"
                         id="reloadSubscription"
                         type="button"
                     >
-
                         Refresh
-
                     </button>
 
-
                 </div>
-
 
             </div>
 
@@ -2663,9 +2231,7 @@ function renderSubscription(){
 
 
     document
-        .getElementById(
-            "renewCurrent"
-        )
+        .getElementById("renewCurrent")
         .addEventListener(
             "click",
             () =>
@@ -2676,9 +2242,7 @@ function renderSubscription(){
 
 
     document
-        .getElementById(
-            "reloadSubscription"
-        )
+        .getElementById("reloadSubscription")
         .addEventListener(
             "click",
             async () => {
@@ -2695,7 +2259,6 @@ function renderSubscription(){
 
                 `;
 
-
                 try{
 
                     await loadSubscription();
@@ -2704,9 +2267,7 @@ function renderSubscription(){
 
                 catch(error){
 
-                    showError(
-                        error
-                    );
+                    showError(error);
 
                 }
 
@@ -2724,131 +2285,126 @@ function renderPlans(){
 
     plansContainer.innerHTML =
 
-        plans.map(
-            plan => {
+        availablePlans
+            .map(
+                plan => {
 
-                const isCurrent =
-                    currentPlan &&
-                    currentPlan.id ===
-                    plan.id;
-
-
-                return `
-
-                    <div
-                        class="plan ${
-                            isCurrent
-                                ? "current"
-                                : ""
-                        }"
-                    >
+                    const isCurrent =
+                        currentPlan &&
+                        String(
+                            currentPlan.id
+                        ) ===
+                        String(
+                            plan.id
+                        );
 
 
-                        ${
-                            isCurrent
-                                ?
-                                `
+                    return `
+
+                        <div
+                            class="plan ${
+                                isCurrent
+                                    ? "current"
+                                    : ""
+                            }"
+                        >
+
+                            ${
+                                isCurrent
+                                    ?
+                                    `
                                     <span
                                         class="current-label"
                                     >
                                         Current Plan
                                     </span>
-                                `
-                                :
-                                ""
-                        }
-
-
-                        <div
-                            class="plan-name-small"
-                        >
-
-                            ${escapeHTML(
-                                plan.name
-                            )}
-
-                        </div>
-
-
-                        <div
-                            class="plan-price"
-                        >
-
-                            ${formatMoney(
-                                plan.price
-                            )}
-
-                        </div>
-
-
-                        <div
-                            class="plan-period"
-                        >
-
-                            per ${plan.days} days
-
-                        </div>
-
-
-                        <ul
-                            class="features"
-                        >
-
-                            ${
-                                plan.features
-                                    .map(
-                                        feature => `
-
-                                            <li>
-
-                                                ✓
-                                                ${escapeHTML(
-                                                    feature
-                                                )}
-
-                                            </li>
-
-                                        `
-                                    )
-                                    .join("")
+                                    `
+                                    :
+                                    ""
                             }
 
-                        </ul>
+                            <div
+                                class="plan-name-small"
+                            >
+                                ${escapeHTML(
+                                    plan.name
+                                )}
+                            </div>
 
+                            <div
+                                class="plan-price"
+                            >
+                                ${formatMoney(
+                                    plan.amount
+                                )}
+                            </div>
 
-                        <button
-                            class="choose-plan ${
-                                isCurrent
-                                    ? "current-button"
-                                    : ""
-                            }"
-                            type="button"
-                            data-plan="${escapeHTML(
-                                plan.id
-                            )}"
-                        >
+                            <div
+                                class="plan-period"
+                            >
 
-                            ${
-                                isCurrent
-                                    ? "Renew Current Plan"
-                                    : "Choose Plan"
-                            }
+                                ${
+                                    plan.days > 0
+                                        ?
+                                        `per ${plan.days} days`
+                                        :
+                                        "Duration managed by administrator"
+                                }
 
-                        </button>
+                            </div>
 
+                            <ul class="features">
 
-                    </div>
+                                ${
+                                    plan.features
+                                        .map(
+                                            feature => `
+                                                <li>
+                                                    ✓
+                                                    ${escapeHTML(
+                                                        feature
+                                                    )}
+                                                </li>
+                                            `
+                                        )
+                                        .join("")
+                                }
 
-                `;
+                            </ul>
 
-            }
-        ).join("");
+                            <button
+                                class="choose-plan ${
+                                    isCurrent
+                                        ? "current-button"
+                                        : ""
+                                }"
+                                type="button"
+                                data-plan="${escapeHTML(
+                                    plan.id
+                                )}"
+                            >
+
+                                ${
+                                    isCurrent
+                                        ?
+                                        "Renew Current Plan"
+                                        :
+                                        "Choose Plan"
+                                }
+
+                            </button>
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
 
 
     plansContainer
-        .querySelectorAll(
-            "[data-plan]"
-        )
+        .querySelectorAll("[data-plan]")
         .forEach(
             button => {
 
@@ -2857,16 +2413,17 @@ function renderPlans(){
                     () => {
 
                         const plan =
-                            plans.find(
+                            availablePlans.find(
                                 item =>
-                                    item.id ===
-                                    button.dataset.plan
+                                    String(
+                                        item.id
+                                    ) ===
+                                    String(
+                                        button.dataset.plan
+                                    )
                             );
 
-
-                        openRenewModal(
-                            plan
-                        );
+                        openRenewModal(plan);
 
                     }
                 );
@@ -2881,9 +2438,7 @@ function renderPlans(){
    OPEN MODAL
 ========================================== */
 
-function openRenewModal(
-    plan
-){
+function openRenewModal(plan){
 
     if(!plan){
 
@@ -2895,7 +2450,6 @@ function openRenewModal(
 
     }
 
-
     selectedPlanData =
         plan;
 
@@ -2903,34 +2457,29 @@ function openRenewModal(
     selectedPlan.innerHTML = `
 
         <strong>
-
             ${escapeHTML(
                 plan.name
-            )}
-            Plan
-
+            )} Plan
         </strong>
-
 
         <div>
 
             ${formatMoney(
-                plan.price
+                plan.amount
             )}
 
-            /
-            ${plan.days}
-            days
+            ${
+                plan.days > 0
+                    ? `/ ${plan.days} days`
+                    : ""
+            }
 
         </div>
 
     `;
 
 
-    renewModal.classList.add(
-        "show"
-    );
-
+    renewModal.classList.add("show");
 
     document.body.style.overflow =
         "hidden";
@@ -2948,14 +2497,11 @@ function closeRenewModal(){
         "show"
     );
 
-
     document.body.style.overflow =
         "";
 
-
     confirmRenew.disabled =
         false;
-
 
     confirmRenew.textContent =
         "Pay with Paystack";
@@ -2968,24 +2514,18 @@ function closeRenewModal(){
 ========================================== */
 
 document
-    .getElementById(
-        "closeModal"
-    )
+    .getElementById("closeModal")
     .addEventListener(
         "click",
         closeRenewModal
     );
-
 
 document
-    .getElementById(
-        "cancelRenew"
-    )
+    .getElementById("cancelRenew")
     .addEventListener(
         "click",
         closeRenewModal
     );
-
 
 renewModal.addEventListener(
     "click",
@@ -3011,7 +2551,6 @@ renewModal.addEventListener(
 confirmRenew.addEventListener(
     "click",
     async () => {
-
 
         if(!selectedPlanData){
 
@@ -3062,7 +2601,7 @@ confirmRenew.addEventListener(
         ){
 
             alert(
-                "Paystack could not load. Check your internet connection and refresh the page."
+                "Paystack could not load. Refresh the page and try again."
             );
 
             return;
@@ -3070,9 +2609,16 @@ confirmRenew.addEventListener(
         }
 
 
+        /*
+           PAYMENT AMOUNT COMES FROM
+           FIRESTORE PLAN.
+
+           No hardcoded price.
+        */
+
         const amount =
             Number(
-                selectedPlanData.price
+                selectedPlanData.amount
             );
 
 
@@ -3082,7 +2628,7 @@ confirmRenew.addEventListener(
         ){
 
             alert(
-                "Invalid payment amount."
+                "This subscription plan does not have a valid price."
             );
 
             return;
@@ -3093,13 +2639,11 @@ confirmRenew.addEventListener(
         confirmRenew.disabled =
             true;
 
-
         confirmRenew.textContent =
             "Opening Paystack...";
 
 
         try{
-
 
             const popup =
                 new window.PaystackPop();
@@ -3117,22 +2661,17 @@ confirmRenew.addEventListener(
                 key:
                     PAYSTACK_PUBLIC_KEY,
 
-
                 email:
                     email,
-
 
                 amount:
                     amount * 100,
 
-
                 currency:
                     "NGN",
 
-
                 reference:
                     reference,
-
 
                 metadata:{
 
@@ -3145,6 +2684,9 @@ confirmRenew.addEventListener(
                     planName:
                         selectedPlanData.name,
 
+                    amount:
+                        amount,
+
                     duration:
                         selectedPlanData.days,
 
@@ -3153,30 +2695,10 @@ confirmRenew.addEventListener(
 
                 },
 
-
-                onLoad:
-                    response => {
-
-                        console.log(
-                            "Paystack loaded:",
-                            response
-                        );
-
-                    },
-
-
                 onSuccess:
                     transaction => {
 
-
-                        console.log(
-                            "PAYMENT SUCCESS:",
-                            transaction
-                        );
-
-
                         closeRenewModal();
-
 
                         messageContainer.innerHTML = `
 
@@ -3206,54 +2728,37 @@ confirmRenew.addEventListener(
 
                         `;
 
-
                         window.scrollTo({
-
                             top:0,
-
                             behavior:"smooth"
-
                         });
 
                     },
 
-
                 onCancel:
                     () => {
 
-
-                        console.log(
-                            "Payment cancelled."
-                        );
-
-
                         confirmRenew.disabled =
                             false;
-
 
                         confirmRenew.textContent =
                             "Pay with Paystack";
 
                     },
 
-
                 onError:
                     error => {
-
 
                         console.error(
                             "Paystack error:",
                             error
                         );
 
-
                         confirmRenew.disabled =
                             false;
 
-
                         confirmRenew.textContent =
                             "Pay with Paystack";
-
 
                         alert(
                             "Payment could not be started. Please try again."
@@ -3262,7 +2767,6 @@ confirmRenew.addEventListener(
                     }
 
             });
-
 
         }
 
@@ -3273,14 +2777,11 @@ confirmRenew.addEventListener(
                 error
             );
 
-
             confirmRenew.disabled =
                 false;
 
-
             confirmRenew.textContent =
                 "Pay with Paystack";
-
 
             alert(
                 "Unable to open Paystack payment."
@@ -3302,10 +2803,7 @@ logoutButton.addEventListener(
 
         try{
 
-            await signOut(
-                auth
-            );
-
+            await signOut(auth);
 
             window.location.href =
                 "login.html";
@@ -3330,22 +2828,19 @@ logoutButton.addEventListener(
 
 
 /* ==========================================
-   AUTH STATE
+   AUTH
 ========================================== */
 
 onAuthStateChanged(
     auth,
     async user => {
 
-
         if(!user){
 
             currentUser = null;
 
-
             userEmail.textContent =
                 "Not logged in";
-
 
             appContainer.innerHTML = `
 
@@ -3364,10 +2859,8 @@ onAuthStateChanged(
 
             `;
 
-
             plansContainer.innerHTML =
                 "";
-
 
             return;
 
@@ -3385,52 +2878,19 @@ onAuthStateChanged(
 
         try{
 
-
-            /*
-               STEP 1
-               Determine whether user is
-               Super Admin or Company Admin.
-            */
-
             await loadUserRole();
 
-
-            /*
-               STEP 2
-               Load company information.
-            */
-
             await loadCompany();
-
-
-            /*
-               STEP 3
-               Load subscription.
-            */
 
             await loadSubscription();
 
 
-            /*
-               Automatically put company
-               email into payment field
-               when available.
-            */
-
-            if(
-                user.email
-            ){
+            if(user.email){
 
                 customerEmail.value =
                     user.email;
 
             }
-
-
-            console.log(
-                "Subscription page loaded successfully."
-            );
-
 
         }
 
@@ -3441,20 +2901,13 @@ onAuthStateChanged(
             );
 
 
-            /*
-               Don't overwrite the
-               Access Denied screen.
-            */
-
             if(
                 !appContainer.innerHTML.includes(
                     "Access Denied"
                 )
             ){
 
-                showError(
-                    error
-                );
+                showError(error);
 
             }
 
