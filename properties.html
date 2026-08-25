@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Property Details</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f8fafc;
+    color:#17202a;
+}
+
+button,a{
+    font:inherit;
+}
+
+a{
+    text-decoration:none;
+}
+
+.header{
+    background:#0f766e;
+    color:white;
+    padding:16px 20px;
+}
+
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:bold;
+}
+
+.back-btn{
+    border:0;
+    background:white;
+    color:#0f766e;
+    padding:9px 15px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px 60px;
+}
+
+.loading{
+    text-align:center;
+    padding:70px 20px;
+    color:#64748b;
+}
+
+.error{
+    max-width:700px;
+    margin:60px auto;
+    background:#fee2e2;
+    color:#991b1b;
+    padding:25px;
+    border-radius:14px;
+    text-align:center;
+    line-height:1.7;
+}
+
+.gallery{
+    background:white;
+    padding:15px;
+    border-radius:16px;
+    box-shadow:0 5px 25px rgba(0,0,0,.06);
+    margin-bottom:25px;
+}
+
+/* ==============================
+   MAIN IMAGE
+============================== */
+
+.main-image{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+    border-radius:12px;
+    background:#e2e8f0;
+    display:block;
+    cursor:pointer;
+}
+
+/* ==============================
+   THUMBNAILS
+============================== */
+
+.thumbnails{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    margin-top:12px;
+}
+
+.thumbnail-box{
+    position:relative;
+    width:100%;
+    height:100px;
+    border-radius:9px;
+    overflow:hidden;
+    cursor:pointer;
+    border:3px solid transparent;
+    background:#e2e8f0;
+}
+
+.thumbnail-box.active{
+    border-color:#0f766e;
+}
+
+.thumbnail{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.photo-number{
+    position:absolute;
+    left:6px;
+    bottom:6px;
+    background:rgba(0,0,0,.65);
+    color:white;
+    font-size:11px;
+    padding:4px 7px;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+/* ==============================
+   IMAGE COUNTER
+============================== */
+
+.image-counter{
+    text-align:center;
+    color:#64748b;
+    font-size:13px;
+    margin-top:10px;
+}
+
+/* ==============================
+   INFO
+============================== */
+
+.info{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 5px 25px rgba(0,0,0,.06);
+}
+
+.title{
+    margin:0 0 8px;
+    font-size:30px;
+}
+
+.location{
+    color:#64748b;
+    margin-bottom:18px;
+}
+
+.price{
+    color:#0f766e;
+    font-size:28px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:15px 0;
+}
+
+.badge{
+    padding:7px 11px;
+    border-radius:999px;
+    background:#ecfdf5;
+    color:#047857;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.badge.blue{
+    background:#e0f2fe;
+    color:#0369a1;
+}
+
+.badge.red{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.badge.purple{
+    background:#ede9fe;
+    color:#6d28d9;
+}
+
+.description{
+    color:#475569;
+    line-height:1.8;
+    white-space:pre-line;
+}
+
+.details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:20px;
+}
+
+.detail{
+    background:#f8fafc;
+    padding:14px;
+    border-radius:10px;
+}
+
+.detail span{
+    display:block;
+    color:#64748b;
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+.detail strong{
+    font-size:14px;
+}
+
+.contact-card h2{
+    margin-top:0;
+}
+
+.contact-btn{
+    display:block;
+    width:100%;
+    text-align:center;
+    padding:14px;
+    border-radius:10px;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+.whatsapp{
+    background:#16a34a;
+    color:white;
+}
+
+.phone{
+    background:#0f766e;
+    color:white;
+}
+
+.email{
+    background:#2563eb;
+    color:white;
+}
+
+.company-info{
+    border-top:1px solid #e2e8f0;
+    margin-top:20px;
+    padding-top:20px;
+}
+
+.company-info p{
+    color:#64748b;
+    line-height:1.6;
+}
+
+/* ==============================
+   FULLSCREEN IMAGE
+============================== */
+
+.image-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.92);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding:20px;
+}
+
+.image-modal.show{
+    display:flex;
+}
+
+.modal-image{
+    max-width:95%;
+    max-height:90vh;
+    object-fit:contain;
+    border-radius:10px;
+}
+
+.close-modal{
+    position:absolute;
+    top:18px;
+    right:20px;
+    width:45px;
+    height:45px;
+    border:0;
+    border-radius:50%;
+    background:white;
+    color:#111827;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.modal-prev,
+.modal-next{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:45px;
+    height:45px;
+    border:0;
+    border-radius:50%;
+    background:white;
+    color:#111827;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.modal-prev{
+    left:20px;
+}
+
+.modal-next{
+    right:20px;
+}
+
+.modal-counter{
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    color:white;
+    background:rgba(0,0,0,.6);
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:13px;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media(max-width:850px){
+
+    .info{
+        grid-template-columns:1fr;
+    }
+
+    .main-image{
+        height:400px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .header-inner{
+        flex-direction:row;
+        align-items:center;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .back-btn{
+        padding:8px 12px;
+        font-size:13px;
+    }
+
+    .main-image{
+        height:280px;
+    }
+
+    .thumbnails{
+        grid-template-columns:repeat(5,1fr);
+        gap:5px;
+    }
+
+    .thumbnail-box{
+        height:60px;
+        border-width:2px;
+    }
+
+    .photo-number{
+        display:none;
+    }
+
+    .title{
+        font-size:24px;
+    }
+
+    .price{
+        font-size:23px;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    .modal-prev{
+        left:8px;
+    }
+
+    .modal-next{
+        right:8px;
+    }
+
+}
+
+/* very small phones */
+
+@media(max-width:380px){
+
+    .thumbnails{
+        grid-template-columns:repeat(5,1fr);
+        gap:3px;
+    }
+
+    .thumbnail-box{
+        height:52px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div class="logo" id="companyName">
+            EstatePro
+        </div>
+
+        <button
+            class="back-btn"
+            id="backButton"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <div id="loading" class="loading">
+        Loading property...
+    </div>
+
+    <div
+        id="error"
+        class="error"
+        style="display:none;"
+    ></div>
+
+    <div
+        id="propertyContent"
+        style="display:none;"
+    >
+
+        <!-- ==========================
+             GALLERY
+        =========================== -->
+
+        <section class="gallery">
+
+            <img
+                id="mainImage"
+                class="main-image"
+                src=""
+                alt="Property"
+            >
+
+            <div
+                id="thumbnails"
+                class="thumbnails"
+            ></div>
+
+            <div
+                id="imageCounter"
+                class="image-counter"
+            ></div>
+
+        </section>
+
+
+        <!-- ==========================
+             INFORMATION
+        =========================== -->
+
+        <section class="info">
+
+            <div class="card">
+
+                <h1
+                    id="propertyTitle"
+                    class="title"
+                >
+                    Property
+                </h1>
+
+                <div
+                    id="propertyLocation"
+                    class="location"
+                >
+                    Location
+                </div>
+
+                <div
+                    id="propertyPrice"
+                    class="price"
+                >
+                    ₦0
+                </div>
+
+                <div
+                    id="badges"
+                    class="badges"
+                ></div>
+
+                <h2>
+                    Property Description
+                </h2>
+
+                <div
+                    id="description"
+                    class="description"
+                >
+                    No description available.
+                </div>
+
+                <div
+                    id="details"
+                    class="details"
+                ></div>
+
+            </div>
+
+
+            <!-- ==========================
+                 CONTACT
+            =========================== -->
+
+            <aside class="card contact-card">
+
+                <h2>
+                    Contact Agent
+                </h2>
+
+                <p>
+                    Interested in this property?
+                    Contact the company directly.
+                </p>
+
+                <a
+                    id="whatsappButton"
+                    class="contact-btn whatsapp"
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    WhatsApp
+                </a>
+
+                <a
+                    id="phoneButton"
+                    class="contact-btn phone"
+                    href="#"
+                >
+                    Call Company
+                </a>
+
+                <a
+                    id="emailButton"
+                    class="contact-btn email"
+                    href="#"
+                >
+                    Email Company
+                </a>
+
+                <div class="company-info">
+
+                    <h3 id="sideCompanyName">
+                        Company
+                    </h3>
+
+                    <p id="sideCompanyAddress">
+                        Address
+                    </p>
+
+                    <p id="sideCompanyDescription">
+                        Description
+                    </p>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- ==============================
+     FULLSCREEN IMAGE MODAL
+=============================== -->
+
+<div
+    id="imageModal"
+    class="image-modal"
+>
+
+    <button
+        id="closeModal"
+        class="close-modal"
+    >
+        ×
+    </button>
+
+    <button
+        id="modalPrev"
+        class="modal-prev"
+    >
+        ‹
+    </button>
+
+    <img
+        id="modalImage"
+        class="modal-image"
+        src=""
+        alt="Property photo"
+    >
+
+    <button
+        id="modalNext"
+        class="modal-next"
+    >
+        ›
+    </button>
+
+    <div
+        id="modalCounter"
+        class="modal-counter"
+    ></div>
+
+</div>
+
+
+<script type="module">
+
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAE44DxNnqz3m8ScqaZxoSj2FdQ7aJ2NIg",
+
+    authDomain:
+        "estate-pro-d564b.firebaseapp.com",
+
+    projectId:
+        "estate-pro-d564b",
+
+    storageBucket:
+        "estate-pro-d564b.firebasestorage.app",
+
+    messagingSenderId:
+        "600309829118",
+
+    appId:
+        "1:600309829118:web:60c61624ca8cdf05e884af",
+
+    measurementId:
+        "G-TG60FCJHXB"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ =
+    id => document.getElementById(id);
+
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   URL PARAMETERS
+========================================================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const companyId =
+    params.get("companyId") ||
+    params.get("companyID") ||
+    params.get("company");
+
+
+const propertyId =
+    params.get("propertyId") ||
+    params.get("propertyID") ||
+    params.get("id");
+
+
+console.log(
+    "Current URL:",
+    window.location.href
+);
+
+console.log(
+    "Company ID:",
+    companyId
+);
+
+console.log(
+    "Property ID:",
+    propertyId
+);
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+$("backButton").onclick =
+function(){
+
+    if(companyId){
+
+        window.location.href =
+            `index.html?companyId=${encodeURIComponent(companyId)}`;
+
+    }else{
+
+        window.history.back();
+
+    }
+
+};
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showError(message){
+
+    $("loading").style.display =
+        "none";
+
+    $("propertyContent").style.display =
+        "none";
+
+    $("error").style.display =
+        "block";
+
+    $("error").textContent =
+        message;
+
+}
+
+
+/* =========================================================
+   LOAD PROPERTY
+========================================================= */
+
+async function loadProperty(){
+
+    try{
+
+        if(!companyId){
+
+            throw new Error(
+                "Company ID is missing from the URL."
+            );
+
+        }
+
+
+        if(!propertyId){
+
+            throw new Error(
+                "Property ID is missing from the URL."
+            );
+
+        }
+
+
+        /*
+        FIRESTORE:
+
+        companies
+          Company_ID
+             properties
+                Property_ID
+        */
+
+        const propertyRef =
+            doc(
+                db,
+                "companies",
+                companyId,
+                "properties",
+                propertyId
+            );
+
+
+        const propertySnap =
+            await getDoc(
+                propertyRef
+            );
+
+
+        if(!propertySnap.exists()){
+
+            throw new Error(
+                "This property does not exist in Firestore."
+            );
+
+        }
+
+
+        const property =
+            propertySnap.data();
+
+
+        console.log(
+            "PROPERTY DATA:",
+            property
+        );
+
+
+        /*
+        LOAD COMPANY
+        */
+
+        const companyRef =
+            doc(
+                db,
+                "companies",
+                companyId
+            );
+
+
+        const companySnap =
+            await getDoc(
+                companyRef
+            );
+
+
+        const company =
+            companySnap.exists()
+            ? companySnap.data()
+            : {};
+
+
+        renderProperty(
+            property,
+            company
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Property loading error:",
+            error
+        );
+
+        showError(
+            error.message ||
+            "Unable to load property."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER PROPERTY
+========================================================= */
+
+function renderProperty(
+    property,
+    company
+){
+
+    $("loading").style.display =
+        "none";
+
+    $("propertyContent").style.display =
+        "block";
+
+
+    /* COMPANY */
+
+    const companyName =
+        company.companyName ||
+        company.name ||
+        companyId ||
+        "EstatePro";
+
+
+    $("companyName").textContent =
+        companyName;
+
+    $("sideCompanyName").textContent =
+        companyName;
+
+
+    $("sideCompanyAddress").textContent =
+        company.companyAddress ||
+        company.address ||
+        "Address not available.";
+
+
+    $("sideCompanyDescription").textContent =
+        company.companyDescription ||
+        company.description ||
+        "Contact us for more information.";
+
+
+    /* TITLE */
+
+    $("propertyTitle").textContent =
+        property.title ||
+        "Untitled Property";
+
+
+    /* LOCATION */
+
+    $("propertyLocation").textContent =
+        property.location ||
+        "Location not available";
+
+
+    /* PRICE */
+
+    const rawPrice =
+        property.price ?? 0;
+
+
+    const numericPrice =
+        Number(
+            String(rawPrice)
+                .replace(/[₦,\s]/g,"")
+        );
+
+
+    if(
+        rawPrice !== "" &&
+        !isNaN(numericPrice)
+    ){
+
+        $("propertyPrice").textContent =
+            "₦" +
+            numericPrice.toLocaleString();
+
+    }else{
+
+        $("propertyPrice").textContent =
+            String(rawPrice);
+
+    }
+
+
+    /* DESCRIPTION */
+
+    $("description").textContent =
+        property.description ||
+        "No description available.";
+
+
+    renderBadges(
+        property
+    );
+
+
+    renderDetails(
+        property
+    );
+
+
+    /*
+    VERY IMPORTANT:
+    LOAD ALL FIVE imageUrl FIELDS
+    */
+
+    renderGallery(
+        property
+    );
+
+
+    setupContact(
+        company,
+        property
+    );
+
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+function renderBadges(property){
+
+    const badges = [];
+
+
+    if(property.propertyType){
+
+        badges.push({
+
+            text:
+                property.propertyType,
+
+            className:
+                "blue"
+
+        });
+
+    }
+
+
+    if(property.purpose){
+
+        badges.push({
+
+            text:
+                property.purpose,
+
+            className:
+                ""
+
+        });
+
+    }
+
+
+    if(property.status){
+
+        const status =
+            String(
+                property.status
+            ).toLowerCase();
+
+
+        badges.push({
+
+            text:
+                property.status,
+
+            className:
+                status === "sold" ||
+                status === "rented"
+                ? "red"
+                : ""
+
+        });
+
+    }
+
+
+    if(
+        property.featured === true ||
+        property.featured === "true"
+    ){
+
+        badges.push({
+
+            text:
+                "Featured",
+
+            className:
+                "purple"
+
+        });
+
+    }
+
+
+    $("badges").innerHTML =
+
+        badges.map(
+            badge => `
+
+                <span class="badge ${badge.className}">
+                    ${escapeHTML(badge.text)}
+                </span>
+
+            `
+        ).join("");
+
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+function renderDetails(property){
+
+    const details = [];
+
+
+    if(
+        property.bedrooms !== undefined &&
+        property.bedrooms !== ""
+    ){
+
+        details.push({
+
+            label:"Bedrooms",
+
+            value:property.bedrooms
+
+        });
+
+    }
+
+
+    if(
+        property.bathrooms !== undefined &&
+        property.bathrooms !== ""
+    ){
+
+        details.push({
+
+            label:"Bathrooms",
+
+            value:property.bathrooms
+
+        });
+
+    }
+
+
+    if(
+        property.area !== undefined &&
+        property.area !== ""
+    ){
+
+        details.push({
+
+            label:"Area",
+
+            value:property.area
+
+        });
+
+    }
+
+
+    if(property.propertyType){
+
+        details.push({
+
+            label:"Property Type",
+
+            value:property.propertyType
+
+        });
+
+    }
+
+
+    if(property.purpose){
+
+        details.push({
+
+            label:"Purpose",
+
+            value:property.purpose
+
+        });
+
+    }
+
+
+    if(property.status){
+
+        details.push({
+
+            label:"Status",
+
+            value:property.status
+
+        });
+
+    }
+
+
+    $("details").innerHTML =
+
+        details.map(
+            item => `
+
+                <div class="detail">
+
+                    <span>
+                        ${escapeHTML(item.label)}
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(item.value)}
+                    </strong>
+
+                </div>
+
+            `
+        ).join("");
+
+}
+
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+let propertyImages = [];
+
+let currentImageIndex = 0;
+
+
+/*
+IMPORTANT:
+
+MUNA AMFANI DA:
+
+imageUrl
+imageUrl2
+imageUrl3
+imageUrl4
+imageUrl5
+
+BA images[]
+*/
+
+function renderGallery(property){
+
+    propertyImages = [];
+
+
+    /*
+    PHOTO 1
+    */
+
+    addImage(
+        property.imageUrl
+    );
+
+
+    /*
+    PHOTO 2
+    */
+
+    addImage(
+        property.imageUrl2
+    );
+
+
+    /*
+    PHOTO 3
+    */
+
+    addImage(
+        property.imageUrl3
+    );
+
+
+    /*
+    PHOTO 4
+    */
+
+    addImage(
+        property.imageUrl4
+    );
+
+
+    /*
+    PHOTO 5
+    */
+
+    addImage(
+        property.imageUrl5
+    );
+
+
+    console.log(
+        "Gallery images:",
+        propertyImages
+    );
+
+
+    /*
+    NO PHOTOS
+    */
+
+    if(
+        propertyImages.length === 0
+    ){
+
+        $("mainImage").src =
+            "https://via.placeholder.com/1200x700?text=No+Property+Image";
+
+        $("thumbnails").innerHTML =
+            "";
+
+        $("imageCounter").textContent =
+            "No photos available";
+
+        return;
+
+    }
+
+
+    /*
+    START WITH PHOTO 1
+    */
+
+    currentImageIndex = 0;
+
+
+    updateMainImage();
+
+
+    /*
+    CREATE ALL THUMBNAILS
+    */
+
+    renderThumbnails();
+
+}
+
+
+/* =========================================================
+   ADD IMAGE
+========================================================= */
+
+function addImage(image){
+
+    /*
+    Accept strings only.
+    Remove spaces around URL.
+    */
+
+    if(
+        typeof image === "string"
+    ){
+
+        const cleanImage =
+            image.trim();
+
+
+        if(
+            cleanImage !== "" &&
+            !propertyImages.includes(
+                cleanImage
+            )
+        ){
+
+            propertyImages.push(
+                cleanImage
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   THUMBNAILS
+========================================================= */
+
+function renderThumbnails(){
+
+    const container =
+        $("thumbnails");
+
+
+    container.innerHTML =
+        "";
+
+
+    propertyImages.forEach(
+        (image,index) => {
+
+            const box =
+                document.createElement(
+                    "div"
+                );
+
+
+            box.className =
+                "thumbnail-box";
+
+
+            if(
+                index === currentImageIndex
+            ){
+
+                box.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            const img =
+                document.createElement(
+                    "img"
+                );
+
+
+            img.className =
+                "thumbnail";
+
+
+            img.src =
+                image;
+
+
+            img.alt =
+                `Property photo ${index + 1}`;
+
+
+            /*
+            IF IMAGE URL IS BROKEN
+            */
+
+            img.onerror =
+                function(){
+
+                    this.style.opacity =
+                        "0.3";
+
+                };
+
+
+            const number =
+                document.createElement(
+                    "div"
+                );
+
+
+            number.className =
+                "photo-number";
+
+
+            number.textContent =
+                `Photo ${index + 1}`;
+
+
+            box.appendChild(
+                img
+            );
+
+
+            box.appendChild(
+                number
+            );
+
+
+            /*
+            CLICK
+            */
+
+            box.onclick =
+                function(){
+
+                    currentImageIndex =
+                        index;
+
+
+                    updateMainImage();
+
+
+                    updateThumbnailActive();
+
+                };
+
+
+            container.appendChild(
+                box
+            );
+
+        }
+    );
+
+
+    updateCounter();
+
+}
+
+
+/* =========================================================
+   UPDATE MAIN IMAGE
+========================================================= */
+
+function updateMainImage(){
+
+    if(
+        !propertyImages.length
+    ){
+
+        return;
+
+    }
+
+
+    const image =
+        propertyImages[
+            currentImageIndex
+        ];
+
+
+    $("mainImage").src =
+        image;
+
+
+    $("mainImage").alt =
+        `Property photo ${currentImageIndex + 1}`;
+
+
+    updateCounter();
+
+}
+
+
+/* =========================================================
+   ACTIVE THUMBNAIL
+========================================================= */
+
+function updateThumbnailActive(){
+
+    document
+        .querySelectorAll(
+            ".thumbnail-box"
+        )
+        .forEach(
+            (box,index) => {
+
+                box.classList.toggle(
+                    "active",
+                    index === currentImageIndex
+                );
+
+            }
+        );
+
+
+    updateCounter();
+
+}
+
+
+/* =========================================================
+   IMAGE COUNTER
+========================================================= */
+
+function updateCounter(){
+
+    if(
+        !propertyImages.length
+    ){
+
+        $("imageCounter").textContent =
+            "";
+
+        return;
+
+    }
+
+
+    $("imageCounter").textContent =
+        `Photo ${currentImageIndex + 1} of ${propertyImages.length}`;
+
+}
+
+
+/* =========================================================
+   MAIN IMAGE CLICK
+========================================================= */
+
+$("mainImage").onclick =
+function(){
+
+    if(
+        !propertyImages.length
+    ){
+
+        return;
+
+    }
+
+
+    openModal();
+
+};
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal(){
+
+    $("imageModal")
+        .classList
+        .add("show");
+
+
+    updateModal();
+
+}
+
+
+function closeModal(){
+
+    $("imageModal")
+        .classList
+        .remove("show");
+
+}
+
+
+function updateModal(){
+
+    if(
+        !propertyImages.length
+    ){
+
+        return;
+
+    }
+
+
+    $("modalImage").src =
+        propertyImages[
+            currentImageIndex
+        ];
+
+
+    $("modalCounter").textContent =
+        `Photo ${currentImageIndex + 1} of ${propertyImages.length}`;
+
+}
+
+
+/* =========================================================
+   MODAL CLOSE
+========================================================= */
+
+$("closeModal").onclick =
+function(){
+
+    closeModal();
+
+};
+
+
+/* =========================================================
+   MODAL PREVIOUS
+========================================================= */
+
+$("modalPrev").onclick =
+function(event){
+
+    event.stopPropagation();
+
+
+    if(
+        !propertyImages.length
+    ){
+
+        return;
+
+    }
+
+
+    currentImageIndex--;
+
+    if(
+        currentImageIndex < 0
+    ){
+
+        currentImageIndex =
+            propertyImages.length - 1;
+
+    }
+
+
+    updateMainImage();
+
+    updateThumbnailActive();
+
+    updateModal();
+
+};
+
+
+/* =========================================================
+   MODAL NEXT
+========================================================= */
+
+$("modalNext").onclick =
+function(event){
+
+    event.stopPropagation();
+
+
+    if(
+        !propertyImages.length
+    ){
+
+        return;
+
+    }
+
+
+    currentImageIndex++;
+
+
+    if(
+        currentImageIndex >=
+        propertyImages.length
+    ){
+
+        currentImageIndex =
+            0;
+
+    }
+
+
+    updateMainImage();
+
+    updateThumbnailActive();
+
+    updateModal();
+
+};
+
+
+/* =========================================================
+   CLICK OUTSIDE IMAGE
+========================================================= */
+
+$("imageModal").onclick =
+function(event){
+
+    if(
+        event.target ===
+        $("imageModal")
+    ){
+
+        closeModal();
+
+    }
+
+};
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            !$("imageModal")
+                .classList
+                .contains("show")
+        ){
+
+            return;
+
+        }
+
+
+        if(
+            event.key === "Escape"
+        ){
+
+            closeModal();
+
+        }
+
+
+        if(
+            event.key === "ArrowLeft"
+        ){
+
+            $("modalPrev").click();
+
+        }
+
+
+        if(
+            event.key === "ArrowRight"
+        ){
+
+            $("modalNext").click();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+function setupContact(
+    company,
+    property
+){
+
+    const phone =
+        company.companyPhone ||
+        company.phone ||
+        "";
+
+
+    const whatsapp =
+        company.companyWhatsApp ||
+        company.whatsapp ||
+        phone;
+
+
+    const email =
+        company.companyEmail ||
+        company.email ||
+        "";
+
+
+    /*
+    WHATSAPP
+    */
+
+    if(whatsapp){
+
+        let number =
+            String(
+                whatsapp
+            ).replace(
+                /\D/g,
+                ""
+            );
+
+
+        if(
+            number.startsWith("0")
+        ){
+
+            number =
+                "234" +
+                number.substring(1);
+
+        }
+
+
+        const message =
+            `Hello, I am interested in the property "${property.title || "this property"}" on your website.`;
+
+
+        $("whatsappButton").href =
+            `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+
+    }else{
+
+        $("whatsappButton")
+            .style.display =
+                "none";
+
+    }
+
+
+    /*
+    PHONE
+    */
+
+    if(phone){
+
+        $("phoneButton").href =
+            `tel:${phone}`;
+
+    }else{
+
+        $("phoneButton")
+            .style.display =
+                "none";
+
+    }
+
+
+    /*
+    EMAIL
+    */
+
+    if(email){
+
+        $("emailButton").href =
+            `mailto:${email}?subject=${encodeURIComponent(
+                "Property Inquiry"
+            )}`;
+
+    }else{
+
+        $("emailButton")
+            .style.display =
+                "none";
+
+    }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadProperty();
+
+</script>
+
+</body>
+</html>
