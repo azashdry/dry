@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>EstatePro Super Admin</title>
 
@@ -13,7 +13,7 @@ body{
     margin:0;
     font-family:Arial,sans-serif;
     background:#f1f5f9;
-    color:#17202a;
+    color:#17202a
 }
 
 button,input,select,textarea{font:inherit}
@@ -158,7 +158,7 @@ input:focus,select:focus,textarea:focus{
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(5,1fr);
     gap:15px;
     margin-bottom:20px
 }
@@ -266,20 +266,20 @@ input:focus,select:focus,textarea:focus{
     margin-bottom:15px
 }
 
-.company{
+.company,.admin,.subscription{
     border:1px solid #e2e8f0;
     border-radius:13px;
     padding:16px;
     margin-bottom:12px
 }
 
-.company-top{
+.company-top,.admin-top{
     display:flex;
     gap:15px;
     align-items:flex-start
 }
 
-.company-logo{
+.company-logo,.admin-avatar{
     width:65px;
     height:65px;
     border-radius:12px;
@@ -288,12 +288,21 @@ input:focus,select:focus,textarea:focus{
     flex-shrink:0
 }
 
-.company h3{
+.admin-avatar{
+    display:grid;
+    place-items:center;
+    background:#ccfbf1;
+    color:#0f766e;
+    font-size:25px;
+    font-weight:bold
+}
+
+.company h3,.admin h3,.subscription h3{
     margin:0 0 6px;
     font-size:18px
 }
 
-.company p{
+.company p,.admin p,.subscription p{
     margin:5px 0;
     color:#64748b;
     font-size:13px
@@ -359,21 +368,6 @@ input:focus,select:focus,textarea:focus{
     font-size:13px
 }
 
-.subscription{
-    border:1px solid #e2e8f0;
-    border-radius:12px;
-    padding:16px;
-    margin-bottom:12px
-}
-
-.subscription h3{margin:0 0 7px}
-
-.subscription p{
-    margin:5px 0;
-    color:#64748b;
-    font-size:13px
-}
-
 .loading,.empty{
     text-align:center;
     padding:30px;
@@ -415,16 +409,31 @@ input:focus,select:focus,textarea:focus{
     word-break:break-word
 }
 
-@media(max-width:900px){
+.warning{
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    color:#9a3412;
+    padding:12px;
+    border-radius:9px;
+    font-size:13px;
+    line-height:1.5;
+    margin-bottom:15px
+}
 
+@media(max-width:1050px){
     .stats{
-        grid-template-columns:repeat(2,1fr)
+        grid-template-columns:repeat(3,1fr)
     }
+}
 
+@media(max-width:900px){
     .grid{
         grid-template-columns:1fr
     }
 
+    .stats{
+        grid-template-columns:repeat(2,1fr)
+    }
 }
 
 @media(max-width:600px){
@@ -459,16 +468,13 @@ input:focus,select:focus,textarea:focus{
         width:100%;
         height:180px
     }
-
 }
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     LOGIN
-===================================================== -->
+<!-- ================= LOGIN ================= -->
 
 <div id="loginCard">
 
@@ -485,31 +491,23 @@ input:focus,select:focus,textarea:focus{
 
         <div class="field">
             <label>Email</label>
-
-            <input
-                id="email"
-                type="email"
-                placeholder="Super Admin Email"
-                required
-            >
+            <input id="email"
+                   type="email"
+                   placeholder="Super Admin Email"
+                   required>
         </div>
 
         <div class="field">
             <label>Password</label>
-
-            <input
-                id="password"
-                type="password"
-                placeholder="Password"
-                required
-            >
+            <input id="password"
+                   type="password"
+                   placeholder="Password"
+                   required>
         </div>
 
-        <button
-            id="loginButton"
-            class="primary"
-            type="submit"
-        >
+        <button id="loginButton"
+                class="primary"
+                type="submit">
             Login
         </button>
 
@@ -518,9 +516,7 @@ input:focus,select:focus,textarea:focus{
 </div>
 
 
-<!-- =====================================================
-     DASHBOARD
-===================================================== -->
+<!-- ================= DASHBOARD ================= -->
 
 <div id="dashboard">
 
@@ -538,11 +534,8 @@ input:focus,select:focus,textarea:focus{
                 Loading...
             </span>
 
-            <button
-                id="logoutButton"
-                class="logout"
-                type="button"
-            >
+            <button id="logoutButton"
+                    class="logout">
                 Logout
             </button>
 
@@ -556,512 +549,536 @@ input:focus,select:focus,textarea:focus{
 <main class="container">
 
     <div class="page-title">
-
         <h1>Super Admin Dashboard</h1>
-
         <p>
-            Manage companies, properties and subscriptions.
+            Manage companies, admins, properties and subscriptions.
         </p>
-
     </div>
 
     <div id="dashboardMessage" class="message"></div>
 
 
-    <!-- =================================================
-         STATS
-    ================================================== -->
+<!-- ================= STATS ================= -->
 
-    <section class="stats">
+<section class="stats">
 
-        <div class="stat">
-            <span>Total Companies</span>
-            <strong id="totalCompanies">0</strong>
-        </div>
-
-        <div class="stat">
-            <span>Total Properties</span>
-            <strong id="totalProperties">0</strong>
-        </div>
-
-        <div class="stat">
-            <span>Active Subscriptions</span>
-            <strong id="activeSubscriptions">0</strong>
-        </div>
-
-        <div class="stat">
-            <span>Expired Subscriptions</span>
-            <strong id="expiredSubscriptions">0</strong>
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         TABS
-    ================================================== -->
-
-    <div class="tabs">
-
-        <button
-            class="tab active"
-            data-tab="companiesTab"
-        >
-            Companies
-        </button>
-
-        <button
-            class="tab"
-            data-tab="propertiesTab"
-        >
-            Properties
-        </button>
-
-        <button
-            class="tab"
-            data-tab="subscriptionsTab"
-        >
-            Subscriptions
-        </button>
-
+    <div class="stat">
+        <span>Total Companies</span>
+        <strong id="totalCompanies">0</strong>
     </div>
 
+    <div class="stat">
+        <span>Total Admins</span>
+        <strong id="totalAdmins">0</strong>
+    </div>
 
-    <!-- =================================================
-         COMPANIES
-    ================================================== -->
+    <div class="stat">
+        <span>Total Properties</span>
+        <strong id="totalProperties">0</strong>
+    </div>
 
-    <section
-        id="companiesTab"
-        class="tab-content active"
-    >
+    <div class="stat">
+        <span>Active Subscriptions</span>
+        <strong id="activeSubscriptions">0</strong>
+    </div>
 
-        <div class="grid">
+    <div class="stat">
+        <span>Expired Subscriptions</span>
+        <strong id="expiredSubscriptions">0</strong>
+    </div>
 
-            <section class="card">
+</section>
+
+
+<!-- ================= TABS ================= -->
+
+<div class="tabs">
+
+    <button class="tab active"
+            data-tab="companiesTab">
+        Companies
+    </button>
+
+    <button class="tab"
+            data-tab="adminsTab">
+        Admins
+    </button>
+
+    <button class="tab"
+            data-tab="propertiesTab">
+        Properties
+    </button>
 
-                <h2 id="companyFormTitle">
-                    Add Company
-                </h2>
+    <button class="tab"
+            data-tab="subscriptionsTab">
+        Subscriptions
+    </button>
 
-                <div
-                    id="companyFormMessage"
-                    class="message"
-                ></div>
+</div>
 
-                <form id="companyForm">
 
-                    <div class="field">
+<!-- =====================================================
+     COMPANIES
+===================================================== -->
 
-                        <label>Company ID</label>
+<section id="companiesTab"
+         class="tab-content active">
 
-                        <input
-                            id="companyId"
-                            placeholder="Company_002"
-                            required
-                        >
+<div class="grid">
 
-                    </div>
+<section class="card">
 
-                    <div class="field">
+<h2 id="companyFormTitle">
+    Add Company
+</h2>
 
-                        <label>Company Name</label>
+<div id="companyFormMessage"
+     class="message"></div>
 
-                        <input
-                            id="companyName"
-                            placeholder="ABC Estate"
-                            required
-                        >
+<form id="companyForm">
 
-                    </div>
+<div class="field">
+<label>Company ID</label>
+<input id="companyId"
+       placeholder="Company_002"
+       required>
+</div>
 
-                    <div class="field">
+<div class="field">
+<label>Company Name</label>
+<input id="companyName"
+       placeholder="ABC Estate"
+       required>
+</div>
 
-                        <label>Email</label>
+<div class="field">
+<label>Email</label>
+<input id="companyEmail"
+       type="email"
+       placeholder="company@email.com">
+</div>
 
-                        <input
-                            id="companyEmail"
-                            type="email"
-                            placeholder="company@email.com"
-                        >
+<div class="row">
 
-                    </div>
+<div class="field">
+<label>Phone</label>
+<input id="companyPhone"
+       placeholder="08000000000">
+</div>
 
-                    <div class="row">
+<div class="field">
+<label>WhatsApp</label>
+<input id="companyWhatsApp"
+       placeholder="2348000000000">
+</div>
 
-                        <div class="field">
+</div>
 
-                            <label>Phone</label>
+<div class="field">
+<label>Logo URL</label>
+<input id="companyLogo"
+       placeholder="https://...">
+</div>
 
-                            <input
-                                id="companyPhone"
-                                placeholder="08000000000"
-                            >
+<div class="field">
+<label>Address</label>
+<input id="companyAddress"
+       placeholder="Kano, Nigeria">
+</div>
 
-                        </div>
+<div class="field">
+<label>Description</label>
+<textarea id="companyDescription"
+          placeholder="Company description..."></textarea>
+</div>
 
-                        <div class="field">
+<button id="companySaveButton"
+        class="primary">
+    Add Company
+</button>
 
-                            <label>WhatsApp</label>
+<button id="companyCancelButton"
+        class="cancel hidden"
+        type="button">
+    Cancel Edit
+</button>
 
-                            <input
-                                id="companyWhatsApp"
-                                placeholder="2348000000000"
-                            >
+</form>
 
-                        </div>
+</section>
 
-                    </div>
 
-                    <div class="field">
+<section class="card">
 
-                        <label>Logo URL</label>
+<h2>All Companies</h2>
 
-                        <input
-                            id="companyLogo"
-                            placeholder="https://..."
-                        >
+<input id="companySearch"
+       class="search"
+       type="search"
+       placeholder="Search company...">
 
-                    </div>
+<div id="companiesList">
+    <div class="loading">
+        Loading companies...
+    </div>
+</div>
 
-                    <div class="field">
+</section>
 
-                        <label>Address</label>
+</div>
 
-                        <input
-                            id="companyAddress"
-                            placeholder="Kano, Nigeria"
-                        >
+</section>
 
-                    </div>
 
-                    <div class="field">
+<!-- =====================================================
+     ADMINS
+===================================================== -->
 
-                        <label>Description</label>
+<section id="adminsTab"
+         class="tab-content">
 
-                        <textarea
-                            id="companyDescription"
-                            placeholder="Company description..."
-                        ></textarea>
+<div class="grid">
 
-                    </div>
+<section class="card">
 
-                    <button
-                        id="companySaveButton"
-                        class="primary"
-                        type="submit"
-                    >
-                        Add Company
-                    </button>
+<h2 id="adminFormTitle">
+    Add Admin
+</h2>
 
-                    <button
-                        id="companyCancelButton"
-                        class="cancel hidden"
-                        type="button"
-                    >
-                        Cancel Edit
-                    </button>
+<div class="warning">
+    <strong>Important:</strong><br>
+    UID dole ne ya zama UID ɗin wannan admin
+    daga Firebase Authentication. Wannan form
+    ba ya ƙirƙirar Authentication account.
+    Password ba ya shiga Firestore.
+</div>
 
-                </form>
+<div id="adminFormMessage"
+     class="message"></div>
 
-            </section>
+<form id="adminForm">
 
+<div class="field">
 
-            <section class="card">
+<label>Admin UID</label>
 
-                <h2>All Companies</h2>
+<input id="adminUid"
+       placeholder="Firebase Authentication UID"
+       required>
 
-                <input
-                    id="companySearch"
-                    class="search"
-                    type="search"
-                    placeholder="Search company..."
-                >
+</div>
 
-                <div id="companiesList">
+<div class="field">
 
-                    <div class="loading">
-                        Loading companies...
-                    </div>
+<label>Admin Name</label>
 
-                </div>
+<input id="adminName"
+       placeholder="Admin Name"
+       required>
 
-            </section>
+</div>
 
-        </div>
+<div class="field">
 
-    </section>
+<label>Email</label>
 
+<input id="adminEmail"
+       type="email"
+       placeholder="admin@email.com"
+       required>
 
-    <!-- =================================================
-         PROPERTIES
-    ================================================== -->
+</div>
 
-    <section
-        id="propertiesTab"
-        class="tab-content"
-    >
+<div class="field">
 
-        <section class="card">
+<label>Company ID</label>
 
-            <button
-                id="backToCompanies"
-                class="back hidden"
-                type="button"
-            >
-                ← All Companies
-            </button>
+<input id="adminCompanyId"
+       placeholder="Company_002"
+       required>
 
-            <h2 id="propertiesTitle">
-                All Properties
-            </h2>
+</div>
 
-            <input
-                id="propertySearch"
-                class="search"
-                type="search"
-                placeholder="Search property..."
-            >
+<div class="field">
 
-            <div id="propertiesList">
+<label>Role</label>
 
-                <div class="loading">
-                    Loading properties...
-                </div>
+<select id="adminRole">
 
-            </div>
+<option value="companyAdmin">
+Company Admin
+</option>
 
-        </section>
+</select>
 
-    </section>
+</div>
 
+<div class="field">
 
-    <!-- =================================================
-         SUBSCRIPTIONS
-    ================================================== -->
+<label>Status</label>
 
-    <section
-        id="subscriptionsTab"
-        class="tab-content"
-    >
+<select id="adminActive">
 
-        <div class="grid">
+<option value="true">
+Active
+</option>
 
-            <section class="card">
+<option value="false">
+Inactive
+</option>
 
-                <h2 id="subscriptionFormTitle">
-                    Add Subscription
-                </h2>
+</select>
 
-                <div
-                    id="subscriptionFormMessage"
-                    class="message"
-                ></div>
+</div>
 
-                <form id="subscriptionForm">
+<button id="adminSaveButton"
+        class="primary"
+        type="submit">
+    Add Admin
+</button>
 
-                    <div class="field">
+<button id="adminCancelButton"
+        class="cancel hidden"
+        type="button">
+    Cancel Edit
+</button>
 
-                        <label>Company ID</label>
+</form>
 
-                        <input
-                            id="subscriptionCompanyId"
-                            placeholder="Company_002"
-                            required
-                        >
+</section>
 
-                    </div>
 
-                    <div class="field">
+<section class="card">
 
-                        <label>Plan</label>
+<h2>All Admins</h2>
 
-                        <select id="plan">
+<input id="adminSearch"
+       class="search"
+       type="search"
+       placeholder="Search admin...">
 
-                            <option value="basic">
-                                Basic
-                            </option>
+<div id="adminsList">
 
-                            <option value="professional">
-                                Professional
-                            </option>
+<div class="loading">
+    Loading admins...
+</div>
 
-                            <option value="premium">
-                                Premium
-                            </option>
+</div>
 
-                        </select>
+</section>
 
-                    </div>
+</div>
 
-                    <div class="field">
+</section>
 
-                        <label>Amount</label>
 
-                        <input
-                            id="amount"
-                            type="number"
-                            min="0"
-                            required
-                        >
+<!-- =====================================================
+     PROPERTIES
+===================================================== -->
 
-                    </div>
+<section id="propertiesTab"
+         class="tab-content">
 
-                    <div class="row">
+<section class="card">
 
-                        <div class="field">
+<button id="backToCompanies"
+        class="back hidden"
+        type="button">
+    ← All Companies
+</button>
 
-                            <label>Start Date</label>
+<h2 id="propertiesTitle">
+    All Properties
+</h2>
 
-                            <input
-                                id="startDate"
-                                type="date"
-                                required
-                            >
+<input id="propertySearch"
+       class="search"
+       type="search"
+       placeholder="Search property...">
 
-                        </div>
+<div id="propertiesList">
 
-                        <div class="field">
+<div class="loading">
+    Loading properties...
+</div>
 
-                            <label>Expiry Date</label>
+</div>
 
-                            <input
-                                id="expiryDate"
-                                type="date"
-                                required
-                            >
+</section>
 
-                        </div>
+</section>
 
-                    </div>
 
-                    <div class="field">
+<!-- =====================================================
+     SUBSCRIPTIONS
+===================================================== -->
 
-                        <label>Payment Status</label>
+<section id="subscriptionsTab"
+         class="tab-content">
 
-                        <select id="paymentStatus">
+<div class="grid">
 
-                            <option value="paid">
-                                Paid
-                            </option>
+<section class="card">
 
-                            <option value="pending">
-                                Pending
-                            </option>
+<h2 id="subscriptionFormTitle">
+    Add Subscription
+</h2>
 
-                            <option value="failed">
-                                Failed
-                            </option>
+<div id="subscriptionFormMessage"
+     class="message"></div>
 
-                        </select>
+<form id="subscriptionForm">
 
-                    </div>
+<div class="field">
+<label>Company ID</label>
+<input id="subscriptionCompanyId"
+       placeholder="Company_002"
+       required>
+</div>
 
-                    <div class="field">
+<div class="field">
 
-                        <label>Status</label>
+<label>Plan</label>
 
-                        <select id="subscriptionStatus">
+<select id="plan">
 
-                            <option value="active">
-                                Active
-                            </option>
+<option value="basic">Basic</option>
+<option value="professional">Professional</option>
+<option value="premium">Premium</option>
 
-                            <option value="expired">
-                                Expired
-                            </option>
+</select>
 
-                            <option value="cancelled">
-                                Cancelled
-                            </option>
+</div>
 
-                        </select>
+<div class="field">
+<label>Amount</label>
+<input id="amount"
+       type="number"
+       min="0"
+       required>
+</div>
 
-                    </div>
+<div class="row">
 
-                    <div style="margin:15px 0">
+<div class="field">
+<label>Start Date</label>
+<input id="startDate"
+       type="date"
+       required>
+</div>
 
-                        <label>
+<div class="field">
+<label>Expiry Date</label>
+<input id="expiryDate"
+       type="date"
+       required>
+</div>
 
-                            <input
-                                id="autoRenew"
-                                type="checkbox"
-                                style="width:auto"
-                            >
+</div>
 
-                            Auto Renew
+<div class="field">
 
-                        </label>
+<label>Payment Status</label>
 
-                    </div>
+<select id="paymentStatus">
 
-                    <button
-                        id="subscriptionSaveButton"
-                        class="primary"
-                        type="submit"
-                    >
-                        Add Subscription
-                    </button>
+<option value="paid">Paid</option>
+<option value="pending">Pending</option>
+<option value="failed">Failed</option>
 
-                    <button
-                        id="subscriptionCancelButton"
-                        class="cancel hidden"
-                        type="button"
-                    >
-                        Cancel Edit
-                    </button>
+</select>
 
-                </form>
+</div>
 
-            </section>
+<div class="field">
 
+<label>Status</label>
 
-            <section class="card">
+<select id="subscriptionStatus">
 
-                <h2>All Subscriptions</h2>
+<option value="active">Active</option>
+<option value="expired">Expired</option>
+<option value="cancelled">Cancelled</option>
 
-                <input
-                    id="subscriptionSearch"
-                    class="search"
-                    type="search"
-                    placeholder="Search company..."
-                >
+</select>
 
-                <div id="subscriptionsList">
+</div>
 
-                    <div class="loading">
-                        Loading subscriptions...
-                    </div>
+<div style="margin:15px 0">
 
-                </div>
+<label>
 
-            </section>
+<input id="autoRenew"
+       type="checkbox"
+       style="width:auto">
 
-        </div>
+Auto Renew
 
-    </section>
+</label>
+
+</div>
+
+<button id="subscriptionSaveButton"
+        class="primary">
+    Add Subscription
+</button>
+
+<button id="subscriptionCancelButton"
+        class="cancel hidden"
+        type="button">
+    Cancel Edit
+</button>
+
+</form>
+
+</section>
+
+
+<section class="card">
+
+<h2>All Subscriptions</h2>
+
+<input id="subscriptionSearch"
+       class="search"
+       type="search"
+       placeholder="Search company...">
+
+<div id="subscriptionsList">
+
+<div class="loading">
+    Loading subscriptions...
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</section>
 
 </main>
-
 </div>
 
 
 <script type="module">
 
-/* =========================================================
+/* =====================================================
    FIREBASE
-========================================================= */
+===================================================== */
 
 import {
     initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
     getAuth,
     signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
     getFirestore,
@@ -1074,2495 +1091,2515 @@ import {
     deleteDoc,
     serverTimestamp,
     Timestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* =========================================================
-   FIREBASE CONFIG
-========================================================= */
+/* =====================================================
+   CONFIG
+===================================================== */
 
 const firebaseConfig = {
 
-    apiKey:
-        "AIzaSyAE44DxNnqz3m8ScqaZxoSj2FdQ7aJ2NIg",
+apiKey:
+"AIzaSyAE44DxNnqz3m8ScqaZxoSj2FdQ7aJ2NIg",
 
-    authDomain:
-        "estate-pro-d564b.firebaseapp.com",
+authDomain:
+"estate-pro-d564b.firebaseapp.com",
 
-    projectId:
-        "estate-pro-d564b",
+projectId:
+"estate-pro-d564b",
 
-    storageBucket:
-        "estate-pro-d564b.firebasestorage.app",
+storageBucket:
+"estate-pro-d564b.firebasestorage.app",
 
-    messagingSenderId:
-        "600309829118",
+messagingSenderId:
+"600309829118",
 
-    appId:
-        "1:600309829118:web:60c61624ca8cdf05e884af",
+appId:
+"1:600309829118:web:60c61624ca8cdf05e884af",
 
-    measurementId:
-        "G-TG60FCJHXB"
+measurementId:
+"G-TG60FCJHXB"
 
 };
 
 
 const app =
-    initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const auth =
-    getAuth(app);
+getAuth(app);
 
 const db =
-    getFirestore(app);
+getFirestore(app);
 
 
-/* =========================================================
+/* =====================================================
    HELPER
-========================================================= */
+===================================================== */
 
 const $ =
-    id => document.getElementById(id);
+id => document.getElementById(id);
 
 
-/* =========================================================
-   DOM
-========================================================= */
+function escapeHTML(value){
 
-const loginCard =
-    $("loginCard");
+return String(value ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
-const dashboard =
-    $("dashboard");
+}
 
-const loginForm =
-    $("loginForm");
-
-const loginButton =
-    $("loginButton");
-
-const loginMessage =
-    $("loginMessage");
-
-const dashboardMessage =
-    $("dashboardMessage");
-
-
-/* =========================================================
-   DATA
-========================================================= */
-
-let companies = [];
-
-let properties = [];
-
-let subscriptions = [];
-
-let editingCompanyId = null;
-
-let editingSubscriptionId = null;
-
-let selectedCompanyId = null;
-
-let currentSuperAdmin = null;
-
-
-/* =========================================================
-   MESSAGE
-========================================================= */
 
 function message(element,text,type){
 
-    element.textContent = text;
+element.textContent = text;
 
-    element.className =
-        "message show " + type;
+element.className =
+"message show " + type;
 
 }
 
 
 function clearMessage(element){
 
-    element.textContent = "";
+element.textContent = "";
 
-    element.className = "message";
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(value){
-
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+element.className =
+"message";
 
 }
 
-
-/* =========================================================
-   ERROR
-========================================================= */
 
 function errorText(error){
 
-    const code =
-        error?.code || "";
+const code =
+error?.code || "";
 
-    if(code === "auth/invalid-credential"){
-        return "Email or password is incorrect.";
-    }
+if(code === "auth/invalid-credential")
+return "Email or password is incorrect.";
 
-    if(code === "auth/user-not-found"){
-        return "Super Admin account was not found.";
-    }
+if(code === "auth/user-not-found")
+return "Super Admin account was not found.";
 
-    if(code === "auth/wrong-password"){
-        return "Incorrect password.";
-    }
+if(code === "auth/wrong-password")
+return "Incorrect password.";
 
-    if(
-        code === "permission-denied" ||
-        code === "firestore/permission-denied"
-    ){
-        return "Firestore permission denied. Check your rules.";
-    }
+if(
+code === "permission-denied" ||
+code === "firestore/permission-denied"
+)
+return "Firestore permission denied. Check your rules.";
 
-    return (
-        error?.message ||
-        "Something went wrong."
-    );
+return error?.message ||
+"Something went wrong.";
 
 }
 
 
-/* =========================================================
-   DATE
-========================================================= */
-
 function dateTimestamp(value){
 
-    if(!value)
-        return null;
+if(!value)
+return null;
 
-    return Timestamp.fromDate(
-        new Date(value + "T00:00:00")
-    );
+return Timestamp.fromDate(
+new Date(value + "T00:00:00")
+);
 
 }
 
 
 function dateInput(value){
 
-    if(!value)
-        return "";
+if(!value)
+return "";
 
-    let date;
+let date;
 
-    if(
-        typeof value.toDate === "function"
-    ){
+if(typeof value.toDate === "function")
+date = value.toDate();
+else
+date = new Date(value);
 
-        date = value.toDate();
+if(Number.isNaN(date.getTime()))
+return "";
 
-    }else{
+return [
 
-        date = new Date(value);
+date.getFullYear(),
 
-    }
+String(date.getMonth()+1)
+.padStart(2,"0"),
 
-    if(
-        Number.isNaN(
-            date.getTime()
-        )
-    ){
+String(date.getDate())
+.padStart(2,"0")
 
-        return "";
-
-    }
-
-    return [
-
-        date.getFullYear(),
-
-        String(
-            date.getMonth() + 1
-        ).padStart(2,"0"),
-
-        String(
-            date.getDate()
-        ).padStart(2,"0")
-
-    ].join("-");
+].join("-");
 
 }
 
 
 function formatDate(value){
 
-    const d =
-        dateInput(value);
+const d =
+dateInput(value);
 
-    if(!d)
-        return "Not set";
+if(!d)
+return "Not set";
 
-    const [
-        y,
-        m,
-        day
-    ] = d.split("-");
+const [
+y,m,day
+] =
+d.split("-");
 
-    return `${day}/${m}/${y}`;
+return `${day}/${m}/${y}`;
 
 }
 
 
-/* =========================================================
+/* =====================================================
+   DATA
+===================================================== */
+
+let companies = [];
+let admins = [];
+let properties = [];
+let subscriptions = [];
+
+let editingCompanyId = null;
+let editingAdminUid = null;
+let editingSubscriptionId = null;
+
+let selectedCompanyId = null;
+let currentSuperAdmin = null;
+
+
+/* =====================================================
    SUPER ADMIN CHECK
-========================================================= */
+===================================================== */
 
 async function checkSuperAdmin(user){
 
-    const ref =
-        doc(
-            db,
-            "superAdmins",
-            user.uid
-        );
+const ref =
+doc(
+db,
+"superAdmins",
+user.uid
+);
 
-    const snap =
-        await getDoc(ref);
+const snap =
+await getDoc(ref);
 
-    if(!snap.exists()){
+if(!snap.exists()){
 
-        throw new Error(
-            "This account is not registered as a Super Admin."
-        );
+throw new Error(
+"This account is not registered as a Super Admin."
+);
 
-    }
+}
 
-    const data =
-        snap.data();
+const data =
+snap.data();
 
-    if(
-        data.active !== true ||
-        data.role !== "superAdmin"
-    ){
+if(
+data.active !== true ||
+data.role !== "superAdmin"
+){
 
-        throw new Error(
-            "Super Admin access is disabled."
-        );
+throw new Error(
+"Super Admin access is disabled."
+);
 
-    }
+}
 
-    return data;
+return data;
 
 }
 
 
-/* =========================================================
+/* =====================================================
    LOGIN
-========================================================= */
+===================================================== */
 
-loginForm.addEventListener(
-    "submit",
-    async e => {
+$("loginForm").addEventListener(
+"submit",
+async e => {
 
-        e.preventDefault();
+e.preventDefault();
 
-        clearMessage(loginMessage);
-
-        loginButton.disabled = true;
-
-        loginButton.textContent =
-            "Checking...";
-
-        try{
-
-            await signInWithEmailAndPassword(
-                auth,
-                $("email").value.trim(),
-                $("password").value
-            );
-
-        }catch(error){
-
-            console.error(
-                "Login error:",
-                error
-            );
-
-            message(
-                loginMessage,
-                errorText(error),
-                "error"
-            );
-
-        }finally{
-
-            loginButton.disabled = false;
-
-            loginButton.textContent =
-                "Login";
-
-        }
-
-    }
+clearMessage(
+$("loginMessage")
 );
 
+$("loginButton").disabled = true;
 
-/* =========================================================
+$("loginButton").textContent =
+"Checking...";
+
+try{
+
+await signInWithEmailAndPassword(
+auth,
+$("email").value.trim(),
+$("password").value
+);
+
+}catch(error){
+
+message(
+$("loginMessage"),
+errorText(error),
+"error"
+);
+
+}finally{
+
+$("loginButton").disabled = false;
+
+$("loginButton").textContent =
+"Login";
+
+}
+
+});
+
+
+/* =====================================================
    AUTH
-========================================================= */
+===================================================== */
 
 onAuthStateChanged(
-    auth,
-    async user => {
+auth,
+async user => {
 
-        if(!user){
+if(!user){
 
-            loginCard.style.display =
-                "block";
+$("loginCard").style.display =
+"block";
 
-            dashboard.style.display =
-                "none";
+$("dashboard").style.display =
+"none";
 
-            currentSuperAdmin = null;
+return;
 
-            return;
+}
 
-        }
+try{
 
-        try{
+const admin =
+await checkSuperAdmin(user);
 
-            const admin =
-                await checkSuperAdmin(user);
+currentSuperAdmin = {
+uid:user.uid,
+email:user.email || admin.email || ""
+};
 
-            currentSuperAdmin = {
-                uid:user.uid,
-                email:user.email || admin.email || ""
-            };
+$("loginCard").style.display =
+"none";
 
-            loginCard.style.display =
-                "none";
+$("dashboard").style.display =
+"block";
 
-            dashboard.style.display =
-                "block";
+$("welcome").textContent =
+admin.email ||
+user.email ||
+"Super Admin";
 
-            $("welcome").textContent =
-                admin.email ||
-                user.email ||
-                "Super Admin";
+await loadEverything();
 
-            await loadEverything();
+}catch(error){
 
-        }catch(error){
-
-            console.error(
-                "Auth error:",
-                error
-            );
-
-            message(
-                loginMessage,
-                error.message,
-                "error"
-            );
-
-            await signOut(auth);
-
-        }
-
-    }
+message(
+$("loginMessage"),
+error.message,
+"error"
 );
 
+await signOut(auth);
 
-/* =========================================================
+}
+
+});
+
+
+/* =====================================================
    LOAD EVERYTHING
-========================================================= */
+===================================================== */
 
 async function loadEverything(){
 
-    await loadCompanies();
+await loadCompanies();
 
-    await loadAllProperties();
+await loadAdmins();
 
-    await loadSubscriptions();
+await loadAllProperties();
 
-    updateStats();
+await loadSubscriptions();
+
+updateStats();
 
 }
 
 
-/* =========================================================
+/* =====================================================
    COMPANIES
-========================================================= */
+===================================================== */
 
 async function loadCompanies(){
 
-    try{
+try{
 
-        const snap =
-            await getDocs(
-                collection(
-                    db,
-                    "companies"
-                )
-            );
+const snap =
+await getDocs(
+collection(db,"companies")
+);
 
-        companies = [];
+companies = [];
 
-        snap.forEach(
-            item => {
+snap.forEach(item => {
 
-                companies.push({
+companies.push({
+id:item.id,
+...item.data()
+});
 
-                    id:item.id,
+});
 
-                    ...item.data()
+renderCompanies(companies);
 
-                });
+}catch(error){
 
-            }
-        );
+$("companiesList").innerHTML =
+`
+<div class="empty">
+Unable to load companies.
+</div>
+`;
 
-        renderCompanies(companies);
-
-    }catch(error){
-
-        console.error(
-            "Companies:",
-            error
-        );
-
-        $("companiesList").innerHTML =
-            `
-            <div class="empty">
-                Unable to load companies.
-            </div>
-            `;
-
-        message(
-            dashboardMessage,
-            errorText(error),
-            "error"
-        );
-
-    }
+message(
+$("dashboardMessage"),
+errorText(error),
+"error"
+);
 
 }
 
+}
 
-/* =========================================================
-   RENDER COMPANIES
-========================================================= */
 
 function renderCompanies(list){
 
-    if(!list.length){
+if(!list.length){
 
-        $("companiesList").innerHTML =
-            `
-            <div class="empty">
-                No companies found.
-            </div>
-            `;
+$("companiesList").innerHTML =
+`
+<div class="empty">
+No companies found.
+</div>
+`;
 
-        return;
+return;
 
-    }
+}
 
-    $("companiesList").innerHTML =
+$("companiesList").innerHTML =
 
-        list.map(
-            company => {
+list.map(company => {
 
-                const companyId =
-                    company.id;
+const id =
+company.id;
 
-                const name =
-                    company.companyName ||
-                    company.name ||
-                    companyId;
+const name =
+company.companyName ||
+company.name ||
+id;
 
-                const logo =
-                    company.companyLogo ||
-                    company.logo ||
-                    "";
+const logo =
+company.companyLogo ||
+company.logo ||
+"";
 
-                const companyProperties =
-                    properties.filter(
-                        property =>
-                            property.companyId === companyId
-                    ).length;
+const count =
+properties.filter(
+p => p.companyId === id
+).length;
 
-                return `
+return `
 
-                <article class="company">
+<article class="company">
 
-                    <div class="company-top">
+<div class="company-top">
 
-                        ${
-                            logo
-                            ?
-                            `
-                            <img
-                                class="company-logo"
-                                src="${escapeHTML(logo)}"
-                                alt=""
-                            >
-                            `
-                            :
-                            `
-                            <div class="company-logo"></div>
-                            `
-                        }
+${
+logo
+?
+`
+<img
+class="company-logo"
+src="${escapeHTML(logo)}"
+alt=""
+>
+`
+:
+`
+<div class="company-logo"></div>
+`
+}
 
-                        <div style="flex:1">
+<div style="flex:1">
 
-                            <h3>
-                                ${escapeHTML(name)}
-                            </h3>
+<h3>
+${escapeHTML(name)}
+</h3>
 
-                            <p>
-                                ID:
-                                ${escapeHTML(companyId)}
-                            </p>
+<p>
+ID: ${escapeHTML(id)}
+</p>
 
-                            <p>
-                                Email:
-                                ${escapeHTML(
-                                    company.companyEmail ||
-                                    company.email ||
-                                    "Not set"
-                                )}
-                            </p>
+<p>
+Email:
+${escapeHTML(
+company.companyEmail ||
+company.email ||
+"Not set"
+)}
+</p>
 
-                            <p>
-                                Phone:
-                                ${escapeHTML(
-                                    company.companyPhone ||
-                                    company.phone ||
-                                    "Not set"
-                                )}
-                            </p>
+<p>
+Phone:
+${escapeHTML(
+company.companyPhone ||
+company.phone ||
+"Not set"
+)}
+</p>
 
-                            <div class="badges">
+<div class="badges">
 
-                                <span class="badge blue">
+<span class="badge blue">
+${count}
+${count === 1 ? " Property":" Properties"}
+</span>
 
-                                    ${companyProperties}
+</div>
 
-                                    ${
-                                        companyProperties === 1
-                                        ? " Property"
-                                        : " Properties"
-                                    }
+</div>
 
-                                </span>
+</div>
 
-                            </div>
+<div class="details">
 
-                        </div>
+<div class="detail">
+<span>WhatsApp</span>
+<strong>
+${escapeHTML(
+company.companyWhatsApp ||
+company.whatsapp ||
+"Not set"
+)}
+</strong>
+</div>
 
-                    </div>
+<div class="detail">
+<span>Address</span>
+<strong>
+${escapeHTML(
+company.companyAddress ||
+company.address ||
+"Not set"
+)}
+</strong>
+</div>
 
+</div>
 
-                    <div class="details">
+<p>
+${escapeHTML(
+company.companyDescription ||
+company.description ||
+"No description"
+)}
+</p>
 
-                        <div class="detail">
+<div class="actions">
 
-                            <span>WhatsApp</span>
+<button class="action view"
+data-view-company="${escapeHTML(id)}">
+Properties
+</button>
 
-                            <strong>
-                                ${escapeHTML(
-                                    company.companyWhatsApp ||
-                                    company.whatsapp ||
-                                    "Not set"
-                                )}
-                            </strong>
+<button class="action edit"
+data-edit-company="${escapeHTML(id)}">
+Edit
+</button>
 
-                        </div>
+<button class="action delete"
+data-delete-company="${escapeHTML(id)}">
+Delete
+</button>
 
+</div>
 
-                        <div class="detail">
+</article>
 
-                            <span>Address</span>
+`;
 
-                            <strong>
-                                ${escapeHTML(
-                                    company.companyAddress ||
-                                    company.address ||
-                                    "Not set"
-                                )}
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <p>
-                        ${escapeHTML(
-                            company.companyDescription ||
-                            company.description ||
-                            "No description"
-                        )}
-                    </p>
-
-
-                    <div class="actions">
-
-                        <button
-                            class="action view"
-                            data-view-company="${escapeHTML(companyId)}"
-                        >
-                            Properties
-                        </button>
-
-                        <button
-                            class="action edit"
-                            data-edit-company="${escapeHTML(companyId)}"
-                        >
-                            Edit
-                        </button>
-
-                        <button
-                            class="action delete"
-                            data-delete-company="${escapeHTML(companyId)}"
-                        >
-                            Delete
-                        </button>
-
-                    </div>
-
-                </article>
-
-                `;
-
-            }
-        ).join("");
+}).join("");
 
 
-    document.querySelectorAll(
-        "[data-view-company]"
-    ).forEach(
-        btn => {
+document.querySelectorAll(
+"[data-view-company]"
+).forEach(btn => {
 
-            btn.onclick = () =>
-                showCompanyProperties(
-                    btn.dataset.viewCompany
-                );
+btn.onclick = () =>
+showCompanyProperties(
+btn.dataset.viewCompany
+);
 
-        }
-    );
+});
 
 
-    document.querySelectorAll(
-        "[data-edit-company]"
-    ).forEach(
-        btn => {
+document.querySelectorAll(
+"[data-edit-company]"
+).forEach(btn => {
 
-            btn.onclick = () =>
-                editCompany(
-                    btn.dataset.editCompany
-                );
+btn.onclick = () =>
+editCompany(
+btn.dataset.editCompany
+);
 
-        }
-    );
+});
 
 
-    document.querySelectorAll(
-        "[data-delete-company]"
-    ).forEach(
-        btn => {
+document.querySelectorAll(
+"[data-delete-company]"
+).forEach(btn => {
 
-            btn.onclick = () =>
-                deleteCompany(
-                    btn.dataset.deleteCompany
-                );
+btn.onclick = () =>
+deleteCompany(
+btn.dataset.deleteCompany
+);
 
-        }
-    );
+});
 
 }
 
 
-/* =========================================================
+/* =====================================================
    SAVE COMPANY
-========================================================= */
+===================================================== */
 
 $("companyForm").addEventListener(
-    "submit",
-    async e => {
+"submit",
+async e => {
 
-        e.preventDefault();
+e.preventDefault();
 
-        const companyId =
-            $("companyId").value.trim();
+const id =
+$("companyId").value.trim();
 
-        if(!companyId)
-            return;
+const data = {
 
-        const data = {
+companyName:
+$("companyName").value.trim(),
 
-            companyName:
-                $("companyName").value.trim(),
+companyEmail:
+$("companyEmail").value.trim(),
 
-            companyEmail:
-                $("companyEmail").value.trim(),
+companyPhone:
+$("companyPhone").value.trim(),
 
-            companyPhone:
-                $("companyPhone").value.trim(),
+companyWhatsApp:
+$("companyWhatsApp").value.trim(),
 
-            companyWhatsApp:
-                $("companyWhatsApp").value.trim(),
+companyLogo:
+$("companyLogo").value.trim(),
 
-            companyLogo:
-                $("companyLogo").value.trim(),
+companyAddress:
+$("companyAddress").value.trim(),
 
-            companyAddress:
-                $("companyAddress").value.trim(),
+companyDescription:
+$("companyDescription").value.trim(),
 
-            companyDescription:
-                $("companyDescription").value.trim(),
+updatedAt:
+serverTimestamp(),
 
-            updatedAt:
-                serverTimestamp(),
+updatedBy:
+currentSuperAdmin.uid
 
-            updatedBy:
-                currentSuperAdmin?.uid ||
-                auth.currentUser?.uid ||
-                ""
+};
 
-        };
+$("companySaveButton").disabled =
+true;
 
+try{
 
-        $("companySaveButton").disabled = true;
+if(!editingCompanyId)
+data.createdAt =
+serverTimestamp();
 
-
-        $("companySaveButton").textContent =
-            editingCompanyId
-            ? "Updating..."
-            : "Saving...";
-
-
-        try{
-
-            if(!editingCompanyId){
-
-                data.createdAt =
-                    serverTimestamp();
-
-            }
-
-
-            await setDoc(
-
-                doc(
-                    db,
-                    "companies",
-                    companyId
-                ),
-
-                data,
-
-                {
-                    merge:true
-                }
-
-            );
-
-
-            message(
-                $("companyFormMessage"),
-
-                editingCompanyId
-                ? "Company updated successfully."
-                : "Company created successfully.",
-
-                "success"
-            );
-
-
-            resetCompanyForm();
-
-            await loadCompanies();
-
-            updateStats();
-
-        }catch(error){
-
-            console.error(
-                "Save company:",
-                error
-            );
-
-            message(
-                $("companyFormMessage"),
-                errorText(error),
-                "error"
-            );
-
-        }finally{
-
-            $("companySaveButton").disabled =
-                false;
-
-            $("companySaveButton").textContent =
-                "Add Company";
-
-        }
-
-    }
+await setDoc(
+doc(db,"companies",id),
+data,
+{merge:true}
 );
 
+message(
+$("companyFormMessage"),
+editingCompanyId
+? "Company updated successfully."
+: "Company created successfully.",
+"success"
+);
 
-/* =========================================================
-   EDIT COMPANY
-========================================================= */
+resetCompanyForm();
+
+await loadCompanies();
+
+updateStats();
+
+}catch(error){
+
+message(
+$("companyFormMessage"),
+errorText(error),
+"error"
+);
+
+}finally{
+
+$("companySaveButton").disabled =
+false;
+
+}
+
+});
+
 
 function editCompany(id){
 
-    const company =
-        companies.find(
-            c => c.id === id
-        );
+const c =
+companies.find(
+x => x.id === id
+);
 
-    if(!company)
-        return;
+if(!c)return;
 
-    editingCompanyId = id;
+editingCompanyId = id;
 
-    $("companyId").value = id;
+$("companyId").value = id;
+$("companyId").readOnly = true;
 
-    $("companyId").readOnly = true;
+$("companyName").value =
+c.companyName || "";
 
-    $("companyName").value =
-        company.companyName || "";
+$("companyEmail").value =
+c.companyEmail || "";
 
-    $("companyEmail").value =
-        company.companyEmail || "";
+$("companyPhone").value =
+c.companyPhone || "";
 
-    $("companyPhone").value =
-        company.companyPhone || "";
+$("companyWhatsApp").value =
+c.companyWhatsApp || "";
 
-    $("companyWhatsApp").value =
-        company.companyWhatsApp || "";
+$("companyLogo").value =
+c.companyLogo || "";
 
-    $("companyLogo").value =
-        company.companyLogo || "";
+$("companyAddress").value =
+c.companyAddress || "";
 
-    $("companyAddress").value =
-        company.companyAddress || "";
+$("companyDescription").value =
+c.companyDescription || "";
 
-    $("companyDescription").value =
-        company.companyDescription || "";
+$("companyFormTitle").textContent =
+"Edit Company";
 
-    $("companyFormTitle").textContent =
-        "Edit Company";
+$("companySaveButton").textContent =
+"Update Company";
 
-    $("companySaveButton").textContent =
-        "Update Company";
-
-    $("companyCancelButton")
-        .classList
-        .remove("hidden");
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+$("companyCancelButton")
+.classList.remove("hidden");
 
 }
 
-
-/* =========================================================
-   RESET COMPANY
-========================================================= */
 
 function resetCompanyForm(){
 
-    editingCompanyId = null;
+editingCompanyId = null;
 
-    $("companyForm").reset();
+$("companyForm").reset();
 
-    $("companyId").readOnly = false;
+$("companyId").readOnly = false;
 
-    $("companyFormTitle").textContent =
-        "Add Company";
+$("companyFormTitle").textContent =
+"Add Company";
 
-    $("companySaveButton").textContent =
-        "Add Company";
+$("companySaveButton").textContent =
+"Add Company";
 
-    $("companyCancelButton")
-        .classList
-        .add("hidden");
+$("companyCancelButton")
+.classList.add("hidden");
 
 }
 
 
-$("companyCancelButton").onclick = () => {
+$("companyCancelButton").onclick =
+resetCompanyForm;
 
-    resetCompanyForm();
-
-    clearMessage(
-        $("companyFormMessage")
-    );
-
-};
-
-
-/* =========================================================
-   DELETE COMPANY
-========================================================= */
 
 async function deleteCompany(id){
 
-    const company =
-        companies.find(
-            c => c.id === id
-        );
+if(!confirm(
+`Delete company ${id}?\n\nThis deletes only the company document.`
+))
+return;
 
-    const name =
-        company?.companyName || id;
+try{
 
-    if(!confirm(
-        `Delete ${name}?\n\nThis deletes the company document only.`
-    )){
+await deleteDoc(
+doc(db,"companies",id)
+);
 
-        return;
+await loadCompanies();
 
-    }
+updateStats();
 
-    try{
+message(
+$("dashboardMessage"),
+"Company deleted successfully.",
+"success"
+);
 
-        await deleteDoc(
-            doc(
-                db,
-                "companies",
-                id
-            )
-        );
+}catch(error){
 
-        message(
-            dashboardMessage,
-            "Company deleted successfully.",
-            "success"
-        );
+message(
+$("dashboardMessage"),
+errorText(error),
+"error"
+);
 
-        await loadCompanies();
-
-        updateStats();
-
-    }catch(error){
-
-        console.error(
-            "Delete company:",
-            error
-        );
-
-        message(
-            dashboardMessage,
-            errorText(error),
-            "error"
-        );
-
-    }
+}
 
 }
 
 
-/* =========================================================
-   PROPERTIES
-========================================================= */
+/* =====================================================
+   ADMINS
+===================================================== */
 
-async function loadAllProperties(){
+async function loadAdmins(){
 
-    try{
+try{
 
-        const snap =
-            await getDocs(
-                collectionGroup(
-                    db,
-                    "properties"
-                )
-            );
+const snap =
+await getDocs(
+collection(db,"admins")
+);
 
-        properties = [];
+admins = [];
 
-        snap.forEach(
-            item => {
+snap.forEach(item => {
 
-                const parent =
-                    item.ref.parent.parent;
+admins.push({
 
-                const companyId =
-                    parent
-                    ? parent.id
-                    : "";
+uid:item.id,
+...item.data()
 
-                properties.push({
+});
 
-                    id:item.id,
+});
 
-                    companyId,
+renderAdmins(admins);
 
-                    ...item.data()
+updateStats();
 
-                });
+}catch(error){
 
-            }
-        );
+$("adminsList").innerHTML =
+`
+<div class="empty">
+Unable to load admins.
+</div>
+`;
 
-        renderProperties(properties);
+message(
+$("dashboardMessage"),
+errorText(error),
+"error"
+);
 
-        renderCompanies(companies);
-
-        updateStats();
-
-    }catch(error){
-
-        console.error(
-            "Properties:",
-            error
-        );
-
-        properties = [];
-
-        $("propertiesList").innerHTML =
-            `
-            <div class="empty">
-
-                Unable to load properties.
-
-                <br><br>
-
-                Check Firestore rules if
-                permission is denied.
-
-            </div>
-            `;
-
-        message(
-            dashboardMessage,
-            errorText(error),
-            "error"
-        );
-
-    }
+}
 
 }
 
 
-/* =========================================================
-   SHOW COMPANY PROPERTIES
-========================================================= */
+/* =====================================================
+   RENDER ADMINS
+===================================================== */
 
-function showCompanyProperties(companyId){
+function renderAdmins(list){
 
-    selectedCompanyId =
-        companyId;
+if(!list.length){
 
-    const company =
-        companies.find(
-            c => c.id === companyId
-        );
+$("adminsList").innerHTML =
+`
+<div class="empty">
+No admins found.
+</div>
+`;
 
-    $("propertiesTitle").textContent =
-        `${company?.companyName || companyId} Properties`;
+return;
 
-    $("backToCompanies")
-        .classList
-        .remove("hidden");
+}
 
-    const list =
-        properties.filter(
-            p =>
-                p.companyId === companyId
-        );
+$("adminsList").innerHTML =
 
-    renderProperties(list);
+list.map(admin => {
 
-    document.querySelector(
-        '[data-tab="propertiesTab"]'
-    ).click();
+const name =
+admin.name ||
+admin.adminName ||
+"Unnamed Admin";
+
+const active =
+admin.active === true;
+
+const company =
+admin.companyId ||
+"Not assigned";
+
+const first =
+escapeHTML(
+name.charAt(0).toUpperCase()
+);
+
+return `
+
+<article class="admin">
+
+<div class="admin-top">
+
+<div class="admin-avatar">
+${first}
+</div>
+
+<div style="flex:1">
+
+<h3>
+${escapeHTML(name)}
+</h3>
+
+<p>
+UID:
+${escapeHTML(admin.uid)}
+</p>
+
+<p>
+Email:
+${escapeHTML(
+admin.email || "Not set"
+)}
+</p>
+
+<p>
+Company:
+${escapeHTML(company)}
+</p>
+
+<div class="badges">
+
+<span class="badge ${
+active ? "" : "red"
+}">
+${active ? "Active" : "Inactive"}
+</span>
+
+<span class="badge blue">
+${escapeHTML(
+admin.role || "companyAdmin"
+)}
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<button
+class="action edit"
+data-edit-admin="${escapeHTML(admin.uid)}">
+Edit
+</button>
+
+<button
+class="action delete"
+data-delete-admin="${escapeHTML(admin.uid)}">
+Delete
+</button>
+
+</div>
+
+</article>
+
+`;
+
+}).join("");
+
+
+document.querySelectorAll(
+"[data-edit-admin]"
+).forEach(btn => {
+
+btn.onclick = () =>
+editAdmin(
+btn.dataset.editAdmin
+);
+
+});
+
+
+document.querySelectorAll(
+"[data-delete-admin]"
+).forEach(btn => {
+
+btn.onclick = () =>
+deleteAdmin(
+btn.dataset.deleteAdmin
+);
+
+});
 
 }
 
 
-/* =========================================================
-   RENDER PROPERTIES
-========================================================= */
+/* =====================================================
+   ADD / EDIT ADMIN
+===================================================== */
 
-function renderProperties(list){
+$("adminForm").addEventListener(
+"submit",
+async e => {
 
-    if(!list.length){
+e.preventDefault();
 
-        $("propertiesList").innerHTML =
-            `
-            <div class="empty">
-                No properties found.
-            </div>
-            `;
+const newUid =
+$("adminUid").value.trim();
 
-        return;
+const oldUid =
+editingAdminUid;
 
-    }
+if(!newUid){
 
-    $("propertiesList").innerHTML =
+message(
+$("adminFormMessage"),
+"UID is required.",
+"error"
+);
 
-        list.map(
-            property => {
+return;
 
-                const image =
-                    property.imageUrl ||
-                    property.image ||
-                    property.photo ||
-                    "";
+}
 
-                return `
+const companyId =
+$("adminCompanyId")
+.value
+.trim();
 
-                <article class="property">
+const existsCompany =
+companies.some(
+c => c.id === companyId
+);
 
-                    ${
-                        image
-                        ?
-                        `
-                        <img
-                            class="property-image"
-                            src="${escapeHTML(image)}"
-                            alt=""
-                        >
-                        `
-                        :
-                        `
-                        <div class="property-image"></div>
-                        `
-                    }
+if(!existsCompany){
 
-                    <div style="flex:1">
+message(
+$("adminFormMessage"),
+`Company "${companyId}" does not exist.`,
+"error"
+);
 
-                        <h3>
-                            ${escapeHTML(
-                                property.title ||
-                                "Untitled Property"
-                            )}
-                        </h3>
-
-                        <p>
-                            Company:
-                            ${escapeHTML(
-                                property.companyId || ""
-                            )}
-                        </p>
-
-                        <p>
-                            Location:
-                            ${escapeHTML(
-                                property.location ||
-                                "Not set"
-                            )}
-                        </p>
-
-                        <p>
-                            Price:
-                            ₦${Number(
-                                property.price || 0
-                            ).toLocaleString()}
-                        </p>
-
-                        <p>
-                            Type:
-                            ${escapeHTML(
-                                property.propertyType ||
-                                property.type ||
-                                "Not set"
-                            )}
-                        </p>
-
-                        <p>
-                            Purpose:
-                            ${escapeHTML(
-                                property.purpose ||
-                                "Not set"
-                            )}
-                        </p>
-
-                        <p>
-                            Status:
-                            ${escapeHTML(
-                                property.status ||
-                                "Not set"
-                            )}
-                        </p>
-
-                        <div class="badges">
-
-                            ${
-                                property.featured
-                                ?
-                                `
-                                <span class="badge purple">
-                                    Featured
-                                </span>
-                                `
-                                :
-                                ""
-                            }
-
-                            ${
-                                property.bedrooms != null
-                                ?
-                                `
-                                <span class="badge blue">
-                                    ${escapeHTML(
-                                        property.bedrooms
-                                    )}
-                                    Bedrooms
-                                </span>
-                                `
-                                :
-                                ""
-                            }
-
-                            ${
-                                property.bathrooms != null
-                                ?
-                                `
-                                <span class="badge">
-                                    ${escapeHTML(
-                                        property.bathrooms
-                                    )}
-                                    Bathrooms
-                                </span>
-                                `
-                                :
-                                ""
-                            }
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-                `;
-
-            }
-        ).join("");
+return;
 
 }
 
 
-/* =========================================================
-   BACK
-========================================================= */
+const adminData = {
 
-$("backToCompanies").onclick = () => {
+name:
+$("adminName").value.trim(),
 
-    selectedCompanyId = null;
+adminName:
+$("adminName").value.trim(),
 
-    $("propertiesTitle").textContent =
-        "All Properties";
+email:
+$("adminEmail").value.trim(),
 
-    $("backToCompanies")
-        .classList
-        .add("hidden");
+companyId,
 
-    renderProperties(properties);
+role:
+$("adminRole").value,
 
-    document.querySelector(
-        '[data-tab="companiesTab"]'
-    ).click();
+active:
+$("adminActive").value === "true",
+
+updatedAt:
+serverTimestamp(),
+
+updatedBy:
+currentSuperAdmin.uid
 
 };
 
 
-/* =========================================================
-   PROPERTY SEARCH
-========================================================= */
+$("adminSaveButton").disabled =
+true;
+
+$("adminSaveButton").textContent =
+oldUid
+? "Updating..."
+: "Saving...";
+
+
+try{
+
+/* ==========================================
+   NEW ADMIN
+========================================== */
+
+if(!oldUid){
+
+adminData.createdAt =
+serverTimestamp();
+
+adminData.createdBy =
+currentSuperAdmin.uid;
+
+await setDoc(
+doc(db,"admins",newUid),
+adminData
+);
+
+message(
+$("adminFormMessage"),
+"Admin created successfully.",
+"success"
+);
+
+}
+
+
+/* ==========================================
+   SAME UID
+========================================== */
+
+else if(oldUid === newUid){
+
+await setDoc(
+doc(db,"admins",newUid),
+adminData,
+{merge:true}
+);
+
+message(
+$("adminFormMessage"),
+"Admin updated successfully.",
+"success"
+);
+
+}
+
+
+/* ==========================================
+   UID CHANGED
+========================================== */
+
+else{
+
+const oldRef =
+doc(db,"admins",oldUid);
+
+const newRef =
+doc(db,"admins",newUid);
+
+
+/*
+   Check whether NEW UID already
+   has an admin document.
+*/
+
+const newSnap =
+await getDoc(newRef);
+
+if(newSnap.exists()){
+
+throw new Error(
+`Admin document for UID "${newUid}" already exists.`
+);
+
+}
+
+
+/*
+   Create new document first.
+*/
+
+await setDoc(
+newRef,
+{
+...adminData,
+createdAt:
+serverTimestamp(),
+createdBy:
+currentSuperAdmin.uid,
+previousUid:
+oldUid
+}
+);
+
+
+/*
+   Delete old document.
+*/
+
+await deleteDoc(oldRef);
+
+
+message(
+$("adminFormMessage"),
+"Admin UID changed successfully.",
+"success"
+);
+
+}
+
+
+/*
+   Reset and reload.
+*/
+
+resetAdminForm();
+
+await loadAdmins();
+
+updateStats();
+
+
+}catch(error){
+
+console.error(
+"Admin save:",
+error
+);
+
+message(
+$("adminFormMessage"),
+errorText(error),
+"error"
+);
+
+}finally{
+
+$("adminSaveButton").disabled =
+false;
+
+$("adminSaveButton").textContent =
+"Add Admin";
+
+}
+
+});
+
+
+/* =====================================================
+   EDIT ADMIN
+===================================================== */
+
+function editAdmin(uid){
+
+const admin =
+admins.find(
+a => a.uid === uid
+);
+
+if(!admin)
+return;
+
+
+/*
+   IMPORTANT:
+   UID IS NOT READ ONLY.
+*/
+
+editingAdminUid =
+uid;
+
+$("adminUid").value =
+admin.uid;
+
+$("adminUid").readOnly =
+false;
+
+
+$("adminName").value =
+admin.name ||
+admin.adminName ||
+"";
+
+$("adminEmail").value =
+admin.email ||
+"";
+
+$("adminCompanyId").value =
+admin.companyId ||
+"";
+
+$("adminRole").value =
+admin.role ||
+"companyAdmin";
+
+$("adminActive").value =
+admin.active === true
+? "true"
+: "false";
+
+
+$("adminFormTitle").textContent =
+"Edit Admin";
+
+$("adminSaveButton").textContent =
+"Update Admin";
+
+$("adminCancelButton")
+.classList.remove("hidden");
+
+
+document.querySelector(
+'[data-tab="adminsTab"]'
+).click();
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* =====================================================
+   RESET ADMIN
+===================================================== */
+
+function resetAdminForm(){
+
+editingAdminUid = null;
+
+$("adminForm").reset();
+
+$("adminUid").readOnly =
+false;
+
+$("adminRole").value =
+"companyAdmin";
+
+$("adminActive").value =
+"true";
+
+$("adminFormTitle").textContent =
+"Add Admin";
+
+$("adminSaveButton").textContent =
+"Add Admin";
+
+$("adminCancelButton")
+.classList.add("hidden");
+
+}
+
+
+$("adminCancelButton").onclick =
+() => {
+
+resetAdminForm();
+
+clearMessage(
+$("adminFormMessage")
+);
+
+};
+
+
+/* =====================================================
+   DELETE ADMIN
+===================================================== */
+
+async function deleteAdmin(uid){
+
+const admin =
+admins.find(
+a => a.uid === uid
+);
+
+const name =
+admin?.name ||
+admin?.adminName ||
+uid;
+
+if(!confirm(
+`Delete admin "${name}"?\n\nUID: ${uid}\n\nThis deletes the Firestore admin document only.`
+))
+return;
+
+try{
+
+await deleteDoc(
+doc(db,"admins",uid)
+);
+
+message(
+$("dashboardMessage"),
+"Admin deleted successfully.",
+"success"
+);
+
+await loadAdmins();
+
+updateStats();
+
+}catch(error){
+
+message(
+$("dashboardMessage"),
+errorText(error),
+"error"
+);
+
+}
+
+}
+
+
+/* =====================================================
+   ADMIN SEARCH
+===================================================== */
+
+$("adminSearch").addEventListener(
+"input",
+e => {
+
+const q =
+e.target.value
+.trim()
+.toLowerCase();
+
+if(!q){
+
+renderAdmins(admins);
+return;
+
+}
+
+const filtered =
+admins.filter(a => [
+
+a.uid,
+a.name,
+a.adminName,
+a.email,
+a.companyId,
+a.role
+
+]
+.join(" ")
+.toLowerCase()
+.includes(q)
+);
+
+renderAdmins(filtered);
+
+});
+
+
+/* =====================================================
+   PROPERTIES
+===================================================== */
+
+async function loadAllProperties(){
+
+try{
+
+const snap =
+await getDocs(
+collectionGroup(
+db,
+"properties"
+)
+);
+
+properties = [];
+
+snap.forEach(item => {
+
+const parent =
+item.ref.parent.parent;
+
+properties.push({
+
+id:item.id,
+
+companyId:
+parent ? parent.id : "",
+
+...item.data()
+
+});
+
+});
+
+renderProperties(properties);
+
+renderCompanies(companies);
+
+updateStats();
+
+}catch(error){
+
+properties = [];
+
+$("propertiesList").innerHTML =
+`
+<div class="empty">
+Unable to load properties.
+</div>
+`;
+
+message(
+$("dashboardMessage"),
+errorText(error),
+"error"
+);
+
+}
+
+}
+
+
+function renderProperties(list){
+
+if(!list.length){
+
+$("propertiesList").innerHTML =
+`
+<div class="empty">
+No properties found.
+</div>
+`;
+
+return;
+
+}
+
+$("propertiesList").innerHTML =
+
+list.map(p => {
+
+const image =
+p.imageUrl ||
+p.image ||
+p.photo ||
+"";
+
+return `
+
+<article class="property">
+
+${
+image
+?
+`
+<img
+class="property-image"
+src="${escapeHTML(image)}"
+alt=""
+>
+`
+:
+`
+<div class="property-image"></div>
+`
+}
+
+<div style="flex:1">
+
+<h3>
+${escapeHTML(
+p.title ||
+"Untitled Property"
+)}
+</h3>
+
+<p>
+Company:
+${escapeHTML(
+p.companyId || ""
+)}
+</p>
+
+<p>
+Location:
+${escapeHTML(
+p.location || "Not set"
+)}
+</p>
+
+<p>
+Price:
+₦${Number(
+p.price || 0
+).toLocaleString()}
+</p>
+
+<p>
+Type:
+${escapeHTML(
+p.propertyType ||
+p.type ||
+"Not set"
+)}
+</p>
+
+<p>
+Purpose:
+${escapeHTML(
+p.purpose || "Not set"
+)}
+</p>
+
+<p>
+Status:
+${escapeHTML(
+p.status || "Not set"
+)}
+</p>
+
+<div class="badges">
+
+${
+p.featured
+?
+`
+<span class="badge purple">
+Featured
+</span>
+`
+:""
+}
+
+${
+p.bedrooms != null
+?
+`
+<span class="badge blue">
+${escapeHTML(p.bedrooms)}
+Bedrooms
+</span>
+`
+:""
+}
+
+${
+p.bathrooms != null
+?
+`
+<span class="badge">
+${escapeHTML(p.bathrooms)}
+Bathrooms
+</span>
+`
+:""
+}
+
+</div>
+
+</div>
+
+</article>
+
+`;
+
+}).join("");
+
+}
+
+
+function showCompanyProperties(companyId){
+
+selectedCompanyId =
+companyId;
+
+const company =
+companies.find(
+c => c.id === companyId
+);
+
+$("propertiesTitle").textContent =
+`${company?.companyName || companyId} Properties`;
+
+$("backToCompanies")
+.classList.remove("hidden");
+
+renderProperties(
+properties.filter(
+p => p.companyId === companyId
+)
+);
+
+document.querySelector(
+'[data-tab="propertiesTab"]'
+).click();
+
+}
+
+
+$("backToCompanies").onclick =
+() => {
+
+selectedCompanyId = null;
+
+$("propertiesTitle").textContent =
+"All Properties";
+
+$("backToCompanies")
+.classList.add("hidden");
+
+renderProperties(properties);
+
+document.querySelector(
+'[data-tab="companiesTab"]'
+).click();
+
+};
+
 
 $("propertySearch").addEventListener(
-    "input",
-    e => {
+"input",
+e => {
 
-        const q =
-            e.target.value
-                .trim()
-                .toLowerCase();
+const q =
+e.target.value
+.trim()
+.toLowerCase();
 
-        let list =
-            selectedCompanyId
-            ?
-            properties.filter(
-                p =>
-                    p.companyId ===
-                    selectedCompanyId
-            )
-            :
-            properties;
+let list =
+selectedCompanyId
+?
+properties.filter(
+p => p.companyId === selectedCompanyId
+)
+:
+properties;
 
-        if(q){
+if(q){
 
-            list =
-                list.filter(
-                    p => [
+list =
+list.filter(
+p => [
 
-                        p.title,
-                        p.location,
-                        p.propertyType,
-                        p.type,
-                        p.purpose,
-                        p.status,
-                        p.companyId,
-                        p.price
+p.title,
+p.location,
+p.propertyType,
+p.type,
+p.purpose,
+p.status,
+p.companyId,
+p.price
 
-                    ]
-                    .join(" ")
-                    .toLowerCase()
-                    .includes(q)
-                );
-
-        }
-
-        renderProperties(list);
-
-    }
+]
+.join(" ")
+.toLowerCase()
+.includes(q)
 );
 
+}
 
-/* =========================================================
-   COMPANY SEARCH
-========================================================= */
+renderProperties(list);
+
+});
+
 
 $("companySearch").addEventListener(
-    "input",
-    e => {
+"input",
+e => {
 
-        const q =
-            e.target.value
-                .trim()
-                .toLowerCase();
+const q =
+e.target.value
+.trim()
+.toLowerCase();
 
-        if(!q){
+if(!q){
 
-            renderCompanies(companies);
+renderCompanies(companies);
+return;
 
-            return;
+}
 
-        }
+renderCompanies(
+companies.filter(
+c => [
 
-        const filtered =
-            companies.filter(
-                c => [
+c.id,
+c.companyName,
+c.companyEmail,
+c.companyPhone,
+c.companyWhatsApp,
+c.companyAddress
 
-                    c.id,
-                    c.companyName,
-                    c.companyEmail,
-                    c.companyPhone,
-                    c.companyWhatsApp,
-                    c.companyAddress
-
-                ]
-                .join(" ")
-                .toLowerCase()
-                .includes(q)
-            );
-
-        renderCompanies(filtered);
-
-    }
+]
+.join(" ")
+.toLowerCase()
+.includes(q)
+)
 );
 
+});
 
-/* =========================================================
+
+/* =====================================================
    SUBSCRIPTIONS
-========================================================= */
+===================================================== */
 
 async function loadSubscriptions(){
 
-    try{
+try{
 
-        const snap =
-            await getDocs(
-                collection(
-                    db,
-                    "subscriptions"
-                )
-            );
+const snap =
+await getDocs(
+collection(
+db,
+"subscriptions"
+)
+);
 
-        subscriptions = [];
+subscriptions = [];
 
-        snap.forEach(
-            item => {
+snap.forEach(item => {
 
-                subscriptions.push({
+subscriptions.push({
 
-                    id:item.id,
+id:item.id,
+...item.data()
 
-                    ...item.data()
+});
 
-                });
+});
 
-            }
-        );
+renderSubscriptions(
+subscriptions
+);
 
-        renderSubscriptions(
-            subscriptions
-        );
+updateStats();
 
-        updateStats();
+}catch(error){
 
-    }catch(error){
+$("subscriptionsList").innerHTML =
+`
+<div class="empty">
+Unable to load subscriptions.
+</div>
+`;
 
-        console.error(
-            "Subscriptions:",
-            error
-        );
-
-        $("subscriptionsList").innerHTML =
-            `
-            <div class="empty">
-                Unable to load subscriptions.
-            </div>
-            `;
-
-        message(
-            dashboardMessage,
-            errorText(error),
-            "error"
-        );
-
-    }
+message(
+$("dashboardMessage"),
+errorText(error),
+"error"
+);
 
 }
 
+}
 
-/* =========================================================
-   FIXED SUBSCRIPTION STATUS
-========================================================= */
 
 function subscriptionStatus(item){
 
-    /*
-       1. Cancelled remains cancelled.
-    */
+if(item.status === "cancelled")
+return "cancelled";
 
-    if(item.status === "cancelled"){
+if(item.status === "expired")
+return "expired";
 
-        return "cancelled";
+if(!item.expiryDate)
+return item.status || "active";
 
-    }
+const expiry =
+typeof item.expiryDate.toDate === "function"
+?
+item.expiryDate.toDate()
+:
+new Date(item.expiryDate);
 
+if(
+!Number.isNaN(expiry.getTime()) &&
+expiry.getTime() < Date.now()
+)
+return "expired";
 
-    /*
-       2. IMPORTANT FIX:
-
-       If Super Admin manually selected
-       "expired", we respect Firestore.
-
-       Previously the code ignored this
-       and calculated only from expiryDate.
-    */
-
-    if(item.status === "expired"){
-
-        return "expired";
-
-    }
-
-
-    /*
-       3. No expiry date:
-       use saved status.
-    */
-
-    if(!item.expiryDate){
-
-        return item.status || "active";
-
-    }
-
-
-    /*
-       4. Check actual expiry date.
-    */
-
-    const expiry =
-
-        typeof item.expiryDate.toDate === "function"
-
-        ?
-
-        item.expiryDate.toDate()
-
-        :
-
-        new Date(
-            item.expiryDate
-        );
-
-
-    /*
-       5. Automatically expired
-       when expiry date has passed.
-    */
-
-    if(
-        expiry.getTime() < Date.now()
-    ){
-
-        return "expired";
-
-    }
-
-
-    /*
-       6. Otherwise respect Firestore status.
-    */
-
-    return item.status || "active";
+return item.status || "active";
 
 }
 
-
-/* =========================================================
-   RENDER SUBSCRIPTIONS
-========================================================= */
 
 function renderSubscriptions(list){
 
-    if(!list.length){
+if(!list.length){
 
-        $("subscriptionsList").innerHTML =
-            `
-            <div class="empty">
-                No subscriptions found.
-            </div>
-            `;
+$("subscriptionsList").innerHTML =
+`
+<div class="empty">
+No subscriptions found.
+</div>
+`;
 
-        return;
+return;
 
-    }
+}
 
-    $("subscriptionsList").innerHTML =
+$("subscriptionsList").innerHTML =
 
-        list.map(
-            item => {
+list.map(item => {
 
-                const status =
-                    subscriptionStatus(item);
+const status =
+subscriptionStatus(item);
 
-                const statusClass =
-                    status === "expired"
-                    || status === "cancelled"
-                    ? "red"
-                    : "";
+return `
 
-                return `
+<article class="subscription">
 
-                <article class="subscription">
+<h3>
+${escapeHTML(
+item.companyId ||
+item.id
+)}
+</h3>
 
-                    <h3>
-                        ${escapeHTML(
-                            item.companyId ||
-                            item.id
-                        )}
-                    </h3>
+<p>
+Plan:
+${escapeHTML(
+item.plan || "professional"
+)}
+</p>
 
+<p>
+Amount:
+₦${Number(
+item.amount || 0
+).toLocaleString()}
+</p>
 
-                    <p>
-                        Plan:
-                        ${escapeHTML(
-                            item.plan ||
-                            "professional"
-                        )}
-                    </p>
+<p>
+Start:
+${formatDate(item.startDate)}
+</p>
 
+<p>
+Expiry:
+${formatDate(item.expiryDate)}
+</p>
 
-                    <p>
-                        Amount:
-                        ₦${Number(
-                            item.amount || 0
-                        ).toLocaleString()}
-                    </p>
+<div class="badges">
 
+<span class="badge ${
+status === "expired" ||
+status === "cancelled"
+? "red" : ""
+}">
+${escapeHTML(status)}
+</span>
 
-                    <p>
-                        Start:
-                        ${formatDate(
-                            item.startDate
-                        )}
-                    </p>
+<span class="badge blue">
+Payment:
+${escapeHTML(
+item.paymentStatus || "pending"
+)}
+</span>
 
+<span class="badge purple">
+${
+item.autoRenew
+? "Auto Renew ON"
+: "Auto Renew OFF"
+}
+</span>
 
-                    <p>
-                        Expiry:
-                        ${formatDate(
-                            item.expiryDate
-                        )}
-                    </p>
+</div>
 
+<div class="actions">
 
-                    <p>
-                        Updated:
-                        ${formatDate(
-                            item.updatedAt
-                        )}
-                    </p>
+<button
+class="action edit"
+data-edit-sub="${escapeHTML(item.id)}">
+Edit
+</button>
 
+<button
+class="action renew"
+data-renew-sub="${escapeHTML(item.id)}">
+Renew 1 Month
+</button>
 
-                    <div class="badges">
+<button
+class="action delete"
+data-delete-sub="${escapeHTML(item.id)}">
+Delete
+</button>
 
-                        <span class="badge ${statusClass}">
+</div>
 
-                            ${escapeHTML(
-                                status
-                            )}
+</article>
 
-                        </span>
+`;
 
-
-                        <span class="badge blue">
-
-                            Payment:
-                            ${escapeHTML(
-                                item.paymentStatus ||
-                                "pending"
-                            )}
-
-                        </span>
-
-
-                        <span class="badge purple">
-
-                            ${
-                                item.autoRenew
-                                ? "Auto Renew ON"
-                                : "Auto Renew OFF"
-                            }
-
-                        </span>
-
-                    </div>
+}).join("");
 
 
-                    <div class="actions">
+document.querySelectorAll(
+"[data-edit-sub]"
+).forEach(btn => {
 
-                        <button
-                            class="action edit"
-                            data-edit-sub="${escapeHTML(item.id)}"
-                        >
-                            Edit
-                        </button>
+btn.onclick = () =>
+editSubscription(
+btn.dataset.editSub
+);
 
-
-                        <button
-                            class="action renew"
-                            data-renew-sub="${escapeHTML(item.id)}"
-                        >
-                            Renew 1 Month
-                        </button>
+});
 
 
-                        <button
-                            class="action delete"
-                            data-delete-sub="${escapeHTML(item.id)}"
-                        >
-                            Delete
-                        </button>
+document.querySelectorAll(
+"[data-renew-sub]"
+).forEach(btn => {
 
-                    </div>
+btn.onclick = () =>
+renewSubscription(
+btn.dataset.renewSub
+);
 
-                </article>
-
-                `;
-
-            }
-        ).join("");
+});
 
 
-    document.querySelectorAll(
-        "[data-edit-sub]"
-    ).forEach(
-        btn => {
+document.querySelectorAll(
+"[data-delete-sub]"
+).forEach(btn => {
 
-            btn.onclick = () =>
-                editSubscription(
-                    btn.dataset.editSub
-                );
+btn.onclick = () =>
+deleteSubscription(
+btn.dataset.deleteSub
+);
 
-        }
-    );
-
-
-    document.querySelectorAll(
-        "[data-renew-sub]"
-    ).forEach(
-        btn => {
-
-            btn.onclick = () =>
-                renewSubscription(
-                    btn.dataset.renewSub
-                );
-
-        }
-    );
-
-
-    document.querySelectorAll(
-        "[data-delete-sub]"
-    ).forEach(
-        btn => {
-
-            btn.onclick = () =>
-                deleteSubscription(
-                    btn.dataset.deleteSub
-                );
-
-        }
-    );
+});
 
 }
 
 
-/* =========================================================
+/* =====================================================
    SAVE SUBSCRIPTION
-========================================================= */
+===================================================== */
 
 $("subscriptionForm").addEventListener(
-    "submit",
-    async e => {
+"submit",
+async e => {
 
-        e.preventDefault();
+e.preventDefault();
 
-        const companyId =
-            $("subscriptionCompanyId")
-                .value
-                .trim();
+const companyId =
+$("subscriptionCompanyId")
+.value.trim();
 
-        const startDate =
-            $("startDate").value;
+const start =
+$("startDate").value;
 
-        const expiryDate =
-            $("expiryDate").value;
+const expiry =
+$("expiryDate").value;
 
+if(!companyId || !start || !expiry){
 
-        if(
-            !companyId ||
-            !startDate ||
-            !expiryDate
-        ){
-
-            message(
-                $("subscriptionFormMessage"),
-                "Please complete all required fields.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(
-            new Date(expiryDate) <=
-            new Date(startDate)
-        ){
-
-            message(
-                $("subscriptionFormMessage"),
-                "Expiry date must be after start date.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        const selectedStatus =
-            $("subscriptionStatus").value;
-
-
-        const data = {
-
-            companyId,
-
-            plan:
-                $("plan").value,
-
-            amount:
-                Number(
-                    $("amount").value
-                ),
-
-            startDate:
-                dateTimestamp(
-                    startDate
-                ),
-
-            expiryDate:
-                dateTimestamp(
-                    expiryDate
-                ),
-
-            paymentStatus:
-                $("paymentStatus").value,
-
-            status:
-                selectedStatus,
-
-            autoRenew:
-                $("autoRenew").checked,
-
-            updatedAt:
-                serverTimestamp(),
-
-            updatedBy:
-                currentSuperAdmin?.uid ||
-                auth.currentUser?.uid ||
-                ""
-
-        };
-
-
-        $("subscriptionSaveButton")
-            .disabled = true;
-
-
-        $("subscriptionSaveButton")
-            .textContent =
-                editingSubscriptionId
-                ? "Updating..."
-                : "Saving...";
-
-
-        try{
-
-            if(!editingSubscriptionId){
-
-                data.createdAt =
-                    serverTimestamp();
-
-                data.createdBy =
-                    currentSuperAdmin?.uid ||
-                    auth.currentUser?.uid ||
-                    "";
-
-            }
-
-
-            /*
-               Subscription document ID
-               is Company ID.
-
-               Example:
-
-               subscriptions/Company_002
-            */
-
-            await setDoc(
-
-                doc(
-                    db,
-                    "subscriptions",
-                    companyId
-                ),
-
-                data,
-
-                {
-                    merge:true
-                }
-
-            );
-
-
-            message(
-
-                $("subscriptionFormMessage"),
-
-                editingSubscriptionId
-                ? "Subscription updated successfully."
-                : "Subscription created successfully.",
-
-                "success"
-
-            );
-
-
-            resetSubscriptionForm();
-
-
-            await loadSubscriptions();
-
-
-            updateStats();
-
-
-        }catch(error){
-
-            console.error(
-                "Subscription save:",
-                error
-            );
-
-            message(
-                $("subscriptionFormMessage"),
-                errorText(error),
-                "error"
-            );
-
-        }finally{
-
-            $("subscriptionSaveButton")
-                .disabled = false;
-
-            $("subscriptionSaveButton")
-                .textContent =
-                    "Add Subscription";
-
-        }
-
-    }
+message(
+$("subscriptionFormMessage"),
+"Please complete all required fields.",
+"error"
 );
 
+return;
 
-/* =========================================================
-   EDIT SUBSCRIPTION
-========================================================= */
+}
+
+if(
+new Date(expiry) <=
+new Date(start)
+){
+
+message(
+$("subscriptionFormMessage"),
+"Expiry date must be after start date.",
+"error"
+);
+
+return;
+
+}
+
+const data = {
+
+companyId,
+
+plan:
+$("plan").value,
+
+amount:
+Number(
+$("amount").value
+),
+
+startDate:
+dateTimestamp(start),
+
+expiryDate:
+dateTimestamp(expiry),
+
+paymentStatus:
+$("paymentStatus").value,
+
+status:
+$("subscriptionStatus").value,
+
+autoRenew:
+$("autoRenew").checked,
+
+updatedAt:
+serverTimestamp(),
+
+updatedBy:
+currentSuperAdmin.uid
+
+};
+
+try{
+
+if(!editingSubscriptionId){
+
+data.createdAt =
+serverTimestamp();
+
+data.createdBy =
+currentSuperAdmin.uid;
+
+}
+
+await setDoc(
+doc(
+db,
+"subscriptions",
+companyId
+),
+data,
+{merge:true}
+);
+
+message(
+$("subscriptionFormMessage"),
+editingSubscriptionId
+? "Subscription updated successfully."
+: "Subscription created successfully.",
+"success"
+);
+
+resetSubscriptionForm();
+
+await loadSubscriptions();
+
+updateStats();
+
+}catch(error){
+
+message(
+$("subscriptionFormMessage"),
+errorText(error),
+"error"
+);
+
+}
+
+});
+
 
 function editSubscription(id){
 
-    const item =
-        subscriptions.find(
-            s => s.id === id
-        );
+const item =
+subscriptions.find(
+s => s.id === id
+);
 
+if(!item)return;
 
-    if(!item)
-        return;
+editingSubscriptionId = id;
 
+$("subscriptionCompanyId").value =
+item.companyId || id;
 
-    editingSubscriptionId =
-        id;
+$("subscriptionCompanyId").readOnly =
+true;
 
+$("plan").value =
+item.plan || "professional";
 
-    $("subscriptionCompanyId")
-        .value =
-            item.companyId ||
-            id;
+$("amount").value =
+item.amount || 0;
 
+$("startDate").value =
+dateInput(item.startDate);
 
-    $("subscriptionCompanyId")
-        .readOnly = true;
+$("expiryDate").value =
+dateInput(item.expiryDate);
 
+$("paymentStatus").value =
+item.paymentStatus || "paid";
 
-    $("plan").value =
-        item.plan ||
-        "professional";
+$("subscriptionStatus").value =
+subscriptionStatus(item);
 
+$("autoRenew").checked =
+item.autoRenew === true;
 
-    $("amount").value =
-        item.amount ||
-        0;
+$("subscriptionFormTitle").textContent =
+"Edit Subscription";
 
+$("subscriptionSaveButton").textContent =
+"Update Subscription";
 
-    $("startDate").value =
-        dateInput(
-            item.startDate
-        );
+$("subscriptionCancelButton")
+.classList.remove("hidden");
 
-
-    $("expiryDate").value =
-        dateInput(
-            item.expiryDate
-        );
-
-
-    $("paymentStatus").value =
-        item.paymentStatus ||
-        "paid";
-
-
-    /*
-       IMPORTANT FIX:
-
-       Use subscriptionStatus(item)
-       instead of blindly using item.status.
-
-       This means an already expired
-       subscription will show Expired
-       in the edit form.
-    */
-
-    $("subscriptionStatus").value =
-        subscriptionStatus(item);
-
-
-    $("autoRenew").checked =
-        item.autoRenew === true;
-
-
-    $("subscriptionFormTitle")
-        .textContent =
-            "Edit Subscription";
-
-
-    $("subscriptionSaveButton")
-        .textContent =
-            "Update Subscription";
-
-
-    $("subscriptionCancelButton")
-        .classList
-        .remove("hidden");
-
-
-    document.querySelector(
-        '[data-tab="subscriptionsTab"]'
-    ).click();
-
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
+document.querySelector(
+'[data-tab="subscriptionsTab"]'
+).click();
 
 }
 
-
-/* =========================================================
-   RENEW SUBSCRIPTION
-========================================================= */
-
-async function renewSubscription(id){
-
-    const item =
-        subscriptions.find(
-            s => s.id === id
-        );
-
-
-    if(!item)
-        return;
-
-
-    let base =
-        new Date();
-
-
-    if(item.expiryDate){
-
-        const expiry =
-
-            typeof item.expiryDate.toDate === "function"
-
-            ?
-
-            item.expiryDate.toDate()
-
-            :
-
-            new Date(
-                item.expiryDate
-            );
-
-
-        if(
-            !Number.isNaN(
-                expiry.getTime()
-            ) &&
-            expiry > base
-        ){
-
-            base = expiry;
-
-        }
-
-    }
-
-
-    const newExpiry =
-        new Date(base);
-
-
-    newExpiry.setMonth(
-        newExpiry.getMonth() + 1
-    );
-
-
-    try{
-
-        await setDoc(
-
-            doc(
-                db,
-                "subscriptions",
-                id
-            ),
-
-            {
-
-                expiryDate:
-                    Timestamp.fromDate(
-                        newExpiry
-                    ),
-
-                status:
-                    "active",
-
-                paymentStatus:
-                    "paid",
-
-                autoRenew:
-                    item.autoRenew === true,
-
-                updatedAt:
-                    serverTimestamp(),
-
-                updatedBy:
-                    currentSuperAdmin?.uid ||
-                    auth.currentUser?.uid ||
-                    ""
-
-            },
-
-            {
-                merge:true
-            }
-
-        );
-
-
-        message(
-
-            dashboardMessage,
-
-            `${id} renewed for 1 month.`,
-
-            "success"
-
-        );
-
-
-        await loadSubscriptions();
-
-        updateStats();
-
-
-    }catch(error){
-
-        console.error(
-            "Renew subscription:",
-            error
-        );
-
-        message(
-            dashboardMessage,
-            errorText(error),
-            "error"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   DELETE SUBSCRIPTION
-========================================================= */
-
-async function deleteSubscription(id){
-
-    if(!confirm(
-        `Delete subscription for ${id}?`
-    )){
-
-        return;
-
-    }
-
-
-    try{
-
-        await deleteDoc(
-
-            doc(
-                db,
-                "subscriptions",
-                id
-            )
-
-        );
-
-
-        await loadSubscriptions();
-
-        updateStats();
-
-
-        message(
-
-            dashboardMessage,
-
-            "Subscription deleted.",
-
-            "success"
-
-        );
-
-
-    }catch(error){
-
-        console.error(
-            "Delete subscription:",
-            error
-        );
-
-        message(
-            dashboardMessage,
-            errorText(error),
-            "error"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   RESET SUBSCRIPTION FORM
-========================================================= */
 
 function resetSubscriptionForm(){
 
-    editingSubscriptionId = null;
+editingSubscriptionId = null;
 
-    $("subscriptionForm").reset();
+$("subscriptionForm").reset();
 
-    $("subscriptionCompanyId")
-        .readOnly = false;
+$("subscriptionCompanyId").readOnly =
+false;
 
-    $("plan").value =
-        "professional";
+$("plan").value =
+"professional";
 
-    $("paymentStatus").value =
-        "paid";
+$("paymentStatus").value =
+"paid";
 
-    $("subscriptionStatus").value =
-        "active";
+$("subscriptionStatus").value =
+"active";
 
-    $("subscriptionSaveButton")
-        .textContent =
-            "Add Subscription";
+$("subscriptionFormTitle").textContent =
+"Add Subscription";
 
-    $("subscriptionFormTitle")
-        .textContent =
-            "Add Subscription";
+$("subscriptionSaveButton").textContent =
+"Add Subscription";
 
-    $("subscriptionCancelButton")
-        .classList
-        .add("hidden");
+$("subscriptionCancelButton")
+.classList.add("hidden");
 
 }
 
 
 $("subscriptionCancelButton").onclick =
-    () => {
-
-        resetSubscriptionForm();
-
-        clearMessage(
-            $("subscriptionFormMessage")
-        );
-
-    };
+resetSubscriptionForm;
 
 
-/* =========================================================
-   SUBSCRIPTION SEARCH
-========================================================= */
+async function renewSubscription(id){
 
-$("subscriptionSearch").addEventListener(
-    "input",
-    e => {
-
-        const q =
-            e.target.value
-                .trim()
-                .toLowerCase();
-
-
-        if(!q){
-
-            renderSubscriptions(
-                subscriptions
-            );
-
-            return;
-
-        }
-
-
-        renderSubscriptions(
-
-            subscriptions.filter(
-                item => {
-
-                    return [
-
-                        item.companyId,
-                        item.plan,
-                        item.status,
-                        subscriptionStatus(item),
-                        item.paymentStatus,
-                        item.amount
-
-                    ]
-                    .join(" ")
-                    .toLowerCase()
-                    .includes(q);
-
-                }
-            )
-
-        );
-
-    }
+const item =
+subscriptions.find(
+s => s.id === id
 );
 
+if(!item)return;
 
-/* =========================================================
-   STATS
-========================================================= */
+let base =
+new Date();
 
-function updateStats(){
+if(item.expiryDate){
 
-    $("totalCompanies")
-        .textContent =
-            companies.length;
+const expiry =
+typeof item.expiryDate.toDate === "function"
+?
+item.expiryDate.toDate()
+:
+new Date(item.expiryDate);
 
+if(
+!Number.isNaN(expiry.getTime()) &&
+expiry > base
+)
+base = expiry;
 
-    $("totalProperties")
-        .textContent =
-            properties.length;
+}
 
+const newExpiry =
+new Date(base);
 
-    $("activeSubscriptions")
-        .textContent =
+newExpiry.setMonth(
+newExpiry.getMonth()+1
+);
 
-            subscriptions.filter(
-                s =>
-                    subscriptionStatus(s) ===
-                    "active"
-            ).length;
+try{
 
+await setDoc(
 
-    $("expiredSubscriptions")
-        .textContent =
+doc(
+db,
+"subscriptions",
+id
+),
 
-            subscriptions.filter(
-                s =>
-                    subscriptionStatus(s) ===
-                    "expired"
-            ).length;
+{
+
+expiryDate:
+Timestamp.fromDate(
+newExpiry
+),
+
+status:"active",
+
+paymentStatus:"paid",
+
+updatedAt:
+serverTimestamp(),
+
+updatedBy:
+currentSuperAdmin.uid
+
+},
+
+{merge:true}
+
+);
+
+await loadSubscriptions();
+
+updateStats();
+
+message(
+$("dashboardMessage"),
+`${id} renewed for 1 month.`,
+"success"
+);
+
+}catch(error){
+
+message(
+$("dashboardMessage"),
+errorText(error),
+"error"
+);
+
+}
 
 }
 
 
-/* =========================================================
-   TABS
-========================================================= */
+async function deleteSubscription(id){
 
-document.querySelectorAll(
-    ".tab"
-).forEach(
-    tab => {
+if(!confirm(
+`Delete subscription for ${id}?`
+))
+return;
 
-        tab.addEventListener(
-            "click",
-            () => {
+try{
 
-                document.querySelectorAll(
-                    ".tab"
-                ).forEach(
-                    t =>
-                        t.classList
-                        .remove("active")
-                );
-
-
-                document.querySelectorAll(
-                    ".tab-content"
-                ).forEach(
-                    c =>
-                        c.classList
-                        .remove("active")
-                );
-
-
-                tab.classList.add("active");
-
-
-                $(tab.dataset.tab)
-                    .classList
-                    .add("active");
-
-            }
-        );
-
-    }
+await deleteDoc(
+doc(
+db,
+"subscriptions",
+id
+)
 );
 
+await loadSubscriptions();
 
-/* =========================================================
+updateStats();
+
+message(
+$("dashboardMessage"),
+"Subscription deleted.",
+"success"
+);
+
+}catch(error){
+
+message(
+$("dashboardMessage"),
+errorText(error),
+"error"
+);
+
+}
+
+}
+
+
+$("subscriptionSearch").addEventListener(
+"input",
+e => {
+
+const q =
+e.target.value
+.trim()
+.toLowerCase();
+
+if(!q){
+
+renderSubscriptions(
+subscriptions
+);
+
+return;
+
+}
+
+renderSubscriptions(
+subscriptions.filter(
+s => [
+
+s.companyId,
+s.plan,
+s.status,
+subscriptionStatus(s),
+s.paymentStatus,
+s.amount
+
+]
+.join(" ")
+.toLowerCase()
+.includes(q)
+)
+);
+
+});
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function updateStats(){
+
+$("totalCompanies").textContent =
+companies.length;
+
+$("totalAdmins").textContent =
+admins.length;
+
+$("totalProperties").textContent =
+properties.length;
+
+$("activeSubscriptions").textContent =
+
+subscriptions.filter(
+s =>
+subscriptionStatus(s) === "active"
+).length;
+
+$("expiredSubscriptions").textContent =
+
+subscriptions.filter(
+s =>
+subscriptionStatus(s) === "expired"
+).length;
+
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+document.querySelectorAll(
+".tab"
+).forEach(tab => {
+
+tab.addEventListener(
+"click",
+() => {
+
+document.querySelectorAll(
+".tab"
+).forEach(
+t => t.classList.remove("active")
+);
+
+document.querySelectorAll(
+".tab-content"
+).forEach(
+c => c.classList.remove("active")
+);
+
+tab.classList.add("active");
+
+$(tab.dataset.tab)
+.classList.add("active");
+
+}
+);
+
+});
+
+
+/* =====================================================
    LOGOUT
-========================================================= */
+===================================================== */
 
 $("logoutButton").onclick =
-    async () => {
+async () => {
 
-        await signOut(auth);
+await signOut(auth);
 
-    };
+};
 
 
-/* =========================================================
+/* =====================================================
    DEBUG
-========================================================= */
+===================================================== */
 
 window.estateProSuperAdmin = {
 
-    auth,
+auth,
 
-    db,
+db,
 
-    reload:
-        loadEverything,
+reload:
+loadEverything,
 
-    getCompanies:
-        () => companies,
+getCompanies:
+() => companies,
 
-    getProperties:
-        () => properties,
+getAdmins:
+() => admins,
 
-    getSubscriptions:
-        () => subscriptions,
+getProperties:
+() => properties,
 
-    getSubscriptionStatus:
-        subscriptionStatus
+getSubscriptions:
+() => subscriptions
 
 };
 
