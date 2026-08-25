@@ -3,27 +3,17 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0f766e">
 
 <title>EstatePro Admin</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-    crossorigin
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+rel="stylesheet"
 >
 
 <style>
@@ -61,9 +51,9 @@ button{
 }
 
 
-/* =====================================================
+/* ================================
    LOGIN
-===================================================== */
+================================ */
 
 #loginScreen{
     min-height:100vh;
@@ -100,7 +90,7 @@ button{
     margin:0 0 8px;
 }
 
-.login-card > p{
+.login-card>p{
     text-align:center;
     color:#64748b;
     margin:0 0 25px;
@@ -158,9 +148,9 @@ button{
 }
 
 
-/* =====================================================
+/* ================================
    MESSAGES
-===================================================== */
+================================ */
 
 .message{
     display:none;
@@ -191,9 +181,9 @@ button{
 }
 
 
-/* =====================================================
+/* ================================
    ADMIN
-===================================================== */
+================================ */
 
 #adminApp{
     display:none;
@@ -274,9 +264,9 @@ button{
 }
 
 
-/* =====================================================
+/* ================================
    COMPANY BAR
-===================================================== */
+================================ */
 
 .company-bar{
     background:#fff;
@@ -320,9 +310,9 @@ button{
 }
 
 
-/* =====================================================
+/* ================================
    SUBSCRIPTION
-===================================================== */
+================================ */
 
 .subscription-card{
     background:#fff;
@@ -446,9 +436,9 @@ button{
 }
 
 
-/* =====================================================
+/* ================================
    STATS
-===================================================== */
+================================ */
 
 .stats{
     display:grid;
@@ -476,9 +466,9 @@ button{
 }
 
 
-/* =====================================================
+/* ================================
    GRID
-===================================================== */
+================================ */
 
 .dashboard-grid{
     display:grid;
@@ -522,9 +512,9 @@ button{
 }
 
 
-/* =====================================================
+/* ================================
    PROPERTY IMAGES
-===================================================== */
+================================ */
 
 .image-section{
     margin-bottom:18px;
@@ -562,6 +552,14 @@ button{
 
 .image-input-wrap input{
     flex:1;
+    border:1px solid #d7dde3;
+    border-radius:9px;
+    padding:12px;
+    outline:none;
+}
+
+.image-input-wrap input:focus{
+    border-color:#0f766e;
 }
 
 .image-preview{
@@ -589,9 +587,9 @@ button{
 }
 
 
-/* =====================================================
+/* ================================
    PROPERTY
-===================================================== */
+================================ */
 
 .property{
     border:1px solid #e2e8f0;
@@ -712,9 +710,9 @@ button{
 }
 
 
-/* =====================================================
+/* ================================
    LOGO
-===================================================== */
+================================ */
 
 .logo-preview{
     width:180px;
@@ -736,9 +734,9 @@ button{
 }
 
 
-/* =====================================================
+/* ================================
    MODAL
-===================================================== */
+================================ */
 
 .modal{
     position:fixed;
@@ -799,9 +797,9 @@ button{
 }
 
 
-/* =====================================================
+/* ================================
    RESPONSIVE
-===================================================== */
+================================ */
 
 @media(max-width:900px){
 
@@ -891,129 +889,120 @@ button{
 <body>
 
 
-<!-- =====================================================
+<!-- ================================
      LOGIN
-===================================================== -->
+================================ -->
 
 <section id="loginScreen">
 
-    <div class="login-card">
+<div class="login-card">
 
-        <div class="login-logo">
-            E
-        </div>
+<div class="login-logo">E</div>
 
-        <h1>
-            EstatePro Admin
-        </h1>
+<h1>EstatePro Admin</h1>
 
-        <p>
-            Sign in to manage your company
-        </p>
+<p>Sign in to manage your company</p>
 
-        <div
-            id="loginMessage"
-            class="message"
-        ></div>
+<div id="loginMessage" class="message"></div>
 
-        <form id="loginForm">
+<form id="loginForm">
 
-            <div class="form-group">
+<div class="form-group">
 
-                <label for="email">
-                    Email Address
-                </label>
+<label for="email">
+Email Address
+</label>
 
-                <input
-                    id="email"
-                    type="email"
-                    autocomplete="username"
-                    placeholder="admin@example.com"
-                    required
-                >
+<input
+id="email"
+type="email"
+autocomplete="username"
+placeholder="admin@example.com"
+required
+>
 
-            </div>
+</div>
 
 
-            <div class="form-group">
+<div class="form-group">
 
-                <label for="password">
-                    Password
-                </label>
+<label for="password">
+Password
+</label>
 
-                <input
-                    id="password"
-                    type="password"
-                    autocomplete="current-password"
-                    placeholder="Password"
-                    required
-                >
+<input
+id="password"
+type="password"
+autocomplete="current-password"
+placeholder="Password"
+required
+>
 
-            </div>
+</div>
 
 
-            <button
-                id="loginButton"
-                class="login-button"
-                type="submit"
-            >
-                Login
-            </button>
+<button
+id="loginButton"
+class="login-button"
+type="submit"
+>
+Login
+</button>
 
-        </form>
+</form>
 
-    </div>
+</div>
 
 </section>
 
 
 
-<!-- =====================================================
+<!-- ================================
      ADMIN APP
-===================================================== -->
+================================ -->
 
 <div id="adminApp">
 
 
 <header class="admin-header">
 
-    <div class="admin-header-inner">
+<div class="admin-header-inner">
 
-        <div class="admin-brand">
+<div class="admin-brand">
 
-            <div class="admin-logo">
-                E
-            </div>
+<div class="admin-logo">
+E
+</div>
 
-            <span id="headerCompanyName">
-                EstatePro
-            </span>
+<span id="headerCompanyName">
+EstatePro
+</span>
 
-        </div>
-
-
-        <div class="admin-actions">
-
-            <button
-                id="refreshButton"
-                class="header-button"
-                type="button"
-            >
-                Refresh
-            </button>
+</div>
 
 
-            <button
-                id="logoutButton"
-                class="header-button"
-                type="button"
-            >
-                Logout
-            </button>
+<div class="admin-actions">
 
-        </div>
+<button
+id="refreshButton"
+class="header-button"
+type="button"
+>
+Refresh
+</button>
 
-    </div>
+
+<button
+id="logoutButton"
+class="header-button"
+type="button"
+>
+Logout
+</button>
+
+</div>
+
+</div>
 
 </header>
 
@@ -1024,85 +1013,77 @@ button{
 
 <div class="admin-title">
 
-    <h1>
-        Admin Dashboard
-    </h1>
+<h1>
+Admin Dashboard
+</h1>
 
-    <p id="adminWelcome">
-        Loading account...
-    </p>
+<p id="adminWelcome">
+Loading account...
+</p>
 
 </div>
 
 
-<div
-    id="dashboardMessage"
-    class="message"
-></div>
+<div id="dashboardMessage" class="message"></div>
 
 
 
-<!-- =====================================================
-     COMPANY
-===================================================== -->
+<!-- COMPANY -->
 
 <div class="company-bar">
 
-    <div
-        id="companyAvatar"
-        class="company-avatar"
-    >
-        E
-    </div>
+<div
+id="companyAvatar"
+class="company-avatar"
+>
+E
+</div>
 
 
-    <div class="company-info">
+<div class="company-info">
 
-        <strong id="companyDisplayName">
-            EstatePro
-        </strong>
+<strong id="companyDisplayName">
+EstatePro
+</strong>
 
-        <span id="companyIdDisplay">
-            Company
-        </span>
+<span id="companyIdDisplay">
+Company
+</span>
 
-    </div>
+</div>
 
 </div>
 
 
 
-<!-- =====================================================
-     SUBSCRIPTION
-===================================================== -->
+<!-- SUBSCRIPTION -->
 
 <section
-    id="subscriptionCard"
-    class="subscription-card"
+id="subscriptionCard"
+class="subscription-card"
 >
-
 
 <div class="subscription-header">
 
-    <div>
+<div>
 
-        <h2>
-            Subscription
-        </h2>
+<h2>
+Subscription
+</h2>
 
-        <p>
-            Manage your EstatePro subscription
-        </p>
+<p>
+Manage your EstatePro subscription
+</p>
 
-    </div>
+</div>
 
 
-    <span
-        id="subscriptionStatus"
-        class="subscription-status pending"
-    >
-        Loading
-    </span>
+<span
+id="subscriptionStatus"
+class="subscription-status pending"
+>
+Loading
+</span>
 
 </div>
 
@@ -1111,121 +1092,98 @@ button{
 <div class="subscription-grid">
 
 
-    <div class="subscription-item">
+<div class="subscription-item">
 
-        <span>
-            Plan
-        </span>
+<span>Plan</span>
 
-        <strong id="subscriptionPlan">
-            Premium
-        </strong>
+<strong id="subscriptionPlan">
+Premium
+</strong>
 
-    </div>
+</div>
 
 
+<div class="subscription-item">
 
-    <div class="subscription-item">
+<span>Amount</span>
 
-        <span>
-            Amount
-        </span>
+<strong id="subscriptionAmount">
+₦35,000
+</strong>
 
-        <strong id="subscriptionAmount">
-            ₦35,000
-        </strong>
-
-    </div>
+</div>
 
 
+<div
+id="daysLeftBox"
+class="subscription-item days-left"
+>
 
-    <div
-        id="daysLeftBox"
-        class="subscription-item days-left"
-    >
+<span>Time Remaining</span>
 
-        <span>
-            Time Remaining
-        </span>
+<strong
+id="subscriptionDays"
+class="days-number"
+>
+--
+</strong>
 
-        <strong
-            id="subscriptionDays"
-            class="days-number"
-        >
-            --
-        </strong>
-
-    </div>
+</div>
 
 
+<div class="subscription-item">
 
-    <div class="subscription-item">
+<span>Payment Status</span>
 
-        <span>
-            Payment Status
-        </span>
+<strong id="subscriptionPayment">
+--
+</strong>
 
-        <strong id="subscriptionPayment">
-            --
-        </strong>
-
-    </div>
+</div>
 
 
+<div class="subscription-item">
 
-    <div class="subscription-item">
+<span>Start Date</span>
 
-        <span>
-            Start Date
-        </span>
+<strong id="subscriptionStart">
+--
+</strong>
 
-        <strong id="subscriptionStart">
-            --
-        </strong>
-
-    </div>
+</div>
 
 
+<div class="subscription-item">
 
-    <div class="subscription-item">
+<span>Expiry Date</span>
 
-        <span>
-            Expiry Date
-        </span>
+<strong id="subscriptionExpiry">
+--
+</strong>
 
-        <strong id="subscriptionExpiry">
-            --
-        </strong>
-
-    </div>
+</div>
 
 
+<div class="subscription-item">
 
-    <div class="subscription-item">
+<span>Auto Renew</span>
 
-        <span>
-            Auto Renew
-        </span>
+<strong id="subscriptionAutoRenew">
+Off
+</strong>
 
-        <strong id="subscriptionAutoRenew">
-            Off
-        </strong>
-
-    </div>
+</div>
 
 
+<div class="subscription-item">
 
-    <div class="subscription-item">
+<span>Company ID</span>
 
-        <span>
-            Company ID
-        </span>
+<strong id="subscriptionCompany">
+--
+</strong>
 
-        <strong id="subscriptionCompany">
-            --
-        </strong>
-
-    </div>
+</div>
 
 </div>
 
@@ -1233,83 +1191,72 @@ button{
 
 <div class="subscription-actions">
 
-    <button
-        id="renewSubscriptionButton"
-        class="renew-button"
-        type="button"
-    >
-        Renew Subscription
-    </button>
+<button
+id="renewSubscriptionButton"
+class="renew-button"
+type="button"
+>
+Renew Subscription
+</button>
 
 </div>
 
 
 <p class="subscription-note">
-    Your subscription status is calculated from Firestore. Paystack payment will be connected when live credentials are ready.
+Your subscription status is calculated from Firestore.
+Paystack payment will be connected when live credentials are ready.
 </p>
 
 </section>
 
 
 
-<!-- =====================================================
-     STATS
-===================================================== -->
+<!-- STATS -->
 
 <section class="stats">
 
-
 <div class="stat">
 
-    <span>
-        Total Properties
-    </span>
+<span>Total Properties</span>
 
-    <strong id="totalProperties">
-        0
-    </strong>
+<strong id="totalProperties">
+0
+</strong>
 
 </div>
 
 
 <div class="stat">
 
-    <span>
-        Available
-    </span>
+<span>Available</span>
 
-    <strong id="availableProperties">
-        0
-    </strong>
+<strong id="availableProperties">
+0
+</strong>
 
 </div>
 
 
 <div class="stat">
 
-    <span>
-        Sold
-    </span>
+<span>Sold</span>
 
-    <strong id="soldProperties">
-        0
-    </strong>
+<strong id="soldProperties">
+0
+</strong>
 
 </div>
 
 
 <div class="stat">
 
-    <span>
-        Rented
-    </span>
+<span>Rented</span>
 
-    <strong id="rentedProperties">
-        0
-    </strong>
+<strong id="rentedProperties">
+0
+</strong>
 
 </div>
-
 
 </section>
 
@@ -1319,28 +1266,23 @@ button{
 
 
 
-<!-- =====================================================
-     LEFT COLUMN
-===================================================== -->
+<!-- LEFT -->
 
 <div>
 
 
-
-<!-- =====================================================
-     PROPERTY FORM
-===================================================== -->
+<!-- PROPERTY FORM -->
 
 <section class="card">
 
 <h2 id="propertyFormTitle">
-    Add Property
+Add Property
 </h2>
 
 
 <div
-    id="propertyMessage"
-    class="message"
+id="propertyMessage"
+class="message"
 ></div>
 
 
@@ -1350,14 +1292,14 @@ button{
 <div class="form-group">
 
 <label>
-    Property Title
+Property Title
 </label>
 
 <input
-    id="propertyTitle"
-    type="text"
-    placeholder="Modern 3 Bedroom House"
-    required
+id="propertyTitle"
+type="text"
+placeholder="Modern 3 Bedroom House"
+required
 >
 
 </div>
@@ -1370,33 +1312,33 @@ button{
 <div class="form-group">
 
 <label>
-    Property Type
+Property Type
 </label>
 
 <select id="propertyType">
 
 <option value="House">
-    House
+House
 </option>
 
 <option value="Apartment">
-    Apartment
+Apartment
 </option>
 
 <option value="Duplex">
-    Duplex
+Duplex
 </option>
 
 <option value="Land">
-    Land
+Land
 </option>
 
 <option value="Office">
-    Office
+Office
 </option>
 
 <option value="Shop">
-    Shop
+Shop
 </option>
 
 </select>
@@ -1408,21 +1350,21 @@ button{
 <div class="form-group">
 
 <label>
-    Status
+Status
 </label>
 
 <select id="propertyStatus">
 
 <option value="available">
-    Available
+Available
 </option>
 
 <option value="sold">
-    Sold
+Sold
 </option>
 
 <option value="rented">
-    Rented
+Rented
 </option>
 
 </select>
@@ -1436,17 +1378,17 @@ button{
 <div class="form-group">
 
 <label>
-    Purpose
+Purpose
 </label>
 
 <select id="propertyPurpose">
 
 <option value="sale">
-    For Sale
+For Sale
 </option>
 
 <option value="rent">
-    For Rent
+For Rent
 </option>
 
 </select>
@@ -1458,14 +1400,14 @@ button{
 <div class="form-group">
 
 <label>
-    Location
+Location
 </label>
 
 <input
-    id="propertyLocation"
-    type="text"
-    placeholder="Kano, Nigeria"
-    required
+id="propertyLocation"
+type="text"
+placeholder="Kano, Nigeria"
+required
 >
 
 </div>
@@ -1475,19 +1417,21 @@ button{
 <div class="form-group">
 
 <label>
-    Price
+Price
 </label>
 
 <input
-    id="propertyPrice"
-    type="text"
-    placeholder="25000000"
-    required
+id="propertyPrice"
+type="text"
+placeholder="25000000"
+required
 >
 
 </div>
 
 
+
+<!-- BEDROOM / BATHROOM -->
 
 <div class="form-row">
 
@@ -1495,14 +1439,15 @@ button{
 <div class="form-group">
 
 <label>
-    Bedrooms
+Bedrooms
 </label>
 
 <input
-    id="propertyBedrooms"
-    type="number"
-    min="0"
-    value="0"
+id="propertyBedrooms"
+type="number"
+min="0"
+max="20"
+value="0"
 >
 
 </div>
@@ -1511,14 +1456,15 @@ button{
 <div class="form-group">
 
 <label>
-    Bathrooms
+Bathrooms
 </label>
 
 <input
-    id="propertyBathrooms"
-    type="number"
-    min="0"
-    value="0"
+id="propertyBathrooms"
+type="number"
+min="0"
+max="20"
+value="0"
 >
 
 </div>
@@ -1528,183 +1474,196 @@ button{
 
 
 
-<!-- =====================================================
-     FIVE PROPERTY IMAGE SPACES
-===================================================== -->
+<!-- AREA -->
+
+<div class="form-group">
+
+<label>
+Area
+</label>
+
+<input
+id="propertyArea"
+type="text"
+placeholder="e.g. 1200 sqm"
+>
+
+</div>
+
+
+
+<!-- FIVE IMAGES -->
 
 <div class="image-section">
 
-    <div class="image-section-title">
-        Property Photos
-    </div>
+<div class="image-section-title">
+Property Photos
+</div>
 
-    <div class="image-section-note">
-        Add up to 5 photos for this property. The first photo will be used as the main property image.
-    </div>
-
-
-    <!-- IMAGE 1 -->
-
-    <div class="image-input-group">
-
-        <label for="propertyImage1">
-            Image 1 — Main Photo
-        </label>
-
-        <div class="image-input-wrap">
-
-            <input
-                id="propertyImage1"
-                type="url"
-                placeholder="https://..."
-            >
-
-            <div
-                id="propertyImagePreview1"
-                class="image-preview"
-            >
-                <span>
-                    Preview
-                </span>
-            </div>
-
-        </div>
-
-    </div>
+<div class="image-section-note">
+Add up to 5 photos. Image 1 will be used as the main property image.
+</div>
 
 
-    <!-- IMAGE 2 -->
 
-    <div class="image-input-group">
+<!-- IMAGE 1 -->
 
-        <label for="propertyImage2">
-            Image 2
-        </label>
+<div class="image-input-group">
 
-        <div class="image-input-wrap">
+<label for="propertyImage1">
+Image 1 — Main Photo
+</label>
 
-            <input
-                id="propertyImage2"
-                type="url"
-                placeholder="https://..."
-            >
+<div class="image-input-wrap">
 
-            <div
-                id="propertyImagePreview2"
-                class="image-preview"
-            >
-                <span>
-                    Preview
-                </span>
-            </div>
+<input
+id="propertyImage1"
+type="url"
+placeholder="https://..."
+>
 
-        </div>
+<div
+id="propertyImagePreview1"
+class="image-preview"
+>
+<span>Preview</span>
+</div>
 
-    </div>
-
-
-    <!-- IMAGE 3 -->
-
-    <div class="image-input-group">
-
-        <label for="propertyImage3">
-            Image 3
-        </label>
-
-        <div class="image-input-wrap">
-
-            <input
-                id="propertyImage3"
-                type="url"
-                placeholder="https://..."
-            >
-
-            <div
-                id="propertyImagePreview3"
-                class="image-preview"
-            >
-                <span>
-                    Preview
-                </span>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- IMAGE 4 -->
-
-    <div class="image-input-group">
-
-        <label for="propertyImage4">
-            Image 4
-        </label>
-
-        <div class="image-input-wrap">
-
-            <input
-                id="propertyImage4"
-                type="url"
-                placeholder="https://..."
-            >
-
-            <div
-                id="propertyImagePreview4"
-                class="image-preview"
-            >
-                <span>
-                    Preview
-                </span>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- IMAGE 5 -->
-
-    <div class="image-input-group">
-
-        <label for="propertyImage5">
-            Image 5
-        </label>
-
-        <div class="image-input-wrap">
-
-            <input
-                id="propertyImage5"
-                type="url"
-                placeholder="https://..."
-            >
-
-            <div
-                id="propertyImagePreview5"
-                class="image-preview"
-            >
-                <span>
-                    Preview
-                </span>
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </div>
 
 
 
+<!-- IMAGE 2 -->
+
+<div class="image-input-group">
+
+<label for="propertyImage2">
+Image 2
+</label>
+
+<div class="image-input-wrap">
+
+<input
+id="propertyImage2"
+type="url"
+placeholder="https://..."
+>
+
+<div
+id="propertyImagePreview2"
+class="image-preview"
+>
+<span>Preview</span>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- IMAGE 3 -->
+
+<div class="image-input-group">
+
+<label for="propertyImage3">
+Image 3
+</label>
+
+<div class="image-input-wrap">
+
+<input
+id="propertyImage3"
+type="url"
+placeholder="https://..."
+>
+
+<div
+id="propertyImagePreview3"
+class="image-preview"
+>
+<span>Preview</span>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- IMAGE 4 -->
+
+<div class="image-input-group">
+
+<label for="propertyImage4">
+Image 4
+</label>
+
+<div class="image-input-wrap">
+
+<input
+id="propertyImage4"
+type="url"
+placeholder="https://..."
+>
+
+<div
+id="propertyImagePreview4"
+class="image-preview"
+>
+<span>Preview</span>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- IMAGE 5 -->
+
+<div class="image-input-group">
+
+<label for="propertyImage5">
+Image 5
+</label>
+
+<div class="image-input-wrap">
+
+<input
+id="propertyImage5"
+type="url"
+placeholder="https://..."
+>
+
+<div
+id="propertyImagePreview5"
+class="image-preview"
+>
+<span>Preview</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- DESCRIPTION -->
+
 <div class="form-group">
 
 <label>
-    Description
+Description
 </label>
 
 <textarea
-    id="propertyDescription"
-    placeholder="Property description..."
+id="propertyDescription"
+placeholder="Property description..."
 ></textarea>
 
 </div>
@@ -1714,12 +1673,12 @@ button{
 <div class="checkbox-row">
 
 <input
-    id="propertyFeatured"
-    type="checkbox"
+id="propertyFeatured"
+type="checkbox"
 >
 
 <label for="propertyFeatured">
-    Featured Property
+Featured Property
 </label>
 
 </div>
@@ -1727,21 +1686,20 @@ button{
 
 
 <button
-    id="savePropertyButton"
-    class="primary-button"
-    type="submit"
+id="savePropertyButton"
+class="primary-button"
+type="submit"
 >
-    Add Property
+Add Property
 </button>
 
 
-
 <button
-    id="cancelEditButton"
-    class="cancel-edit-button hidden"
-    type="button"
+id="cancelEditButton"
+class="cancel-edit-button hidden"
+type="button"
 >
-    Cancel Edit
+Cancel Edit
 </button>
 
 
@@ -1751,20 +1709,18 @@ button{
 
 
 
-<!-- =====================================================
-     COMPANY SETTINGS
-===================================================== -->
+<!-- COMPANY SETTINGS -->
 
 <section class="card">
 
 <h2>
-    Company Settings
+Company Settings
 </h2>
 
 
 <div
-    id="companyMessage"
-    class="message"
+id="companyMessage"
+class="message"
 ></div>
 
 
@@ -1774,14 +1730,14 @@ button{
 <div class="form-group">
 
 <label>
-    Company Name
+Company Name
 </label>
 
 <input
-    id="companyName"
-    type="text"
-    placeholder="Company Name"
-    required
+id="companyName"
+type="text"
+placeholder="Company Name"
+required
 >
 
 </div>
@@ -1791,13 +1747,13 @@ button{
 <div class="form-group">
 
 <label>
-    Company Logo URL
+Company Logo URL
 </label>
 
 <input
-    id="companyLogo"
-    type="url"
-    placeholder="https://..."
+id="companyLogo"
+type="url"
+placeholder="https://..."
 >
 
 </div>
@@ -1807,14 +1763,14 @@ button{
 <div class="logo-preview">
 
 <img
-    id="companyLogoPreview"
-    src=""
-    alt="Company Logo"
-    class="hidden"
+id="companyLogoPreview"
+src=""
+alt="Company Logo"
+class="hidden"
 >
 
 <span id="logoPlaceholder">
-    No logo
+No logo
 </span>
 
 </div>
@@ -1824,13 +1780,13 @@ button{
 <div class="form-group">
 
 <label>
-    Phone
+Phone
 </label>
 
 <input
-    id="companyPhone"
-    type="text"
-    placeholder="+234..."
+id="companyPhone"
+type="text"
+placeholder="+234..."
 >
 
 </div>
@@ -1840,13 +1796,13 @@ button{
 <div class="form-group">
 
 <label>
-    WhatsApp
+WhatsApp
 </label>
 
 <input
-    id="companyWhatsApp"
-    type="text"
-    placeholder="+234..."
+id="companyWhatsApp"
+type="text"
+placeholder="+234..."
 >
 
 </div>
@@ -1856,13 +1812,13 @@ button{
 <div class="form-group">
 
 <label>
-    Email
+Email
 </label>
 
 <input
-    id="companyEmail"
-    type="email"
-    placeholder="info@example.com"
+id="companyEmail"
+type="email"
+placeholder="info@example.com"
 >
 
 </div>
@@ -1872,12 +1828,12 @@ button{
 <div class="form-group">
 
 <label>
-    Address
+Address
 </label>
 
 <textarea
-    id="companyAddress"
-    placeholder="Company address..."
+id="companyAddress"
+placeholder="Company address..."
 ></textarea>
 
 </div>
@@ -1887,12 +1843,12 @@ button{
 <div class="form-group">
 
 <label>
-    Description
+Description
 </label>
 
 <textarea
-    id="companyDescription"
-    placeholder="About the company..."
+id="companyDescription"
+placeholder="About the company..."
 ></textarea>
 
 </div>
@@ -1900,48 +1856,44 @@ button{
 
 
 <button
-    id="saveCompanyButton"
-    class="primary-button"
-    type="submit"
+id="saveCompanyButton"
+class="primary-button"
+type="submit"
 >
-    Save Company Settings
+Save Company Settings
 </button>
-
 
 </form>
 
 </section>
 
-
 </div>
 
 
 
-<!-- =====================================================
-     RIGHT COLUMN
-===================================================== -->
+<!-- RIGHT -->
 
 <div>
 
 <section class="card">
 
 <h2>
-    Properties
+Properties
 </h2>
 
 
 <input
-    id="propertySearch"
-    class="search-input"
-    type="search"
-    placeholder="Search your properties..."
+id="propertySearch"
+class="search-input"
+type="search"
+placeholder="Search your properties..."
 >
 
 
 <div id="propertiesList">
 
 <div class="loading">
-    Loading properties...
+Loading properties...
 </div>
 
 </div>
@@ -1949,7 +1901,6 @@ button{
 </section>
 
 </div>
-
 
 </div>
 
@@ -1959,68 +1910,63 @@ button{
 
 
 
-<!-- =====================================================
-     RENEW MODAL
-===================================================== -->
+<!-- RENEW MODAL -->
 
 <div
-    id="renewModal"
-    class="modal"
+id="renewModal"
+class="modal"
 >
 
 <div class="modal-box">
 
 <h2>
-    Renew Subscription
+Renew Subscription
 </h2>
 
-
 <p>
-    Your EstatePro plan is
-    <strong>Premium</strong>.
+Your EstatePro plan is
+<strong>Premium</strong>.
 </p>
 
 
 <div
-    id="renewCurrentStatus"
-    class="message show warning"
+id="renewCurrentStatus"
+class="message show warning"
 >
-    Checking subscription...
+Checking subscription...
 </div>
 
 
 <p>
-    Subscription price:
-    <strong>₦35,000</strong>
+Subscription price:
+<strong>₦35,000</strong>
 </p>
 
 
 <div
-    id="renewModalMessage"
-    class="message"
+id="renewModalMessage"
+class="message"
 ></div>
 
 
 <div class="modal-buttons">
 
-
 <button
-    id="cancelRenewButton"
-    class="modal-cancel"
-    type="button"
+id="cancelRenewButton"
+class="modal-cancel"
+type="button"
 >
-    Cancel
+Cancel
 </button>
 
 
 <button
-    id="startPaymentButton"
-    class="modal-renew"
-    type="button"
+id="startPaymentButton"
+class="modal-renew"
+type="button"
 >
-    Continue
+Continue
 </button>
-
 
 </div>
 
@@ -2067,7 +2013,6 @@ import {
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-
 /* =====================================================
    FIREBASE CONFIG
 ===================================================== */
@@ -2098,22 +2043,18 @@ const firebaseConfig = {
 };
 
 
-
 /* =====================================================
-   FIREBASE INITIALIZATION
+   INITIALIZE
 ===================================================== */
 
 const app =
 initializeApp(firebaseConfig);
 
-
 const auth =
 getAuth(app);
 
-
 const db =
 getFirestore(app);
-
 
 
 /* =====================================================
@@ -2133,9 +2074,8 @@ const SUBSCRIPTIONS_COLLECTION =
 "subscriptions";
 
 
-
 /* =====================================================
-   CURRENT STATE
+   STATE
 ===================================================== */
 
 let currentUser = null;
@@ -2151,107 +2091,67 @@ let allProperties = [];
 let editingPropertyId = null;
 
 
-
 /* =====================================================
    DOM
 ===================================================== */
 
 const loginScreen =
-document.getElementById(
-    "loginScreen"
-);
+document.getElementById("loginScreen");
 
 const adminApp =
-document.getElementById(
-    "adminApp"
-);
+document.getElementById("adminApp");
 
 const loginForm =
-document.getElementById(
-    "loginForm"
-);
+document.getElementById("loginForm");
 
 const loginButton =
-document.getElementById(
-    "loginButton"
-);
+document.getElementById("loginButton");
 
 const logoutButton =
-document.getElementById(
-    "logoutButton"
-);
+document.getElementById("logoutButton");
 
 const refreshButton =
-document.getElementById(
-    "refreshButton"
-);
+document.getElementById("refreshButton");
 
 const propertyForm =
-document.getElementById(
-    "propertyForm"
-);
+document.getElementById("propertyForm");
 
 const companyForm =
-document.getElementById(
-    "companyForm"
-);
+document.getElementById("companyForm");
 
 const propertiesList =
-document.getElementById(
-    "propertiesList"
-);
+document.getElementById("propertiesList");
 
 const propertySearch =
-document.getElementById(
-    "propertySearch"
-);
+document.getElementById("propertySearch");
 
 const savePropertyButton =
-document.getElementById(
-    "savePropertyButton"
-);
+document.getElementById("savePropertyButton");
 
 const cancelEditButton =
-document.getElementById(
-    "cancelEditButton"
-);
+document.getElementById("cancelEditButton");
 
 const propertyFormTitle =
-document.getElementById(
-    "propertyFormTitle"
-);
+document.getElementById("propertyFormTitle");
 
 const renewModal =
-document.getElementById(
-    "renewModal"
-);
+document.getElementById("renewModal");
 
 const renewSubscriptionButton =
-document.getElementById(
-    "renewSubscriptionButton"
-);
+document.getElementById("renewSubscriptionButton");
 
 const cancelRenewButton =
-document.getElementById(
-    "cancelRenewButton"
-);
+document.getElementById("cancelRenewButton");
 
 const startPaymentButton =
-document.getElementById(
-    "startPaymentButton"
-);
-
+document.getElementById("startPaymentButton");
 
 
 /* =====================================================
-   MESSAGE HELPER
+   MESSAGE
 ===================================================== */
 
-function showMessage(
-    id,
-    text,
-    type = "success"
-){
+function showMessage(id,text,type="success"){
 
     const element =
     document.getElementById(id);
@@ -2267,7 +2167,6 @@ function showMessage(
     "message show " + type;
 
 }
-
 
 
 function clearMessage(id){
@@ -2288,16 +2187,13 @@ function clearMessage(id){
 }
 
 
-
 /* =====================================================
    ESCAPE HTML
 ===================================================== */
 
 function escapeHTML(value){
 
-    return String(
-        value ?? ""
-    )
+    return String(value ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
@@ -2305,7 +2201,6 @@ function escapeHTML(value){
     .replace(/'/g,"&#039;");
 
 }
-
 
 
 /* =====================================================
@@ -2353,7 +2248,6 @@ function firebaseError(error){
 }
 
 
-
 /* =====================================================
    ADMIN PROFILE
 ===================================================== */
@@ -2367,10 +2261,8 @@ async function loadAdminProfile(user){
         user.uid
     );
 
-
     const snapshot =
     await getDoc(adminRef);
-
 
     if(!snapshot.exists()){
 
@@ -2380,16 +2272,13 @@ async function loadAdminProfile(user){
 
     }
 
-
     const data =
     snapshot.data();
-
 
     const companyId =
     String(
         data.companyId || ""
     ).trim();
-
 
     if(!companyId){
 
@@ -2399,15 +2288,12 @@ async function loadAdminProfile(user){
 
     }
 
-
     currentCompanyId =
     companyId;
-
 
     return data;
 
 }
-
 
 
 /* =====================================================
@@ -2424,7 +2310,6 @@ function getCompanyRef(){
 
     }
 
-
     return doc(
         db,
         COMPANIES_COLLECTION,
@@ -2434,9 +2319,8 @@ function getCompanyRef(){
 }
 
 
-
 /* =====================================================
-   PROPERTY REF
+   PROPERTIES REF
 ===================================================== */
 
 function getPropertiesRef(){
@@ -2449,7 +2333,6 @@ function getPropertiesRef(){
 
     }
 
-
     return collection(
         db,
         COMPANIES_COLLECTION,
@@ -2458,7 +2341,6 @@ function getPropertiesRef(){
     );
 
 }
-
 
 
 /* =====================================================
@@ -2475,7 +2357,6 @@ function getSubscriptionRef(){
 
     }
 
-
     return doc(
         db,
         SUBSCRIPTIONS_COLLECTION,
@@ -2485,94 +2366,83 @@ function getSubscriptionRef(){
 }
 
 
-
 /* =====================================================
    LOGIN
 ===================================================== */
 
 loginForm.addEventListener(
-    "submit",
-    async event=>{
+"submit",
+async event=>{
 
-        event.preventDefault();
+    event.preventDefault();
 
-        clearMessage(
-            "loginMessage"
+    clearMessage("loginMessage");
+
+    const email =
+    document
+    .getElementById("email")
+    .value
+    .trim();
+
+    const password =
+    document
+    .getElementById("password")
+    .value;
+
+    if(!email || !password){
+
+        showMessage(
+            "loginMessage",
+            "Enter your email and password.",
+            "error"
         );
 
-
-        const email =
-        document
-        .getElementById("email")
-        .value
-        .trim();
-
-
-        const password =
-        document
-        .getElementById("password")
-        .value;
-
-
-        if(!email || !password){
-
-            showMessage(
-                "loginMessage",
-                "Enter your email and password.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        loginButton.disabled =
-        true;
-
-        loginButton.textContent =
-        "Logging in...";
-
-
-        try{
-
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-
-        }
-
-        catch(error){
-
-            console.error(
-                "Login error:",
-                error
-            );
-
-
-            showMessage(
-                "loginMessage",
-                firebaseError(error),
-                "error"
-            );
-
-        }
-
-        finally{
-
-            loginButton.disabled =
-            false;
-
-            loginButton.textContent =
-            "Login";
-
-        }
+        return;
 
     }
-);
 
+    loginButton.disabled =
+    true;
+
+    loginButton.textContent =
+    "Logging in...";
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Login error:",
+            error
+        );
+
+        showMessage(
+            "loginMessage",
+            firebaseError(error),
+            "error"
+        );
+
+    }
+
+    finally{
+
+        loginButton.disabled =
+        false;
+
+        loginButton.textContent =
+        "Login";
+
+    }
+
+});
 
 
 /* =====================================================
@@ -2580,99 +2450,84 @@ loginForm.addEventListener(
 ===================================================== */
 
 onAuthStateChanged(
-    auth,
-    async user=>{
+auth,
+async user=>{
 
-        if(!user){
-
-            currentUser =
-            null;
-
-            currentCompanyId =
-            null;
-
-            currentCompany =
-            null;
-
-            currentSubscription =
-            null;
-
-            editingPropertyId =
-            null;
-
-
-            loginScreen.style.display =
-            "flex";
-
-            adminApp.style.display =
-            "none";
-
-            return;
-
-        }
-
+    if(!user){
 
         currentUser =
-        user;
+        null;
 
+        currentCompanyId =
+        null;
 
-        try{
+        currentCompany =
+        null;
 
-            await loadAdminProfile(
-                user
-            );
+        currentSubscription =
+        null;
 
+        allProperties =
+        [];
 
-            await loadCompanySettings();
+        editingPropertyId =
+        null;
 
-            await loadSubscription();
+        loginScreen.style.display =
+        "flex";
 
-            await loadProperties();
+        adminApp.style.display =
+        "none";
 
-
-            loginScreen.style.display =
-            "none";
-
-            adminApp.style.display =
-            "block";
-
-
-            const welcome =
-            document.getElementById(
-                "adminWelcome"
-            );
-
-
-            welcome.textContent =
-            "Logged in as " +
-            user.email;
-
-        }
-
-        catch(error){
-
-            console.error(
-                "Startup error:",
-                error
-            );
-
-
-            showMessage(
-                "loginMessage",
-                firebaseError(error),
-                "error"
-            );
-
-
-            await signOut(
-                auth
-            );
-
-        }
+        return;
 
     }
-);
 
+    currentUser =
+    user;
+
+    try{
+
+        await loadAdminProfile(user);
+
+        await loadCompanySettings();
+
+        await loadSubscription();
+
+        await loadProperties();
+
+        loginScreen.style.display =
+        "none";
+
+        adminApp.style.display =
+        "block";
+
+        document.getElementById(
+            "adminWelcome"
+        ).textContent =
+        "Logged in as " +
+        user.email;
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Startup error:",
+            error
+        );
+
+        showMessage(
+            "loginMessage",
+            firebaseError(error),
+            "error"
+        );
+
+        await signOut(auth);
+
+    }
+
+});
 
 
 /* =====================================================
@@ -2680,28 +2535,24 @@ onAuthStateChanged(
 ===================================================== */
 
 logoutButton.addEventListener(
-    "click",
-    async()=>{
+"click",
+async()=>{
 
-        try{
+    try{
 
-            await signOut(
-                auth
-            );
-
-        }
-
-        catch(error){
-
-            alert(
-                firebaseError(error)
-            );
-
-        }
+        await signOut(auth);
 
     }
-);
 
+    catch(error){
+
+        alert(
+            firebaseError(error)
+        );
+
+    }
+
+});
 
 
 /* =====================================================
@@ -2715,44 +2566,36 @@ async function loadCompanySettings(){
         getCompanyRef()
     );
 
-
     if(!snapshot.exists()){
 
         currentCompany = {
             name:"EstatePro"
         };
 
-
         updateCompanyUI(
             currentCompany
         );
-
 
         fillCompanyForm(
             currentCompany
         );
 
-
         return;
 
     }
 
-
     currentCompany =
     snapshot.data();
-
 
     updateCompanyUI(
         currentCompany
     );
-
 
     fillCompanyForm(
         currentCompany
     );
 
 }
-
 
 
 /* =====================================================
@@ -2766,18 +2609,15 @@ function updateCompanyUI(data){
     data.companyName ||
     "EstatePro";
 
-
     document.getElementById(
         "headerCompanyName"
     ).textContent =
     name;
 
-
     document.getElementById(
         "companyDisplayName"
     ).textContent =
     name;
-
 
     document.getElementById(
         "companyIdDisplay"
@@ -2785,33 +2625,29 @@ function updateCompanyUI(data){
     "Company ID: " +
     currentCompanyId;
 
-
     document.getElementById(
         "subscriptionCompany"
     ).textContent =
     currentCompanyId;
-
 
     const avatar =
     document.getElementById(
         "companyAvatar"
     );
 
-
     const logo =
     data.logo ||
     data.companyLogo ||
     "";
 
-
     if(logo){
 
         avatar.innerHTML =
         `
-            <img
-                src="${escapeHTML(logo)}"
-                alt="${escapeHTML(name)}"
-            >
+        <img
+        src="${escapeHTML(logo)}"
+        alt="${escapeHTML(name)}"
+        >
         `;
 
     }
@@ -2828,7 +2664,6 @@ function updateCompanyUI(data){
 }
 
 
-
 /* =====================================================
    COMPANY FORM
 ===================================================== */
@@ -2842,14 +2677,12 @@ function fillCompanyForm(data){
     data.companyName ||
     "";
 
-
     document.getElementById(
         "companyLogo"
     ).value =
     data.logo ||
     data.companyLogo ||
     "";
-
 
     document.getElementById(
         "companyPhone"
@@ -2858,14 +2691,12 @@ function fillCompanyForm(data){
     data.companyPhone ||
     "";
 
-
     document.getElementById(
         "companyWhatsApp"
     ).value =
     data.whatsapp ||
     data.companyWhatsApp ||
     "";
-
 
     document.getElementById(
         "companyEmail"
@@ -2874,14 +2705,12 @@ function fillCompanyForm(data){
     data.companyEmail ||
     "";
 
-
     document.getElementById(
         "companyAddress"
     ).value =
     data.address ||
     data.companyAddress ||
     "";
-
 
     document.getElementById(
         "companyDescription"
@@ -2890,7 +2719,6 @@ function fillCompanyForm(data){
     data.companyDescription ||
     "";
 
-
     updateLogoPreview(
         data.logo ||
         data.companyLogo ||
@@ -2898,7 +2726,6 @@ function fillCompanyForm(data){
     );
 
 }
-
 
 
 /* =====================================================
@@ -2912,12 +2739,10 @@ function updateLogoPreview(url){
         "companyLogoPreview"
     );
 
-
     const placeholder =
     document.getElementById(
         "logoPlaceholder"
     );
-
 
     if(!url){
 
@@ -2932,7 +2757,6 @@ function updateLogoPreview(url){
         return;
 
     }
-
 
     image.src =
     url;
@@ -2949,18 +2773,16 @@ function updateLogoPreview(url){
 
 
 document.getElementById(
-    "companyLogo"
+"companyLogo"
 ).addEventListener(
-    "input",
-    event=>{
+"input",
+event=>{
 
-        updateLogoPreview(
-            event.target.value.trim()
-        );
+    updateLogoPreview(
+        event.target.value.trim()
+    );
 
-    }
-);
-
+});
 
 
 /* =====================================================
@@ -2968,132 +2790,121 @@ document.getElementById(
 ===================================================== */
 
 companyForm.addEventListener(
-    "submit",
-    async event=>{
+"submit",
+async event=>{
 
-        event.preventDefault();
+    event.preventDefault();
 
+    const button =
+    document.getElementById(
+        "saveCompanyButton"
+    );
 
-        const button =
-        document.getElementById(
-            "saveCompanyButton"
+    clearMessage(
+        "companyMessage"
+    );
+
+    button.disabled =
+    true;
+
+    button.textContent =
+    "Saving...";
+
+    try{
+
+        const data = {
+
+            name:
+            document.getElementById(
+                "companyName"
+            ).value.trim(),
+
+            logo:
+            document.getElementById(
+                "companyLogo"
+            ).value.trim(),
+
+            phone:
+            document.getElementById(
+                "companyPhone"
+            ).value.trim(),
+
+            whatsapp:
+            document.getElementById(
+                "companyWhatsApp"
+            ).value.trim(),
+
+            email:
+            document.getElementById(
+                "companyEmail"
+            ).value.trim(),
+
+            address:
+            document.getElementById(
+                "companyAddress"
+            ).value.trim(),
+
+            description:
+            document.getElementById(
+                "companyDescription"
+            ).value.trim(),
+
+            updatedAt:
+            serverTimestamp()
+
+        };
+
+        await setDoc(
+            getCompanyRef(),
+            data,
+            {
+                merge:true
+            }
         );
 
+        currentCompany = {
+            ...currentCompany,
+            ...data
+        };
 
-        clearMessage(
-            "companyMessage"
+        updateCompanyUI(
+            currentCompany
         );
 
-
-        button.disabled =
-        true;
-
-        button.textContent =
-        "Saving...";
-
-
-        try{
-
-            const data = {
-
-                name:
-                document.getElementById(
-                    "companyName"
-                ).value.trim(),
-
-                logo:
-                document.getElementById(
-                    "companyLogo"
-                ).value.trim(),
-
-                phone:
-                document.getElementById(
-                    "companyPhone"
-                ).value.trim(),
-
-                whatsapp:
-                document.getElementById(
-                    "companyWhatsApp"
-                ).value.trim(),
-
-                email:
-                document.getElementById(
-                    "companyEmail"
-                ).value.trim(),
-
-                address:
-                document.getElementById(
-                    "companyAddress"
-                ).value.trim(),
-
-                description:
-                document.getElementById(
-                    "companyDescription"
-                ).value.trim(),
-
-                updatedAt:
-                serverTimestamp()
-
-            };
-
-
-            await setDoc(
-                getCompanyRef(),
-                data,
-                {
-                    merge:true
-                }
-            );
-
-
-            currentCompany = {
-                ...currentCompany,
-                ...data
-            };
-
-
-            updateCompanyUI(
-                currentCompany
-            );
-
-
-            showMessage(
-                "companyMessage",
-                "Company settings saved successfully.",
-                "success"
-            );
-
-        }
-
-        catch(error){
-
-            console.error(
-                "Company save:",
-                error
-            );
-
-
-            showMessage(
-                "companyMessage",
-                firebaseError(error),
-                "error"
-            );
-
-        }
-
-        finally{
-
-            button.disabled =
-            false;
-
-            button.textContent =
-            "Save Company Settings";
-
-        }
+        showMessage(
+            "companyMessage",
+            "Company settings saved successfully.",
+            "success"
+        );
 
     }
-);
 
+    catch(error){
+
+        console.error(
+            "Company save:",
+            error
+        );
+
+        showMessage(
+            "companyMessage",
+            firebaseError(error),
+            "error"
+        );
+
+    }
+
+    finally{
+
+        button.disabled =
+        false;
+
+        button.textContent =
+        "Save Company Settings";
+
+    }
+
+});
 
 
 /* =====================================================
@@ -3107,7 +2918,6 @@ async function loadSubscription(){
         getSubscriptionRef()
     );
 
-
     if(!snapshot.exists()){
 
         currentSubscription =
@@ -3119,13 +2929,10 @@ async function loadSubscription(){
 
     }
 
-
-    currentSubscription =
-    {
+    currentSubscription = {
         id:snapshot.id,
         ...snapshot.data()
     };
-
 
     renderSubscription(
         currentSubscription
@@ -3134,9 +2941,8 @@ async function loadSubscription(){
 }
 
 
-
 /* =====================================================
-   DATE VALUE
+   DATE
 ===================================================== */
 
 function getDateValue(value){
@@ -3144,7 +2950,6 @@ function getDateValue(value){
     if(!value){
         return null;
     }
-
 
     if(
         typeof value.toDate ===
@@ -3155,17 +2960,14 @@ function getDateValue(value){
 
     }
 
-
     if(value instanceof Date){
 
         return value;
 
     }
 
-
     const date =
     new Date(value);
-
 
     if(
         isNaN(
@@ -3177,31 +2979,19 @@ function getDateValue(value){
 
     }
 
-
     return date;
 
 }
 
 
-
-/* =====================================================
-   FORMAT DATE
-===================================================== */
-
 function formatDate(value){
 
     const date =
-    getDateValue(
-        value
-    );
-
+    getDateValue(value);
 
     if(!date){
-
         return "--";
-
     }
-
 
     return date.toLocaleDateString(
         "en-NG",
@@ -3215,11 +3005,6 @@ function formatDate(value){
 }
 
 
-
-/* =====================================================
-   CALCULATE DAYS
-===================================================== */
-
 function calculateDaysLeft(
     expiryValue
 ){
@@ -3229,22 +3014,16 @@ function calculateDaysLeft(
         expiryValue
     );
 
-
     if(!expiry){
-
         return null;
-
     }
-
 
     const now =
     new Date();
 
-
     const difference =
     expiry.getTime() -
     now.getTime();
-
 
     return Math.ceil(
         difference /
@@ -3254,9 +3033,8 @@ function calculateDaysLeft(
 }
 
 
-
 /* =====================================================
-   EFFECTIVE SUBSCRIPTION STATUS
+   EFFECTIVE STATUS
 ===================================================== */
 
 function getEffectiveStatus(data){
@@ -3269,19 +3047,14 @@ function getEffectiveStatus(data){
     .toLowerCase()
     .trim();
 
-
     const daysLeft =
     calculateDaysLeft(
         data?.expiryDate
     );
 
-
     if(rawStatus === "expired"){
-
         return "expired";
-
     }
-
 
     if(
         daysLeft !== null &&
@@ -3291,7 +3064,6 @@ function getEffectiveStatus(data){
         return "expired";
 
     }
-
 
     if(
         rawStatus === "active" &&
@@ -3305,22 +3077,17 @@ function getEffectiveStatus(data){
 
     }
 
-
     if(rawStatus === "pending"){
-
         return "pending";
-
     }
-
 
     return rawStatus;
 
 }
 
 
-
 /* =====================================================
-   RENDER NO SUBSCRIPTION
+   NO SUBSCRIPTION
 ===================================================== */
 
 function renderNoSubscription(){
@@ -3330,7 +3097,6 @@ function renderNoSubscription(){
         "subscriptionCard"
     );
 
-
     card.classList.remove(
         "active-card"
     );
@@ -3339,75 +3105,59 @@ function renderNoSubscription(){
         "expired-card"
     );
 
-
     document.getElementById(
         "subscriptionPlan"
     ).textContent =
     "Premium";
-
 
     document.getElementById(
         "subscriptionAmount"
     ).textContent =
     "₦35,000";
 
-
     document.getElementById(
         "subscriptionDays"
     ).textContent =
     "Not subscribed";
-
 
     document.getElementById(
         "subscriptionPayment"
     ).textContent =
     "Not paid";
 
-
     document.getElementById(
         "subscriptionStart"
     ).textContent =
     "--";
-
 
     document.getElementById(
         "subscriptionExpiry"
     ).textContent =
     "--";
 
-
     document.getElementById(
         "subscriptionAutoRenew"
     ).textContent =
     "Off";
-
 
     const status =
     document.getElementById(
         "subscriptionStatus"
     );
 
-
     status.textContent =
     "Not Active";
-
 
     status.className =
     "subscription-status expired";
 
-
-    const daysBox =
     document.getElementById(
         "daysLeftBox"
-    );
-
-
-    daysBox.classList.add(
+    ).classList.add(
         "expired-days"
     );
 
 }
-
 
 
 /* =====================================================
@@ -3422,13 +3172,11 @@ function renderSubscription(data){
         "premium"
     );
 
-
     const amount =
     Number(
         data.amount ||
         35000
     );
-
 
     const paymentStatus =
     String(
@@ -3436,25 +3184,19 @@ function renderSubscription(data){
         "pending"
     );
 
-
     const daysLeft =
     calculateDaysLeft(
         data.expiryDate
     );
 
-
     const effectiveStatus =
-    getEffectiveStatus(
-        data
-    );
-
+    getEffectiveStatus(data);
 
     document.getElementById(
         "subscriptionPlan"
     ).textContent =
     plan.charAt(0).toUpperCase() +
     plan.slice(1);
-
 
     document.getElementById(
         "subscriptionAmount"
@@ -3464,12 +3206,10 @@ function renderSubscription(data){
         "en-NG"
     );
 
-
     document.getElementById(
         "subscriptionPayment"
     ).textContent =
     paymentStatus;
-
 
     document.getElementById(
         "subscriptionStart"
@@ -3478,14 +3218,12 @@ function renderSubscription(data){
         data.startDate
     );
 
-
     document.getElementById(
         "subscriptionExpiry"
     ).textContent =
     formatDate(
         data.expiryDate
     );
-
 
     document.getElementById(
         "subscriptionAutoRenew"
@@ -3494,50 +3232,39 @@ function renderSubscription(data){
     ? "On"
     : "Off";
 
-
-
     const statusElement =
     document.getElementById(
         "subscriptionStatus"
     );
-
 
     const daysBox =
     document.getElementById(
         "daysLeftBox"
     );
 
-
     const card =
     document.getElementById(
         "subscriptionCard"
     );
 
-
     daysBox.classList.remove(
         "expired-days"
     );
-
 
     card.classList.remove(
         "active-card",
         "expired-card"
     );
 
-
-
     if(
-        effectiveStatus ===
-        "active"
+        effectiveStatus === "active"
     ){
 
         statusElement.textContent =
         "Active";
 
-
         statusElement.className =
         "subscription-status active";
-
 
         card.classList.add(
             "active-card"
@@ -3546,22 +3273,18 @@ function renderSubscription(data){
     }
 
     else if(
-        effectiveStatus ===
-        "expired"
+        effectiveStatus === "expired"
     ){
 
         statusElement.textContent =
         "Expired";
 
-
         statusElement.className =
         "subscription-status expired";
-
 
         daysBox.classList.add(
             "expired-days"
         );
-
 
         card.classList.add(
             "expired-card"
@@ -3574,19 +3297,15 @@ function renderSubscription(data){
         statusElement.textContent =
         effectiveStatus;
 
-
         statusElement.className =
         "subscription-status pending";
 
     }
 
-
-
     const daysElement =
     document.getElementById(
         "subscriptionDays"
     );
-
 
     if(daysLeft === null){
 
@@ -3596,8 +3315,7 @@ function renderSubscription(data){
     }
 
     else if(
-        effectiveStatus ===
-        "expired" ||
+        effectiveStatus === "expired" ||
         daysLeft < 0
     ){
 
@@ -3631,137 +3349,118 @@ function renderSubscription(data){
 }
 
 
-
 /* =====================================================
    RENEW MODAL
 ===================================================== */
 
 renewSubscriptionButton.addEventListener(
-    "click",
-    ()=>{
+"click",
+()=>{
 
-        clearMessage(
-            "renewModalMessage"
-        );
+    clearMessage(
+        "renewModalMessage"
+    );
 
-
-        const status =
+    const status =
+    currentSubscription
+    ?
+    getEffectiveStatus(
         currentSubscription
+    )
+    :
+    "expired";
+
+    const days =
+    currentSubscription
+    ?
+    calculateDaysLeft(
+        currentSubscription.expiryDate
+    )
+    :
+    null;
+
+    const currentStatus =
+    document.getElementById(
+        "renewCurrentStatus"
+    );
+
+    if(status === "active"){
+
+        currentStatus.textContent =
+        days !== null
         ?
-        getEffectiveStatus(
-            currentSubscription
-        )
+        "Your subscription is active. You have " +
+        days +
+        " day(s) remaining."
         :
-        "expired";
+        "Your subscription is currently active.";
 
-
-        const days =
-        currentSubscription
-        ?
-        calculateDaysLeft(
-            currentSubscription.expiryDate
-        )
-        :
-        null;
-
-
-        const currentStatus =
-        document.getElementById(
-            "renewCurrentStatus"
-        );
-
-
-        if(status === "active"){
-
-            currentStatus.textContent =
-            days !== null
-            ?
-            "Your subscription is active. You have " +
-            days +
-            " day(s) remaining."
-            :
-            "Your subscription is currently active.";
-
-            currentStatus.className =
-            "message show success";
-
-        }
-
-        else{
-
-            currentStatus.textContent =
-            "Your subscription is expired. Renewing will require a new payment.";
-
-            currentStatus.className =
-            "message show warning";
-
-        }
-
-
-        renewModal.classList.add(
-            "show"
-        );
+        currentStatus.className =
+        "message show success";
 
     }
-);
 
+    else{
+
+        currentStatus.textContent =
+        "Your subscription is expired. Renewing will require a new payment.";
+
+        currentStatus.className =
+        "message show warning";
+
+    }
+
+    renewModal.classList.add(
+        "show"
+    );
+
+});
 
 
 cancelRenewButton.addEventListener(
-    "click",
-    ()=>{
+"click",
+()=>{
+
+    renewModal.classList.remove(
+        "show"
+    );
+
+});
+
+
+renewModal.addEventListener(
+"click",
+event=>{
+
+    if(
+        event.target ===
+        renewModal
+    ){
 
         renewModal.classList.remove(
             "show"
         );
 
     }
-);
 
+});
 
-
-renewModal.addEventListener(
-    "click",
-    event=>{
-
-        if(
-            event.target ===
-            renewModal
-        ){
-
-            renewModal.classList.remove(
-                "show"
-            );
-
-        }
-
-    }
-);
-
-
-
-/* =====================================================
-   START PAYMENT
-===================================================== */
 
 startPaymentButton.addEventListener(
-    "click",
-    async()=>{
+"click",
+async()=>{
 
-        clearMessage(
-            "renewModalMessage"
-        );
+    clearMessage(
+        "renewModalMessage"
+    );
 
+    showMessage(
+        "renewModalMessage",
+        "Paystack live payment is not connected yet. No subscription was changed.",
+        "warning"
+    );
 
-        showMessage(
-            "renewModalMessage",
-            "Paystack live payment is not connected yet. No subscription was changed.",
-            "warning"
-        );
-
-    }
-);
-
+});
 
 
 /* =====================================================
@@ -3779,37 +3478,33 @@ function updatePropertyImagePreview(
         number
     );
 
-
     if(!preview){
         return;
     }
-
 
     if(!url){
 
         preview.innerHTML =
         `
-            <span>
-                Preview
-            </span>
+        <span>
+        Preview
+        </span>
         `;
 
         return;
 
     }
 
-
     preview.innerHTML =
     `
-        <img
-            src="${escapeHTML(url)}"
-            alt="Property image ${number}"
-            onerror="this.parentElement.innerHTML='<span>Invalid image</span>'"
-        >
+    <img
+    src="${escapeHTML(url)}"
+    alt="Property image ${number}"
+    onerror="this.parentElement.innerHTML='<span>Invalid image</span>'"
+    >
     `;
 
 }
-
 
 
 /* =====================================================
@@ -3817,17 +3512,15 @@ function updatePropertyImagePreview(
 ===================================================== */
 
 for(
-    let i = 1;
-    i <= 5;
+    let i=1;
+    i<=5;
     i++
 ){
 
     const input =
     document.getElementById(
-        "propertyImage" +
-        i
+        "propertyImage" + i
     );
-
 
     input.addEventListener(
         "input",
@@ -3844,7 +3537,6 @@ for(
 }
 
 
-
 /* =====================================================
    GET PROPERTY IMAGES
 ===================================================== */
@@ -3853,35 +3545,28 @@ function getPropertyImages(){
 
     const images = [];
 
-
     for(
-        let i = 1;
-        i <= 5;
+        let i=1;
+        i<=5;
         i++
     ){
 
         const value =
         document.getElementById(
-            "propertyImage" +
-            i
+            "propertyImage" + i
         ).value.trim();
-
 
         if(value){
 
-            images.push(
-                value
-            );
+            images.push(value);
 
         }
 
     }
 
-
     return images;
 
 }
-
 
 
 /* =====================================================
@@ -3892,7 +3577,6 @@ function setPropertyImages(images){
 
     let list = [];
 
-
     if(
         Array.isArray(images)
     ){
@@ -3900,31 +3584,26 @@ function setPropertyImages(images){
         list =
         images.filter(
             image =>
-            typeof image ===
-            "string" &&
+            typeof image === "string" &&
             image.trim()
         );
 
     }
 
-
     for(
-        let i = 1;
-        i <= 5;
+        let i=1;
+        i<=5;
         i++
     ){
 
         const value =
-        list[i - 1] ||
+        list[i-1] ||
         "";
 
-
         document.getElementById(
-            "propertyImage" +
-            i
+            "propertyImage" + i
         ).value =
         value;
-
 
         updatePropertyImagePreview(
             i,
@@ -3936,7 +3615,6 @@ function setPropertyImages(images){
 }
 
 
-
 /* =====================================================
    LOAD PROPERTIES
 ===================================================== */
@@ -3945,11 +3623,10 @@ async function loadProperties(){
 
     propertiesList.innerHTML =
     `
-        <div class="loading">
-            Loading properties...
-        </div>
+    <div class="loading">
+    Loading properties...
+    </div>
     `;
-
 
     try{
 
@@ -3958,10 +3635,7 @@ async function loadProperties(){
             getPropertiesRef()
         );
 
-
-        allProperties =
-        [];
-
+        allProperties = [];
 
         snapshot.forEach(
             propertyDoc=>{
@@ -3978,7 +3652,6 @@ async function loadProperties(){
             }
         );
 
-
         updateStats();
 
         renderProperties(
@@ -3994,14 +3667,12 @@ async function loadProperties(){
             error
         );
 
-
         propertiesList.innerHTML =
         `
-            <div class="empty">
-                Unable to load properties.
-            </div>
+        <div class="empty">
+        Unable to load properties.
+        </div>
         `;
-
 
         showMessage(
             "dashboardMessage",
@@ -4014,225 +3685,244 @@ async function loadProperties(){
 }
 
 
-
 /* =====================================================
-   PROPERTY FORM
+   SAVE PROPERTY
 ===================================================== */
 
 propertyForm.addEventListener(
-    "submit",
-    async event=>{
+"submit",
+async event=>{
 
-        event.preventDefault();
+    event.preventDefault();
 
+    clearMessage(
+        "propertyMessage"
+    );
 
-        clearMessage(
-            "propertyMessage"
+    const title =
+    document.getElementById(
+        "propertyTitle"
+    ).value.trim();
+
+    const location =
+    document.getElementById(
+        "propertyLocation"
+    ).value.trim();
+
+    const price =
+    document.getElementById(
+        "propertyPrice"
+    ).value.trim();
+
+    const bedrooms =
+    Number(
+        document.getElementById(
+            "propertyBedrooms"
+        ).value || 0
+    );
+
+    const bathrooms =
+    Number(
+        document.getElementById(
+            "propertyBathrooms"
+        ).value || 0
+    );
+
+    const area =
+    document.getElementById(
+        "propertyArea"
+    ).value.trim();
+
+    if(bedrooms > 20){
+
+        showMessage(
+            "propertyMessage",
+            "Bedrooms cannot be more than 20.",
+            "error"
         );
 
+        return;
 
-        savePropertyButton.disabled =
-        true;
+    }
 
+    if(bathrooms > 20){
 
-        const wasEditing =
-        Boolean(
-            editingPropertyId
+        showMessage(
+            "propertyMessage",
+            "Bathrooms cannot be more than 20.",
+            "error"
         );
 
+        return;
 
-        savePropertyButton.textContent =
-        wasEditing
-        ?
-        "Updating..."
-        :
-        "Saving...";
+    }
+
+    savePropertyButton.disabled =
+    true;
+
+    const wasEditing =
+    Boolean(editingPropertyId);
+
+    savePropertyButton.textContent =
+    wasEditing
+    ?
+    "Updating..."
+    :
+    "Saving...";
+
+    try{
+
+        const images =
+        getPropertyImages();
+
+        /*
+        IMPORTANT:
+
+        imageUrl = first/main image
+        images   = all property images
+        area     = property area
+        */
+
+        const propertyData = {
+
+            title:title,
+
+            propertyType:
+            document.getElementById(
+                "propertyType"
+            ).value,
+
+            status:
+            document.getElementById(
+                "propertyStatus"
+            ).value,
+
+            purpose:
+            document.getElementById(
+                "propertyPurpose"
+            ).value,
+
+            location:location,
+
+            price:price,
+
+            bedrooms:bedrooms,
+
+            bathrooms:bathrooms,
+
+            area:area,
+
+            imageUrl:
+            images[0] || "",
+
+            images:images,
+
+            description:
+            document.getElementById(
+                "propertyDescription"
+            ).value.trim(),
+
+            featured:
+            document.getElementById(
+                "propertyFeatured"
+            ).checked,
+
+            updatedAt:
+            serverTimestamp()
+
+        };
 
 
-        try{
+        if(editingPropertyId){
 
-            const images =
-            getPropertyImages();
+            const propertyRef =
+            doc(
+                db,
+                COMPANIES_COLLECTION,
+                currentCompanyId,
+                PROPERTIES_SUBCOLLECTION,
+                editingPropertyId
+            );
 
+            await updateDoc(
+                propertyRef,
+                propertyData
+            );
 
-            /*
-              Compatibility:
+            showMessage(
+                "propertyMessage",
+                "Property updated successfully.",
+                "success"
+            );
 
-              imageUrl remains the first image.
-              images stores all 5 images.
-            */
+        }
 
-            const propertyData = {
+        else{
 
-                title:
-                document.getElementById(
-                    "propertyTitle"
-                ).value.trim(),
+            const newProperty = {
 
-                propertyType:
-                document.getElementById(
-                    "propertyType"
-                ).value,
+                ...propertyData,
 
-                status:
-                document.getElementById(
-                    "propertyStatus"
-                ).value,
+                createdBy:
+                currentUser.uid,
 
-                purpose:
-                document.getElementById(
-                    "propertyPurpose"
-                ).value,
+                companyId:
+                currentCompanyId,
 
-                location:
-                document.getElementById(
-                    "propertyLocation"
-                ).value.trim(),
-
-                price:
-                document.getElementById(
-                    "propertyPrice"
-                ).value.trim(),
-
-                bedrooms:
-                Number(
-                    document.getElementById(
-                        "propertyBedrooms"
-                    ).value ||
-                    0
-                ),
-
-                bathrooms:
-                Number(
-                    document.getElementById(
-                        "propertyBathrooms"
-                    ).value ||
-                    0
-                ),
-
-                imageUrl:
-                images[0] ||
-                "",
-
-                images:
-                images,
-
-                description:
-                document.getElementById(
-                    "propertyDescription"
-                ).value.trim(),
-
-                featured:
-                document.getElementById(
-                    "propertyFeatured"
-                ).checked,
-
-                updatedAt:
+                createdAt:
                 serverTimestamp()
 
             };
 
-
-
-            if(editingPropertyId){
-
-                const propertyRef =
-                doc(
-                    db,
-                    COMPANIES_COLLECTION,
-                    currentCompanyId,
-                    PROPERTIES_SUBCOLLECTION,
-                    editingPropertyId
-                );
-
-
-                await updateDoc(
-                    propertyRef,
-                    propertyData
-                );
-
-
-                showMessage(
-                    "propertyMessage",
-                    "Property updated successfully.",
-                    "success"
-                );
-
-            }
-
-            else{
-
-                const newProperty = {
-
-                    ...propertyData,
-
-                    createdBy:
-                    currentUser.uid,
-
-                    companyId:
-                    currentCompanyId,
-
-                    createdAt:
-                    serverTimestamp()
-
-                };
-
-
-                await addDoc(
-                    getPropertiesRef(),
-                    newProperty
-                );
-
-
-                showMessage(
-                    "propertyMessage",
-                    "Property added successfully.",
-                    "success"
-                );
-
-            }
-
-
-            resetPropertyForm();
-
-            await loadProperties();
-
-        }
-
-        catch(error){
-
-            console.error(
-                "Save property:",
-                error
+            await addDoc(
+                getPropertiesRef(),
+                newProperty
             );
-
 
             showMessage(
                 "propertyMessage",
-                firebaseError(error),
-                "error"
+                "Property added successfully.",
+                "success"
             );
 
         }
 
-        finally{
+        resetPropertyForm();
 
-            savePropertyButton.disabled =
-            false;
-
-
-            savePropertyButton.textContent =
-            editingPropertyId
-            ?
-            "Update Property"
-            :
-            "Add Property";
-
-        }
+        await loadProperties();
 
     }
-);
 
+    catch(error){
+
+        console.error(
+            "Save property:",
+            error
+        );
+
+        showMessage(
+            "propertyMessage",
+            firebaseError(error),
+            "error"
+        );
+
+    }
+
+    finally{
+
+        savePropertyButton.disabled =
+        false;
+
+        savePropertyButton.textContent =
+        editingPropertyId
+        ?
+        "Update Property"
+        :
+        "Add Property";
+
+    }
+
+});
 
 
 /* =====================================================
@@ -4247,7 +3937,6 @@ function editProperty(id){
         item.id === id
     );
 
-
     if(!property){
 
         showMessage(
@@ -4260,7 +3949,6 @@ function editProperty(id){
 
     }
 
-
     editingPropertyId =
     id;
 
@@ -4268,8 +3956,7 @@ function editProperty(id){
     document.getElementById(
         "propertyTitle"
     ).value =
-    property.title ||
-    "";
+    property.title || "";
 
 
     document.getElementById(
@@ -4311,34 +3998,44 @@ function editProperty(id){
     document.getElementById(
         "propertyBedrooms"
     ).value =
-    Number(
-        property.bedrooms ||
-        0
+    Math.min(
+        Number(property.bedrooms || 0),
+        20
     );
 
 
     document.getElementById(
         "propertyBathrooms"
     ).value =
-    Number(
-        property.bathrooms ||
-        0
+    Math.min(
+        Number(property.bathrooms || 0),
+        20
     );
 
 
+    /*
+    AREA
+    */
+
+    document.getElementById(
+        "propertyArea"
+    ).value =
+    property.area ||
+    property.propertyArea ||
+    "";
+
 
     /*
-      Support both:
+    SUPPORT:
 
-      New:
-      images: []
+    New:
+    images: []
 
-      Old:
-      imageUrl / image
+    Old:
+    imageUrl / image
     */
 
     let propertyImages = [];
-
 
     if(
         Array.isArray(
@@ -4358,13 +4055,10 @@ function editProperty(id){
         property.image ||
         "";
 
-
         if(oldImage){
 
             propertyImages =
-            [
-                oldImage
-            ];
+            [oldImage];
 
         }
 
@@ -4374,7 +4068,6 @@ function editProperty(id){
     setPropertyImages(
         propertyImages
     );
-
 
 
     document.getElementById(
@@ -4416,31 +4109,27 @@ function editProperty(id){
 }
 
 
-
 /* =====================================================
    CANCEL EDIT
 ===================================================== */
 
 cancelEditButton.addEventListener(
-    "click",
-    ()=>{
+"click",
+()=>{
 
-        resetPropertyForm();
+    resetPropertyForm();
 
-    }
-);
-
+});
 
 
 /* =====================================================
-   RESET PROPERTY
+   RESET PROPERTY FORM
 ===================================================== */
 
 function resetPropertyForm(){
 
     editingPropertyId =
     null;
-
 
     propertyForm.reset();
 
@@ -4455,6 +4144,16 @@ function resetPropertyForm(){
         "propertyBathrooms"
     ).value =
     0;
+
+
+    /*
+    RESET AREA
+    */
+
+    document.getElementById(
+        "propertyArea"
+    ).value =
+    "";
 
 
     document.getElementById(
@@ -4475,9 +4174,7 @@ function resetPropertyForm(){
     "House";
 
 
-    setPropertyImages(
-        []
-    );
+    setPropertyImages([]);
 
 
     propertyFormTitle.textContent =
@@ -4495,9 +4192,8 @@ function resetPropertyForm(){
 }
 
 
-
 /* =====================================================
-   GET IMAGE COUNT
+   IMAGE COUNT
 ===================================================== */
 
 function getImageCount(property){
@@ -4510,13 +4206,11 @@ function getImageCount(property){
 
         return property.images.filter(
             image =>
-            typeof image ===
-            "string" &&
+            typeof image === "string" &&
             image.trim()
         ).length;
 
     }
-
 
     return (
         property.imageUrl ||
@@ -4528,7 +4222,6 @@ function getImageCount(property){
     0;
 
 }
-
 
 
 /* =====================================================
@@ -4543,9 +4236,9 @@ function renderProperties(
 
         propertiesList.innerHTML =
         `
-            <div class="empty">
-                No properties found.
-            </div>
+        <div class="empty">
+        No properties found.
+        </div>
         `;
 
         return;
@@ -4603,168 +4296,197 @@ function renderProperties(
             ).toLowerCase();
 
 
+            const area =
+            property.area ||
+            property.propertyArea ||
+            "Not specified";
+
+
+            const bedrooms =
+            Number(
+                property.bedrooms ||
+                0
+            );
+
+
+            const bathrooms =
+            Number(
+                property.bathrooms ||
+                0
+            );
+
+
             const imageCount =
             getImageCount(
                 property
             );
 
 
-            let statusClass =
-            "";
-
+            let statusClass = "";
 
             if(status === "sold"){
-
-                statusClass =
-                "sold";
-
+                statusClass = "sold";
             }
 
-
             if(status === "rented"){
-
-                statusClass =
-                "rented";
-
+                statusClass = "rented";
             }
 
 
             return `
 
-                <article class="property">
+            <article class="property">
 
-                    <div class="property-top">
+            <div class="property-top">
 
-                        <div class="property-image">
+            <div class="property-image">
 
-                            ${
-                                image
-                                ?
-                                `
-                                    <img
-                                        src="${escapeHTML(image)}"
-                                        alt="${escapeHTML(title)}"
-                                        onerror="this.style.display='none'"
-                                    >
-                                `
-                                :
-                                `
-                                    <div
-                                        style="
-                                            width:100%;
-                                            height:100%;
-                                            display:grid;
-                                            place-items:center;
-                                            color:#94a3b8;
-                                            font-size:12px;
-                                        "
-                                    >
-                                        No Image
-                                    </div>
-                                `
-                            }
+            ${
+                image
+                ?
+                `
+                <img
+                src="${escapeHTML(image)}"
+                alt="${escapeHTML(title)}"
+                onerror="this.style.display='none'"
+                >
+                `
+                :
+                `
+                <div
+                style="
+                width:100%;
+                height:100%;
+                display:grid;
+                place-items:center;
+                color:#94a3b8;
+                font-size:12px;
+                "
+                >
+                No Image
+                </div>
+                `
+            }
 
-                        </div>
-
-
-                        <div class="property-details">
-
-                            <h3>
-                                ${escapeHTML(title)}
-                            </h3>
+            </div>
 
 
-                            <p>
-                                📍
-                                ${escapeHTML(location)}
-                            </p>
+            <div class="property-details">
+
+            <h3>
+            ${escapeHTML(title)}
+            </h3>
 
 
-                            <p>
-                                🏠
-                                ${escapeHTML(type)}
-                            </p>
+            <p>
+            📍
+            ${escapeHTML(location)}
+            </p>
 
 
-                            <p>
-                                💰
-                                ${escapeHTML(
-                                    property.price ||
-                                    "Price on request"
-                                )}
-                            </p>
+            <p>
+            🏠
+            ${escapeHTML(type)}
+            </p>
 
 
-                            <p class="property-photo-count">
-                                📷
-                                ${imageCount}
-                                ${imageCount === 1 ? "photo" : "photos"}
-                            </p>
+            <p>
+            💰
+            ${escapeHTML(
+                property.price ||
+                "Price on request"
+            )}
+            </p>
 
 
-                            <div class="badges">
-
-                                <span
-                                    class="badge ${statusClass}"
-                                >
-                                    ${escapeHTML(status)}
-                                </span>
+            <p>
+            🛏️
+            ${bedrooms}
+            ${bedrooms === 1 ? "Bedroom" : "Bedrooms"}
+            </p>
 
 
-                                <span class="badge">
-
-                                    ${
-                                        purpose === "rent"
-                                        ?
-                                        "For Rent"
-                                        :
-                                        "For Sale"
-                                    }
-
-                                </span>
+            <p>
+            🛁
+            ${bathrooms}
+            ${bathrooms === 1 ? "Bathroom" : "Bathrooms"}
+            </p>
 
 
-                                ${
-                                    property.featured
-                                    ?
-                                    `
-                                        <span class="badge featured">
-                                            Featured
-                                        </span>
-                                    `
-                                    :
-                                    ""
-                                }
-
-                            </div>
+            <p>
+            📐
+            ${escapeHTML(area)}
+            </p>
 
 
-                            <div class="property-actions">
-
-                                <button
-                                    type="button"
-                                    class="edit-button"
-                                    data-edit-id="${escapeHTML(property.id)}"
-                                >
-                                    Edit
-                                </button>
+            <p class="property-photo-count">
+            📷
+            ${imageCount}
+            ${imageCount === 1 ? "photo" : "photos"}
+            </p>
 
 
-                                <button
-                                    type="button"
-                                    class="delete-button"
-                                    data-delete-id="${escapeHTML(property.id)}"
-                                >
-                                    Delete
-                                </button>
+            <div class="badges">
 
-                            </div>
+            <span class="badge ${statusClass}">
+            ${escapeHTML(status)}
+            </span>
 
-                        </div>
 
-                    </div>
+            <span class="badge">
 
-                </article>
+            ${
+                purpose === "rent"
+                ?
+                "For Rent"
+                :
+                "For Sale"
+            }
+
+            </span>
+
+
+            ${
+                property.featured
+                ?
+                `
+                <span class="badge featured">
+                Featured
+                </span>
+                `
+                :
+                ""
+            }
+
+            </div>
+
+
+            <div class="property-actions">
+
+            <button
+            type="button"
+            class="edit-button"
+            data-edit-id="${escapeHTML(property.id)}"
+            >
+            Edit
+            </button>
+
+
+            <button
+            type="button"
+            class="delete-button"
+            data-delete-id="${escapeHTML(property.id)}"
+            >
+            Delete
+            </button>
+
+            </div>
+
+            </div>
+
+            </div>
+
+            </article>
 
             `;
 
@@ -4819,7 +4541,6 @@ function renderProperties(
 }
 
 
-
 /* =====================================================
    DELETE PROPERTY
 ===================================================== */
@@ -4831,7 +4552,6 @@ async function deleteProperty(id){
         item =>
         item.id === id
     );
-
 
     const title =
     property?.title ||
@@ -4865,8 +4585,7 @@ async function deleteProperty(id){
 
 
         if(
-            editingPropertyId ===
-            id
+            editingPropertyId === id
         ){
 
             resetPropertyForm();
@@ -4904,77 +4623,78 @@ async function deleteProperty(id){
 }
 
 
-
 /* =====================================================
    SEARCH
 ===================================================== */
 
 propertySearch.addEventListener(
-    "input",
-    event=>{
+"input",
+event=>{
 
-        const query =
-        event.target.value
-        .trim()
-        .toLowerCase();
-
-
-        if(!query){
-
-            renderProperties(
-                allProperties
-            );
-
-            return;
-
-        }
+    const query =
+    event.target.value
+    .trim()
+    .toLowerCase();
 
 
-        const filtered =
-        allProperties.filter(
-            property=>{
-
-                const imageText =
-                Array.isArray(
-                    property.images
-                )
-                ?
-                property.images.join(" ")
-                :
-                "";
-
-
-                const text =
-                [
-                    property.title,
-                    property.propertyType,
-                    property.type,
-                    property.location,
-                    property.price,
-                    property.status,
-                    property.purpose,
-                    property.description,
-                    imageText
-                ]
-                .join(" ")
-                .toLowerCase();
-
-
-                return text.includes(
-                    query
-                );
-
-            }
-        );
-
+    if(!query){
 
         renderProperties(
-            filtered
+            allProperties
         );
 
-    }
-);
+        return;
 
+    }
+
+
+    const filtered =
+    allProperties.filter(
+        property=>{
+
+            const imageText =
+            Array.isArray(
+                property.images
+            )
+            ?
+            property.images.join(" ")
+            :
+            "";
+
+
+            const text =
+            [
+                property.title,
+                property.propertyType,
+                property.type,
+                property.location,
+                property.price,
+                property.status,
+                property.purpose,
+                property.area,
+                property.propertyArea,
+                property.bedrooms,
+                property.bathrooms,
+                property.description,
+                imageText
+            ]
+            .join(" ")
+            .toLowerCase();
+
+
+            return text.includes(
+                query
+            );
+
+        }
+    );
+
+
+    renderProperties(
+        filtered
+    );
+
+});
 
 
 /* =====================================================
@@ -4991,8 +4711,7 @@ function updateStats(){
     allProperties.filter(
         property =>
         String(
-            property.status ||
-            ""
+            property.status || ""
         ).toLowerCase() ===
         "available"
     ).length;
@@ -5002,8 +4721,7 @@ function updateStats(){
     allProperties.filter(
         property =>
         String(
-            property.status ||
-            ""
+            property.status || ""
         ).toLowerCase() ===
         "sold"
     ).length;
@@ -5013,8 +4731,7 @@ function updateStats(){
     allProperties.filter(
         property =>
         String(
-            property.status ||
-            ""
+            property.status || ""
         ).toLowerCase() ===
         "rented"
     ).length;
@@ -5046,75 +4763,66 @@ function updateStats(){
 }
 
 
-
 /* =====================================================
    REFRESH
 ===================================================== */
 
 refreshButton.addEventListener(
-    "click",
-    async()=>{
+"click",
+async()=>{
 
-        refreshButton.disabled =
-        true;
+    refreshButton.disabled =
+    true;
 
+    refreshButton.textContent =
+    "Refreshing...";
 
-        refreshButton.textContent =
-        "Refreshing...";
+    try{
 
+        await loadAdminProfile(
+            currentUser
+        );
 
-        try{
+        await loadCompanySettings();
 
-            await loadAdminProfile(
-                currentUser
-            );
+        await loadSubscription();
 
+        await loadProperties();
 
-            await loadCompanySettings();
-
-            await loadSubscription();
-
-            await loadProperties();
-
-
-            showMessage(
-                "dashboardMessage",
-                "Dashboard refreshed successfully.",
-                "success"
-            );
-
-        }
-
-        catch(error){
-
-            console.error(
-                "Refresh error:",
-                error
-            );
-
-
-            showMessage(
-                "dashboardMessage",
-                firebaseError(error),
-                "error"
-            );
-
-        }
-
-        finally{
-
-            refreshButton.disabled =
-            false;
-
-
-            refreshButton.textContent =
-            "Refresh";
-
-        }
+        showMessage(
+            "dashboardMessage",
+            "Dashboard refreshed successfully.",
+            "success"
+        );
 
     }
-);
 
+    catch(error){
+
+        console.error(
+            "Refresh error:",
+            error
+        );
+
+        showMessage(
+            "dashboardMessage",
+            firebaseError(error),
+            "error"
+        );
+
+    }
+
+    finally{
+
+        refreshButton.disabled =
+        false;
+
+        refreshButton.textContent =
+        "Refresh";
+
+    }
+
+});
 
 
 /* =====================================================
@@ -5149,7 +4857,6 @@ window.estatePro = {
     getEffectiveStatus
 
 };
-
 
 </script>
 
