@@ -1946,7 +1946,24 @@ async function loadSubscription(){
         "ALL SUBSCRIPTIONS:",
         subscriptions
     );
+subscriptions.forEach(item => {
 
+    const expiry = timestampToDate(item.expiryDate);
+
+    console.log("=== SUBSCRIPTION DEBUG ===");
+    console.log("Company ID:", currentCompanyId);
+    console.log("Status:", item.status);
+    console.log("Expiry raw:", item.expiryDate);
+    console.log("Expiry parsed:", expiry);
+    console.log("Expiry ISO:", expiry ? expiry.toISOString() : null);
+    console.log("Now:", new Date());
+    console.log("Now ISO:", new Date().toISOString());
+    console.log(
+        "Expiry > Now:",
+        expiry ? expiry.getTime() > Date.now() : false
+    );
+
+});
 
     /*
      * Find all ACTIVE subscriptions
