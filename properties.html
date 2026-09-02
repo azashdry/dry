@@ -3151,7 +3151,24 @@ function renderProperty(property){
         `;
 
     }
+  
+if(property.kitchen){
 
+    metaHTML += `
+
+        <div class="meta-item">
+
+            🍳
+            Kitchen:
+            ${escapeHTML(
+                property.kitchen
+            )}
+
+        </div>
+
+    `;
+
+}
 
     if(purpose){
 
@@ -3537,11 +3554,17 @@ function renderDetails(property){
             "Not specified"
         ],
 
-        [
-            "Area",
-            property.area ||
-            "Not specified"
-        ]
+     [
+    "Area",
+    property.area ||
+    "Not specified"
+],
+
+[
+    "Kitchen",
+    property.kitchen ||
+    "Not specified"
+] 
 
     ];
 
