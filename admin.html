@@ -1077,11 +1077,6 @@ button{
 
 <body>
 
-
-<!-- =========================================================
-     LOGIN
-========================================================= -->
-
 <section
     id="loginScreen"
     class="login-screen"
@@ -1158,17 +1153,10 @@ button{
 
 </section>
 
-
-<!-- =========================================================
-     ADMIN SCREEN
-========================================================= -->
-
 <div
     id="adminScreen"
     class="admin-screen"
 >
-
-    <!-- HEADER -->
 
     <header class="admin-header">
 
@@ -1224,19 +1212,12 @@ button{
 
     </header>
 
-
     <main class="admin-main">
-
-
-        <!-- MESSAGE -->
 
         <div
             id="message"
             class="message hidden"
         ></div>
-
-
-        <!-- COMPANY BAR -->
 
         <div class="company-bar">
 
@@ -1271,9 +1252,6 @@ button{
             </button>
 
         </div>
-
-
-        <!-- SUBSCRIPTION -->
 
         <section class="subscription-card">
 
@@ -1381,9 +1359,6 @@ button{
 
         </section>
 
-
-        <!-- STATS -->
-
         <div class="stats">
 
             <div class="stat">
@@ -1447,9 +1422,6 @@ button{
             </div>
 
         </div>
-
-
-        <!-- COMPANY SETTINGS -->
 
         <section class="section">
 
@@ -1595,9 +1567,6 @@ button{
             </form>
 
         </section>
-
-
-        <!-- ADD PROPERTY -->
 
         <section class="section">
 
@@ -1792,6 +1761,32 @@ button{
 
                     </div>
 
+                    <!-- KITCHEN ADDED ONLY -->
+
+                    <div class="form-group">
+
+                        <label for="propertyKitchen">
+                            Kitchen
+                        </label>
+
+                        <select id="propertyKitchen">
+
+                            <option value="">
+                                Select Kitchen
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
                     <div class="form-group">
 
                         <label for="propertyArea">
@@ -1805,9 +1800,6 @@ button{
                         >
 
                     </div>
-
-
-                    <!-- IMAGE 1 -->
 
                     <div class="form-group">
 
@@ -1839,9 +1831,6 @@ button{
 
                     </div>
 
-
-                    <!-- IMAGE 2 -->
-
                     <div class="form-group">
 
                         <div class="image-input-wrap">
@@ -1871,9 +1860,6 @@ button{
                         </div>
 
                     </div>
-
-
-                    <!-- IMAGE 3 -->
 
                     <div class="form-group">
 
@@ -1905,9 +1891,6 @@ button{
 
                     </div>
 
-
-                    <!-- IMAGE 4 -->
-
                     <div class="form-group">
 
                         <div class="image-input-wrap">
@@ -1937,9 +1920,6 @@ button{
                         </div>
 
                     </div>
-
-
-                    <!-- IMAGE 5 -->
 
                     <div class="form-group">
 
@@ -1971,7 +1951,6 @@ button{
 
                     </div>
 
-
                     <div class="form-group full">
 
                         <label for="propertyDescription">
@@ -1987,7 +1966,6 @@ button{
 
                 </div>
 
-
                 <div class="checkbox-row">
 
                     <input
@@ -2000,7 +1978,6 @@ button{
                     </label>
 
                 </div>
-
 
                 <div class="form-actions">
 
@@ -2026,9 +2003,6 @@ button{
 
         </section>
 
-
-        <!-- PROPERTIES -->
-
         <section class="section">
 
             <div class="section-header">
@@ -2046,7 +2020,6 @@ button{
                 </div>
 
             </div>
-
 
             <div class="property-toolbar">
 
@@ -2142,7 +2115,6 @@ button{
 
             </div>
 
-
             <div
                 id="propertiesList"
                 class="properties-list"
@@ -2160,7 +2132,6 @@ button{
 
         </section>
 
-
         <footer class="footer">
 
             EstatePro Admin Panel
@@ -2170,11 +2141,6 @@ button{
     </main>
 
 </div>
-
-
-<!-- =========================================================
-     DELETE MODAL
-========================================================= -->
 
 <div
     id="deleteModal"
@@ -2226,12 +2192,7 @@ button{
 
 </div>
 
-
 <script type="module">
-
-/* =========================================================
-   FIREBASE IMPORTS
-========================================================= */
 
 import {
     initializeApp
@@ -2264,10 +2225,6 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
-/* =========================================================
-   FIREBASE CONFIG
-========================================================= */
-
 const firebaseConfig = {
 
     apiKey:
@@ -2294,10 +2251,6 @@ const firebaseConfig = {
 };
 
 
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
 const firebaseApp =
     initializeApp(firebaseConfig);
 
@@ -2308,28 +2261,14 @@ const auth =
     getAuth(firebaseApp);
 
 
-/* =========================================================
-   STATE
-========================================================= */
-
 let currentUser = null;
-
 let currentCompanyId = null;
-
 let currentCompany = null;
-
 let currentSubscription = null;
-
 let allProperties = [];
-
 let editingPropertyId = null;
-
 let propertyToDelete = null;
 
-
-/* =========================================================
-   DOM
-========================================================= */
 
 const loginScreen =
     document.getElementById("loginScreen");
@@ -2355,10 +2294,6 @@ const loginMessage =
 const message =
     document.getElementById("message");
 
-
-/* =========================================================
-   MESSAGE
-========================================================= */
 
 function showMessage(
     text,
@@ -2388,10 +2323,6 @@ function clearMessage(){
 }
 
 
-/* =========================================================
-   LOGIN MESSAGE
-========================================================= */
-
 function showLoginMessage(
     text,
     type = "error"
@@ -2406,10 +2337,6 @@ function showLoginMessage(
 }
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
 function escapeHTML(value){
 
     return String(value ?? "")
@@ -2422,10 +2349,6 @@ function escapeHTML(value){
 
 }
 
-
-/* =========================================================
-   FIREBASE ERROR
-========================================================= */
 
 function firebaseError(error){
 
@@ -2441,10 +2364,6 @@ function firebaseError(error){
 
 }
 
-
-/* =========================================================
-   URL COMPANY ID
-========================================================= */
 
 function getRequestedCompanyId(){
 
@@ -2469,10 +2388,6 @@ function getRequestedCompanyId(){
 
 }
 
-
-/* =========================================================
-   COMPANY REFERENCES
-========================================================= */
 
 function getCompanyRef(){
 
@@ -2505,10 +2420,6 @@ function getSubscriptionRef(){
 
 }
 
-
-/* =========================================================
-   LOAD ADMIN PROFILE
-========================================================= */
 
 async function loadAdminProfile(){
 
@@ -2566,11 +2477,6 @@ async function loadAdminProfile(){
         getRequestedCompanyId();
 
 
-    /*
-       Company Admin may only access
-       their own company.
-    */
-
     if(
         requestedId &&
         requestedId !== companyId
@@ -2588,10 +2494,6 @@ async function loadAdminProfile(){
 
 }
 
-
-/* =========================================================
-   LOAD COMPANY
-========================================================= */
 
 async function loadCompany(){
 
@@ -2622,10 +2524,6 @@ async function loadCompany(){
 
 }
 
-
-/* =========================================================
-   COMPANY UI
-========================================================= */
 
 function updateCompanyUI(){
 
@@ -2723,10 +2621,6 @@ function updateCompanyUI(){
 }
 
 
-/* =========================================================
-   FILL COMPANY FORM
-========================================================= */
-
 function fillCompanyForm(){
 
     document.getElementById(
@@ -2786,10 +2680,6 @@ function fillCompanyForm(){
 }
 
 
-/* =========================================================
-   LOGO PREVIEW
-========================================================= */
-
 function updateLogoPreview(){
 
     const input =
@@ -2817,7 +2707,8 @@ function updateLogoPreview(){
     }
 
 
-    preview.innerHTML = "";
+    preview.innerHTML =
+        "";
 
 
     const img =
@@ -2854,10 +2745,6 @@ document
         updateLogoPreview
     );
 
-
-/* =========================================================
-   SAVE COMPANY
-========================================================= */
 
 document
     .getElementById("companyForm")
@@ -3009,10 +2896,6 @@ document
     );
 
 
-/* =========================================================
-   LOAD SUBSCRIPTION
-========================================================= */
-
 async function loadSubscription(){
 
     const snapshot =
@@ -3083,10 +2966,6 @@ async function loadSubscription(){
 
 }
 
-
-/* =========================================================
-   DATE HELPERS
-========================================================= */
 
 function getDateValue(value){
 
@@ -3198,10 +3077,6 @@ function calculateDaysLeft(value){
 }
 
 
-/* =========================================================
-   MONEY
-========================================================= */
-
 function formatMoney(amount){
 
     const number =
@@ -3228,10 +3103,6 @@ function formatMoney(amount){
 
 }
 
-
-/* =========================================================
-   SUBSCRIPTION STATUS
-========================================================= */
 
 function renderSubscription(){
 
@@ -3394,10 +3265,6 @@ function renderSubscription(){
 }
 
 
-/* =========================================================
-   SUBSCRIPTION BUTTON
-========================================================= */
-
 document
     .getElementById(
         "subscriptionButton"
@@ -3427,10 +3294,6 @@ document
         }
     );
 
-
-/* =========================================================
-   IMAGE PREVIEW
-========================================================= */
 
 function updatePropertyImagePreview(
     number
@@ -3531,10 +3394,6 @@ for(
 }
 
 
-/* =========================================================
-   GET IMAGES
-========================================================= */
-
 function getPropertyImages(){
 
     const images = [];
@@ -3568,10 +3427,6 @@ function getPropertyImages(){
 
 }
 
-
-/* =========================================================
-   SET IMAGES
-========================================================= */
 
 function setPropertyImages(
     images
@@ -3608,10 +3463,6 @@ function setPropertyImages(
 
 }
 
-
-/* =========================================================
-   LOAD PROPERTIES
-========================================================= */
 
 async function loadProperties(){
 
@@ -3714,10 +3565,6 @@ async function loadProperties(){
 
 }
 
-
-/* =========================================================
-   SAVE PROPERTY
-========================================================= */
 
 document
     .getElementById(
@@ -3828,6 +3675,16 @@ async function saveProperty(
         ) || 0;
 
 
+    /* KITCHEN ADDED ONLY */
+
+    const kitchen =
+        document
+            .getElementById(
+                "propertyKitchen"
+            )
+            .value;
+
+
     const area =
         document
             .getElementById(
@@ -3926,14 +3783,6 @@ async function saveProperty(
     }
 
 
-    /*
-       We keep backward compatibility.
-
-       imageUrl  = first image
-       images    = all images
-       imageUrl1..5 = individual image URLs
-    */
-
     const propertyData = {
 
         title:
@@ -3959,6 +3808,9 @@ async function saveProperty(
 
         bathrooms:
             bathrooms,
+
+        kitchen:
+            kitchen,
 
         area:
             area,
@@ -4096,10 +3948,6 @@ async function saveProperty(
 }
 
 
-/* =========================================================
-   EDIT PROPERTY
-========================================================= */
-
 function editProperty(
     id
 ){
@@ -4202,6 +4050,15 @@ function editProperty(
         0;
 
 
+    /* KITCHEN ADDED ONLY */
+
+    document.getElementById(
+        "propertyKitchen"
+    ).value =
+        property.kitchen ||
+        "";
+
+
     document.getElementById(
         "propertyArea"
     ).value =
@@ -4279,10 +4136,6 @@ function editProperty(
 }
 
 
-/* =========================================================
-   CANCEL / RESET
-========================================================= */
-
 document
     .getElementById(
         "cancelPropertyButton"
@@ -4328,6 +4181,14 @@ function resetPropertyForm(){
         "0";
 
 
+    /* KITCHEN ADDED ONLY */
+
+    document.getElementById(
+        "propertyKitchen"
+    ).value =
+        "";
+
+
     setPropertyImages(
         []
     );
@@ -4353,10 +4214,6 @@ function resetPropertyForm(){
 
 }
 
-
-/* =========================================================
-   DUPLICATE PROPERTY
-========================================================= */
 
 async function duplicateProperty(
     id
@@ -4463,10 +4320,6 @@ async function duplicateProperty(
 
 }
 
-
-/* =========================================================
-   DELETE MODAL
-========================================================= */
 
 function openDeleteModal(
     id
@@ -4583,10 +4436,6 @@ document
     );
 
 
-/* =========================================================
-   CONFIRM DELETE
-========================================================= */
-
 document
     .getElementById(
         "confirmDelete"
@@ -4668,10 +4517,6 @@ document
     );
 
 
-/* =========================================================
-   PROPERTY IMAGE COUNT
-========================================================= */
-
 function getImageCount(
     property
 ){
@@ -4730,10 +4575,6 @@ function getImageCount(
 }
 
 
-/* =========================================================
-   PROPERTY IMAGE
-========================================================= */
-
 function getMainImage(
     property
 ){
@@ -4781,10 +4622,6 @@ function getMainImage(
 
 }
 
-
-/* =========================================================
-   RENDER PROPERTIES
-========================================================= */
 
 function renderProperties(){
 
@@ -5307,10 +5144,6 @@ function renderProperties(){
 }
 
 
-/* =========================================================
-   STATS
-========================================================= */
-
 function updateStats(){
 
     const total =
@@ -5376,10 +5209,6 @@ function updateStats(){
 }
 
 
-/* =========================================================
-   FILTER EVENTS
-========================================================= */
-
 document
     .getElementById(
         "propertySearch"
@@ -5430,10 +5259,6 @@ document
     );
 
 
-/* =========================================================
-   REFRESH
-========================================================= */
-
 async function refreshAdmin(){
 
     if(!currentUser){
@@ -5483,10 +5308,6 @@ document
         refreshAdmin
     );
 
-
-/* =========================================================
-   LOGIN
-========================================================= */
 
 loginForm.addEventListener(
     "submit",
@@ -5563,10 +5384,6 @@ loginForm.addEventListener(
 );
 
 
-/* =========================================================
-   LOGOUT
-========================================================= */
-
 document
     .getElementById(
         "logoutButton"
@@ -5593,10 +5410,6 @@ document
         }
     );
 
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
 
 onAuthStateChanged(
     auth,
@@ -5681,10 +5494,6 @@ onAuthStateChanged(
     }
 );
 
-
-/* =========================================================
-   DEBUG
-========================================================= */
 
 window.estatePro = {
 
