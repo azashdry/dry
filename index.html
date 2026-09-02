@@ -888,6 +888,7 @@ a{
     .mobile-menu-button{
         display:block;
     }
+
 }
 
 @media(max-width:700px){
@@ -950,6 +951,7 @@ a{
     .footer-inner{
         grid-template-columns:1fr;
     }
+
 }
 
 @media(max-width:500px){
@@ -962,6 +964,7 @@ a{
         padding:9px 10px;
         font-size:12px;
     }
+
 }
 
 </style>
@@ -1419,7 +1422,7 @@ from
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyAE44DxNnqz3m8ScqaZxoSj2FdQ7aJ2NIg",
+        "AIzaSyAE44DxNnqz3m8ScqaZxoSj2Fd7aJ2NIg",
 
     authDomain:
         "estate-pro-d564b.firebaseapp.com",
@@ -1486,7 +1489,7 @@ function getCompanyId(){
 
     }
 
-    return "Company_002";
+    return "Company_001";
 
 }
 
@@ -1675,8 +1678,6 @@ function timestampToDate(value){
     }
 
 
-    /* Firestore Timestamp */
-
     if(
         typeof value.toDate === "function"
     ){
@@ -1692,8 +1693,6 @@ function timestampToDate(value){
 
     }
 
-
-    /* Firestore timestamp object */
 
     if(
         typeof value === "object" &&
@@ -1720,8 +1719,6 @@ function timestampToDate(value){
     }
 
 
-    /* Date */
-
     if(value instanceof Date){
 
         return isNaN(
@@ -1732,8 +1729,6 @@ function timestampToDate(value){
 
     }
 
-
-    /* Number */
 
     if(typeof value === "number"){
 
@@ -1748,8 +1743,6 @@ function timestampToDate(value){
 
     }
 
-
-    /* String */
 
     if(typeof value === "string"){
 
@@ -1819,12 +1812,6 @@ function checkSubscription(subscription){
     );
 
 
-    /*
-     * IMPORTANT:
-     *
-     * status must be active.
-     */
-
     if(status !== "active"){
 
         if(status === "expired"){
@@ -1844,11 +1831,6 @@ function checkSubscription(subscription){
     }
 
 
-    /*
-     * Active subscription must have
-     * a valid expiry date.
-     */
-
     if(!expiry){
 
         return {
@@ -1858,11 +1840,6 @@ function checkSubscription(subscription){
 
     }
 
-
-    /*
-     * Expired only when expiry date
-     * is actually in the past.
-     */
 
     if(
         expiry.getTime() <=
@@ -1946,29 +1923,65 @@ async function loadSubscription(){
         "ALL SUBSCRIPTIONS:",
         subscriptions
     );
-subscriptions.forEach(item => {
 
-    const expiry = timestampToDate(item.expiryDate);
 
-    console.log("=== SUBSCRIPTION DEBUG ===");
-    console.log("Company ID:", currentCompanyId);
-    console.log("Status:", item.status);
-    console.log("Expiry raw:", item.expiryDate);
-    console.log("Expiry parsed:", expiry);
-    console.log("Expiry ISO:", expiry ? expiry.toISOString() : null);
-    console.log("Now:", new Date());
-    console.log("Now ISO:", new Date().toISOString());
-    console.log(
-        "Expiry > Now:",
-        expiry ? expiry.getTime() > Date.now() : false
-    );
+    subscriptions.forEach(item => {
 
-});
+        const expiry =
+            timestampToDate(
+                item.expiryDate
+            );
 
-    /*
-     * Find all ACTIVE subscriptions
-     * whose expiry date is still valid.
-     */
+        console.log(
+            "=== SUBSCRIPTION DEBUG ==="
+        );
+
+        console.log(
+            "Company ID:",
+            currentCompanyId
+        );
+
+        console.log(
+            "Status:",
+            item.status
+        );
+
+        console.log(
+            "Expiry raw:",
+            item.expiryDate
+        );
+
+        console.log(
+            "Expiry parsed:",
+            expiry
+        );
+
+        console.log(
+            "Expiry ISO:",
+            expiry
+            ? expiry.toISOString()
+            : null
+        );
+
+        console.log(
+            "Now:",
+            new Date()
+        );
+
+        console.log(
+            "Now ISO:",
+            new Date().toISOString()
+        );
+
+        console.log(
+            "Expiry > Now:",
+            expiry
+            ? expiry.getTime() > Date.now()
+            : false
+        );
+
+    });
+
 
     const valid =
         subscriptions
@@ -2015,11 +2028,6 @@ subscriptions.forEach(item => {
         });
 
 
-    /*
-     * If there is ANY valid active
-     * subscription, use the newest one.
-     */
-
     if(valid.length){
 
         currentSubscription =
@@ -2036,13 +2044,6 @@ subscriptions.forEach(item => {
 
     }
 
-
-    /*
-     * No valid active subscription.
-     * Choose the latest subscription
-     * only for displaying the correct
-     * reason.
-     */
 
     subscriptions.sort((a,b) => {
 
@@ -2927,7 +2928,9 @@ function applyFilters(){
 
                     property.purpose,
 
-                    property.description
+                    property.description,
+
+                    property.kitchen
 
                 ]
                 .join(" ")
@@ -3206,6 +3209,16 @@ function createPropertyCard(property){
         );
 
 
+    /* =====================================================
+       KITCHEN
+       Reads directly from Firestore property.kitchen
+    ===================================================== */
+
+    const kitchen =
+        property.kitchen ||
+        "";
+
+
     return `
 
         <article class="property-card">
@@ -3331,6 +3344,31 @@ function createPropertyCard(property){
                                     bathrooms
                                 )}
                                 Bathrooms
+
+                            </span>
+
+                        `
+
+                        :
+
+                        ""
+                    }
+
+
+                    ${
+                        kitchen
+
+                        ?
+
+                        `
+
+                            <span class="meta-item">
+
+                                🍳
+                                Kitchen:
+                                ${escapeHTML(
+                                    kitchen
+                                )}
 
                             </span>
 
