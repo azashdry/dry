@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <meta name="theme-color" content="#0f766e">
 
 <title>EstatePro Admin</title>
@@ -12,8 +14,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
 >
 
 <style>
@@ -22,16 +24,14 @@ rel="stylesheet"
     box-sizing:border-box;
 }
 
-html,
-body{
-    margin:0;
-    padding:0;
-    min-height:100%;
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    font-family:Inter,sans-serif;
-    background:#f5f7f9;
+    margin:0;
+    font-family:Inter,Arial,sans-serif;
+    background:#f4f7fb;
     color:#17202a;
 }
 
@@ -50,76 +50,89 @@ button{
     display:none!important;
 }
 
-
 /* ================================
    LOGIN
 ================================ */
 
-#loginScreen{
+.login-screen{
     min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
     padding:20px;
+    background:#f4f7fb;
 }
 
-.login-card{
+.login-box{
     width:100%;
-    max-width:420px;
+    max-width:430px;
     background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:20px;
     padding:30px;
-    border-radius:18px;
-    box-shadow:0 10px 35px rgba(0,0,0,.08);
+    box-shadow:0 15px 45px rgba(15,23,42,.08);
 }
 
 .login-logo{
     width:58px;
     height:58px;
-    margin:0 auto 15px;
+    margin:0 auto 18px;
     border-radius:15px;
-    background:#0f766e;
-    color:#fff;
+    background:#ecfdf5;
+    color:#0f766e;
     display:grid;
     place-items:center;
-    font-size:28px;
+    font-size:25px;
     font-weight:800;
+    overflow:hidden;
 }
 
-.login-card h1{
+.login-logo img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.login-box h1{
     text-align:center;
-    margin:0 0 8px;
+    margin:0 0 7px;
+    font-size:25px;
 }
 
-.login-card>p{
+.login-box p{
     text-align:center;
     color:#64748b;
+    font-size:13px;
+    line-height:1.6;
     margin:0 0 25px;
 }
 
 .form-group{
-    margin-bottom:15px;
+    margin-bottom:16px;
 }
 
 .form-group label{
     display:block;
-    margin-bottom:6px;
-    font-size:13px;
+    font-size:12px;
     font-weight:700;
+    margin-bottom:7px;
+    color:#334155;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea{
     width:100%;
-    border:1px solid #d7dde3;
+    border:1px solid #cbd5e1;
     border-radius:9px;
-    padding:12px;
+    padding:11px 12px;
     outline:none;
     background:#fff;
+    color:#17202a;
 }
 
 .form-group textarea{
-    min-height:100px;
+    min-height:120px;
     resize:vertical;
 }
 
@@ -130,139 +143,156 @@ button{
     box-shadow:0 0 0 3px rgba(15,118,110,.08);
 }
 
-.login-button,
-.primary-button{
+.login-button{
     width:100%;
     border:0;
-    border-radius:9px;
-    padding:13px;
     background:#0f766e;
     color:#fff;
-    font-weight:700;
+    padding:13px;
+    border-radius:9px;
+    font-weight:800;
 }
 
-.login-button:disabled,
-.primary-button:disabled{
+.login-button:hover{
+    background:#115e59;
+}
+
+.login-button:disabled{
     opacity:.6;
     cursor:not-allowed;
 }
 
-
 /* ================================
-   MESSAGES
+   MESSAGE
 ================================ */
 
 .message{
-    display:none;
-    padding:12px;
-    border-radius:9px;
-    margin-bottom:15px;
-    font-size:14px;
-    line-height:1.5;
-}
-
-.message.show{
-    display:block;
-}
-
-.message.error{
-    background:#fee2e2;
-    color:#991b1b;
+    padding:13px 15px;
+    border-radius:10px;
+    margin-bottom:18px;
+    font-size:12px;
+    line-height:1.6;
 }
 
 .message.success{
-    background:#dcfce7;
-    color:#166534;
+    background:#ecfdf5;
+    color:#065f46;
+    border:1px solid #a7f3d0;
+}
+
+.message.error{
+    background:#fef2f2;
+    color:#991b1b;
+    border:1px solid #fecaca;
 }
 
 .message.warning{
-    background:#fef3c7;
+    background:#fffbeb;
     color:#92400e;
+    border:1px solid #fde68a;
 }
-
 
 /* ================================
    ADMIN
 ================================ */
 
-#adminApp{
+.admin-screen{
     display:none;
-    min-height:100vh;
 }
 
 .admin-header{
-    background:#0f766e;
-    color:#fff;
+    background:#fff;
+    border-bottom:1px solid #e5e7eb;
     position:sticky;
     top:0;
     z-index:100;
 }
 
 .admin-header-inner{
-    max-width:1200px;
+    max-width:1250px;
     margin:auto;
-    padding:16px 18px;
+    padding:12px 18px;
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:15px;
 }
 
-.admin-brand{
+.brand{
     display:flex;
     align-items:center;
     gap:10px;
-    font-weight:800;
 }
 
-.admin-logo{
-    width:42px;
-    height:42px;
-    border-radius:10px;
-    background:#fff;
+.brand-icon{
+    width:43px;
+    height:43px;
+    border-radius:12px;
+    background:#ecfdf5;
     color:#0f766e;
     display:grid;
     place-items:center;
+    font-size:19px;
+    font-weight:800;
+    overflow:hidden;
+}
+
+.brand-icon img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.brand-name{
+    font-size:16px;
     font-weight:800;
 }
 
-.admin-actions{
+.brand-subtitle{
+    color:#64748b;
+    font-size:10px;
+    margin-top:2px;
+}
+
+.header-actions{
     display:flex;
+    align-items:center;
     gap:8px;
 }
 
 .header-button{
-    border:1px solid rgba(255,255,255,.4);
-    background:transparent;
-    color:#fff;
+    border:1px solid #d7dde3;
+    background:#fff;
+    color:#334155;
+    padding:8px 11px;
     border-radius:8px;
-    padding:9px 13px;
+    font-size:11px;
+    font-weight:700;
 }
 
 .header-button:hover{
-    background:rgba(255,255,255,.1);
+    background:#f8fafc;
 }
 
-.admin-container{
-    max-width:1200px;
+.header-button.primary{
+    background:#0f766e;
+    border-color:#0f766e;
+    color:#fff;
+}
+
+.header-button.danger{
+    color:#b91c1c;
+}
+
+/* ================================
+   MAIN
+================================ */
+
+.admin-main{
+    max-width:1250px;
     margin:auto;
-    padding:25px 15px 50px;
+    padding:25px 18px 60px;
 }
-
-.admin-title{
-    margin-bottom:22px;
-}
-
-.admin-title h1{
-    margin:0 0 6px;
-    font-size:28px;
-}
-
-.admin-title p{
-    margin:0;
-    color:#64748b;
-}
-
 
 /* ================================
    COMPANY BAR
@@ -270,45 +300,53 @@ button{
 
 .company-bar{
     background:#fff;
+    border:1px solid #e5e7eb;
     border-radius:14px;
-    padding:16px;
+    padding:15px 18px;
     margin-bottom:20px;
-    box-shadow:0 4px 18px rgba(0,0,0,.05);
     display:flex;
+    justify-content:space-between;
     align-items:center;
-    gap:14px;
+    gap:15px;
 }
 
-.company-avatar{
-    width:55px;
-    height:55px;
-    border-radius:12px;
-    overflow:hidden;
-    background:#ecfdf5;
-    color:#0f766e;
-    display:grid;
-    place-items:center;
-    font-size:22px;
-    font-weight:800;
-    flex-shrink:0;
+.company-bar-left{
+    min-width:0;
 }
 
-.company-avatar img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
-
-.company-info strong{
-    display:block;
-    font-size:18px;
-}
-
-.company-info span{
+.company-label{
     color:#64748b;
-    font-size:13px;
+    font-size:10px;
+    margin-bottom:4px;
 }
 
+.company-title{
+    font-size:17px;
+    font-weight:800;
+    word-break:break-word;
+}
+
+.company-id{
+    color:#64748b;
+    font-size:10px;
+    margin-top:3px;
+    word-break:break-all;
+}
+
+.subscription-link{
+    border:0;
+    background:#0f766e;
+    color:#fff;
+    padding:10px 14px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.subscription-link:hover{
+    background:#115e59;
+}
 
 /* ================================
    SUBSCRIPTION
@@ -316,56 +354,47 @@ button{
 
 .subscription-card{
     background:#fff;
+    border:1px solid #e5e7eb;
     border-radius:16px;
-    padding:22px;
-    margin-bottom:22px;
-    box-shadow:0 4px 18px rgba(0,0,0,.05);
-    border-left:5px solid #0f766e;
-}
-
-.subscription-card.expired-card{
-    border-left-color:#dc2626;
-}
-
-.subscription-card.active-card{
-    border-left-color:#16a34a;
-}
-
-.subscription-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
+    padding:18px;
     margin-bottom:20px;
 }
 
-.subscription-header h2{
-    margin:0;
-    font-size:21px;
+.subscription-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:15px;
 }
 
-.subscription-header p{
-    margin:5px 0 0;
+.subscription-heading h2{
+    margin:0 0 4px;
+    font-size:16px;
+}
+
+.subscription-heading p{
+    margin:0;
     color:#64748b;
-    font-size:13px;
+    font-size:11px;
 }
 
 .subscription-status{
-    padding:7px 12px;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    padding:6px 9px;
     border-radius:999px;
-    font-size:12px;
+    font-size:10px;
     font-weight:800;
     text-transform:uppercase;
-}
-
-.subscription-status.active{
     background:#dcfce7;
     color:#166534;
 }
 
 .subscription-status.expired{
     background:#fee2e2;
-    color:#991b1b;
+    color:#b91c1c;
 }
 
 .subscription-status.pending{
@@ -375,66 +404,28 @@ button{
 
 .subscription-grid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    margin-bottom:18px;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
 }
 
 .subscription-item{
     background:#f8fafc;
-    border-radius:11px;
-    padding:14px;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    padding:12px;
 }
 
-.subscription-item span{
-    display:block;
+.subscription-label{
     color:#64748b;
+    font-size:9px;
+    margin-bottom:5px;
+}
+
+.subscription-value{
     font-size:12px;
-    margin-bottom:6px;
-}
-
-.subscription-item strong{
-    font-size:16px;
-}
-
-.days-left{
-    background:#ecfdf5;
-    color:#047857;
-}
-
-.days-left.expired-days{
-    background:#fee2e2;
-    color:#991b1b;
-}
-
-.days-number{
-    font-size:21px!important;
-}
-
-.subscription-actions{
-    display:flex;
-    gap:10px;
-}
-
-.renew-button{
-    border:0;
-    background:#0f766e;
-    color:#fff;
-    padding:12px 20px;
-    border-radius:9px;
     font-weight:800;
+    word-break:break-word;
 }
-
-.renew-button:hover{
-    background:#0b5f59;
-}
-
-.subscription-note{
-    margin:12px 0 0;
-    color:#64748b;
-    font-size:12px;
-}
-
 
 /* ================================
    STATS
@@ -443,135 +434,135 @@ button{
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:15px;
+    gap:14px;
     margin-bottom:22px;
 }
 
 .stat{
     background:#fff;
+    border:1px solid #e5e7eb;
     border-radius:14px;
-    padding:18px;
-    box-shadow:0 4px 18px rgba(0,0,0,.05);
+    padding:17px;
 }
 
-.stat span{
+.stat-label{
     color:#64748b;
-    font-size:13px;
+    font-size:11px;
+    margin-bottom:7px;
 }
 
-.stat strong{
-    display:block;
-    margin-top:8px;
-    font-size:27px;
+.stat-value{
+    font-size:25px;
+    font-weight:800;
+    color:#0f766e;
 }
-
 
 /* ================================
-   GRID
+   SECTION
 ================================ */
 
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:1fr 1.5fr;
-    gap:20px;
-}
-
-.card{
+.section{
     background:#fff;
-    border-radius:14px;
-    padding:22px;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:20px;
     margin-bottom:20px;
-    box-shadow:0 4px 18px rgba(0,0,0,.05);
 }
 
-.card h2{
-    margin:0 0 18px;
-    font-size:20px;
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:18px;
 }
 
-.form-row{
+.section-header h2{
+    margin:0 0 4px;
+    font-size:18px;
+}
+
+.section-header p{
+    margin:0;
+    color:#64748b;
+    font-size:11px;
+}
+
+/* ================================
+   FORM GRID
+================================ */
+
+.form-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
+    grid-template-columns:repeat(2,1fr);
+    gap:0 16px;
+}
+
+.full{
+    grid-column:1/-1;
 }
 
 .checkbox-row{
     display:flex;
     align-items:center;
     gap:8px;
-    margin:15px 0;
-}
-
-.search-input{
-    width:100%;
-    padding:11px 12px;
-    border:1px solid #d7dde3;
-    border-radius:8px;
-    outline:none;
-    margin-bottom:15px;
-}
-
-
-/* ================================
-   PROPERTY IMAGES
-================================ */
-
-.image-section{
-    margin-bottom:18px;
-}
-
-.image-section-title{
-    font-size:14px;
-    font-weight:800;
-    margin-bottom:5px;
-}
-
-.image-section-note{
-    color:#64748b;
-    font-size:12px;
-    line-height:1.5;
-    margin-bottom:12px;
-}
-
-.image-input-group{
-    margin-bottom:12px;
-}
-
-.image-input-group label{
-    display:block;
-    margin-bottom:6px;
+    margin:3px 0 17px;
     font-size:12px;
     font-weight:700;
+}
+
+.checkbox-row input{
+    width:16px;
+    height:16px;
+    accent-color:#0f766e;
+}
+
+/* ================================
+   IMAGE INPUTS
+================================ */
+
+.image-input-wrap{
+    margin-bottom:16px;
+}
+
+.image-input-label{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:7px;
     color:#334155;
 }
 
-.image-input-wrap{
-    display:flex;
-    gap:8px;
+.image-input-row{
+    display:block;
 }
 
-.image-input-wrap input{
-    flex:1;
-    border:1px solid #d7dde3;
+.image-input{
+    width:100%;
+    border:1px solid #cbd5e1;
     border-radius:9px;
-    padding:12px;
+    padding:11px 12px;
     outline:none;
 }
 
-.image-input-wrap input:focus{
+.image-input:focus{
     border-color:#0f766e;
 }
 
 .image-preview{
-    width:74px;
-    height:48px;
-    border:1px solid #d7dde3;
-    border-radius:7px;
-    overflow:hidden;
+    width:100%;
+    height:125px;
+    margin-top:8px;
+    border:1px dashed #cbd5e1;
+    border-radius:9px;
     background:#f8fafc;
-    display:grid;
-    place-items:center;
-    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    color:#94a3b8;
+    font-size:10px;
+    text-align:center;
 }
 
 .image-preview img{
@@ -580,151 +571,29 @@ button{
     object-fit:cover;
 }
 
-.image-preview span{
-    color:#94a3b8;
-    font-size:9px;
-    text-align:center;
-}
-
-
-/* ================================
-   PROPERTY
-================================ */
-
-.property{
-    border:1px solid #e2e8f0;
-    border-radius:11px;
-    padding:14px;
-    margin-bottom:12px;
-}
-
-.property-top{
-    display:flex;
-    gap:14px;
-}
-
-.property-image{
-    width:100px;
-    height:80px;
-    border-radius:9px;
-    overflow:hidden;
-    background:#f1f5f9;
-    flex-shrink:0;
-}
-
-.property-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.property-details{
-    flex:1;
-}
-
-.property-details h3{
-    margin:0 0 5px;
-    font-size:17px;
-}
-
-.property-details p{
-    margin:4px 0;
-    color:#64748b;
-    font-size:13px;
-}
-
-.property-photo-count{
-    color:#0f766e!important;
-    font-weight:700;
-}
-
-.badges{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    margin-top:8px;
-}
-
-.badge{
-    padding:4px 8px;
-    border-radius:999px;
-    background:#ecfdf5;
-    color:#047857;
-    font-size:11px;
-    font-weight:700;
-}
-
-.badge.sold{
-    background:#fee2e2;
+.image-preview.invalid{
     color:#b91c1c;
+    background:#fef2f2;
+    border-color:#fecaca;
 }
-
-.badge.rented{
-    background:#fef3c7;
-    color:#92400e;
-}
-
-.badge.featured{
-    background:#ede9fe;
-    color:#6d28d9;
-}
-
-.property-actions{
-    display:flex;
-    gap:7px;
-    margin-top:12px;
-}
-
-.edit-button{
-    border:0;
-    background:#0f766e;
-    color:#fff;
-    padding:8px 12px;
-    border-radius:7px;
-}
-
-.delete-button{
-    border:0;
-    background:#dc2626;
-    color:#fff;
-    padding:8px 12px;
-    border-radius:7px;
-}
-
-.cancel-edit-button{
-    width:100%;
-    border:1px solid #cbd5e1;
-    background:#fff;
-    color:#334155;
-    padding:11px;
-    border-radius:9px;
-    font-weight:700;
-    margin-top:8px;
-}
-
-.loading,
-.empty{
-    text-align:center;
-    padding:25px;
-    color:#64748b;
-}
-
 
 /* ================================
-   LOGO
+   LOGO PREVIEW
 ================================ */
 
 .logo-preview{
-    width:180px;
-    height:100px;
+    width:90px;
+    height:90px;
     border:1px dashed #cbd5e1;
-    border-radius:10px;
-    margin:8px 0 15px;
+    border-radius:12px;
+    background:#f8fafc;
     display:flex;
     align-items:center;
     justify-content:center;
     overflow:hidden;
-    background:#f8fafc;
+    margin-top:8px;
+    color:#94a3b8;
+    font-size:10px;
 }
 
 .logo-preview img{
@@ -733,6 +602,278 @@ button{
     object-fit:contain;
 }
 
+/* ================================
+   BUTTONS
+================================ */
+
+.form-actions{
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+    margin-top:5px;
+}
+
+.primary-button{
+    border:0;
+    background:#0f766e;
+    color:#fff;
+    padding:11px 17px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:800;
+}
+
+.primary-button:hover{
+    background:#115e59;
+}
+
+.primary-button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.secondary-button{
+    border:1px solid #d7dde3;
+    background:#fff;
+    color:#334155;
+    padding:10px 17px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.secondary-button:hover{
+    background:#f8fafc;
+}
+
+/* ================================
+   PROPERTY TOOLBAR
+================================ */
+
+.property-toolbar{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr 1fr;
+    gap:9px;
+    margin-bottom:18px;
+}
+
+.property-toolbar input,
+.property-toolbar select{
+    width:100%;
+    padding:10px 11px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    outline:none;
+    background:#fff;
+    font-size:11px;
+}
+
+.property-toolbar input:focus,
+.property-toolbar select:focus{
+    border-color:#0f766e;
+}
+
+/* ================================
+   PROPERTIES
+================================ */
+
+.properties-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.property-card{
+    border:1px solid #e2e8f0;
+    border-radius:13px;
+    overflow:hidden;
+    background:#fff;
+    transition:.2s ease;
+}
+
+.property-card:hover{
+    box-shadow:0 8px 25px rgba(15,23,42,.07);
+}
+
+.property-image{
+    height:190px;
+    background:#f1f5f9;
+    position:relative;
+    overflow:hidden;
+}
+
+.property-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.property-placeholder{
+    width:100%;
+    height:100%;
+    display:grid;
+    place-items:center;
+    color:#94a3b8;
+    font-size:11px;
+}
+
+.property-badges{
+    position:absolute;
+    top:9px;
+    left:9px;
+    right:9px;
+    display:flex;
+    justify-content:space-between;
+    gap:6px;
+}
+
+.badge{
+    padding:5px 7px;
+    border-radius:6px;
+    background:#fff;
+    color:#334155;
+    font-size:9px;
+    font-weight:800;
+    box-shadow:0 2px 7px rgba(0,0,0,.08);
+}
+
+.badge.featured{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.badge.available{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.badge.sold,
+.badge.rented{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.property-content{
+    padding:14px;
+}
+
+.property-title{
+    font-size:14px;
+    font-weight:800;
+    margin-bottom:5px;
+    line-height:1.4;
+}
+
+.property-location{
+    color:#64748b;
+    font-size:10px;
+    margin-bottom:10px;
+}
+
+.property-price{
+    color:#0f766e;
+    font-size:16px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.property-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:12px;
+}
+
+.meta{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:6px;
+    padding:5px 7px;
+    color:#475569;
+    font-size:9px;
+}
+
+.property-description{
+    color:#64748b;
+    font-size:10px;
+    line-height:1.5;
+    margin-bottom:12px;
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+}
+
+.property-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:6px;
+}
+
+.property-action{
+    border:1px solid #d7dde3;
+    background:#fff;
+    color:#334155;
+    padding:8px 5px;
+    border-radius:7px;
+    font-size:9px;
+    font-weight:800;
+}
+
+.property-action:hover{
+    background:#f8fafc;
+}
+
+.property-action.delete{
+    color:#b91c1c;
+    border-color:#fecaca;
+}
+
+.property-action.delete:hover{
+    background:#fef2f2;
+}
+
+.empty-state{
+    grid-column:1/-1;
+    padding:45px 20px;
+    text-align:center;
+    color:#64748b;
+    border:1px dashed #cbd5e1;
+    border-radius:12px;
+}
+
+.empty-state strong{
+    display:block;
+    color:#334155;
+    margin-bottom:5px;
+}
+
+/* ================================
+   LOADING
+================================ */
+
+.loading{
+    text-align:center;
+    padding:35px 20px;
+    color:#64748b;
+    font-size:12px;
+}
+
+.spinner{
+    width:30px;
+    height:30px;
+    border:3px solid #d1fae5;
+    border-top-color:#0f766e;
+    border-radius:50%;
+    margin:0 auto 12px;
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
 
 /* ================================
    MODAL
@@ -741,12 +882,12 @@ button{
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(15,23,42,.55);
+    z-index:1000;
     display:none;
     align-items:center;
     justify-content:center;
-    padding:20px;
-    z-index:500;
+    padding:18px;
+    background:rgba(15,23,42,.7);
 }
 
 .modal.show{
@@ -755,64 +896,95 @@ button{
 
 .modal-box{
     width:100%;
-    max-width:450px;
+    max-width:470px;
     background:#fff;
     border-radius:16px;
     padding:25px;
-    box-shadow:0 20px 50px rgba(0,0,0,.2);
+    position:relative;
+}
+
+.modal-close{
+    position:absolute;
+    top:10px;
+    right:10px;
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:50%;
+    background:#f1f5f9;
+    color:#334155;
+    font-size:19px;
 }
 
 .modal-box h2{
-    margin:0 0 8px;
+    margin:0 0 7px;
+    font-size:20px;
 }
 
 .modal-box p{
     color:#64748b;
+    font-size:12px;
     line-height:1.6;
 }
 
-.modal-buttons{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
+.modal-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:18px;
 }
 
-.modal-cancel{
-    flex:1;
-    border:1px solid #cbd5e1;
-    background:#fff;
-    padding:12px;
-    border-radius:9px;
-    font-weight:700;
-}
+/* ================================
+   FOOTER
+================================ */
 
-.modal-renew{
-    flex:1;
-    border:0;
-    background:#0f766e;
-    color:#fff;
-    padding:12px;
-    border-radius:9px;
-    font-weight:800;
+.footer{
+    text-align:center;
+    color:#94a3b8;
+    font-size:10px;
+    padding:20px;
 }
-
 
 /* ================================
    RESPONSIVE
 ================================ */
 
-@media(max-width:900px){
+@media(max-width:1050px){
+
+    .subscription-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .properties-list{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .property-toolbar{
+        grid-template-columns:2fr 1fr 1fr;
+    }
+
+}
+
+@media(max-width:800px){
 
     .stats{
         grid-template-columns:repeat(2,1fr);
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
     }
 
     .subscription-grid{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .dashboard-grid{
-        grid-template-columns:1fr;
+    .property-toolbar{
+        grid-template-columns:1fr 1fr;
     }
 
 }
@@ -820,1117 +992,1267 @@ button{
 @media(max-width:600px){
 
     .admin-header-inner{
-        align-items:flex-start;
-        flex-direction:column;
+        padding:10px 13px;
     }
 
-    .admin-actions{
-        width:100%;
+    .brand-subtitle{
+        display:none;
+    }
+
+    .header-actions{
+        gap:5px;
     }
 
     .header-button{
-        flex:1;
+        padding:7px 8px;
+        font-size:9px;
     }
 
-    .form-row{
-        grid-template-columns:1fr;
+    .admin-main{
+        padding:18px 13px 45px;
     }
 
-    .property-top{
-        flex-direction:column;
-    }
-
-    .property-image{
-        width:100%;
-        height:160px;
-    }
-
-    .property-actions{
-        flex-wrap:wrap;
-    }
-
-    .edit-button,
-    .delete-button{
-        flex:1;
-    }
-
-    .subscription-header{
+    .company-bar{
         align-items:flex-start;
         flex-direction:column;
+    }
+
+    .subscription-link{
+        width:100%;
     }
 
     .subscription-grid{
         grid-template-columns:1fr 1fr;
     }
 
-    .subscription-actions{
+    .stats{
+        gap:9px;
+    }
+
+    .stat{
+        padding:13px;
+    }
+
+    .stat-value{
+        font-size:21px;
+    }
+
+    .section{
+        padding:15px;
+    }
+
+    .properties-list{
+        grid-template-columns:1fr;
+    }
+
+    .property-toolbar{
+        grid-template-columns:1fr;
+    }
+
+    .form-actions{
         flex-direction:column;
     }
 
-    .renew-button{
+    .form-actions button{
         width:100%;
     }
 
-    .image-input-wrap{
-        flex-direction:column;
+    .property-actions{
+        grid-template-columns:1fr 1fr 1fr;
     }
 
-    .image-preview{
-        width:100%;
-        height:120px;
+    .modal-actions{
+        grid-template-columns:1fr;
+    }
+
+    .login-box{
+        padding:23px;
     }
 
 }
 
 </style>
-</head>
 
+</head>
 
 <body>
 
 
-<!-- LOGIN -->
-
-<section id="loginScreen">
-
-<div class="login-card">
-
-<div class="login-logo">E</div>
-
-<h1>EstatePro Admin</h1>
-
-<p>Sign in to manage your company</p>
-
-<div id="loginMessage" class="message"></div>
-
-<form id="loginForm">
-
-<div class="form-group">
-
-<label for="email">
-Email Address
-</label>
-
-<input
-id="email"
-type="email"
-autocomplete="username"
-placeholder="admin@example.com"
-required
->
-
-</div>
-
-
-<div class="form-group">
-
-<label for="password">
-Password
-</label>
-
-<input
-id="password"
-type="password"
-autocomplete="current-password"
-placeholder="Password"
-required
->
-
-</div>
-
-
-<button
-id="loginButton"
-class="login-button"
-type="submit"
->
-Login
-</button>
-
-</form>
-
-</div>
-
-</section>
-
-
-<!-- ADMIN APP -->
-
-<div id="adminApp">
-
-
-<header class="admin-header">
-
-<div class="admin-header-inner">
-
-<div class="admin-brand">
-
-<div class="admin-logo">
-E
-</div>
-
-<span id="headerCompanyName">
-EstatePro
-</span>
-
-</div>
-
-
-<div class="admin-actions">
-
-<button
-id="refreshButton"
-class="header-button"
-type="button"
->
-Refresh
-</button>
-
-
-<button
-id="logoutButton"
-class="header-button"
-type="button"
->
-Logout
-</button>
-
-</div>
-
-</div>
-
-</header>
-
-
-<main class="admin-container">
-
-
-<div class="admin-title">
-
-<h1>
-Admin Dashboard
-</h1>
-
-<p id="adminWelcome">
-Loading account...
-</p>
-
-</div>
-
-
-<div id="dashboardMessage" class="message"></div>
-
-
-<!-- COMPANY -->
-
-<div class="company-bar">
-
-<div
-id="companyAvatar"
-class="company-avatar"
->
-E
-</div>
-
-
-<div class="company-info">
-
-<strong id="companyDisplayName">
-EstatePro
-</strong>
-
-<span id="companyIdDisplay">
-Company
-</span>
-
-</div>
-
-</div>
-
-
-<!-- SUBSCRIPTION -->
+<!-- =========================================================
+     LOGIN
+========================================================= -->
 
 <section
-id="subscriptionCard"
-class="subscription-card"
+    id="loginScreen"
+    class="login-screen"
 >
 
-<div class="subscription-header">
+    <div class="login-box">
 
-<div>
+        <div
+            id="loginLogo"
+            class="login-logo"
+        >
+            E
+        </div>
 
-<h2>
-Subscription
-</h2>
+        <h1>
+            EstatePro Admin
+        </h1>
 
-<p>
-Manage your EstatePro subscription
-</p>
+        <p>
+            Sign in to manage your company's
+            properties and website settings.
+        </p>
 
-</div>
+        <div
+            id="loginMessage"
+            class="message hidden"
+        ></div>
 
+        <form id="loginForm">
 
-<span
-id="subscriptionStatus"
-class="subscription-status pending"
->
-Loading
-</span>
+            <div class="form-group">
 
-</div>
+                <label for="loginEmail">
+                    Email Address
+                </label>
 
+                <input
+                    id="loginEmail"
+                    type="email"
+                    placeholder="admin@example.com"
+                    autocomplete="email"
+                    required
+                >
 
-<div class="subscription-grid">
+            </div>
 
+            <div class="form-group">
 
-<div class="subscription-item">
+                <label for="loginPassword">
+                    Password
+                </label>
 
-<span>Plan</span>
+                <input
+                    id="loginPassword"
+                    type="password"
+                    placeholder="Enter password"
+                    autocomplete="current-password"
+                    required
+                >
 
-<strong id="subscriptionPlan">
---
-</strong>
+            </div>
 
-</div>
+            <button
+                id="loginButton"
+                class="login-button"
+                type="submit"
+            >
+                Login
+            </button>
 
+        </form>
 
-<div class="subscription-item">
-
-<span>Amount</span>
-
-<strong id="subscriptionAmount">
---
-</strong>
-
-</div>
-
-
-<div
-id="daysLeftBox"
-class="subscription-item days-left"
->
-
-<span>Time Remaining</span>
-
-<strong
-id="subscriptionDays"
-class="days-number"
->
---
-</strong>
-
-</div>
-
-
-<div class="subscription-item">
-
-<span>Payment Status</span>
-
-<strong id="subscriptionPayment">
---
-</strong>
-
-</div>
-
-
-<div class="subscription-item">
-
-<span>Start Date</span>
-
-<strong id="subscriptionStart">
---
-</strong>
-
-</div>
-
-
-<div class="subscription-item">
-
-<span>Expiry Date</span>
-
-<strong id="subscriptionExpiry">
---
-</strong>
-
-</div>
-
-
-<div class="subscription-item">
-
-<span>Auto Renew</span>
-
-<strong id="subscriptionAutoRenew">
---
-</strong>
-
-</div>
-
-
-<div class="subscription-item">
-
-<span>Company ID</span>
-
-<strong id="subscriptionCompany">
---
-</strong>
-
-</div>
-
-</div>
-
-
-<div class="subscription-actions">
-
-<button
-id="renewSubscriptionButton"
-class="renew-button"
-type="button"
->
-Renew Subscription
-</button>
-
-</div>
-
-
-<p class="subscription-note">
-Subscription plan and amount are loaded directly from Firestore.
-</p>
+    </div>
 
 </section>
 
 
-<!-- STATS -->
-
-<section class="stats">
-
-<div class="stat">
-
-<span>Total Properties</span>
-
-<strong id="totalProperties">
-0
-</strong>
-
-</div>
-
-
-<div class="stat">
-
-<span>Available</span>
-
-<strong id="availableProperties">
-0
-</strong>
-
-</div>
-
-
-<div class="stat">
-
-<span>Sold</span>
-
-<strong id="soldProperties">
-0
-</strong>
-
-</div>
-
-
-<div class="stat">
-
-<span>Rented</span>
-
-<strong id="rentedProperties">
-0
-</strong>
-
-</div>
-
-</section>
-
-
-<div class="dashboard-grid">
-
-
-<!-- LEFT -->
-
-<div>
-
-
-<!-- PROPERTY FORM -->
-
-<section class="card">
-
-<h2 id="propertyFormTitle">
-Add Property
-</h2>
-
+<!-- =========================================================
+     ADMIN SCREEN
+========================================================= -->
 
 <div
-id="propertyMessage"
-class="message"
-></div>
-
-
-<form id="propertyForm">
-
-
-<div class="form-group">
-
-<label>
-Property Title
-</label>
-
-<input
-id="propertyTitle"
-type="text"
-placeholder="Modern 3 Bedroom House"
-required
+    id="adminScreen"
+    class="admin-screen"
 >
 
+    <!-- HEADER -->
+
+    <header class="admin-header">
+
+        <div class="admin-header-inner">
+
+            <div class="brand">
+
+                <div
+                    id="brandIcon"
+                    class="brand-icon"
+                >
+                    E
+                </div>
+
+                <div>
+
+                    <div
+                        id="brandName"
+                        class="brand-name"
+                    >
+                        EstatePro
+                    </div>
+
+                    <div class="brand-subtitle">
+                        Administration Panel
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="header-actions">
+
+                <button
+                    id="refreshButton"
+                    class="header-button"
+                    type="button"
+                >
+                    Refresh
+                </button>
+
+                <button
+                    id="logoutButton"
+                    class="header-button danger"
+                    type="button"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="admin-main">
+
+
+        <!-- MESSAGE -->
+
+        <div
+            id="message"
+            class="message hidden"
+        ></div>
+
+
+        <!-- COMPANY BAR -->
+
+        <div class="company-bar">
+
+            <div class="company-bar-left">
+
+                <div class="company-label">
+                    CURRENT COMPANY
+                </div>
+
+                <div
+                    id="companyTitle"
+                    class="company-title"
+                >
+                    Loading...
+                </div>
+
+                <div
+                    id="companyId"
+                    class="company-id"
+                >
+                    Company ID: --
+                </div>
+
+            </div>
+
+            <button
+                id="subscriptionButton"
+                class="subscription-link"
+                type="button"
+            >
+                Manage Subscription
+            </button>
+
+        </div>
+
+
+        <!-- SUBSCRIPTION -->
+
+        <section class="subscription-card">
+
+            <div class="subscription-heading">
+
+                <div>
+
+                    <h2>
+                        Subscription
+                    </h2>
+
+                    <p>
+                        Current subscription status
+                    </p>
+
+                </div>
+
+                <span
+                    id="subscriptionStatus"
+                    class="subscription-status"
+                >
+                    ● Checking
+                </span>
+
+            </div>
+
+            <div class="subscription-grid">
+
+                <div class="subscription-item">
+
+                    <div class="subscription-label">
+                        PLAN
+                    </div>
+
+                    <div
+                        id="subscriptionPlan"
+                        class="subscription-value"
+                    >
+                        --
+                    </div>
+
+                </div>
+
+                <div class="subscription-item">
+
+                    <div class="subscription-label">
+                        AMOUNT
+                    </div>
+
+                    <div
+                        id="subscriptionAmount"
+                        class="subscription-value"
+                    >
+                        --
+                    </div>
+
+                </div>
+
+                <div class="subscription-item">
+
+                    <div class="subscription-label">
+                        EXPIRES
+                    </div>
+
+                    <div
+                        id="subscriptionExpiry"
+                        class="subscription-value"
+                    >
+                        --
+                    </div>
+
+                </div>
+
+                <div class="subscription-item">
+
+                    <div class="subscription-label">
+                        REMAINING
+                    </div>
+
+                    <div
+                        id="subscriptionRemaining"
+                        class="subscription-value"
+                    >
+                        --
+                    </div>
+
+                </div>
+
+                <div class="subscription-item">
+
+                    <div class="subscription-label">
+                        PAYMENT
+                    </div>
+
+                    <div
+                        id="subscriptionPayment"
+                        class="subscription-value"
+                    >
+                        --
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    Total Properties
+                </div>
+
+                <div
+                    id="totalProperties"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    Available
+                </div>
+
+                <div
+                    id="availableProperties"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    Sold
+                </div>
+
+                <div
+                    id="soldProperties"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    Rented
+                </div>
+
+                <div
+                    id="rentedProperties"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- COMPANY SETTINGS -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Company Settings
+                    </h2>
+
+                    <p>
+                        Update your company's website information.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <form id="companyForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="companyNameInput">
+                            Company Name
+                        </label>
+
+                        <input
+                            id="companyNameInput"
+                            type="text"
+                            placeholder="Company name"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="companyPhone">
+                            Phone
+                        </label>
+
+                        <input
+                            id="companyPhone"
+                            type="text"
+                            placeholder="+234..."
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="companyWhatsApp">
+                            WhatsApp
+                        </label>
+
+                        <input
+                            id="companyWhatsApp"
+                            type="text"
+                            placeholder="+234..."
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="companyEmail">
+                            Email
+                        </label>
+
+                        <input
+                            id="companyEmail"
+                            type="email"
+                            placeholder="company@example.com"
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="companyAddress">
+                            Address
+                        </label>
+
+                        <input
+                            id="companyAddress"
+                            type="text"
+                            placeholder="Company address"
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="companyLogo">
+                            Logo URL
+                        </label>
+
+                        <input
+                            id="companyLogo"
+                            type="url"
+                            placeholder="https://..."
+                        >
+
+                        <div
+                            id="companyLogoPreview"
+                            class="logo-preview"
+                        >
+                            Logo Preview
+                        </div>
+
+                    </div>
+
+                    <div class="form-group full">
+
+                        <label for="companyDescription">
+                            Company Description
+                        </label>
+
+                        <textarea
+                            id="companyDescription"
+                            placeholder="Tell customers about the company..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button
+                        id="saveCompanyButton"
+                        class="primary-button"
+                        type="submit"
+                    >
+                        Save Company Settings
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- ADD PROPERTY -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2 id="propertyFormTitle">
+                        Add Property
+                    </h2>
+
+                    <p>
+                        Add or update a property on your website.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <form id="propertyForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="propertyTitle">
+                            Property Title
+                        </label>
+
+                        <input
+                            id="propertyTitle"
+                            type="text"
+                            placeholder="Beautiful 3 Bedroom House"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="propertyType">
+                            Property Type
+                        </label>
+
+                        <select
+                            id="propertyType"
+                            required
+                        >
+
+                            <option value="">
+                                Select type
+                            </option>
+
+                            <option value="House">
+                                House
+                            </option>
+
+                            <option value="Apartment">
+                                Apartment
+                            </option>
+
+                            <option value="Duplex">
+                                Duplex
+                            </option>
+
+                            <option value="Land">
+                                Land
+                            </option>
+
+                            <option value="Office">
+                                Office
+                            </option>
+
+                            <option value="Shop">
+                                Shop
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="propertyStatus">
+                            Status
+                        </label>
+
+                        <select
+                            id="propertyStatus"
+                            required
+                        >
+
+                            <option value="available">
+                                Available
+                            </option>
+
+                            <option value="sold">
+                                Sold
+                            </option>
+
+                            <option value="rented">
+                                Rented
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="propertyPurpose">
+                            Purpose
+                        </label>
+
+                        <select
+                            id="propertyPurpose"
+                            required
+                        >
+
+                            <option value="sale">
+                                For Sale
+                            </option>
+
+                            <option value="rent">
+                                For Rent
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="propertyLocation">
+                            Location
+                        </label>
+
+                        <input
+                            id="propertyLocation"
+                            type="text"
+                            placeholder="Kano, Nigeria"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="propertyPrice">
+                            Price
+                        </label>
+
+                        <input
+                            id="propertyPrice"
+                            type="number"
+                            min="0"
+                            placeholder="45000000"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="propertyBedrooms">
+                            Bedrooms
+                        </label>
+
+                        <input
+                            id="propertyBedrooms"
+                            type="number"
+                            min="0"
+                            max="20"
+                            value="0"
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="propertyBathrooms">
+                            Bathrooms
+                        </label>
+
+                        <input
+                            id="propertyBathrooms"
+                            type="number"
+                            min="0"
+                            max="20"
+                            value="0"
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="propertyArea">
+                            Area
+                        </label>
+
+                        <input
+                            id="propertyArea"
+                            type="text"
+                            placeholder="500 sqm"
+                        >
+
+                    </div>
+
+
+                    <!-- IMAGE 1 -->
+
+                    <div class="form-group">
+
+                        <div class="image-input-wrap">
+
+                            <label
+                                class="image-input-label"
+                                for="propertyImage1"
+                            >
+                                Property Image 1
+                            </label>
+
+                            <input
+                                id="propertyImage1"
+                                class="image-input"
+                                type="url"
+                                placeholder="https://image-url-1.jpg"
+                                autocomplete="off"
+                            >
+
+                            <div
+                                id="propertyImagePreview1"
+                                class="image-preview"
+                            >
+                                Image 1 Preview
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE 2 -->
+
+                    <div class="form-group">
+
+                        <div class="image-input-wrap">
+
+                            <label
+                                class="image-input-label"
+                                for="propertyImage2"
+                            >
+                                Property Image 2
+                            </label>
+
+                            <input
+                                id="propertyImage2"
+                                class="image-input"
+                                type="url"
+                                placeholder="https://image-url-2.jpg"
+                                autocomplete="off"
+                            >
+
+                            <div
+                                id="propertyImagePreview2"
+                                class="image-preview"
+                            >
+                                Image 2 Preview
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE 3 -->
+
+                    <div class="form-group">
+
+                        <div class="image-input-wrap">
+
+                            <label
+                                class="image-input-label"
+                                for="propertyImage3"
+                            >
+                                Property Image 3
+                            </label>
+
+                            <input
+                                id="propertyImage3"
+                                class="image-input"
+                                type="url"
+                                placeholder="https://image-url-3.jpg"
+                                autocomplete="off"
+                            >
+
+                            <div
+                                id="propertyImagePreview3"
+                                class="image-preview"
+                            >
+                                Image 3 Preview
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE 4 -->
+
+                    <div class="form-group">
+
+                        <div class="image-input-wrap">
+
+                            <label
+                                class="image-input-label"
+                                for="propertyImage4"
+                            >
+                                Property Image 4
+                            </label>
+
+                            <input
+                                id="propertyImage4"
+                                class="image-input"
+                                type="url"
+                                placeholder="https://image-url-4.jpg"
+                                autocomplete="off"
+                            >
+
+                            <div
+                                id="propertyImagePreview4"
+                                class="image-preview"
+                            >
+                                Image 4 Preview
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE 5 -->
+
+                    <div class="form-group">
+
+                        <div class="image-input-wrap">
+
+                            <label
+                                class="image-input-label"
+                                for="propertyImage5"
+                            >
+                                Property Image 5
+                            </label>
+
+                            <input
+                                id="propertyImage5"
+                                class="image-input"
+                                type="url"
+                                placeholder="https://image-url-5.jpg"
+                                autocomplete="off"
+                            >
+
+                            <div
+                                id="propertyImagePreview5"
+                                class="image-preview"
+                            >
+                                Image 5 Preview
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label for="propertyDescription">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="propertyDescription"
+                            placeholder="Describe this property..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="checkbox-row">
+
+                    <input
+                        id="propertyFeatured"
+                        type="checkbox"
+                    >
+
+                    <label for="propertyFeatured">
+                        Mark as Featured Property
+                    </label>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        id="savePropertyButton"
+                        class="primary-button"
+                        type="submit"
+                    >
+                        Save Property
+                    </button>
+
+                    <button
+                        id="cancelPropertyButton"
+                        class="secondary-button hidden"
+                        type="button"
+                    >
+                        Cancel Edit
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- PROPERTIES -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Properties
+                    </h2>
+
+                    <p>
+                        Manage all properties belonging to this company.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="property-toolbar">
+
+                <input
+                    id="propertySearch"
+                    type="search"
+                    placeholder="Search title, location, type..."
+                >
+
+                <select id="filterStatus">
+
+                    <option value="">
+                        All Status
+                    </option>
+
+                    <option value="available">
+                        Available
+                    </option>
+
+                    <option value="sold">
+                        Sold
+                    </option>
+
+                    <option value="rented">
+                        Rented
+                    </option>
+
+                </select>
+
+                <select id="filterType">
+
+                    <option value="">
+                        All Types
+                    </option>
+
+                    <option value="House">
+                        House
+                    </option>
+
+                    <option value="Apartment">
+                        Apartment
+                    </option>
+
+                    <option value="Duplex">
+                        Duplex
+                    </option>
+
+                    <option value="Land">
+                        Land
+                    </option>
+
+                    <option value="Office">
+                        Office
+                    </option>
+
+                    <option value="Shop">
+                        Shop
+                    </option>
+
+                </select>
+
+                <select id="filterPurpose">
+
+                    <option value="">
+                        All Purpose
+                    </option>
+
+                    <option value="sale">
+                        Sale
+                    </option>
+
+                    <option value="rent">
+                        Rent
+                    </option>
+
+                </select>
+
+                <select id="filterFeatured">
+
+                    <option value="">
+                        All Properties
+                    </option>
+
+                    <option value="featured">
+                        Featured
+                    </option>
+
+                    <option value="normal">
+                        Normal
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                id="propertiesList"
+                class="properties-list"
+            >
+
+                <div class="loading">
+
+                    <div class="spinner"></div>
+
+                    Loading properties...
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="footer">
+
+            EstatePro Admin Panel
+
+        </footer>
+
+    </main>
+
 </div>
 
 
-<div class="form-row">
-
-
-<div class="form-group">
-
-<label>
-Property Type
-</label>
-
-<select id="propertyType">
-
-<option value="House">
-House
-</option>
-
-<option value="Apartment">
-Apartment
-</option>
-
-<option value="Duplex">
-Duplex
-</option>
-
-<option value="Land">
-Land
-</option>
-
-<option value="Office">
-Office
-</option>
-
-<option value="Shop">
-Shop
-</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Status
-</label>
-
-<select id="propertyStatus">
-
-<option value="available">
-Available
-</option>
-
-<option value="sold">
-Sold
-</option>
-
-<option value="rented">
-Rented
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Purpose
-</label>
-
-<select id="propertyPurpose">
-
-<option value="sale">
-For Sale
-</option>
-
-<option value="rent">
-For Rent
-</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Location
-</label>
-
-<input
-id="propertyLocation"
-type="text"
-placeholder="Kano, Nigeria"
-required
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Price
-</label>
-
-<input
-id="propertyPrice"
-type="text"
-placeholder="25000000"
-required
->
-
-</div>
-
-
-<div class="form-row">
-
-
-<div class="form-group">
-
-<label>
-Bedrooms
-</label>
-
-<input
-id="propertyBedrooms"
-type="number"
-min="0"
-max="20"
-value="0"
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Bathrooms
-</label>
-
-<input
-id="propertyBathrooms"
-type="number"
-min="0"
-max="20"
-value="0"
->
-
-</div>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Area
-</label>
-
-<input
-id="propertyArea"
-type="text"
-placeholder="e.g. 1200 sqm"
->
-
-</div>
-
-
-<!-- FIVE IMAGES -->
-
-<div class="image-section">
-
-<div class="image-section-title">
-Property Photos
-</div>
-
-<div class="image-section-note">
-Add up to 5 photos. Image 1 will be used as the main property image.
-</div>
-
-
-<div class="image-input-group">
-
-<label for="propertyImage1">
-Image 1 — Main Photo
-</label>
-
-<div class="image-input-wrap">
-
-<input
-id="propertyImage1"
-type="url"
-placeholder="https://..."
->
+<!-- =========================================================
+     DELETE MODAL
+========================================================= -->
 
 <div
-id="propertyImagePreview1"
-class="image-preview"
->
-<span>Preview</span>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="image-input-group">
-
-<label for="propertyImage2">
-Image 2
-</label>
-
-<div class="image-input-wrap">
-
-<input
-id="propertyImage2"
-type="url"
-placeholder="https://..."
+    id="deleteModal"
+    class="modal"
 >
 
-<div
-id="propertyImagePreview2"
-class="image-preview"
->
-<span>Preview</span>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="image-input-group">
-
-<label for="propertyImage3">
-Image 3
-</label>
-
-<div class="image-input-wrap">
-
-<input
-id="propertyImage3"
-type="url"
-placeholder="https://..."
->
-
-<div
-id="propertyImagePreview3"
-class="image-preview"
->
-<span>Preview</span>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="image-input-group">
-
-<label for="propertyImage4">
-Image 4
-</label>
-
-<div class="image-input-wrap">
-
-<input
-id="propertyImage4"
-type="url"
-placeholder="https://..."
->
-
-<div
-id="propertyImagePreview4"
-class="image-preview"
->
-<span>Preview</span>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="image-input-group">
-
-<label for="propertyImage5">
-Image 5
-</label>
-
-<div class="image-input-wrap">
-
-<input
-id="propertyImage5"
-type="url"
-placeholder="https://..."
->
-
-<div
-id="propertyImagePreview5"
-class="image-preview"
->
-<span>Preview</span>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Description
-</label>
-
-<textarea
-id="propertyDescription"
-placeholder="Property description..."
-></textarea>
-
-</div>
-
-
-<div class="checkbox-row">
-
-<input
-id="propertyFeatured"
-type="checkbox"
->
-
-<label for="propertyFeatured">
-Featured Property
-</label>
-
-</div>
-
-
-<button
-id="savePropertyButton"
-class="primary-button"
-type="submit"
->
-Add Property
-</button>
-
-
-<button
-id="cancelEditButton"
-class="cancel-edit-button hidden"
-type="button"
->
-Cancel Edit
-</button>
-
-
-</form>
-
-</section>
-
-
-<!-- COMPANY SETTINGS -->
-
-<section class="card">
-
-<h2>
-Company Settings
-</h2>
-
-
-<div
-id="companyMessage"
-class="message"
-></div>
-
-
-<form id="companyForm">
-
-
-<div class="form-group">
-
-<label>
-Company Name
-</label>
-
-<input
-id="companyName"
-type="text"
-placeholder="Company Name"
-required
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Company Logo URL
-</label>
-
-<input
-id="companyLogo"
-type="url"
-placeholder="https://..."
->
-
-</div>
-
-
-<div class="logo-preview">
-
-<img
-id="companyLogoPreview"
-src=""
-alt="Company Logo"
-class="hidden"
->
-
-<span id="logoPlaceholder">
-No logo
-</span>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Phone
-</label>
-
-<input
-id="companyPhone"
-type="text"
-placeholder="+234..."
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-WhatsApp
-</label>
-
-<input
-id="companyWhatsApp"
-type="text"
-placeholder="+234..."
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Email
-</label>
-
-<input
-id="companyEmail"
-type="email"
-placeholder="info@example.com"
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Address
-</label>
-
-<textarea
-id="companyAddress"
-placeholder="Company address..."
-></textarea>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Description
-</label>
-
-<textarea
-id="companyDescription"
-placeholder="About the company..."
-></textarea>
-
-</div>
-
-
-<button
-id="saveCompanyButton"
-class="primary-button"
-type="submit"
->
-Save Company Settings
-</button>
-
-</form>
-
-</section>
-
-</div>
-
-
-<!-- RIGHT -->
-
-<div>
-
-<section class="card">
-
-<h2>
-Properties
-</h2>
-
-
-<input
-id="propertySearch"
-class="search-input"
-type="search"
-placeholder="Search your properties..."
->
-
-
-<div id="propertiesList">
-
-<div class="loading">
-Loading properties...
-</div>
-
-</div>
-
-</section>
-
-</div>
-
-</div>
-
-</main>
-
-</div>
-
-
-<!-- RENEW MODAL -->
-
-<div
-id="renewModal"
-class="modal"
->
-
-<div class="modal-box">
-
-<h2>
-Renew Subscription
-</h2>
-
-<p>
-Your current EstatePro plan is
-<strong id="renewPlanName">--</strong>.
-</p>
-
-
-<div
-id="renewCurrentStatus"
-class="message show warning"
->
-Checking subscription...
-</div>
-
-
-<p>
-Subscription price:
-<strong id="renewAmount">
---
-</strong>
-</p>
-
-
-<div
-id="renewModalMessage"
-class="message"
-></div>
-
-
-<div class="modal-buttons">
-
-<button
-id="cancelRenewButton"
-class="modal-cancel"
-type="button"
->
-Cancel
-</button>
-
-
-<button
-id="startPaymentButton"
-class="modal-renew"
-type="button"
->
-Continue
-</button>
-
-</div>
-
-</div>
+    <div class="modal-box">
+
+        <button
+            id="closeDeleteModal"
+            class="modal-close"
+            type="button"
+        >
+            ×
+        </button>
+
+        <h2>
+            Delete Property?
+        </h2>
+
+        <p>
+            This action will permanently remove this
+            property from this company's Firestore collection.
+        </p>
+
+        <div id="deletePropertyName"></div>
+
+        <div class="modal-actions">
+
+            <button
+                id="cancelDelete"
+                class="secondary-button"
+                type="button"
+            >
+                Cancel
+            </button>
+
+            <button
+                id="confirmDelete"
+                class="primary-button"
+                type="button"
+            >
+                Delete Property
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
 
 <script type="module">
 
-
-/* =====================================================
+/* =========================================================
    FIREBASE IMPORTS
-===================================================== */
+========================================================= */
 
 import {
     initializeApp
 }
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    collection,
+    getDocs,
+    serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 import {
     getAuth,
@@ -1938,88 +2260,57 @@ import {
     onAuthStateChanged,
     signOut
 }
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
-import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc,
-    collection,
-    addDoc,
-    getDocs,
-    deleteDoc,
-    updateDoc,
-    serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-
-/* =====================================================
+/* =========================================================
    FIREBASE CONFIG
-===================================================== */
+========================================================= */
 
 const firebaseConfig = {
 
     apiKey:
-    "AIzaSyAE44DxNnqz3m8ScqaZxoSj2FdQ7aJ2NIg",
+        "AIzaSyAE44DxNnqz3m8ScqaZxoSj2FdQ7aJ2NIg",
 
     authDomain:
-    "estate-pro-d564b.firebaseapp.com",
+        "estate-pro-d564b.firebaseapp.com",
 
     projectId:
-    "estate-pro-d564b",
+        "estate-pro-d564b",
 
     storageBucket:
-    "estate-pro-d564b.firebasestorage.app",
+        "estate-pro-d564b.firebasestorage.app",
 
     messagingSenderId:
-    "600309829118",
+        "600309829118",
 
     appId:
-    "1:600309829118:web:60c61624ca8cdf05e884af",
+        "1:600309829118:web:60c61624ca8cdf05e884af",
 
     measurementId:
-    "G-TG60FCJHXB"
+        "G-TG60FCJHXB"
 
 };
 
 
-/* =====================================================
+/* =========================================================
    INITIALIZE
-===================================================== */
+========================================================= */
 
-const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
+const firebaseApp =
+    initializeApp(firebaseConfig);
 
 const db =
-getFirestore(app);
+    getFirestore(firebaseApp);
+
+const auth =
+    getAuth(firebaseApp);
 
 
-/* =====================================================
-   COLLECTIONS
-===================================================== */
-
-const ADMINS_COLLECTION =
-"admins";
-
-const COMPANIES_COLLECTION =
-"companies";
-
-const PROPERTIES_SUBCOLLECTION =
-"properties";
-
-const SUBSCRIPTIONS_COLLECTION =
-"subscriptions";
-
-
-/* =====================================================
+/* =========================================================
    STATE
-===================================================== */
+========================================================= */
 
 let currentUser = null;
 
@@ -2033,965 +2324,807 @@ let allProperties = [];
 
 let editingPropertyId = null;
 
+let propertyToDelete = null;
 
-/* =====================================================
+
+/* =========================================================
    DOM
-===================================================== */
+========================================================= */
 
 const loginScreen =
-document.getElementById("loginScreen");
+    document.getElementById("loginScreen");
 
-const adminApp =
-document.getElementById("adminApp");
+const adminScreen =
+    document.getElementById("adminScreen");
 
 const loginForm =
-document.getElementById("loginForm");
+    document.getElementById("loginForm");
+
+const loginEmail =
+    document.getElementById("loginEmail");
+
+const loginPassword =
+    document.getElementById("loginPassword");
 
 const loginButton =
-document.getElementById("loginButton");
+    document.getElementById("loginButton");
 
-const logoutButton =
-document.getElementById("logoutButton");
+const loginMessage =
+    document.getElementById("loginMessage");
 
-const refreshButton =
-document.getElementById("refreshButton");
-
-const propertyForm =
-document.getElementById("propertyForm");
-
-const companyForm =
-document.getElementById("companyForm");
-
-const propertiesList =
-document.getElementById("propertiesList");
-
-const propertySearch =
-document.getElementById("propertySearch");
-
-const savePropertyButton =
-document.getElementById("savePropertyButton");
-
-const cancelEditButton =
-document.getElementById("cancelEditButton");
-
-const propertyFormTitle =
-document.getElementById("propertyFormTitle");
-
-const renewModal =
-document.getElementById("renewModal");
-
-const renewSubscriptionButton =
-document.getElementById("renewSubscriptionButton");
-
-const cancelRenewButton =
-document.getElementById("cancelRenewButton");
-
-const startPaymentButton =
-document.getElementById("startPaymentButton");
+const message =
+    document.getElementById("message");
 
 
-/* =====================================================
+/* =========================================================
    MESSAGE
-===================================================== */
+========================================================= */
 
-function showMessage(id,text,type="success"){
+function showMessage(
+    text,
+    type = "success"
+){
 
-    const element =
-    document.getElementById(id);
+    message.textContent = text;
 
-    if(!element){
-        return;
-    }
+    message.className =
+        "message " + type;
 
-    element.textContent =
-    text;
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
-    element.className =
-    "message show " + type;
+}
+
+function clearMessage(){
+
+    message.className =
+        "message hidden";
+
+    message.textContent =
+        "";
 
 }
 
 
-function clearMessage(id){
+/* =========================================================
+   LOGIN MESSAGE
+========================================================= */
 
-    const element =
-    document.getElementById(id);
+function showLoginMessage(
+    text,
+    type = "error"
+){
 
-    if(!element){
-        return;
-    }
+    loginMessage.textContent =
+        text;
 
-    element.textContent =
-    "";
-
-    element.className =
-    "message";
+    loginMessage.className =
+        "message " + type;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ESCAPE HTML
-===================================================== */
+========================================================= */
 
 function escapeHTML(value){
 
     return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
 
-/* =====================================================
+/* =========================================================
    FIREBASE ERROR
-===================================================== */
+========================================================= */
 
 function firebaseError(error){
 
-    const code =
-    error?.code || "";
+    console.error(
+        "Firebase error:",
+        error
+    );
 
-    switch(code){
-
-        case "auth/invalid-credential":
-            return "Email or password is incorrect.";
-
-        case "auth/invalid-login-credentials":
-            return "Email or password is incorrect.";
-
-        case "auth/user-not-found":
-            return "No account exists with this email.";
-
-        case "auth/wrong-password":
-            return "Incorrect password.";
-
-        case "auth/invalid-email":
-            return "Invalid email address.";
-
-        case "auth/network-request-failed":
-            return "Network error. Check your internet connection.";
-
-        case "auth/too-many-requests":
-            return "Too many attempts. Please wait.";
-
-        case "permission-denied":
-        case "firestore/permission-denied":
-            return "Firebase permission denied. Check Firestore rules.";
-
-        default:
-            return error?.message ||
-            "Something went wrong.";
-
-    }
+    return (
+        error?.message ||
+        "Something went wrong."
+    );
 
 }
 
 
-/* =====================================================
-   ADMIN PROFILE
-===================================================== */
+/* =========================================================
+   URL COMPANY ID
+========================================================= */
 
-async function loadAdminProfile(user){
+function getRequestedCompanyId(){
 
-    const adminRef =
-    doc(
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const id =
+        params.get("companyId");
+
+    if(
+        id &&
+        id.trim()
+    ){
+
+        return id.trim();
+
+    }
+
+    return null;
+
+}
+
+
+/* =========================================================
+   COMPANY REFERENCES
+========================================================= */
+
+function getCompanyRef(){
+
+    return doc(
         db,
-        ADMINS_COLLECTION,
-        user.uid
+        "companies",
+        currentCompanyId
     );
 
+}
+
+function getPropertiesRef(){
+
+    return collection(
+        db,
+        "companies",
+        currentCompanyId,
+        "properties"
+    );
+
+}
+
+function getSubscriptionRef(){
+
+    return doc(
+        db,
+        "subscriptions",
+        currentCompanyId
+    );
+
+}
+
+
+/* =========================================================
+   LOAD ADMIN PROFILE
+========================================================= */
+
+async function loadAdminProfile(){
+
+    if(!currentUser){
+
+        throw new Error(
+            "You must be logged in."
+        );
+
+    }
+
+
+    const adminRef =
+        doc(
+            db,
+            "admins",
+            currentUser.uid
+        );
+
     const snapshot =
-    await getDoc(adminRef);
+        await getDoc(
+            adminRef
+        );
+
 
     if(!snapshot.exists()){
 
         throw new Error(
-            "This admin account has no company profile."
+            "Your account is not registered as an administrator."
         );
 
     }
 
+
     const data =
-    snapshot.data();
+        snapshot.data();
+
 
     const companyId =
-    String(
-        data.companyId || ""
-    ).trim();
+        String(
+            data.companyId || ""
+        ).trim();
+
 
     if(!companyId){
 
         throw new Error(
-            "This admin account has no companyId."
+            "Your administrator account does not have a companyId."
         );
 
     }
+
+
+    const requestedId =
+        getRequestedCompanyId();
+
+
+    /*
+       Company Admin may only access
+       their own company.
+    */
+
+    if(
+        requestedId &&
+        requestedId !== companyId
+    ){
+
+        throw new Error(
+            "Access denied. This company does not belong to your account."
+        );
+
+    }
+
 
     currentCompanyId =
-    companyId;
-
-    return data;
+        companyId;
 
 }
 
 
-/* =====================================================
-   COMPANY REF
-===================================================== */
-
-function getCompanyRef(){
-
-    if(!currentCompanyId){
-
-        throw new Error(
-            "Company ID is not available."
-        );
-
-    }
-
-    return doc(
-        db,
-        COMPANIES_COLLECTION,
-        currentCompanyId
-    );
-
-}
-
-
-/* =====================================================
-   PROPERTIES REF
-===================================================== */
-
-function getPropertiesRef(){
-
-    if(!currentCompanyId){
-
-        throw new Error(
-            "Company ID is not available."
-        );
-
-    }
-
-    return collection(
-        db,
-        COMPANIES_COLLECTION,
-        currentCompanyId,
-        PROPERTIES_SUBCOLLECTION
-    );
-
-}
-
-
-/* =====================================================
-   SUBSCRIPTION REF
-===================================================== */
-
-function getSubscriptionRef(){
-
-    if(!currentCompanyId){
-
-        throw new Error(
-            "Company ID is not available."
-        );
-
-    }
-
-    return doc(
-        db,
-        SUBSCRIPTIONS_COLLECTION,
-        currentCompanyId
-    );
-
-}
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-loginForm.addEventListener(
-"submit",
-async event=>{
-
-    event.preventDefault();
-
-    clearMessage("loginMessage");
-
-    const email =
-    document
-    .getElementById("email")
-    .value
-    .trim();
-
-    const password =
-    document
-    .getElementById("password")
-    .value;
-
-    if(!email || !password){
-
-        showMessage(
-            "loginMessage",
-            "Enter your email and password.",
-            "error"
-        );
-
-        return;
-
-    }
-
-    loginButton.disabled =
-    true;
-
-    loginButton.textContent =
-    "Logging in...";
-
-    try{
-
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Login error:",
-            error
-        );
-
-        showMessage(
-            "loginMessage",
-            firebaseError(error),
-            "error"
-        );
-
-    }
-
-    finally{
-
-        loginButton.disabled =
-        false;
-
-        loginButton.textContent =
-        "Login";
-
-    }
-
-});
-
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
-
-onAuthStateChanged(
-auth,
-async user=>{
-
-    if(!user){
-
-        currentUser =
-        null;
-
-        currentCompanyId =
-        null;
-
-        currentCompany =
-        null;
-
-        currentSubscription =
-        null;
-
-        allProperties =
-        [];
-
-        editingPropertyId =
-        null;
-
-        loginScreen.style.display =
-        "flex";
-
-        adminApp.style.display =
-        "none";
-
-        return;
-
-    }
-
-    currentUser =
-    user;
-
-    try{
-
-        await loadAdminProfile(user);
-
-        await loadCompanySettings();
-
-        await loadSubscription();
-
-        await loadProperties();
-
-        loginScreen.style.display =
-        "none";
-
-        adminApp.style.display =
-        "block";
-
-        document.getElementById(
-            "adminWelcome"
-        ).textContent =
-        "Logged in as " +
-        user.email;
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Startup error:",
-            error
-        );
-
-        showMessage(
-            "loginMessage",
-            firebaseError(error),
-            "error"
-        );
-
-        await signOut(auth);
-
-    }
-
-});
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-logoutButton.addEventListener(
-"click",
-async()=>{
-
-    try{
-
-        await signOut(auth);
-
-    }
-
-    catch(error){
-
-        alert(
-            firebaseError(error)
-        );
-
-    }
-
-});
-
-
-/* =====================================================
+/* =========================================================
    LOAD COMPANY
-===================================================== */
+========================================================= */
 
-async function loadCompanySettings(){
+async function loadCompany(){
 
     const snapshot =
-    await getDoc(
-        getCompanyRef()
-    );
+        await getDoc(
+            getCompanyRef()
+        );
+
 
     if(!snapshot.exists()){
 
         currentCompany = {};
 
-        updateCompanyUI(
-            currentCompany
-        );
-
-        fillCompanyForm(
-            currentCompany
-        );
+        updateCompanyUI();
 
         return;
 
     }
 
+
     currentCompany =
-    snapshot.data();
+        snapshot.data();
 
-    updateCompanyUI(
-        currentCompany
-    );
 
-    fillCompanyForm(
-        currentCompany
-    );
+    updateCompanyUI();
+
+    fillCompanyForm();
 
 }
 
 
-/* =====================================================
+/* =========================================================
    COMPANY UI
-===================================================== */
+========================================================= */
 
-function updateCompanyUI(data){
+function updateCompanyUI(){
 
     const name =
-    data.name ||
-    data.companyName ||
-    "EstatePro";
+        currentCompany?.name ||
+        currentCompany?.companyName ||
+        currentCompanyId ||
+        "EstatePro";
 
-    document.getElementById(
-        "headerCompanyName"
-    ).textContent =
-    name;
 
-    document.getElementById(
-        "companyDisplayName"
-    ).textContent =
-    name;
+    document
+        .getElementById("brandName")
+        .textContent =
+            name;
 
-    document.getElementById(
-        "companyIdDisplay"
-    ).textContent =
-    "Company ID: " +
-    currentCompanyId;
 
-    document.getElementById(
-        "subscriptionCompany"
-    ).textContent =
-    currentCompanyId;
+    document
+        .getElementById("companyTitle")
+        .textContent =
+            name;
 
-    const avatar =
-    document.getElementById(
-        "companyAvatar"
-    );
+
+    document
+        .getElementById("companyId")
+        .textContent =
+            "Company ID: " +
+            currentCompanyId;
+
 
     const logo =
-    data.logo ||
-    data.companyLogo ||
-    "";
+        currentCompany?.logo ||
+        currentCompany?.companyLogo ||
+        "";
+
+
+    const icon =
+        document.getElementById(
+            "brandIcon"
+        );
+
+
+    const loginLogo =
+        document.getElementById(
+            "loginLogo"
+        );
+
 
     if(logo){
 
-        avatar.innerHTML =
-        `
-        <img
-        src="${escapeHTML(logo)}"
-        alt="${escapeHTML(name)}"
-        >
-        `;
+        icon.innerHTML = "";
 
-    }
+        const img =
+            document.createElement("img");
 
-    else{
+        img.src =
+            logo;
 
-        avatar.textContent =
-        name
-        .charAt(0)
-        .toUpperCase();
+        img.alt =
+            name;
+
+        icon.appendChild(img);
+
+
+        loginLogo.innerHTML = "";
+
+        const loginImg =
+            document.createElement("img");
+
+        loginImg.src =
+            logo;
+
+        loginImg.alt =
+            name;
+
+        loginLogo.appendChild(
+            loginImg
+        );
+
+    }else{
+
+        const first =
+            name
+                .charAt(0)
+                .toUpperCase() ||
+            "E";
+
+        icon.textContent =
+            first;
+
+        loginLogo.textContent =
+            first;
 
     }
 
 }
 
 
-/* =====================================================
-   COMPANY FORM
-===================================================== */
+/* =========================================================
+   FILL COMPANY FORM
+========================================================= */
 
-function fillCompanyForm(data){
-
-    document.getElementById(
-        "companyName"
-    ).value =
-    data.name ||
-    data.companyName ||
-    "";
+function fillCompanyForm(){
 
     document.getElementById(
-        "companyLogo"
+        "companyNameInput"
     ).value =
-    data.logo ||
-    data.companyLogo ||
-    "";
+        currentCompany?.name ||
+        currentCompany?.companyName ||
+        "";
+
 
     document.getElementById(
         "companyPhone"
     ).value =
-    data.phone ||
-    data.companyPhone ||
-    "";
+        currentCompany?.phone ||
+        "";
+
 
     document.getElementById(
         "companyWhatsApp"
     ).value =
-    data.whatsapp ||
-    data.companyWhatsApp ||
-    "";
+        currentCompany?.whatsapp ||
+        currentCompany?.whatsApp ||
+        "";
+
 
     document.getElementById(
         "companyEmail"
     ).value =
-    data.email ||
-    data.companyEmail ||
-    "";
+        currentCompany?.email ||
+        "";
+
 
     document.getElementById(
         "companyAddress"
     ).value =
-    data.address ||
-    data.companyAddress ||
-    "";
+        currentCompany?.address ||
+        "";
+
+
+    document.getElementById(
+        "companyLogo"
+    ).value =
+        currentCompany?.logo ||
+        currentCompany?.companyLogo ||
+        "";
+
 
     document.getElementById(
         "companyDescription"
     ).value =
-    data.description ||
-    data.companyDescription ||
-    "";
+        currentCompany?.description ||
+        "";
 
-    updateLogoPreview(
-        data.logo ||
-        data.companyLogo ||
-        ""
-    );
+
+    updateLogoPreview();
 
 }
 
 
-/* =====================================================
+/* =========================================================
    LOGO PREVIEW
-===================================================== */
+========================================================= */
 
-function updateLogoPreview(url){
+function updateLogoPreview(){
 
-    const image =
-    document.getElementById(
-        "companyLogoPreview"
-    );
+    const input =
+        document.getElementById(
+            "companyLogo"
+        );
 
-    const placeholder =
-    document.getElementById(
-        "logoPlaceholder"
-    );
+    const preview =
+        document.getElementById(
+            "companyLogoPreview"
+        );
+
+
+    const url =
+        input.value.trim();
+
 
     if(!url){
 
-        image.classList.add(
-            "hidden"
-        );
-
-        placeholder.classList.remove(
-            "hidden"
-        );
+        preview.innerHTML =
+            "Logo Preview";
 
         return;
 
     }
 
-    image.src =
-    url;
 
-    image.classList.remove(
-        "hidden"
-    );
+    preview.innerHTML = "";
 
-    placeholder.classList.add(
-        "hidden"
+
+    const img =
+        document.createElement("img");
+
+
+    img.src =
+        url;
+
+
+    img.alt =
+        "Company Logo";
+
+
+    img.onerror = () => {
+
+        preview.innerHTML =
+            "Invalid logo URL";
+
+    };
+
+
+    preview.appendChild(
+        img
     );
 
 }
 
 
-document.getElementById(
-"companyLogo"
-).addEventListener(
-"input",
-event=>{
-
-    updateLogoPreview(
-        event.target.value.trim()
+document
+    .getElementById("companyLogo")
+    .addEventListener(
+        "input",
+        updateLogoPreview
     );
 
-});
 
-
-/* =====================================================
+/* =========================================================
    SAVE COMPANY
-===================================================== */
+========================================================= */
 
-companyForm.addEventListener(
-"submit",
-async event=>{
+document
+    .getElementById("companyForm")
+    .addEventListener(
+        "submit",
+        async event => {
 
-    event.preventDefault();
+            event.preventDefault();
 
-    const button =
-    document.getElementById(
-        "saveCompanyButton"
-    );
+            clearMessage();
 
-    clearMessage(
-        "companyMessage"
-    );
 
-    button.disabled =
-    true;
+            const button =
+                document.getElementById(
+                    "saveCompanyButton"
+                );
 
-    button.textContent =
-    "Saving...";
 
-    try{
+            const companyData = {
 
-        const data = {
+                name:
+                    document
+                        .getElementById(
+                            "companyNameInput"
+                        )
+                        .value
+                        .trim(),
 
-            name:
-            document.getElementById(
-                "companyName"
-            ).value.trim(),
+                phone:
+                    document
+                        .getElementById(
+                            "companyPhone"
+                        )
+                        .value
+                        .trim(),
 
-            logo:
-            document.getElementById(
-                "companyLogo"
-            ).value.trim(),
+                whatsapp:
+                    document
+                        .getElementById(
+                            "companyWhatsApp"
+                        )
+                        .value
+                        .trim(),
 
-            phone:
-            document.getElementById(
-                "companyPhone"
-            ).value.trim(),
+                email:
+                    document
+                        .getElementById(
+                            "companyEmail"
+                        )
+                        .value
+                        .trim(),
 
-            whatsapp:
-            document.getElementById(
-                "companyWhatsApp"
-            ).value.trim(),
+                address:
+                    document
+                        .getElementById(
+                            "companyAddress"
+                        )
+                        .value
+                        .trim(),
 
-            email:
-            document.getElementById(
-                "companyEmail"
-            ).value.trim(),
+                logo:
+                    document
+                        .getElementById(
+                            "companyLogo"
+                        )
+                        .value
+                        .trim(),
 
-            address:
-            document.getElementById(
-                "companyAddress"
-            ).value.trim(),
+                description:
+                    document
+                        .getElementById(
+                            "companyDescription"
+                        )
+                        .value
+                        .trim(),
 
-            description:
-            document.getElementById(
-                "companyDescription"
-            ).value.trim(),
+                updatedAt:
+                    serverTimestamp()
 
-            updatedAt:
-            serverTimestamp()
+            };
 
-        };
 
-        await setDoc(
-            getCompanyRef(),
-            data,
-            {
-                merge:true
+            if(!companyData.name){
+
+                showMessage(
+                    "Please enter company name.",
+                    "error"
+                );
+
+                return;
+
             }
-        );
-
-        currentCompany = {
-            ...currentCompany,
-            ...data
-        };
-
-        updateCompanyUI(
-            currentCompany
-        );
-
-        showMessage(
-            "companyMessage",
-            "Company settings saved successfully.",
-            "success"
-        );
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Company save:",
-            error
-        );
-
-        showMessage(
-            "companyMessage",
-            firebaseError(error),
-            "error"
-        );
-
-    }
-
-    finally{
-
-        button.disabled =
-        false;
-
-        button.textContent =
-        "Save Company Settings";
-
-    }
-
-});
 
 
-/* =====================================================
+            button.disabled =
+                true;
+
+            button.textContent =
+                "Saving...";
+
+
+            try{
+
+                await setDoc(
+                    getCompanyRef(),
+                    companyData,
+                    {
+                        merge:true
+                    }
+                );
+
+
+                currentCompany =
+                    {
+                        ...currentCompany,
+                        ...companyData
+                    };
+
+
+                updateCompanyUI();
+
+                showMessage(
+                    "Company settings saved successfully.",
+                    "success"
+                );
+
+            }
+
+            catch(error){
+
+                showMessage(
+                    firebaseError(error),
+                    "error"
+                );
+
+            }
+
+            finally{
+
+                button.disabled =
+                    false;
+
+                button.textContent =
+                    "Save Company Settings";
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
    LOAD SUBSCRIPTION
-===================================================== */
+========================================================= */
 
 async function loadSubscription(){
 
     const snapshot =
-    await getDoc(
-        getSubscriptionRef()
-    );
+        await getDoc(
+            getSubscriptionRef()
+        );
+
+
+    const statusElement =
+        document.getElementById(
+            "subscriptionStatus"
+        );
+
 
     if(!snapshot.exists()){
 
         currentSubscription =
-        null;
+            null;
 
-        renderNoSubscription();
+
+        statusElement.className =
+            "subscription-status expired";
+
+        statusElement.textContent =
+            "● No Subscription";
+
+
+        document.getElementById(
+            "subscriptionPlan"
+        ).textContent =
+            "Not available";
+
+
+        document.getElementById(
+            "subscriptionAmount"
+        ).textContent =
+            "--";
+
+
+        document.getElementById(
+            "subscriptionExpiry"
+        ).textContent =
+            "--";
+
+
+        document.getElementById(
+            "subscriptionRemaining"
+        ).textContent =
+            "--";
+
+
+        document.getElementById(
+            "subscriptionPayment"
+        ).textContent =
+            "--";
+
 
         return;
 
     }
 
-    currentSubscription = {
 
-        id:
-        snapshot.id,
+    currentSubscription =
+        snapshot.data();
 
-        ...snapshot.data()
 
-    };
-
-    console.log(
-        "Subscription loaded from Firestore:",
-        currentSubscription
-    );
-
-    renderSubscription(
-        currentSubscription
-    );
+    renderSubscription();
 
 }
 
 
-/* =====================================================
-   SUBSCRIPTION AMOUNT
-   IMPORTANT:
-   NO DEFAULT PRICE
-===================================================== */
-
-function getSubscriptionAmount(data){
-
-    if(!data){
-        return null;
-    }
-
-    const rawAmount =
-    data.amount;
-
-    if(
-        rawAmount === undefined ||
-        rawAmount === null ||
-        rawAmount === ""
-    ){
-
-        return null;
-
-    }
-
-    const numericAmount =
-    Number(
-        String(rawAmount)
-        .replace(/[₦,\s]/g,"")
-    );
-
-    if(
-        !Number.isFinite(
-            numericAmount
-        )
-    ){
-
-        return null;
-
-    }
-
-    return numericAmount;
-
-}
-
-
-/* =====================================================
-   FORMAT SUBSCRIPTION AMOUNT
-===================================================== */
-
-function formatSubscriptionAmount(data){
-
-    const amount =
-    getSubscriptionAmount(data);
-
-    if(amount === null){
-
-        return "Price not set";
-
-    }
-
-    return (
-        "₦" +
-        amount.toLocaleString(
-            "en-NG"
-        )
-    );
-
-}
-
-
-/* =====================================================
-   DATE
-===================================================== */
+/* =========================================================
+   DATE HELPERS
+========================================================= */
 
 function getDateValue(value){
 
     if(!value){
+
         return null;
+
     }
 
+
     if(
-        typeof value.toDate ===
-        "function"
+        typeof value === "object" &&
+        typeof value.toDate === "function"
     ){
 
         return value.toDate();
 
     }
 
-    if(value instanceof Date){
 
-        return value;
+    if(
+        typeof value === "object" &&
+        typeof value.seconds === "number"
+    ){
+
+        return new Date(
+            value.seconds * 1000
+        );
 
     }
 
+
     const date =
-    new Date(value);
+        new Date(value);
+
 
     if(
-        isNaN(
+        Number.isNaN(
             date.getTime()
         )
     ){
@@ -2999,6 +3132,7 @@ function getDateValue(value){
         return null;
 
     }
+
 
     return date;
 
@@ -3008,16 +3142,20 @@ function getDateValue(value){
 function formatDate(value){
 
     const date =
-    getDateValue(value);
+        getDateValue(value);
+
 
     if(!date){
+
         return "--";
+
     }
+
 
     return date.toLocaleDateString(
         "en-NG",
         {
-            day:"2-digit",
+            day:"numeric",
             month:"short",
             year:"numeric"
         }
@@ -3026,757 +3164,396 @@ function formatDate(value){
 }
 
 
-function calculateDaysLeft(
-    expiryValue
-){
+function calculateDaysLeft(value){
 
     const expiry =
-    getDateValue(
-        expiryValue
-    );
+        getDateValue(value);
+
 
     if(!expiry){
+
         return null;
+
     }
 
-    const now =
-    new Date();
 
     const difference =
-    expiry.getTime() -
-    now.getTime();
-
-    return Math.ceil(
-        difference /
-        (1000 * 60 * 60 * 24)
-    );
-
-}
+        expiry.getTime() -
+        Date.now();
 
 
-/* =====================================================
-   EFFECTIVE STATUS
-===================================================== */
-
-function getEffectiveStatus(data){
-
-    const rawStatus =
-    String(
-        data?.status ||
-        "expired"
-    )
-    .toLowerCase()
-    .trim();
-
-    const daysLeft =
-    calculateDaysLeft(
-        data?.expiryDate
-    );
-
-    if(rawStatus === "expired"){
-        return "expired";
-    }
-
-    if(
-        daysLeft !== null &&
-        daysLeft < 0
-    ){
-
-        return "expired";
-
-    }
-
-    if(
-        rawStatus === "active" &&
-        (
-            daysLeft === null ||
-            daysLeft >= 0
+    return Math.max(
+        0,
+        Math.ceil(
+            difference /
+            (
+                1000 *
+                60 *
+                60 *
+                24
+            )
         )
+    );
+
+}
+
+
+/* =========================================================
+   MONEY
+========================================================= */
+
+function formatMoney(amount){
+
+    const number =
+        Number(amount);
+
+
+    if(
+        !Number.isFinite(number)
     ){
 
-        return "active";
+        return "--";
 
     }
 
-    if(rawStatus === "pending"){
-        return "pending";
-    }
 
-    return rawStatus;
+    return new Intl.NumberFormat(
+        "en-NG",
+        {
+            style:"currency",
+            currency:"NGN",
+            maximumFractionDigits:0
+        }
+    ).format(number);
 
 }
 
 
-/* =====================================================
-   NO SUBSCRIPTION
-   NO HARDCODED PLAN
-   NO HARDCODED PRICE
-===================================================== */
+/* =========================================================
+   SUBSCRIPTION STATUS
+========================================================= */
 
-function renderNoSubscription(){
+function renderSubscription(){
 
-    const card =
-    document.getElementById(
-        "subscriptionCard"
-    );
-
-    card.classList.remove(
-        "active-card"
-    );
-
-    card.classList.add(
-        "expired-card"
-    );
-
-    document.getElementById(
-        "subscriptionPlan"
-    ).textContent =
-    "Not configured";
-
-    document.getElementById(
-        "subscriptionAmount"
-    ).textContent =
-    "Price not set";
-
-    document.getElementById(
-        "subscriptionDays"
-    ).textContent =
-    "Not subscribed";
-
-    document.getElementById(
-        "subscriptionPayment"
-    ).textContent =
-    "Not paid";
-
-    document.getElementById(
-        "subscriptionStart"
-    ).textContent =
-    "--";
-
-    document.getElementById(
-        "subscriptionExpiry"
-    ).textContent =
-    "--";
-
-    document.getElementById(
-        "subscriptionAutoRenew"
-    ).textContent =
-    "Off";
-
-    document.getElementById(
-        "renewPlanName"
-    ).textContent =
-    "--";
-
-    document.getElementById(
-        "renewAmount"
-    ).textContent =
-    "Price not set";
-
-    const status =
-    document.getElementById(
-        "subscriptionStatus"
-    );
-
-    status.textContent =
-    "Not Active";
-
-    status.className =
-    "subscription-status expired";
-
-    document.getElementById(
-        "daysLeftBox"
-    ).classList.add(
-        "expired-days"
-    );
-
-}
+    const subscription =
+        currentSubscription;
 
 
-/* =====================================================
-   RENDER SUBSCRIPTION
-===================================================== */
+    if(!subscription){
 
-function renderSubscription(data){
+        return;
 
-    /*
-    PLAN COMES FROM FIRESTORE
-    */
-
-    const plan =
-    String(
-        data.plan ||
-        data.planName ||
-        "Not configured"
-    ).trim();
+    }
 
 
-    /*
-    AMOUNT COMES FROM FIRESTORE
-
-    There is NO:
-    35000
-    35000 fallback
-    hardcoded price
-    */
-
-    const amount =
-    getSubscriptionAmount(
-        data
-    );
+    const firestoreStatus =
+        String(
+            subscription.status ||
+            ""
+        ).toLowerCase();
 
 
     const paymentStatus =
-    String(
-        data.paymentStatus ||
-        "pending"
-    );
+        String(
+            subscription.paymentStatus ||
+            ""
+        ).toLowerCase();
 
 
-    const daysLeft =
-    calculateDaysLeft(
-        data.expiryDate
-    );
+    const expiry =
+        getDateValue(
+            subscription.expiryDate
+        );
 
 
-    const effectiveStatus =
-    getEffectiveStatus(
-        data
-    );
+    let statusText =
+        firestoreStatus ||
+        "Unknown";
+
+
+    let statusClass =
+        "";
+
+
+    if(
+        expiry &&
+        expiry.getTime() < Date.now()
+    ){
+
+        statusText =
+            "Expired";
+
+        statusClass =
+            "expired";
+
+    }
+
+    else if(
+        firestoreStatus === "active"
+    ){
+
+        statusText =
+            "Active";
+
+    }
+
+    else if(
+        paymentStatus === "pending"
+    ){
+
+        statusText =
+            "Pending";
+
+        statusClass =
+            "pending";
+
+    }
+
+    else{
+
+        statusText =
+            firestoreStatus ||
+            "Unknown";
+
+        statusClass =
+            "expired";
+
+    }
+
+
+    const statusElement =
+        document.getElementById(
+            "subscriptionStatus"
+        );
+
+
+    statusElement.className =
+        "subscription-status " +
+        statusClass;
+
+
+    statusElement.textContent =
+        "● " +
+        statusText;
+
+
+    const planName =
+        subscription.planName ||
+        subscription.plan ||
+        "Unknown Plan";
+
+
+    const amount =
+        Number(
+            subscription.amount
+        );
 
 
     document.getElementById(
         "subscriptionPlan"
     ).textContent =
-    plan;
+        planName;
 
 
     document.getElementById(
         "subscriptionAmount"
     ).textContent =
-    amount === null
-    ?
-    "Price not set"
-    :
-    "₦" +
-    amount.toLocaleString(
-        "en-NG"
-    );
-
-
-    document.getElementById(
-        "subscriptionPayment"
-    ).textContent =
-    paymentStatus;
-
-
-    document.getElementById(
-        "subscriptionStart"
-    ).textContent =
-    formatDate(
-        data.startDate
-    );
+        Number.isFinite(amount)
+            ? formatMoney(amount)
+            : "--";
 
 
     document.getElementById(
         "subscriptionExpiry"
     ).textContent =
-    formatDate(
-        data.expiryDate
-    );
-
-
-    document.getElementById(
-        "subscriptionAutoRenew"
-    ).textContent =
-    data.autoRenew === true
-    ?
-    "On"
-    :
-    "Off";
-
-
-    /*
-    UPDATE RENEW MODAL FROM SAME FIRESTORE DATA
-    */
-
-    document.getElementById(
-        "renewPlanName"
-    ).textContent =
-    plan;
-
-
-    document.getElementById(
-        "renewAmount"
-    ).textContent =
-    amount === null
-    ?
-    "Price not set"
-    :
-    "₦" +
-    amount.toLocaleString(
-        "en-NG"
-    );
-
-
-    const statusElement =
-    document.getElementById(
-        "subscriptionStatus"
-    );
-
-
-    const daysBox =
-    document.getElementById(
-        "daysLeftBox"
-    );
-
-
-    const card =
-    document.getElementById(
-        "subscriptionCard"
-    );
-
-
-    daysBox.classList.remove(
-        "expired-days"
-    );
-
-
-    card.classList.remove(
-        "active-card",
-        "expired-card"
-    );
-
-
-    if(
-        effectiveStatus === "active"
-    ){
-
-        statusElement.textContent =
-        "Active";
-
-        statusElement.className =
-        "subscription-status active";
-
-        card.classList.add(
-            "active-card"
+        formatDate(
+            subscription.expiryDate
         );
-
-    }
-
-    else if(
-        effectiveStatus === "expired"
-    ){
-
-        statusElement.textContent =
-        "Expired";
-
-        statusElement.className =
-        "subscription-status expired";
-
-        daysBox.classList.add(
-            "expired-days"
-        );
-
-        card.classList.add(
-            "expired-card"
-        );
-
-    }
-
-    else{
-
-        statusElement.textContent =
-        effectiveStatus;
-
-        statusElement.className =
-        "subscription-status pending";
-
-    }
-
-
-    const daysElement =
-    document.getElementById(
-        "subscriptionDays"
-    );
-
-
-    if(daysLeft === null){
-
-        daysElement.textContent =
-        "Unknown";
-
-    }
-
-    else if(
-        effectiveStatus === "expired" ||
-        daysLeft < 0
-    ){
-
-        daysElement.textContent =
-        "Expired";
-
-    }
-
-    else if(daysLeft === 0){
-
-        daysElement.textContent =
-        "Expires today";
-
-    }
-
-    else if(daysLeft === 1){
-
-        daysElement.textContent =
-        "1 day left";
-
-    }
-
-    else{
-
-        daysElement.textContent =
-        daysLeft +
-        " days left";
-
-    }
-
-}
-
-
-/* =====================================================
-   RENEW MODAL
-===================================================== */
-
-renewSubscriptionButton.addEventListener(
-"click",
-()=>{
-
-    clearMessage(
-        "renewModalMessage"
-    );
-
-
-    /*
-    ALWAYS USE CURRENT FIRESTORE DATA
-    */
-
-    if(!currentSubscription){
-
-        showMessage(
-            "renewModalMessage",
-            "Subscription information is not available.",
-            "error"
-        );
-
-        renewModal.classList.add(
-            "show"
-        );
-
-        return;
-
-    }
-
-
-    const amount =
-    getSubscriptionAmount(
-        currentSubscription
-    );
-
-
-    const plan =
-    String(
-        currentSubscription.plan ||
-        currentSubscription.planName ||
-        "Not configured"
-    );
-
-
-    document.getElementById(
-        "renewPlanName"
-    ).textContent =
-    plan;
-
-
-    document.getElementById(
-        "renewAmount"
-    ).textContent =
-    amount === null
-    ?
-    "Price not set"
-    :
-    "₦" +
-    amount.toLocaleString(
-        "en-NG"
-    );
-
-
-    const status =
-    getEffectiveStatus(
-        currentSubscription
-    );
 
 
     const days =
-    calculateDaysLeft(
-        currentSubscription.expiryDate
-    );
+        calculateDaysLeft(
+            subscription.expiryDate
+        );
 
 
-    const currentStatus =
     document.getElementById(
-        "renewCurrentStatus"
-    );
+        "subscriptionRemaining"
+    ).textContent =
+        days === null
+            ? "--"
+            : days + " days";
 
 
-    if(status === "active"){
-
-        currentStatus.textContent =
-        days !== null
-        ?
-        "Your subscription is active. You have " +
-        days +
-        " day(s) remaining."
-        :
-        "Your subscription is currently active.";
-
-        currentStatus.className =
-        "message show success";
-
-    }
-
-    else{
-
-        currentStatus.textContent =
-        "Your subscription is expired. Renewing will require a new payment.";
-
-        currentStatus.className =
-        "message show warning";
-
-    }
-
-
-    /*
-    Do not allow payment if Super Admin
-    has not configured an amount.
-    */
-
-    if(amount === null){
-
-        startPaymentButton.disabled =
-        true;
-
-        showMessage(
-            "renewModalMessage",
-            "Subscription price has not been configured by Super Admin.",
-            "error"
-        );
-
-    }
-
-    else{
-
-        startPaymentButton.disabled =
-        false;
-
-    }
-
-
-    renewModal.classList.add(
-        "show"
-    );
-
-});
-
-
-cancelRenewButton.addEventListener(
-"click",
-()=>{
-
-    renewModal.classList.remove(
-        "show"
-    );
-
-    startPaymentButton.disabled =
-    false;
-
-});
-
-
-renewModal.addEventListener(
-"click",
-event=>{
-
-    if(
-        event.target ===
-        renewModal
-    ){
-
-        renewModal.classList.remove(
-            "show"
-        );
-
-        startPaymentButton.disabled =
-        false;
-
-    }
-
-});
-
-
-startPaymentButton.addEventListener(
-"click",
-async()=>{
-
-    clearMessage(
-        "renewModalMessage"
-    );
-
-
-    if(!currentSubscription){
-
-        showMessage(
-            "renewModalMessage",
-            "Subscription information is unavailable.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    const amount =
-    getSubscriptionAmount(
-        currentSubscription
-    );
-
-
-    if(amount === null){
-
-        showMessage(
-            "renewModalMessage",
-            "Subscription price is not configured in Firestore.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    /*
-    PAYMENT WILL USE THIS FIRESTORE AMOUNT.
-    NO FIXED PRICE.
-    */
-
-    console.log(
-        "Renewal amount from Firestore:",
-        amount
-    );
-
-
-    showMessage(
-        "renewModalMessage",
-        "Paystack live payment is not connected yet. Amount ready from Firestore: ₦" +
-        amount.toLocaleString("en-NG"),
-        "warning"
-    );
-
-});
-
-
-/* =====================================================
-   IMAGE PREVIEW
-===================================================== */
-
-function updatePropertyImagePreview(
-    number,
-    url
-){
-
-    const preview =
     document.getElementById(
-        "propertyImagePreview" +
-        number
-    );
-
-    if(!preview){
-        return;
-    }
-
-    if(!url){
-
-        preview.innerHTML =
-        `
-        <span>
-        Preview
-        </span>
-        `;
-
-        return;
-
-    }
-
-    preview.innerHTML =
-    `
-    <img
-    src="${escapeHTML(url)}"
-    alt="Property image ${number}"
-    onerror="this.parentElement.innerHTML='<span>Invalid image</span>'"
-    >
-    `;
+        "subscriptionPayment"
+    ).textContent =
+        subscription.paymentStatus ||
+        "--";
 
 }
 
 
-/* =====================================================
-   IMAGE INPUT EVENTS
-===================================================== */
+/* =========================================================
+   SUBSCRIPTION BUTTON
+========================================================= */
 
-for(
-    let i=1;
-    i<=5;
-    i++
-){
+document
+    .getElementById(
+        "subscriptionButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
 
-    const input =
-    document.getElementById(
-        "propertyImage" + i
-    );
+            if(!currentCompanyId){
 
-    input.addEventListener(
-        "input",
-        event=>{
+                showMessage(
+                    "Company ID is not available.",
+                    "error"
+                );
 
-            updatePropertyImagePreview(
-                i,
-                event.target.value.trim()
-            );
+                return;
+
+            }
+
+
+            window.location.href =
+                "subscription.html?companyId=" +
+                encodeURIComponent(
+                    currentCompanyId
+                );
 
         }
     );
 
+
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
+
+function updatePropertyImagePreview(
+    number
+){
+
+    const input =
+        document.getElementById(
+            "propertyImage" + number
+        );
+
+    const preview =
+        document.getElementById(
+            "propertyImagePreview" + number
+        );
+
+
+    const url =
+        input.value.trim();
+
+
+    if(!url){
+
+        preview.className =
+            "image-preview";
+
+        preview.innerHTML =
+            "Image " +
+            number +
+            " Preview";
+
+        return;
+
+    }
+
+
+    preview.className =
+        "image-preview";
+
+    preview.innerHTML =
+        "";
+
+
+    const img =
+        document.createElement("img");
+
+
+    img.src =
+        url;
+
+
+    img.alt =
+        "Property Image " +
+        number;
+
+
+    img.onload = () => {
+
+        preview.className =
+            "image-preview";
+
+    };
+
+
+    img.onerror = () => {
+
+        preview.className =
+            "image-preview invalid";
+
+        preview.innerHTML =
+            "Invalid image URL";
+
+    };
+
+
+    preview.appendChild(
+        img
+    );
+
 }
 
 
-/* =====================================================
-   GET PROPERTY IMAGES
-===================================================== */
+for(
+    let i = 1;
+    i <= 5;
+    i++
+){
+
+    document
+        .getElementById(
+            "propertyImage" + i
+        )
+        .addEventListener(
+            "input",
+            () =>
+                updatePropertyImagePreview(i)
+        );
+
+}
+
+
+/* =========================================================
+   GET IMAGES
+========================================================= */
 
 function getPropertyImages(){
 
     const images = [];
 
+
     for(
-        let i=1;
-        i<=5;
+        let i = 1;
+        i <= 5;
         i++
     ){
 
         const value =
-        document.getElementById(
-            "propertyImage" + i
-        ).value.trim();
+            document
+                .getElementById(
+                    "propertyImage" + i
+                )
+                .value
+                .trim();
+
 
         if(value){
 
@@ -3786,50 +3563,45 @@ function getPropertyImages(){
 
     }
 
+
     return images;
 
 }
 
 
-/* =====================================================
-   SET PROPERTY IMAGES
-===================================================== */
+/* =========================================================
+   SET IMAGES
+========================================================= */
 
-function setPropertyImages(images){
+function setPropertyImages(
+    images
+){
 
-    let list = [];
-
-    if(
+    const safeImages =
         Array.isArray(images)
-    ){
+            ? images
+            : [];
 
-        list =
-        images.filter(
-            image =>
-            typeof image === "string" &&
-            image.trim()
-        );
-
-    }
 
     for(
-        let i=1;
-        i<=5;
+        let i = 1;
+        i <= 5;
         i++
     ){
 
-        const value =
-        list[i-1] ||
-        "";
+        const input =
+            document.getElementById(
+                "propertyImage" + i
+            );
 
-        document.getElementById(
-            "propertyImage" + i
-        ).value =
-        value;
+
+        input.value =
+            safeImages[i - 1] ||
+            "";
+
 
         updatePropertyImagePreview(
-            i,
-            value
+            i
         );
 
     }
@@ -3837,35 +3609,49 @@ function setPropertyImages(images){
 }
 
 
-/* =====================================================
+/* =========================================================
    LOAD PROPERTIES
-===================================================== */
+========================================================= */
 
 async function loadProperties(){
 
-    propertiesList.innerHTML =
-    `
-    <div class="loading">
-    Loading properties...
-    </div>
+    const container =
+        document.getElementById(
+            "propertiesList"
+        );
+
+
+    container.innerHTML = `
+
+        <div class="loading">
+
+            <div class="spinner"></div>
+
+            Loading properties...
+
+        </div>
+
     `;
+
 
     try{
 
         const snapshot =
-        await getDocs(
-            getPropertiesRef()
-        );
+            await getDocs(
+                getPropertiesRef()
+            );
+
 
         allProperties = [];
 
+
         snapshot.forEach(
-            propertyDoc=>{
+            propertyDoc => {
 
                 allProperties.push({
 
                     id:
-                    propertyDoc.id,
+                        propertyDoc.id,
 
                     ...propertyDoc.data()
 
@@ -3874,93 +3660,208 @@ async function loadProperties(){
             }
         );
 
+
+        allProperties.sort(
+            (a,b) => {
+
+                const aTime =
+                    getDateValue(
+                        a.createdAt
+                    )?.getTime() ||
+                    0;
+
+
+                const bTime =
+                    getDateValue(
+                        b.createdAt
+                    )?.getTime() ||
+                    0;
+
+
+                return bTime - aTime;
+
+            }
+        );
+
+
         updateStats();
 
-        renderProperties(
-            allProperties
-        );
+        renderProperties();
 
     }
 
     catch(error){
 
-        console.error(
-            "Load properties:",
-            error
-        );
+        console.error(error);
 
-        propertiesList.innerHTML =
-        `
-        <div class="empty">
-        Unable to load properties.
-        </div>
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <strong>
+                    Unable to load properties
+                </strong>
+
+                ${escapeHTML(
+                    firebaseError(error)
+                )}
+
+            </div>
+
         `;
-
-        showMessage(
-            "dashboardMessage",
-            firebaseError(error),
-            "error"
-        );
 
     }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    SAVE PROPERTY
-===================================================== */
+========================================================= */
 
-propertyForm.addEventListener(
-"submit",
-async event=>{
+document
+    .getElementById(
+        "propertyForm"
+    )
+    .addEventListener(
+        "submit",
+        saveProperty
+    );
+
+
+async function saveProperty(
+    event
+){
 
     event.preventDefault();
 
-    clearMessage(
-        "propertyMessage"
-    );
+    clearMessage();
+
+
+    if(!currentCompanyId){
+
+        showMessage(
+            "Company ID is not available.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const button =
+        document.getElementById(
+            "savePropertyButton"
+        );
+
 
     const title =
-    document.getElementById(
-        "propertyTitle"
-    ).value.trim();
+        document
+            .getElementById(
+                "propertyTitle"
+            )
+            .value
+            .trim();
+
+
+    const propertyType =
+        document
+            .getElementById(
+                "propertyType"
+            )
+            .value;
+
+
+    const status =
+        document
+            .getElementById(
+                "propertyStatus"
+            )
+            .value;
+
+
+    const purpose =
+        document
+            .getElementById(
+                "propertyPurpose"
+            )
+            .value;
+
 
     const location =
-    document.getElementById(
-        "propertyLocation"
-    ).value.trim();
+        document
+            .getElementById(
+                "propertyLocation"
+            )
+            .value
+            .trim();
+
 
     const price =
-    document.getElementById(
-        "propertyPrice"
-    ).value.trim();
+        Number(
+            document
+                .getElementById(
+                    "propertyPrice"
+                )
+                .value
+        );
+
 
     const bedrooms =
-    Number(
-        document.getElementById(
-            "propertyBedrooms"
-        ).value || 0
-    );
+        Number(
+            document
+                .getElementById(
+                    "propertyBedrooms"
+                )
+                .value
+        ) || 0;
+
 
     const bathrooms =
-    Number(
-        document.getElementById(
-            "propertyBathrooms"
-        ).value || 0
-    );
+        Number(
+            document
+                .getElementById(
+                    "propertyBathrooms"
+                )
+                .value
+        ) || 0;
+
 
     const area =
-    document.getElementById(
-        "propertyArea"
-    ).value.trim();
+        document
+            .getElementById(
+                "propertyArea"
+            )
+            .value
+            .trim();
 
 
-    if(bedrooms > 20){
+    const description =
+        document
+            .getElementById(
+                "propertyDescription"
+            )
+            .value
+            .trim();
+
+
+    const featured =
+        document
+            .getElementById(
+                "propertyFeatured"
+            )
+            .checked;
+
+
+    const images =
+        getPropertyImages();
+
+
+    if(!title){
 
         showMessage(
-            "propertyMessage",
-            "Bedrooms cannot be more than 20.",
+            "Property title is required.",
             "error"
         );
 
@@ -3969,11 +3870,10 @@ async event=>{
     }
 
 
-    if(bathrooms > 20){
+    if(!propertyType){
 
         showMessage(
-            "propertyMessage",
-            "Bathrooms cannot be more than 20.",
+            "Please select property type.",
             "error"
         );
 
@@ -3982,88 +3882,152 @@ async event=>{
     }
 
 
-    savePropertyButton.disabled =
-    true;
+    if(!location){
+
+        showMessage(
+            "Property location is required.",
+            "error"
+        );
+
+        return;
+
+    }
 
 
-    const wasEditing =
-    Boolean(editingPropertyId);
+    if(
+        !Number.isFinite(price) ||
+        price < 0
+    ){
+
+        showMessage(
+            "Please enter a valid property price.",
+            "error"
+        );
+
+        return;
+
+    }
 
 
-    savePropertyButton.textContent =
-    wasEditing
-    ?
-    "Updating..."
-    :
-    "Saving...";
+    if(
+        bedrooms < 0 ||
+        bedrooms > 20 ||
+        bathrooms < 0 ||
+        bathrooms > 20
+    ){
+
+        showMessage(
+            "Bedrooms and bathrooms must be between 0 and 20.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       We keep backward compatibility.
+
+       imageUrl  = first image
+       images    = all images
+       imageUrl1..5 = individual image URLs
+    */
+
+    const propertyData = {
+
+        title:
+            title,
+
+        propertyType:
+            propertyType,
+
+        status:
+            status,
+
+        purpose:
+            purpose,
+
+        location:
+            location,
+
+        price:
+            price,
+
+        bedrooms:
+            bedrooms,
+
+        bathrooms:
+            bathrooms,
+
+        area:
+            area,
+
+        imageUrl:
+            images[0] ||
+            "",
+
+        imageUrl1:
+            images[0] ||
+            "",
+
+        imageUrl2:
+            images[1] ||
+            "",
+
+        imageUrl3:
+            images[2] ||
+            "",
+
+        imageUrl4:
+            images[3] ||
+            "",
+
+        imageUrl5:
+            images[4] ||
+            "",
+
+        images:
+            images,
+
+        description:
+            description,
+
+        featured:
+            featured,
+
+        companyId:
+            currentCompanyId,
+
+        updatedAt:
+            serverTimestamp()
+
+    };
+
+
+    button.disabled =
+        true;
+
+
+    button.textContent =
+        editingPropertyId
+            ? "Updating..."
+            : "Saving...";
 
 
     try{
 
-        const images =
-        getPropertyImages();
-
-
-        const propertyData = {
-
-            title:title,
-
-            propertyType:
-            document.getElementById(
-                "propertyType"
-            ).value,
-
-            status:
-            document.getElementById(
-                "propertyStatus"
-            ).value,
-
-            purpose:
-            document.getElementById(
-                "propertyPurpose"
-            ).value,
-
-            location:location,
-
-            price:price,
-
-            bedrooms:bedrooms,
-
-            bathrooms:bathrooms,
-
-            area:area,
-
-            imageUrl:
-            images[0] || "",
-
-            images:images,
-
-            description:
-            document.getElementById(
-                "propertyDescription"
-            ).value.trim(),
-
-            featured:
-            document.getElementById(
-                "propertyFeatured"
-            ).checked,
-
-            updatedAt:
-            serverTimestamp()
-
-        };
-
-
         if(editingPropertyId){
 
             const propertyRef =
-            doc(
-                db,
-                COMPANIES_COLLECTION,
-                currentCompanyId,
-                PROPERTIES_SUBCOLLECTION,
-                editingPropertyId
-            );
+                doc(
+                    db,
+                    "companies",
+                    currentCompanyId,
+                    "properties",
+                    editingPropertyId
+                );
+
 
             await updateDoc(
                 propertyRef,
@@ -4072,7 +4036,6 @@ async event=>{
 
 
             showMessage(
-                "propertyMessage",
                 "Property updated successfully.",
                 "success"
             );
@@ -4081,30 +4044,21 @@ async event=>{
 
         else{
 
-            const newProperty = {
+            propertyData.createdBy =
+                currentUser?.uid ||
+                "";
 
-                ...propertyData,
-
-                createdBy:
-                currentUser.uid,
-
-                companyId:
-                currentCompanyId,
-
-                createdAt:
-                serverTimestamp()
-
-            };
+            propertyData.createdAt =
+                serverTimestamp();
 
 
             await addDoc(
                 getPropertiesRef(),
-                newProperty
+                propertyData
             );
 
 
             showMessage(
-                "propertyMessage",
                 "Property added successfully.",
                 "success"
             );
@@ -4120,13 +4074,9 @@ async event=>{
 
     catch(error){
 
-        console.error(
-            "Save property:",
-            error
-        );
+        console.error(error);
 
         showMessage(
-            "propertyMessage",
             firebaseError(error),
             "error"
         );
@@ -4135,39 +4085,36 @@ async event=>{
 
     finally{
 
-        savePropertyButton.disabled =
-        false;
+        button.disabled =
+            false;
 
-        savePropertyButton.textContent =
-        editingPropertyId
-        ?
-        "Update Property"
-        :
-        "Add Property";
+        button.textContent =
+            "Save Property";
 
     }
 
-});
+}
 
 
-/* =====================================================
+/* =========================================================
    EDIT PROPERTY
-===================================================== */
+========================================================= */
 
-function editProperty(id){
+function editProperty(
+    id
+){
 
     const property =
-    allProperties.find(
-        item =>
-        item.id === id
-    );
+        allProperties.find(
+            item =>
+                item.id === id
+        );
 
 
     if(!property){
 
         showMessage(
-            "dashboardMessage",
-            "Property could not be found.",
+            "Property not found.",
             "error"
         );
 
@@ -4177,78 +4124,105 @@ function editProperty(id){
 
 
     editingPropertyId =
-    id;
+        id;
+
+
+    document.getElementById(
+        "propertyFormTitle"
+    ).textContent =
+        "Edit Property";
+
+
+    document.getElementById(
+        "savePropertyButton"
+    ).textContent =
+        "Update Property";
+
+
+    document.getElementById(
+        "cancelPropertyButton"
+    ).classList.remove(
+        "hidden"
+    );
 
 
     document.getElementById(
         "propertyTitle"
     ).value =
-    property.title || "";
+        property.title ||
+        "";
 
 
     document.getElementById(
         "propertyType"
     ).value =
-    property.propertyType ||
-    property.type ||
-    "House";
+        property.propertyType ||
+        "";
 
 
     document.getElementById(
         "propertyStatus"
     ).value =
-    property.status ||
-    "available";
+        property.status ||
+        "available";
 
 
     document.getElementById(
         "propertyPurpose"
     ).value =
-    property.purpose ||
-    "sale";
+        property.purpose ||
+        "sale";
 
 
     document.getElementById(
         "propertyLocation"
     ).value =
-    property.location ||
-    "";
+        property.location ||
+        "";
 
 
     document.getElementById(
         "propertyPrice"
     ).value =
-    property.price ||
-    "";
+        property.price ??
+        "";
 
 
     document.getElementById(
         "propertyBedrooms"
     ).value =
-    Math.min(
-        Number(property.bedrooms || 0),
-        20
-    );
+        property.bedrooms ??
+        0;
 
 
     document.getElementById(
         "propertyBathrooms"
     ).value =
-    Math.min(
-        Number(property.bathrooms || 0),
-        20
-    );
+        property.bathrooms ??
+        0;
 
 
     document.getElementById(
         "propertyArea"
     ).value =
-    property.area ||
-    property.propertyArea ||
-    "";
+        property.area ||
+        "";
 
 
-    let propertyImages = [];
+    document.getElementById(
+        "propertyDescription"
+    ).value =
+        property.description ||
+        "";
+
+
+    document.getElementById(
+        "propertyFeatured"
+    ).checked =
+        property.featured === true;
+
+
+    let images = [];
 
 
     if(
@@ -4257,156 +4231,450 @@ function editProperty(id){
         )
     ){
 
-        propertyImages =
-        property.images;
+        images =
+            property.images;
 
     }
 
     else{
 
-        const oldImage =
-        property.imageUrl ||
-        property.image ||
-        "";
+        images = [
 
-        if(oldImage){
+            property.imageUrl1 ||
+            property.imageUrl ||
+            property.image ||
+            "",
 
-            propertyImages =
-            [oldImage];
+            property.imageUrl2 ||
+            "",
 
-        }
+            property.imageUrl3 ||
+            "",
+
+            property.imageUrl4 ||
+            "",
+
+            property.imageUrl5 ||
+            ""
+
+        ];
 
     }
 
 
     setPropertyImages(
-        propertyImages
+        images
     );
 
 
-    document.getElementById(
-        "propertyDescription"
-    ).value =
-    property.description ||
-    "";
-
-
-    document.getElementById(
-        "propertyFeatured"
-    ).checked =
-    property.featured === true;
-
-
-    propertyFormTitle.textContent =
-    "Edit Property";
-
-
-    savePropertyButton.textContent =
-    "Update Property";
-
-
-    cancelEditButton.classList.remove(
-        "hidden"
-    );
-
-
-    clearMessage(
-        "propertyMessage"
-    );
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+    document
+        .getElementById(
+            "propertyForm"
+        )
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
 
 }
 
 
-/* =====================================================
-   CANCEL EDIT
-===================================================== */
+/* =========================================================
+   CANCEL / RESET
+========================================================= */
 
-cancelEditButton.addEventListener(
-"click",
-()=>{
+document
+    .getElementById(
+        "cancelPropertyButton"
+    )
+    .addEventListener(
+        "click",
+        resetPropertyForm
+    );
 
-    resetPropertyForm();
-
-});
-
-
-/* =====================================================
-   RESET PROPERTY FORM
-===================================================== */
 
 function resetPropertyForm(){
 
     editingPropertyId =
-    null;
-
-    propertyForm.reset();
+        null;
 
 
     document.getElementById(
-        "propertyBedrooms"
-    ).value =
-    0;
-
-
-    document.getElementById(
-        "propertyBathrooms"
-    ).value =
-    0;
-
-
-    document.getElementById(
-        "propertyArea"
-    ).value =
-    "";
+        "propertyForm"
+    ).reset();
 
 
     document.getElementById(
         "propertyStatus"
     ).value =
-    "available";
+        "available";
 
 
     document.getElementById(
         "propertyPurpose"
     ).value =
-    "sale";
+        "sale";
 
 
     document.getElementById(
-        "propertyType"
+        "propertyBedrooms"
     ).value =
-    "House";
+        "0";
 
 
-    setPropertyImages([]);
+    document.getElementById(
+        "propertyBathrooms"
+    ).value =
+        "0";
 
 
-    propertyFormTitle.textContent =
-    "Add Property";
+    setPropertyImages(
+        []
+    );
 
 
-    savePropertyButton.textContent =
-    "Add Property";
+    document.getElementById(
+        "propertyFormTitle"
+    ).textContent =
+        "Add Property";
 
 
-    cancelEditButton.classList.add(
+    document.getElementById(
+        "savePropertyButton"
+    ).textContent =
+        "Save Property";
+
+
+    document.getElementById(
+        "cancelPropertyButton"
+    ).classList.add(
         "hidden"
     );
 
 }
 
 
-/* =====================================================
-   IMAGE COUNT
-===================================================== */
+/* =========================================================
+   DUPLICATE PROPERTY
+========================================================= */
 
-function getImageCount(property){
+async function duplicateProperty(
+    id
+){
+
+    const property =
+        allProperties.find(
+            item =>
+                item.id === id
+        );
+
+
+    if(!property){
+
+        showMessage(
+            "Property not found.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+            "Duplicate this property?"
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    try{
+
+        const {
+
+            id:ignoredId,
+
+            createdAt:ignoredCreatedAt,
+
+            updatedAt:ignoredUpdatedAt,
+
+            ...copy
+
+        } = property;
+
+
+        const duplicateData = {
+
+            ...copy,
+
+            title:
+                (
+                    copy.title ||
+                    "Property"
+                ) +
+                " - Copy",
+
+            companyId:
+                currentCompanyId,
+
+            createdBy:
+                currentUser?.uid ||
+                "",
+
+            createdAt:
+                serverTimestamp(),
+
+            updatedAt:
+                serverTimestamp()
+
+        };
+
+
+        await addDoc(
+            getPropertiesRef(),
+            duplicateData
+        );
+
+
+        showMessage(
+            "Property duplicated successfully.",
+            "success"
+        );
+
+
+        await loadProperties();
+
+    }
+
+    catch(error){
+
+        showMessage(
+            firebaseError(error),
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DELETE MODAL
+========================================================= */
+
+function openDeleteModal(
+    id
+){
+
+    const property =
+        allProperties.find(
+            item =>
+                item.id === id
+        );
+
+
+    if(!property){
+
+        return;
+
+    }
+
+
+    propertyToDelete =
+        id;
+
+
+    document.getElementById(
+        "deletePropertyName"
+    ).innerHTML = `
+
+        <div
+            style="
+                background:#f8fafc;
+                border:1px solid #e2e8f0;
+                border-radius:9px;
+                padding:10px;
+                font-size:12px;
+                font-weight:800;
+                margin-top:12px;
+            "
+        >
+            ${escapeHTML(
+                property.title ||
+                "Untitled Property"
+            )}
+        </div>
+
+    `;
+
+
+    document
+        .getElementById(
+            "deleteModal"
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+function closeDeleteModal(){
+
+    propertyToDelete =
+        null;
+
+
+    document
+        .getElementById(
+            "deleteModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+document
+    .getElementById(
+        "closeDeleteModal"
+    )
+    .addEventListener(
+        "click",
+        closeDeleteModal
+    );
+
+
+document
+    .getElementById(
+        "cancelDelete"
+    )
+    .addEventListener(
+        "click",
+        closeDeleteModal
+    );
+
+
+document
+    .getElementById(
+        "deleteModal"
+    )
+    .addEventListener(
+        "click",
+        event => {
+
+            if(
+                event.target.id ===
+                "deleteModal"
+            ){
+
+                closeDeleteModal();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   CONFIRM DELETE
+========================================================= */
+
+document
+    .getElementById(
+        "confirmDelete"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            if(!propertyToDelete){
+
+                return;
+
+            }
+
+
+            const button =
+                document.getElementById(
+                    "confirmDelete"
+                );
+
+
+            button.disabled =
+                true;
+
+            button.textContent =
+                "Deleting...";
+
+
+            try{
+
+                const propertyRef =
+                    doc(
+                        db,
+                        "companies",
+                        currentCompanyId,
+                        "properties",
+                        propertyToDelete
+                    );
+
+
+                await deleteDoc(
+                    propertyRef
+                );
+
+
+                closeDeleteModal();
+
+
+                showMessage(
+                    "Property deleted successfully.",
+                    "success"
+                );
+
+
+                await loadProperties();
+
+            }
+
+            catch(error){
+
+                showMessage(
+                    firebaseError(error),
+                    "error"
+                );
+
+            }
+
+            finally{
+
+                button.disabled =
+                    false;
+
+                button.textContent =
+                    "Delete Property";
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   PROPERTY IMAGE COUNT
+========================================================= */
+
+function getImageCount(
+    property
+){
 
     if(
         Array.isArray(
@@ -4416,40 +4684,285 @@ function getImageCount(property){
 
         return property.images.filter(
             image =>
-            typeof image === "string" &&
-            image.trim()
+                String(image || "").trim()
         ).length;
 
     }
 
 
-    return (
-        property.imageUrl ||
-        property.image
-    )
-    ?
-    1
-    :
-    0;
+    let count = 0;
+
+
+    for(
+        let i = 1;
+        i <= 5;
+        i++
+    ){
+
+        if(
+            property[
+                "imageUrl" + i
+            ]
+        ){
+
+            count++;
+
+        }
+
+    }
+
+
+    if(
+        count === 0 &&
+        (
+            property.imageUrl ||
+            property.image
+        )
+    ){
+
+        count = 1;
+
+    }
+
+
+    return count;
 
 }
 
 
-/* =====================================================
-   RENDER PROPERTIES
-===================================================== */
+/* =========================================================
+   PROPERTY IMAGE
+========================================================= */
 
-function renderProperties(
-    properties
+function getMainImage(
+    property
 ){
 
-    if(!properties.length){
+    if(
+        property.imageUrl1
+    ){
 
-        propertiesList.innerHTML =
-        `
-        <div class="empty">
-        No properties found.
-        </div>
+        return property.imageUrl1;
+
+    }
+
+
+    if(
+        property.imageUrl
+    ){
+
+        return property.imageUrl;
+
+    }
+
+
+    if(
+        Array.isArray(
+            property.images
+        ) &&
+        property.images[0]
+    ){
+
+        return property.images[0];
+
+    }
+
+
+    if(
+        property.image
+    ){
+
+        return property.image;
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   RENDER PROPERTIES
+========================================================= */
+
+function renderProperties(){
+
+    const container =
+        document.getElementById(
+            "propertiesList"
+        );
+
+
+    const search =
+        document
+            .getElementById(
+                "propertySearch"
+            )
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const filterStatus =
+        document
+            .getElementById(
+                "filterStatus"
+            )
+            .value;
+
+
+    const filterType =
+        document
+            .getElementById(
+                "filterType"
+            )
+            .value;
+
+
+    const filterPurpose =
+        document
+            .getElementById(
+                "filterPurpose"
+            )
+            .value;
+
+
+    const filterFeatured =
+        document
+            .getElementById(
+                "filterFeatured"
+            )
+            .value;
+
+
+    const filtered =
+        allProperties.filter(
+            property => {
+
+                const searchable = [
+
+                    property.title,
+
+                    property.location,
+
+                    property.propertyType,
+
+                    property.status,
+
+                    property.purpose,
+
+                    property.description,
+
+                    ...(Array.isArray(property.images)
+                        ? property.images
+                        : [])
+
+                ]
+                .join(" ")
+                .toLowerCase();
+
+
+                if(
+                    search &&
+                    !searchable.includes(
+                        search
+                    )
+                ){
+
+                    return false;
+
+                }
+
+
+                if(
+                    filterStatus &&
+                    String(
+                        property.status ||
+                        ""
+                    ).toLowerCase() !==
+                    filterStatus.toLowerCase()
+                ){
+
+                    return false;
+
+                }
+
+
+                if(
+                    filterType &&
+                    String(
+                        property.propertyType ||
+                        ""
+                    ).toLowerCase() !==
+                    filterType.toLowerCase()
+                ){
+
+                    return false;
+
+                }
+
+
+                if(
+                    filterPurpose &&
+                    String(
+                        property.purpose ||
+                        ""
+                    ).toLowerCase() !==
+                    filterPurpose.toLowerCase()
+                ){
+
+                    return false;
+
+                }
+
+
+                if(
+                    filterFeatured === "featured" &&
+                    property.featured !== true
+                ){
+
+                    return false;
+
+                }
+
+
+                if(
+                    filterFeatured === "normal" &&
+                    property.featured === true
+                ){
+
+                    return false;
+
+                }
+
+
+                return true;
+
+            }
+        );
+
+
+    if(
+        filtered.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <strong>
+                    No properties found
+                </strong>
+
+                ${
+                    allProperties.length
+                        ? "Try changing your search or filters."
+                        : "Add your first property above."
+                }
+
+            </div>
+
         `;
 
         return;
@@ -4457,548 +4970,485 @@ function renderProperties(
     }
 
 
-    propertiesList.innerHTML =
-    properties
-    .map(
-        property=>{
-
-            const status =
-            String(
-                property.status ||
-                "available"
-            ).toLowerCase();
-
-
-            const image =
-            property.imageUrl ||
-            (
-                Array.isArray(
-                    property.images
-                )
-                ?
-                property.images[0]
-                :
-                ""
-            ) ||
-            property.image ||
-            "";
-
-
-            const title =
-            property.title ||
-            "Untitled Property";
-
-
-            const location =
-            property.location ||
-            "Location not specified";
-
-
-            const type =
-            property.propertyType ||
-            property.type ||
-            "Property";
-
-
-            const purpose =
-            String(
-                property.purpose ||
-                "sale"
-            ).toLowerCase();
-
-
-            const area =
-            property.area ||
-            property.propertyArea ||
-            "Not specified";
-
-
-            const bedrooms =
-            Number(
-                property.bedrooms ||
-                0
-            );
-
-
-            const bathrooms =
-            Number(
-                property.bathrooms ||
-                0
-            );
-
-
-            const imageCount =
-            getImageCount(
-                property
-            );
-
-
-            let statusClass = "";
-
-
-            if(status === "sold"){
-                statusClass = "sold";
-            }
-
-
-            if(status === "rented"){
-                statusClass = "rented";
-            }
-
-
-            return `
-
-            <article class="property">
-
-            <div class="property-top">
-
-            <div class="property-image">
-
-            ${
-                image
-                ?
-                `
-                <img
-                src="${escapeHTML(image)}"
-                alt="${escapeHTML(title)}"
-                onerror="this.style.display='none'"
-                >
-                `
-                :
-                `
-                <div
-                style="
-                width:100%;
-                height:100%;
-                display:grid;
-                place-items:center;
-                color:#94a3b8;
-                font-size:12px;
-                "
-                >
-                No Image
-                </div>
-                `
-            }
-
-            </div>
-
-
-            <div class="property-details">
-
-            <h3>
-            ${escapeHTML(title)}
-            </h3>
-
-
-            <p>
-            📍
-            ${escapeHTML(location)}
-            </p>
-
-
-            <p>
-            🏠
-            ${escapeHTML(type)}
-            </p>
-
-
-            <p>
-            💰
-            ${escapeHTML(
-                property.price ||
-                "Price on request"
-            )}
-            </p>
-
-
-            <p>
-            🛏️
-            ${bedrooms}
-            ${bedrooms === 1 ? "Bedroom" : "Bedrooms"}
-            </p>
-
-
-            <p>
-            🛁
-            ${bathrooms}
-            ${bathrooms === 1 ? "Bathroom" : "Bathrooms"}
-            </p>
-
-
-            <p>
-            📐
-            ${escapeHTML(area)}
-            </p>
-
-
-            <p class="property-photo-count">
-            📷
-            ${imageCount}
-            ${imageCount === 1 ? "photo" : "photos"}
-            </p>
-
-
-            <div class="badges">
-
-            <span class="badge ${statusClass}">
-            ${escapeHTML(status)}
-            </span>
-
-
-            <span class="badge">
-
-            ${
-                purpose === "rent"
-                ?
-                "For Rent"
-                :
-                "For Sale"
-            }
-
-            </span>
-
-
-            ${
-                property.featured
-                ?
-                `
-                <span class="badge featured">
-                Featured
-                </span>
-                `
-                :
-                ""
-            }
-
-            </div>
-
-
-            <div class="property-actions">
-
-            <button
-            type="button"
-            class="edit-button"
-            data-edit-id="${escapeHTML(property.id)}"
-            >
-            Edit
-            </button>
-
-
-            <button
-            type="button"
-            class="delete-button"
-            data-delete-id="${escapeHTML(property.id)}"
-            >
-            Delete
-            </button>
-
-            </div>
-
-            </div>
-
-            </div>
-
-            </article>
-
-            `;
-
-        }
-    )
-    .join("");
-
-
-    document
-    .querySelectorAll(
-        "[data-edit-id]"
-    )
-    .forEach(
-        button=>{
-
-            button.addEventListener(
-                "click",
-                ()=>{
-
-                    editProperty(
-                        button.dataset.editId
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    document
-    .querySelectorAll(
-        "[data-delete-id]"
-    )
-    .forEach(
-        button=>{
-
-            button.addEventListener(
-                "click",
-                ()=>{
-
-                    deleteProperty(
-                        button.dataset.deleteId
-                    );
-
-                }
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   DELETE PROPERTY
-===================================================== */
-
-async function deleteProperty(id){
-
-    const property =
-    allProperties.find(
-        item =>
-        item.id === id
-    );
-
-
-    const title =
-    property?.title ||
-    "this property";
-
-
-    if(
-        !window.confirm(
-            "Delete " +
-            title +
-            "?"
-        )
-    ){
-
-        return;
-
-    }
-
-
-    try{
-
-        await deleteDoc(
-            doc(
-                db,
-                COMPANIES_COLLECTION,
-                currentCompanyId,
-                PROPERTIES_SUBCOLLECTION,
-                id
-            )
-        );
-
-
-        if(
-            editingPropertyId === id
-        ){
-
-            resetPropertyForm();
-
-        }
-
-
-        showMessage(
-            "dashboardMessage",
-            "Property deleted successfully.",
-            "success"
-        );
-
-
-        await loadProperties();
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Delete property:",
-            error
-        );
-
-
-        showMessage(
-            "dashboardMessage",
-            firebaseError(error),
-            "error"
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-propertySearch.addEventListener(
-"input",
-event=>{
-
-    const query =
-    event.target.value
-    .trim()
-    .toLowerCase();
-
-
-    if(!query){
-
-        renderProperties(
-            allProperties
-        );
-
-        return;
-
-    }
-
-
-    const filtered =
-    allProperties.filter(
-        property=>{
-
-            const imageText =
-            Array.isArray(
-                property.images
-            )
-            ?
-            property.images.join(" ")
-            :
-            "";
-
-
-            const text =
-            [
-                property.title,
-                property.propertyType,
-                property.type,
-                property.location,
-                property.price,
-                property.status,
-                property.purpose,
-                property.area,
-                property.propertyArea,
-                property.bedrooms,
-                property.bathrooms,
-                property.description,
-                imageText
-            ]
-            .join(" ")
-            .toLowerCase();
-
-
-            return text.includes(
-                query
-            );
-
-        }
-    );
-
-
-    renderProperties(
+    container.innerHTML =
         filtered
-    );
+            .map(
+                property => {
 
-});
+                    const image =
+                        getMainImage(
+                            property
+                        );
 
 
-/* =====================================================
+                    const status =
+                        String(
+                            property.status ||
+                            "available"
+                        ).toLowerCase();
+
+
+                    const statusLabel =
+                        status.charAt(0).toUpperCase() +
+                        status.slice(1);
+
+
+                    const price =
+                        Number(
+                            property.price
+                        );
+
+
+                    const imageCount =
+                        getImageCount(
+                            property
+                        );
+
+
+                    return `
+
+                        <article
+                            class="property-card"
+                        >
+
+                            <div
+                                class="property-image"
+                            >
+
+                                ${
+                                    image
+                                        ?
+                                        `
+                                        <img
+                                            src="${escapeHTML(image)}"
+                                            alt="${escapeHTML(
+                                                property.title ||
+                                                "Property"
+                                            )}"
+                                            onerror="this.style.display='none';this.nextElementSibling.style.display='grid';"
+                                        >
+
+                                        <div
+                                            class="property-placeholder"
+                                            style="display:none;"
+                                        >
+                                            Image unavailable
+                                        </div>
+                                        `
+                                        :
+                                        `
+                                        <div
+                                            class="property-placeholder"
+                                        >
+                                            No Image
+                                        </div>
+                                        `
+                                }
+
+                                <div
+                                    class="property-badges"
+                                >
+
+                                    <div>
+
+                                        <span
+                                            class="badge ${escapeHTML(status)}"
+                                        >
+                                            ${escapeHTML(
+                                                statusLabel
+                                            )}
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+
+                                        ${
+                                            property.featured
+                                                ?
+                                                `
+                                                <span
+                                                    class="badge featured"
+                                                >
+                                                    ★ Featured
+                                                </span>
+                                                `
+                                                :
+                                                ""
+                                        }
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div
+                                class="property-content"
+                            >
+
+                                <div
+                                    class="property-title"
+                                >
+                                    ${escapeHTML(
+                                        property.title ||
+                                        "Untitled Property"
+                                    )}
+                                </div>
+
+                                <div
+                                    class="property-location"
+                                >
+                                    📍
+                                    ${escapeHTML(
+                                        property.location ||
+                                        "Location not specified"
+                                    )}
+                                </div>
+
+                                <div
+                                    class="property-price"
+                                >
+
+                                    ${
+                                        Number.isFinite(price)
+                                            ?
+                                            formatMoney(price)
+                                            :
+                                            "Price not set"
+                                    }
+
+                                </div>
+
+                                <div
+                                    class="property-meta"
+                                >
+
+                                    ${
+                                        property.propertyType
+                                            ?
+                                            `
+                                            <span class="meta">
+                                                ${escapeHTML(
+                                                    property.propertyType
+                                                )}
+                                            </span>
+                                            `
+                                            :
+                                            ""
+                                    }
+
+                                    ${
+                                        property.purpose
+                                            ?
+                                            `
+                                            <span class="meta">
+                                                ${escapeHTML(
+                                                    property.purpose
+                                                )}
+                                            </span>
+                                            `
+                                            :
+                                            ""
+                                    }
+
+                                    <span class="meta">
+                                        🛏
+                                        ${Number(
+                                            property.bedrooms
+                                        ) || 0}
+                                    </span>
+
+                                    <span class="meta">
+                                        🚿
+                                        ${Number(
+                                            property.bathrooms
+                                        ) || 0}
+                                    </span>
+
+                                    ${
+                                        property.area
+                                            ?
+                                            `
+                                            <span class="meta">
+                                                📐
+                                                ${escapeHTML(
+                                                    property.area
+                                                )}
+                                            </span>
+                                            `
+                                            :
+                                            ""
+                                    }
+
+                                    <span class="meta">
+                                        🖼
+                                        ${imageCount} photo${
+                                            imageCount === 1
+                                                ? ""
+                                                : "s"
+                                        }
+                                    </span>
+
+                                </div>
+
+                                <div
+                                    class="property-description"
+                                >
+                                    ${escapeHTML(
+                                        property.description ||
+                                        "No description available."
+                                    )}
+                                </div>
+
+                                <div
+                                    class="property-actions"
+                                >
+
+                                    <button
+                                        class="property-action"
+                                        type="button"
+                                        data-edit="${escapeHTML(
+                                            property.id
+                                        )}"
+                                    >
+                                        Edit
+                                    </button>
+
+                                    <button
+                                        class="property-action"
+                                        type="button"
+                                        data-duplicate="${escapeHTML(
+                                            property.id
+                                        )}"
+                                    >
+                                        Copy
+                                    </button>
+
+                                    <button
+                                        class="property-action delete"
+                                        type="button"
+                                        data-delete="${escapeHTML(
+                                            property.id
+                                        )}"
+                                    >
+                                        Delete
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+
+    container
+        .querySelectorAll(
+            "[data-edit]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () =>
+                        editProperty(
+                            button.dataset.edit
+                        )
+                );
+
+            }
+        );
+
+
+    container
+        .querySelectorAll(
+            "[data-duplicate]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () =>
+                        duplicateProperty(
+                            button.dataset.duplicate
+                        )
+                );
+
+            }
+        );
+
+
+    container
+        .querySelectorAll(
+            "[data-delete]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () =>
+                        openDeleteModal(
+                            button.dataset.delete
+                        )
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
    STATS
-===================================================== */
+========================================================= */
 
 function updateStats(){
 
     const total =
-    allProperties.length;
+        allProperties.length;
 
 
     const available =
-    allProperties.filter(
-        property =>
-        String(
-            property.status || ""
-        ).toLowerCase() ===
-        "available"
-    ).length;
+        allProperties.filter(
+            property =>
+                String(
+                    property.status ||
+                    ""
+                ).toLowerCase() ===
+                "available"
+        ).length;
 
 
     const sold =
-    allProperties.filter(
-        property =>
-        String(
-            property.status || ""
-        ).toLowerCase() ===
-        "sold"
-    ).length;
+        allProperties.filter(
+            property =>
+                String(
+                    property.status ||
+                    ""
+                ).toLowerCase() ===
+                "sold"
+        ).length;
 
 
     const rented =
-    allProperties.filter(
-        property =>
-        String(
-            property.status || ""
-        ).toLowerCase() ===
-        "rented"
-    ).length;
+        allProperties.filter(
+            property =>
+                String(
+                    property.status ||
+                    ""
+                ).toLowerCase() ===
+                "rented"
+        ).length;
 
 
     document.getElementById(
         "totalProperties"
     ).textContent =
-    total;
+        total;
 
 
     document.getElementById(
         "availableProperties"
     ).textContent =
-    available;
+        available;
 
 
     document.getElementById(
         "soldProperties"
     ).textContent =
-    sold;
+        sold;
 
 
     document.getElementById(
         "rentedProperties"
     ).textContent =
-    rented;
+        rented;
 
 }
 
 
-/* =====================================================
+/* =========================================================
+   FILTER EVENTS
+========================================================= */
+
+document
+    .getElementById(
+        "propertySearch"
+    )
+    .addEventListener(
+        "input",
+        renderProperties
+    );
+
+
+document
+    .getElementById(
+        "filterStatus"
+    )
+    .addEventListener(
+        "change",
+        renderProperties
+    );
+
+
+document
+    .getElementById(
+        "filterType"
+    )
+    .addEventListener(
+        "change",
+        renderProperties
+    );
+
+
+document
+    .getElementById(
+        "filterPurpose"
+    )
+    .addEventListener(
+        "change",
+        renderProperties
+    );
+
+
+document
+    .getElementById(
+        "filterFeatured"
+    )
+    .addEventListener(
+        "change",
+        renderProperties
+    );
+
+
+/* =========================================================
    REFRESH
-===================================================== */
+========================================================= */
 
-refreshButton.addEventListener(
-"click",
-async()=>{
+async function refreshAdmin(){
 
-    refreshButton.disabled =
-    true;
+    if(!currentUser){
 
-    refreshButton.textContent =
-    "Refreshing...";
+        return;
+
+    }
+
+
+    clearMessage();
 
 
     try{
 
-        await loadAdminProfile(
-            currentUser
-        );
-
-        await loadCompanySettings();
+        await loadCompany();
 
         await loadSubscription();
 
@@ -5006,8 +5456,7 @@ async()=>{
 
 
         showMessage(
-            "dashboardMessage",
-            "Dashboard refreshed successfully.",
+            "Admin data refreshed successfully.",
             "success"
         );
 
@@ -5015,71 +5464,273 @@ async()=>{
 
     catch(error){
 
-        console.error(
-            "Refresh error:",
-            error
-        );
-
-
         showMessage(
-            "dashboardMessage",
             firebaseError(error),
             "error"
         );
 
     }
 
-    finally{
+}
 
-        refreshButton.disabled =
-        false;
 
-        refreshButton.textContent =
-        "Refresh";
+document
+    .getElementById(
+        "refreshButton"
+    )
+    .addEventListener(
+        "click",
+        refreshAdmin
+    );
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+loginForm.addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
+
+        const email =
+            loginEmail.value.trim();
+
+
+        const password =
+            loginPassword.value;
+
+
+        if(!email || !password){
+
+            showLoginMessage(
+                "Please enter email and password.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        loginButton.disabled =
+            true;
+
+        loginButton.textContent =
+            "Signing in...";
+
+
+        try{
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+            showLoginMessage(
+                "Login successful.",
+                "success"
+            );
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+            showLoginMessage(
+                firebaseError(error),
+                "error"
+            );
+
+        }
+
+        finally{
+
+            loginButton.disabled =
+                false;
+
+            loginButton.textContent =
+                "Login";
+
+        }
 
     }
+);
 
-});
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document
+    .getElementById(
+        "logoutButton"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            try{
+
+                await signOut(auth);
+
+            }
+
+            catch(error){
+
+                console.error(
+                    "Logout error:",
+                    error
+                );
+
+            }
+
+        }
+    );
 
 
-/* =====================================================
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+onAuthStateChanged(
+    auth,
+    async user => {
+
+        if(!user){
+
+            currentUser =
+                null;
+
+            currentCompanyId =
+                null;
+
+            adminScreen.style.display =
+                "none";
+
+            loginScreen.style.display =
+                "flex";
+
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        try{
+
+            loginScreen.style.display =
+                "none";
+
+            adminScreen.style.display =
+                "block";
+
+
+            await loadAdminProfile();
+
+            await loadCompany();
+
+            await loadSubscription();
+
+            await loadProperties();
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+
+            adminScreen.style.display =
+                "none";
+
+            loginScreen.style.display =
+                "flex";
+
+
+            showLoginMessage(
+                firebaseError(error),
+                "error"
+            );
+
+
+            try{
+
+                await signOut(auth);
+
+            }
+
+            catch(signOutError){
+
+                console.error(
+                    signOutError
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
    DEBUG
-===================================================== */
+========================================================= */
 
 window.estatePro = {
 
-    auth,
+    get currentUser(){
 
-    db,
+        return currentUser;
 
-    getCurrentUser:
-    ()=>currentUser,
+    },
 
-    getCurrentCompanyId:
-    ()=>currentCompanyId,
+    get currentCompanyId(){
 
-    getCurrentSubscription:
-    ()=>currentSubscription,
+        return currentCompanyId;
 
-    getSubscriptionAmount,
+    },
 
-    formatSubscriptionAmount,
+    get currentCompany(){
 
-    loadProperties,
+        return currentCompany;
 
-    loadCompanySettings,
+    },
 
-    loadSubscription,
+    get currentSubscription(){
 
-    editProperty,
+        return currentSubscription;
 
-    calculateDaysLeft,
+    },
 
-    getEffectiveStatus
+    get properties(){
+
+        return allProperties;
+
+    },
+
+    refresh:
+        refreshAdmin,
+
+    loadProperties:
+        loadProperties,
+
+    loadSubscription:
+        loadSubscription
 
 };
 
 </script>
 
 </body>
+
 </html>
