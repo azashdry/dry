@@ -1,18 +1,20 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+// firebase.js - DeepBuild
+// Duk sauran fayiloli suna shigo da app, auth, db daga nan.
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAE44DxNnqz3m8ScqaZxoSj2FdQ7aJ2NIg",
-  authDomain: "estate-pro-d564b.firebaseapp.com",
-  projectId: "estate-pro-d564b",
-  storageBucket: "estate-pro-d564b.firebasestorage.app",
-  messagingSenderId: "600309829118",
-  appId: "1:600309829118:web:60c61624ca8cdf05e884af",
-  measurementId: "G-TG60FCJHXB"
+  apiKey: "AIzaSyADxFOQ1vtMGHtaa1kKBRwYTK_CZ_YvuAQ",
+  authDomain: "deepbuild-ai.firebaseapp.com",
+  projectId: "deepbuild-ai",
+  storageBucket: "deepbuild-ai.firebasestorage.app",
+  messagingSenderId: "437150594307",
+  appId: "1:437150594307:web:defa8b45fc14473e5b6536",
+  measurementId: "G-QBKE8R7SRF"
 };
 
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-export { app, db };
+export const app  = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db   = getFirestore(app);

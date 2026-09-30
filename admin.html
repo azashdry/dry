@@ -1,5545 +1,766 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="theme-color" content="#0f766e">
-
-<title>EstatePro Admin</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepBuild Admin</title>
 <style>
-
-*{
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    margin:0;
-    font-family:Inter,Arial,sans-serif;
-    background:#f4f7fb;
-    color:#17202a;
-}
-
-button,
-input,
-select,
-textarea{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-.hidden{
-    display:none!important;
-}
-
-/* ================================
-   LOGIN
-================================ */
-
-.login-screen{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:#f4f7fb;
-}
-
-.login-box{
-    width:100%;
-    max-width:430px;
-    background:#fff;
-    border:1px solid #e5e7eb;
-    border-radius:20px;
-    padding:30px;
-    box-shadow:0 15px 45px rgba(15,23,42,.08);
-}
-
-.login-logo{
-    width:58px;
-    height:58px;
-    margin:0 auto 18px;
-    border-radius:15px;
-    background:#ecfdf5;
-    color:#0f766e;
-    display:grid;
-    place-items:center;
-    font-size:25px;
-    font-weight:800;
-    overflow:hidden;
-}
-
-.login-logo img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
-
-.login-box h1{
-    text-align:center;
-    margin:0 0 7px;
-    font-size:25px;
-}
-
-.login-box p{
-    text-align:center;
-    color:#64748b;
-    font-size:13px;
-    line-height:1.6;
-    margin:0 0 25px;
-}
-
-.form-group{
-    margin-bottom:16px;
-}
-
-.form-group label{
-    display:block;
-    font-size:12px;
-    font-weight:700;
-    margin-bottom:7px;
-    color:#334155;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea{
-    width:100%;
-    border:1px solid #cbd5e1;
-    border-radius:9px;
-    padding:11px 12px;
-    outline:none;
-    background:#fff;
-    color:#17202a;
-}
-
-.form-group textarea{
-    min-height:120px;
-    resize:vertical;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-    border-color:#0f766e;
-    box-shadow:0 0 0 3px rgba(15,118,110,.08);
-}
-
-.login-button{
-    width:100%;
-    border:0;
-    background:#0f766e;
-    color:#fff;
-    padding:13px;
-    border-radius:9px;
-    font-weight:800;
-}
-
-.login-button:hover{
-    background:#115e59;
-}
-
-.login-button:disabled{
-    opacity:.6;
-    cursor:not-allowed;
-}
-
-/* ================================
-   MESSAGE
-================================ */
-
-.message{
-    padding:13px 15px;
-    border-radius:10px;
-    margin-bottom:18px;
-    font-size:12px;
-    line-height:1.6;
-}
-
-.message.success{
-    background:#ecfdf5;
-    color:#065f46;
-    border:1px solid #a7f3d0;
-}
-
-.message.error{
-    background:#fef2f2;
-    color:#991b1b;
-    border:1px solid #fecaca;
-}
-
-.message.warning{
-    background:#fffbeb;
-    color:#92400e;
-    border:1px solid #fde68a;
-}
-
-/* ================================
-   ADMIN
-================================ */
-
-.admin-screen{
-    display:none;
-}
-
-.admin-header{
-    background:#fff;
-    border-bottom:1px solid #e5e7eb;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-.admin-header-inner{
-    max-width:1250px;
-    margin:auto;
-    padding:12px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.brand-icon{
-    width:43px;
-    height:43px;
-    border-radius:12px;
-    background:#ecfdf5;
-    color:#0f766e;
-    display:grid;
-    place-items:center;
-    font-size:19px;
-    font-weight:800;
-    overflow:hidden;
-}
-
-.brand-icon img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
-
-.brand-name{
-    font-size:16px;
-    font-weight:800;
-}
-
-.brand-subtitle{
-    color:#64748b;
-    font-size:10px;
-    margin-top:2px;
-}
-
-.header-actions{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.header-button{
-    border:1px solid #d7dde3;
-    background:#fff;
-    color:#334155;
-    padding:8px 11px;
-    border-radius:8px;
-    font-size:11px;
-    font-weight:700;
-}
-
-.header-button:hover{
-    background:#f8fafc;
-}
-
-.header-button.primary{
-    background:#0f766e;
-    border-color:#0f766e;
-    color:#fff;
-}
-
-.header-button.danger{
-    color:#b91c1c;
-}
-
-/* ================================
-   MAIN
-================================ */
-
-.admin-main{
-    max-width:1250px;
-    margin:auto;
-    padding:25px 18px 60px;
-}
-
-/* ================================
-   COMPANY BAR
-================================ */
-
-.company-bar{
-    background:#fff;
-    border:1px solid #e5e7eb;
-    border-radius:14px;
-    padding:15px 18px;
-    margin-bottom:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-}
-
-.company-bar-left{
-    min-width:0;
-}
-
-.company-label{
-    color:#64748b;
-    font-size:10px;
-    margin-bottom:4px;
-}
-
-.company-title{
-    font-size:17px;
-    font-weight:800;
-    word-break:break-word;
-}
-
-.company-id{
-    color:#64748b;
-    font-size:10px;
-    margin-top:3px;
-    word-break:break-all;
-}
-
-.subscription-link{
-    border:0;
-    background:#0f766e;
-    color:#fff;
-    padding:10px 14px;
-    border-radius:8px;
-    font-size:11px;
-    font-weight:800;
-    white-space:nowrap;
-}
-
-.subscription-link:hover{
-    background:#115e59;
-}
-
-/* ================================
-   SUBSCRIPTION
-================================ */
-
-.subscription-card{
-    background:#fff;
-    border:1px solid #e5e7eb;
-    border-radius:16px;
-    padding:18px;
-    margin-bottom:20px;
-}
-
-.subscription-heading{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    margin-bottom:15px;
-}
-
-.subscription-heading h2{
-    margin:0 0 4px;
-    font-size:16px;
-}
-
-.subscription-heading p{
-    margin:0;
-    color:#64748b;
-    font-size:11px;
-}
-
-.subscription-status{
-    display:inline-flex;
-    align-items:center;
-    gap:5px;
-    padding:6px 9px;
-    border-radius:999px;
-    font-size:10px;
-    font-weight:800;
-    text-transform:uppercase;
-    background:#dcfce7;
-    color:#166534;
-}
-
-.subscription-status.expired{
-    background:#fee2e2;
-    color:#b91c1c;
-}
-
-.subscription-status.pending{
-    background:#fef3c7;
-    color:#92400e;
-}
-
-.subscription-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:10px;
-}
-
-.subscription-item{
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    border-radius:10px;
-    padding:12px;
-}
-
-.subscription-label{
-    color:#64748b;
-    font-size:9px;
-    margin-bottom:5px;
-}
-
-.subscription-value{
-    font-size:12px;
-    font-weight:800;
-    word-break:break-word;
-}
-
-/* ================================
-   STATS
-================================ */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-    margin-bottom:22px;
-}
-
-.stat{
-    background:#fff;
-    border:1px solid #e5e7eb;
-    border-radius:14px;
-    padding:17px;
-}
-
-.stat-label{
-    color:#64748b;
-    font-size:11px;
-    margin-bottom:7px;
-}
-
-.stat-value{
-    font-size:25px;
-    font-weight:800;
-    color:#0f766e;
-}
-
-/* ================================
-   SECTION
-================================ */
-
-.section{
-    background:#fff;
-    border:1px solid #e5e7eb;
-    border-radius:16px;
-    padding:20px;
-    margin-bottom:20px;
-}
-
-.section-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:15px;
-    margin-bottom:18px;
-}
-
-.section-header h2{
-    margin:0 0 4px;
-    font-size:18px;
-}
-
-.section-header p{
-    margin:0;
-    color:#64748b;
-    font-size:11px;
-}
-
-/* ================================
-   FORM GRID
-================================ */
-
-.form-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:0 16px;
-}
-
-.full{
-    grid-column:1/-1;
-}
-
-.checkbox-row{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin:3px 0 17px;
-    font-size:12px;
-    font-weight:700;
-}
-
-.checkbox-row input{
-    width:16px;
-    height:16px;
-    accent-color:#0f766e;
-}
-
-/* ================================
-   IMAGE INPUTS
-================================ */
-
-.image-input-wrap{
-    margin-bottom:16px;
-}
-
-.image-input-label{
-    display:block;
-    font-size:12px;
-    font-weight:700;
-    margin-bottom:7px;
-    color:#334155;
-}
-
-.image-input-row{
-    display:block;
-}
-
-.image-input{
-    width:100%;
-    border:1px solid #cbd5e1;
-    border-radius:9px;
-    padding:11px 12px;
-    outline:none;
-}
-
-.image-input:focus{
-    border-color:#0f766e;
-}
-
-.image-preview{
-    width:100%;
-    height:125px;
-    margin-top:8px;
-    border:1px dashed #cbd5e1;
-    border-radius:9px;
-    background:#f8fafc;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    color:#94a3b8;
-    font-size:10px;
-    text-align:center;
-}
-
-.image-preview img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.image-preview.invalid{
-    color:#b91c1c;
-    background:#fef2f2;
-    border-color:#fecaca;
-}
-
-/* ================================
-   LOGO PREVIEW
-================================ */
-
-.logo-preview{
-    width:90px;
-    height:90px;
-    border:1px dashed #cbd5e1;
-    border-radius:12px;
-    background:#f8fafc;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    margin-top:8px;
-    color:#94a3b8;
-    font-size:10px;
-}
-
-.logo-preview img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
-
-/* ================================
-   BUTTONS
-================================ */
-
-.form-actions{
-    display:flex;
-    gap:9px;
-    flex-wrap:wrap;
-    margin-top:5px;
-}
-
-.primary-button{
-    border:0;
-    background:#0f766e;
-    color:#fff;
-    padding:11px 17px;
-    border-radius:9px;
-    font-size:12px;
-    font-weight:800;
-}
-
-.primary-button:hover{
-    background:#115e59;
-}
-
-.primary-button:disabled{
-    opacity:.6;
-    cursor:not-allowed;
-}
-
-.secondary-button{
-    border:1px solid #d7dde3;
-    background:#fff;
-    color:#334155;
-    padding:10px 17px;
-    border-radius:9px;
-    font-size:12px;
-    font-weight:700;
-}
-
-.secondary-button:hover{
-    background:#f8fafc;
-}
-
-/* ================================
-   PROPERTY TOOLBAR
-================================ */
-
-.property-toolbar{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr 1fr;
-    gap:9px;
-    margin-bottom:18px;
-}
-
-.property-toolbar input,
-.property-toolbar select{
-    width:100%;
-    padding:10px 11px;
-    border:1px solid #cbd5e1;
-    border-radius:8px;
-    outline:none;
-    background:#fff;
-    font-size:11px;
-}
-
-.property-toolbar input:focus,
-.property-toolbar select:focus{
-    border-color:#0f766e;
-}
-
-/* ================================
-   PROPERTIES
-================================ */
-
-.properties-list{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.property-card{
-    border:1px solid #e2e8f0;
-    border-radius:13px;
-    overflow:hidden;
-    background:#fff;
-    transition:.2s ease;
-}
-
-.property-card:hover{
-    box-shadow:0 8px 25px rgba(15,23,42,.07);
-}
-
-.property-image{
-    height:190px;
-    background:#f1f5f9;
-    position:relative;
-    overflow:hidden;
-}
-
-.property-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.property-placeholder{
-    width:100%;
-    height:100%;
-    display:grid;
-    place-items:center;
-    color:#94a3b8;
-    font-size:11px;
-}
-
-.property-badges{
-    position:absolute;
-    top:9px;
-    left:9px;
-    right:9px;
-    display:flex;
-    justify-content:space-between;
-    gap:6px;
-}
-
-.badge{
-    padding:5px 7px;
-    border-radius:6px;
-    background:#fff;
-    color:#334155;
-    font-size:9px;
-    font-weight:800;
-    box-shadow:0 2px 7px rgba(0,0,0,.08);
-}
-
-.badge.featured{
-    background:#fef3c7;
-    color:#92400e;
-}
-
-.badge.available{
-    background:#dcfce7;
-    color:#166534;
-}
-
-.badge.sold,
-.badge.rented{
-    background:#fee2e2;
-    color:#b91c1c;
-}
-
-.property-content{
-    padding:14px;
-}
-
-.property-title{
-    font-size:14px;
-    font-weight:800;
-    margin-bottom:5px;
-    line-height:1.4;
-}
-
-.property-location{
-    color:#64748b;
-    font-size:10px;
-    margin-bottom:10px;
-}
-
-.property-price{
-    color:#0f766e;
-    font-size:16px;
-    font-weight:800;
-    margin-bottom:10px;
-}
-
-.property-meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    margin-bottom:12px;
-}
-
-.meta{
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    border-radius:6px;
-    padding:5px 7px;
-    color:#475569;
-    font-size:9px;
-}
-
-.property-description{
-    color:#64748b;
-    font-size:10px;
-    line-height:1.5;
-    margin-bottom:12px;
-    display:-webkit-box;
-    -webkit-line-clamp:3;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
-}
-
-.property-actions{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:6px;
-}
-
-.property-action{
-    border:1px solid #d7dde3;
-    background:#fff;
-    color:#334155;
-    padding:8px 5px;
-    border-radius:7px;
-    font-size:9px;
-    font-weight:800;
-}
-
-.property-action:hover{
-    background:#f8fafc;
-}
-
-.property-action.delete{
-    color:#b91c1c;
-    border-color:#fecaca;
-}
-
-.property-action.delete:hover{
-    background:#fef2f2;
-}
-
-.empty-state{
-    grid-column:1/-1;
-    padding:45px 20px;
-    text-align:center;
-    color:#64748b;
-    border:1px dashed #cbd5e1;
-    border-radius:12px;
-}
-
-.empty-state strong{
-    display:block;
-    color:#334155;
-    margin-bottom:5px;
-}
-
-/* ================================
-   LOADING
-================================ */
-
-.loading{
-    text-align:center;
-    padding:35px 20px;
-    color:#64748b;
-    font-size:12px;
-}
-
-.spinner{
-    width:30px;
-    height:30px;
-    border:3px solid #d1fae5;
-    border-top-color:#0f766e;
-    border-radius:50%;
-    margin:0 auto 12px;
-    animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* ================================
-   MODAL
-================================ */
-
-.modal{
-    position:fixed;
-    inset:0;
-    z-index:1000;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:18px;
-    background:rgba(15,23,42,.7);
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:100%;
-    max-width:470px;
-    background:#fff;
-    border-radius:16px;
-    padding:25px;
-    position:relative;
-}
-
-.modal-close{
-    position:absolute;
-    top:10px;
-    right:10px;
-    width:34px;
-    height:34px;
-    border:0;
-    border-radius:50%;
-    background:#f1f5f9;
-    color:#334155;
-    font-size:19px;
-}
-
-.modal-box h2{
-    margin:0 0 7px;
-    font-size:20px;
-}
-
-.modal-box p{
-    color:#64748b;
-    font-size:12px;
-    line-height:1.6;
-}
-
-.modal-actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    margin-top:18px;
-}
-
-/* ================================
-   FOOTER
-================================ */
-
-.footer{
-    text-align:center;
-    color:#94a3b8;
-    font-size:10px;
-    padding:20px;
-}
-
-/* ================================
-   RESPONSIVE
-================================ */
-
-@media(max-width:1050px){
-
-    .subscription-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-    .properties-list{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .property-toolbar{
-        grid-template-columns:2fr 1fr 1fr;
-    }
-
-}
-
-@media(max-width:800px){
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .full{
-        grid-column:auto;
-    }
-
-    .subscription-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .property-toolbar{
-        grid-template-columns:1fr 1fr;
-    }
-
-}
-
-@media(max-width:600px){
-
-    .admin-header-inner{
-        padding:10px 13px;
-    }
-
-    .brand-subtitle{
-        display:none;
-    }
-
-    .header-actions{
-        gap:5px;
-    }
-
-    .header-button{
-        padding:7px 8px;
-        font-size:9px;
-    }
-
-    .admin-main{
-        padding:18px 13px 45px;
-    }
-
-    .company-bar{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-
-    .subscription-link{
-        width:100%;
-    }
-
-    .subscription-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .stats{
-        gap:9px;
-    }
-
-    .stat{
-        padding:13px;
-    }
-
-    .stat-value{
-        font-size:21px;
-    }
-
-    .section{
-        padding:15px;
-    }
-
-    .properties-list{
-        grid-template-columns:1fr;
-    }
-
-    .property-toolbar{
-        grid-template-columns:1fr;
-    }
-
-    .form-actions{
-        flex-direction:column;
-    }
-
-    .form-actions button{
-        width:100%;
-    }
-
-    .property-actions{
-        grid-template-columns:1fr 1fr 1fr;
-    }
-
-    .modal-actions{
-        grid-template-columns:1fr;
-    }
-
-    .login-box{
-        padding:23px;
-    }
-
-}
-
+  :root{
+    --bg:#0b1020; --panel:#121a30; --line:#243052;
+    --text:#e8ecf7; --muted:#8b97b8; --blue:#2f6bff; --red:#ff6b6b; --green:#3ddc97; --amber:#f5b942;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  h1{margin:0;font-size:1.4rem} h1 span{color:var(--blue)}
+  h2{margin:0;font-size:1.15rem}
+  label{display:block;font-size:.85rem;color:var(--muted);margin:14px 0 6px}
+  input,select,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid var(--line);
+    background:var(--bg);color:var(--text);font-size:1rem;font-family:inherit}
+  textarea{min-height:90px;resize:vertical}
+  input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+  button{padding:11px 16px;border:0;border-radius:8px;background:var(--blue);color:#fff;
+    font-size:.95rem;font-weight:600;cursor:pointer}
+  button:disabled{opacity:.6;cursor:wait}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+  button.danger{background:transparent;border:1px solid var(--red);color:var(--red)}
+  .check{display:flex;align-items:center;gap:10px;margin-top:14px;color:var(--text);font-size:.95rem}
+  .check input{width:auto}
+
+  #loginWrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .box{width:100%;max-width:400px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px}
+  .box button{width:100%;margin-top:20px;padding:13px}
+  p.sub{margin:4px 0 20px;color:var(--muted);font-size:.95rem}
+  .pw{position:relative}
+  .pw input{padding-right:70px}
+  .box .pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:auto;margin:0;padding:6px 10px;background:transparent;color:var(--muted);font-size:.85rem}
+  .box .link{width:auto;margin:14px 0 0;padding:0;background:transparent;color:var(--blue);font-size:.9rem;font-weight:600}
+  #msg{margin-top:14px;font-size:.9rem;min-height:1.2em;color:var(--red);word-break:break-word}
+
+  #dashboard{display:none;max-width:980px;margin:0 auto;padding:18px}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .who{color:var(--green);font-size:.85rem;margin-top:4px}
+  nav{display:flex;gap:8px;border-bottom:1px solid var(--line);margin-bottom:18px}
+  nav button{background:transparent;color:var(--muted);border-radius:8px 8px 0 0;padding:12px 18px}
+  nav button.on{color:var(--text);box-shadow:inset 0 -2px 0 var(--blue)}
+  .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+  .list{display:grid;gap:12px}
+  .item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .item h3{margin:0 0 4px;font-size:1.05rem}
+  .meta{color:var(--muted);font-size:.85rem;margin-bottom:10px}
+  .tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.78rem;border:1px solid var(--line);margin-right:6px}
+  .tag.live{color:var(--green);border-color:var(--green)}
+  .tag.draft{color:var(--amber);border-color:var(--amber)}
+  .actions{display:flex;gap:8px;flex-wrap:wrap}
+  .actions button{padding:8px 14px;font-size:.85rem}
+  .empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+.stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin-bottom:22px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .stat .n{font-size:1.9rem;font-weight:700;line-height:1.1}
+  .stat .l{color:var(--muted);font-size:.85rem;margin-top:6px}
+  .stat .s{color:var(--muted);font-size:.78rem;margin-top:2px}
+  .stat.good .n{color:var(--green)}
+  .rank{display:grid;gap:12px}
+  .rank .r{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;font-size:.92rem}
+  .rank .r b{font-weight:600}
+  .rank .r span{color:var(--muted);font-size:.85rem}
+  .rank .r i{grid-column:1/-1;display:block;height:6px;border-radius:99px;background:var(--blue)}
+  dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:14px;
+    width:min(520px,94vw);padding:22px;max-height:92vh;overflow:auto}
+  dialog::backdrop{background:rgba(0,0,0,.6)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .foot{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+  #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--panel);
+    border:1px solid var(--line);padding:12px 18px;border-radius:10px;display:none;max-width:90vw}
 </style>
-
 </head>
-
 <body>
 
-<section
-    id="loginScreen"
-    class="login-screen"
->
-
-    <div class="login-box">
-
-        <div
-            id="loginLogo"
-            class="login-logo"
-        >
-            E
-        </div>
-
-        <h1>
-            EstatePro Admin
-        </h1>
-
-        <p>
-            Sign in to manage your company's
-            properties and website settings.
-        </p>
-
-        <div
-            id="loginMessage"
-            class="message hidden"
-        ></div>
-
-        <form id="loginForm">
-
-            <div class="form-group">
-
-                <label for="loginEmail">
-                    Email Address
-                </label>
-
-                <input
-                    id="loginEmail"
-                    type="email"
-                    placeholder="admin@example.com"
-                    autocomplete="email"
-                    required
-                >
-
-            </div>
-
-            <div class="form-group">
-
-                <label for="loginPassword">
-                    Password
-                </label>
-
-                <input
-                    id="loginPassword"
-                    type="password"
-                    placeholder="Enter password"
-                    autocomplete="current-password"
-                    required
-                >
-
-            </div>
-
-            <button
-                id="loginButton"
-                class="login-button"
-                type="submit"
-            >
-                Login
-            </button>
-
-        </form>
-
-    </div>
-
-</section>
-
-<div
-    id="adminScreen"
-    class="admin-screen"
->
-
-    <header class="admin-header">
-
-        <div class="admin-header-inner">
-
-            <div class="brand">
-
-                <div
-                    id="brandIcon"
-                    class="brand-icon"
-                >
-                    E
-                </div>
-
-                <div>
-
-                    <div
-                        id="brandName"
-                        class="brand-name"
-                    >
-                        EstatePro
-                    </div>
-
-                    <div class="brand-subtitle">
-                        Administration Panel
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="header-actions">
-
-                <button
-                    id="refreshButton"
-                    class="header-button"
-                    type="button"
-                >
-                    Refresh
-                </button>
-
-                <button
-                    id="logoutButton"
-                    class="header-button danger"
-                    type="button"
-                >
-                    Logout
-                </button>
-
-            </div>
-
-        </div>
-
-    </header>
-
-    <main class="admin-main">
-
-        <div
-            id="message"
-            class="message hidden"
-        ></div>
-
-        <div class="company-bar">
-
-            <div class="company-bar-left">
-
-                <div class="company-label">
-                    CURRENT COMPANY
-                </div>
-
-                <div
-                    id="companyTitle"
-                    class="company-title"
-                >
-                    Loading...
-                </div>
-
-                <div
-                    id="companyId"
-                    class="company-id"
-                >
-                    Company ID: --
-                </div>
-
-            </div>
-
-            <button
-                id="subscriptionButton"
-                class="subscription-link"
-                type="button"
-            >
-                Manage Subscription
-            </button>
-
-        </div>
-
-        <section class="subscription-card">
-
-            <div class="subscription-heading">
-
-                <div>
-
-                    <h2>
-                        Subscription
-                    </h2>
-
-                    <p>
-                        Current subscription status
-                    </p>
-
-                </div>
-
-                <span
-                    id="subscriptionStatus"
-                    class="subscription-status"
-                >
-                    ● Checking
-                </span>
-
-            </div>
-
-            <div class="subscription-grid">
-
-                <div class="subscription-item">
-
-                    <div class="subscription-label">
-                        PLAN
-                    </div>
-
-                    <div
-                        id="subscriptionPlan"
-                        class="subscription-value"
-                    >
-                        --
-                    </div>
-
-                </div>
-
-                <div class="subscription-item">
-
-                    <div class="subscription-label">
-                        AMOUNT
-                    </div>
-
-                    <div
-                        id="subscriptionAmount"
-                        class="subscription-value"
-                    >
-                        --
-                    </div>
-
-                </div>
-
-                <div class="subscription-item">
-
-                    <div class="subscription-label">
-                        EXPIRES
-                    </div>
-
-                    <div
-                        id="subscriptionExpiry"
-                        class="subscription-value"
-                    >
-                        --
-                    </div>
-
-                </div>
-
-                <div class="subscription-item">
-
-                    <div class="subscription-label">
-                        REMAINING
-                    </div>
-
-                    <div
-                        id="subscriptionRemaining"
-                        class="subscription-value"
-                    >
-                        --
-                    </div>
-
-                </div>
-
-                <div class="subscription-item">
-
-                    <div class="subscription-label">
-                        PAYMENT
-                    </div>
-
-                    <div
-                        id="subscriptionPayment"
-                        class="subscription-value"
-                    >
-                        --
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <div class="stats">
-
-            <div class="stat">
-
-                <div class="stat-label">
-                    Total Properties
-                </div>
-
-                <div
-                    id="totalProperties"
-                    class="stat-value"
-                >
-                    0
-                </div>
-
-            </div>
-
-            <div class="stat">
-
-                <div class="stat-label">
-                    Available
-                </div>
-
-                <div
-                    id="availableProperties"
-                    class="stat-value"
-                >
-                    0
-                </div>
-
-            </div>
-
-            <div class="stat">
-
-                <div class="stat-label">
-                    Sold
-                </div>
-
-                <div
-                    id="soldProperties"
-                    class="stat-value"
-                >
-                    0
-                </div>
-
-            </div>
-
-            <div class="stat">
-
-                <div class="stat-label">
-                    Rented
-                </div>
-
-                <div
-                    id="rentedProperties"
-                    class="stat-value"
-                >
-                    0
-                </div>
-
-            </div>
-
-        </div>
-
-        <section class="section">
-
-            <div class="section-header">
-
-                <div>
-
-                    <h2>
-                        Company Settings
-                    </h2>
-
-                    <p>
-                        Update your company's website information.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <form id="companyForm">
-
-                <div class="form-grid">
-
-                    <div class="form-group">
-
-                        <label for="companyNameInput">
-                            Company Name
-                        </label>
-
-                        <input
-                            id="companyNameInput"
-                            type="text"
-                            placeholder="Company name"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="companyPhone">
-                            Phone
-                        </label>
-
-                        <input
-                            id="companyPhone"
-                            type="text"
-                            placeholder="+234..."
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="companyWhatsApp">
-                            WhatsApp
-                        </label>
-
-                        <input
-                            id="companyWhatsApp"
-                            type="text"
-                            placeholder="+234..."
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="companyEmail">
-                            Email
-                        </label>
-
-                        <input
-                            id="companyEmail"
-                            type="email"
-                            placeholder="company@example.com"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="companyAddress">
-                            Address
-                        </label>
-
-                        <input
-                            id="companyAddress"
-                            type="text"
-                            placeholder="Company address"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="companyLogo">
-                            Logo URL
-                        </label>
-
-                        <input
-                            id="companyLogo"
-                            type="url"
-                            placeholder="https://..."
-                        >
-
-                        <div
-                            id="companyLogoPreview"
-                            class="logo-preview"
-                        >
-                            Logo Preview
-                        </div>
-
-                    </div>
-
-                    <div class="form-group full">
-
-                        <label for="companyDescription">
-                            Company Description
-                        </label>
-
-                        <textarea
-                            id="companyDescription"
-                            placeholder="Tell customers about the company..."
-                        ></textarea>
-
-                    </div>
-
-                </div>
-
-                <div class="form-actions">
-
-                    <button
-                        id="saveCompanyButton"
-                        class="primary-button"
-                        type="submit"
-                    >
-                        Save Company Settings
-                    </button>
-
-                </div>
-
-            </form>
-
-        </section>
-
-        <section class="section">
-
-            <div class="section-header">
-
-                <div>
-
-                    <h2 id="propertyFormTitle">
-                        Add Property
-                    </h2>
-
-                    <p>
-                        Add or update a property on your website.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <form id="propertyForm">
-
-                <div class="form-grid">
-
-                    <div class="form-group">
-
-                        <label for="propertyTitle">
-                            Property Title
-                        </label>
-
-                        <input
-                            id="propertyTitle"
-                            type="text"
-                            placeholder="Beautiful 3 Bedroom House"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="propertyType">
-                            Property Type
-                        </label>
-
-                        <select
-                            id="propertyType"
-                            required
-                        >
-
-                            <option value="">
-                                Select type
-                            </option>
-
-                            <option value="House">
-                                House
-                            </option>
-
-                            <option value="Apartment">
-                                Apartment
-                            </option>
-
-                            <option value="Duplex">
-                                Duplex
-                            </option>
-
-                            <option value="Land">
-                                Land
-                            </option>
-
-                            <option value="Office">
-                                Office
-                            </option>
-
-                            <option value="Shop">
-                                Shop
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="propertyStatus">
-                            Status
-                        </label>
-
-                        <select
-                            id="propertyStatus"
-                            required
-                        >
-
-                            <option value="available">
-                                Available
-                            </option>
-
-                            <option value="sold">
-                                Sold
-                            </option>
-
-                            <option value="rented">
-                                Rented
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="propertyPurpose">
-                            Purpose
-                        </label>
-
-                        <select
-                            id="propertyPurpose"
-                            required
-                        >
-
-                            <option value="sale">
-                                For Sale
-                            </option>
-
-                            <option value="rent">
-                                For Rent
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="propertyLocation">
-                            Location
-                        </label>
-
-                        <input
-                            id="propertyLocation"
-                            type="text"
-                            placeholder="Kano, Nigeria"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="propertyPrice">
-                            Price
-                        </label>
-
-                        <input
-                            id="propertyPrice"
-                            type="number"
-                            min="0"
-                            placeholder="45000000"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="propertyBedrooms">
-                            Bedrooms
-                        </label>
-
-                        <input
-                            id="propertyBedrooms"
-                            type="number"
-                            min="0"
-                            max="20"
-                            value="0"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="propertyBathrooms">
-                            Bathrooms
-                        </label>
-
-                        <input
-                            id="propertyBathrooms"
-                            type="number"
-                            min="0"
-                            max="20"
-                            value="0"
-                        >
-
-                    </div>
-
-                    <!-- KITCHEN ADDED ONLY -->
-
-                    <div class="form-group">
-
-                        <label for="propertyKitchen">
-                            Kitchen
-                        </label>
-
-                        <select id="propertyKitchen">
-
-                            <option value="">
-                                Select Kitchen
-                            </option>
-
-                            <option value="Yes">
-                                Yes
-                            </option>
-
-                            <option value="No">
-                                No
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="propertyArea">
-                            Area
-                        </label>
-
-                        <input
-                            id="propertyArea"
-                            type="text"
-                            placeholder="500 sqm"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <div class="image-input-wrap">
-
-                            <label
-                                class="image-input-label"
-                                for="propertyImage1"
-                            >
-                                Property Image 1
-                            </label>
-
-                            <input
-                                id="propertyImage1"
-                                class="image-input"
-                                type="url"
-                                placeholder="https://image-url-1.jpg"
-                                autocomplete="off"
-                            >
-
-                            <div
-                                id="propertyImagePreview1"
-                                class="image-preview"
-                            >
-                                Image 1 Preview
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <div class="image-input-wrap">
-
-                            <label
-                                class="image-input-label"
-                                for="propertyImage2"
-                            >
-                                Property Image 2
-                            </label>
-
-                            <input
-                                id="propertyImage2"
-                                class="image-input"
-                                type="url"
-                                placeholder="https://image-url-2.jpg"
-                                autocomplete="off"
-                            >
-
-                            <div
-                                id="propertyImagePreview2"
-                                class="image-preview"
-                            >
-                                Image 2 Preview
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <div class="image-input-wrap">
-
-                            <label
-                                class="image-input-label"
-                                for="propertyImage3"
-                            >
-                                Property Image 3
-                            </label>
-
-                            <input
-                                id="propertyImage3"
-                                class="image-input"
-                                type="url"
-                                placeholder="https://image-url-3.jpg"
-                                autocomplete="off"
-                            >
-
-                            <div
-                                id="propertyImagePreview3"
-                                class="image-preview"
-                            >
-                                Image 3 Preview
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <div class="image-input-wrap">
-
-                            <label
-                                class="image-input-label"
-                                for="propertyImage4"
-                            >
-                                Property Image 4
-                            </label>
-
-                            <input
-                                id="propertyImage4"
-                                class="image-input"
-                                type="url"
-                                placeholder="https://image-url-4.jpg"
-                                autocomplete="off"
-                            >
-
-                            <div
-                                id="propertyImagePreview4"
-                                class="image-preview"
-                            >
-                                Image 4 Preview
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <div class="image-input-wrap">
-
-                            <label
-                                class="image-input-label"
-                                for="propertyImage5"
-                            >
-                                Property Image 5
-                            </label>
-
-                            <input
-                                id="propertyImage5"
-                                class="image-input"
-                                type="url"
-                                placeholder="https://image-url-5.jpg"
-                                autocomplete="off"
-                            >
-
-                            <div
-                                id="propertyImagePreview5"
-                                class="image-preview"
-                            >
-                                Image 5 Preview
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="form-group full">
-
-                        <label for="propertyDescription">
-                            Description
-                        </label>
-
-                        <textarea
-                            id="propertyDescription"
-                            placeholder="Describe this property..."
-                        ></textarea>
-
-                    </div>
-
-                </div>
-
-                <div class="checkbox-row">
-
-                    <input
-                        id="propertyFeatured"
-                        type="checkbox"
-                    >
-
-                    <label for="propertyFeatured">
-                        Mark as Featured Property
-                    </label>
-
-                </div>
-
-                <div class="form-actions">
-
-                    <button
-                        id="savePropertyButton"
-                        class="primary-button"
-                        type="submit"
-                    >
-                        Save Property
-                    </button>
-
-                    <button
-                        id="cancelPropertyButton"
-                        class="secondary-button hidden"
-                        type="button"
-                    >
-                        Cancel Edit
-                    </button>
-
-                </div>
-
-            </form>
-
-        </section>
-
-        <section class="section">
-
-            <div class="section-header">
-
-                <div>
-
-                    <h2>
-                        Properties
-                    </h2>
-
-                    <p>
-                        Manage all properties belonging to this company.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="property-toolbar">
-
-                <input
-                    id="propertySearch"
-                    type="search"
-                    placeholder="Search title, location, type..."
-                >
-
-                <select id="filterStatus">
-
-                    <option value="">
-                        All Status
-                    </option>
-
-                    <option value="available">
-                        Available
-                    </option>
-
-                    <option value="sold">
-                        Sold
-                    </option>
-
-                    <option value="rented">
-                        Rented
-                    </option>
-
-                </select>
-
-                <select id="filterType">
-
-                    <option value="">
-                        All Types
-                    </option>
-
-                    <option value="House">
-                        House
-                    </option>
-
-                    <option value="Apartment">
-                        Apartment
-                    </option>
-
-                    <option value="Duplex">
-                        Duplex
-                    </option>
-
-                    <option value="Land">
-                        Land
-                    </option>
-
-                    <option value="Office">
-                        Office
-                    </option>
-
-                    <option value="Shop">
-                        Shop
-                    </option>
-
-                </select>
-
-                <select id="filterPurpose">
-
-                    <option value="">
-                        All Purpose
-                    </option>
-
-                    <option value="sale">
-                        Sale
-                    </option>
-
-                    <option value="rent">
-                        Rent
-                    </option>
-
-                </select>
-
-                <select id="filterFeatured">
-
-                    <option value="">
-                        All Properties
-                    </option>
-
-                    <option value="featured">
-                        Featured
-                    </option>
-
-                    <option value="normal">
-                        Normal
-                    </option>
-
-                </select>
-
-            </div>
-
-            <div
-                id="propertiesList"
-                class="properties-list"
-            >
-
-                <div class="loading">
-
-                    <div class="spinner"></div>
-
-                    Loading properties...
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <footer class="footer">
-
-            EstatePro Admin Panel
-
-        </footer>
-
-    </main>
-
+<div id="loginWrap">
+  <button class="ghost langBtn" type="button" style="position:fixed;top:14px;right:14px">Hausa</button>
+  <div class="box">
+    <h1 data-no-i18n>Deep<span>Build</span> Admin</h1>
+    <p class="sub">Sign in with your admin account.</p>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="username" required>
+      <label for="password">Password</label>
+      <div class="pw">
+        <input id="password" type="password" autocomplete="current-password" required>
+        <button type="button" class="pwtoggle" data-target="password" aria-label="Show or hide password">Show</button>
+      </div>
+      <button id="loginBtn" type="submit">Sign in</button>
+      <button type="button" class="link" id="forgotBtn">Forgot password?</button>
+    </form>
+    <div id="msg" role="alert"></div>
+  </div>
 </div>
 
-<div
-    id="deleteModal"
-    class="modal"
->
-
-    <div class="modal-box">
-
-        <button
-            id="closeDeleteModal"
-            class="modal-close"
-            type="button"
-        >
-            ×
-        </button>
-
-        <h2>
-            Delete Property?
-        </h2>
-
-        <p>
-            This action will permanently remove this
-            property from this company's Firestore collection.
-        </p>
-
-        <div id="deletePropertyName"></div>
-
-        <div class="modal-actions">
-
-            <button
-                id="cancelDelete"
-                class="secondary-button"
-                type="button"
-            >
-                Cancel
-            </button>
-
-            <button
-                id="confirmDelete"
-                class="primary-button"
-                type="button"
-            >
-                Delete Property
-            </button>
-
-        </div>
-
+<div id="dashboard">
+  <div class="top">
+    <div>
+      <h1 data-no-i18n>Deep<span>Build</span> Admin</h1>
+      <div class="who" id="who"></div>
     </div>
+    <div style="display:flex;gap:8px"><button class="ghost langBtn" type="button">Hausa</button><button class="ghost" id="logoutBtn">Sign out</button></div>
+  </div>
 
+  <nav>
+    <button class="on" data-tab="overview">Overview</button>
+    <button data-tab="courses">Courses</button>
+    <button data-tab="users">Users</button>
+    <button data-tab="tools">Tools</button>
+    <button data-tab="settings">Settings</button>
+    <button data-tab="admins">Admins</button>
+  </nav>
+
+  <section id="tab-overview">
+    <div class="bar"><h2>Overview</h2><button class="ghost" id="refreshStats">Refresh</button></div>
+    <div class="stats" id="statGrid"></div>
+    <div class="item">
+      <h3>Top courses by enrollments</h3>
+      <div class="rank" id="topCourses" style="margin-top:14px"></div>
+    </div>
+  </section>
+
+  <section id="tab-courses" hidden>
+    <div class="bar">
+      <h2>Courses</h2>
+      <button id="addCourseBtn">Add course</button>
+    </div>
+    <div class="list" id="courseList"></div>
+  </section>
+
+  <section id="tab-tools" hidden>
+    <div class="bar"><h2>AI Tools</h2><button id="addToolBtn">Add tool</button></div>
+    <div class="list" id="toolList"></div>
+  </section>
+
+  <section id="tab-settings" hidden>
+    <div class="bar"><h2>Community settings</h2></div>
+    <form id="settingsForm" class="item">
+      <label for="sWhatsapp">WhatsApp group link</label>
+      <input id="sWhatsapp" type="url" placeholder="https://chat.whatsapp.com/...">
+      <label for="sMembers">Members text shown on the site</label>
+      <input id="sMembers" placeholder="5,000+ learners">
+      <div class="foot" style="justify-content:flex-start"><button type="submit" id="saveSettingsBtn">Save settings</button></div>
+    </form>
+  </section>
+
+  <section id="tab-admins" hidden>
+    <div class="bar"><h2>Admins</h2></div>
+    <form id="adminForm" class="item" style="margin-bottom:14px">
+      <h3>Add an admin</h3>
+      <div class="meta">The person must have signed up on the website first.</div>
+      <label for="aEmail">Email</label>
+      <input id="aEmail" type="email" required>
+      <label for="aRole">Role</label>
+      <select id="aRole">
+        <option value="admin">Admin</option>
+        <option value="contentManager">Content Manager</option>
+        <option value="moderator">Moderator</option>
+        <option value="support">Support</option>
+      </select>
+      <div class="foot" style="justify-content:flex-start"><button type="submit" id="addAdminBtn">Add admin</button></div>
+    </form>
+    <div class="list" id="adminList"></div>
+  </section>
+
+  <section id="tab-users" hidden>
+    <div class="bar">
+      <h2>Users</h2>
+      <input id="userSearch" placeholder="Search by name or email" style="max-width:280px">
+    </div>
+    <div class="list" id="userList"></div>
+  </section>
 </div>
+
+<dialog id="courseDialog">
+  <form id="courseForm">
+    <h2 id="dialogTitle">Add course</h2>
+    <label for="cTitle">Title</label>
+    <input id="cTitle" required>
+    <label for="cInstructor">Instructor</label>
+    <input id="cInstructor" required>
+    <label for="cDesc">Description</label>
+    <textarea id="cDesc"></textarea>
+    <div class="two">
+      <div>
+        <label for="cCategory">Category</label>
+        <select id="cCategory">
+          <option value="AI &amp; ML">AI &amp; ML</option><option value="Python">Python</option>
+          <option value="Data Science">Data Science</option><option value="General">General</option>
+        </select>
+      </div>
+      <div>
+        <label for="cLevel">Level</label>
+        <select id="cLevel">
+          <option value="Beginner">Beginner</option><option value="Intermediate">Intermediate</option><option value="Advanced">Advanced</option>
+        </select>
+      </div>
+    </div>
+    <label for="cImageFile">Cover image (optional)</label>
+    <input id="cImageFile" type="file" accept="image/*">
+    <div id="cImageStatus" class="meta" style="margin:6px 0 0"></div>
+    <img id="cImagePreview" alt="Cover preview" hidden style="margin-top:10px;width:100%;max-height:180px;object-fit:cover;border-radius:8px;border:1px solid var(--line)">
+    <label for="cImage">Or paste an image URL</label>
+    <input id="cImage" type="url" placeholder="https://...">
+    <label class="check"><input type="checkbox" id="cFree" checked> Free course</label>
+    <div id="priceRow" hidden>
+      <label for="cPrice">Price (USD)</label>
+      <input id="cPrice" type="number" min="0" step="0.01">
+    </div>
+    <label class="check"><input type="checkbox" id="cPublished"> Published (visible to learners)</label>
+    <div class="foot">
+      <button type="button" class="ghost" id="cancelBtn">Cancel</button>
+      <button type="submit" id="saveBtn">Save course</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="lessonDialog">
+  <h2 id="lessonsTitle">Lessons</h2>
+  <div class="list" id="lessonList" style="margin-top:12px"></div>
+  <form id="lessonForm" class="item" style="margin-top:14px">
+    <h3 id="lessonFormTitle">Add lesson</h3>
+    <label for="lTitle">Title</label>
+    <input id="lTitle" required>
+    <label for="lOrder">Order (1, 2, 3...)</label>
+    <input id="lOrder" type="number" min="1" required>
+    <label for="lVideo">YouTube link (optional)</label>
+    <input id="lVideo" type="url" placeholder="https://www.youtube.com/watch?v=...">
+    <label for="lContent">Lesson text (optional)</label>
+    <textarea id="lContent"></textarea>
+    <div class="foot">
+      <button type="button" class="ghost" id="lessonReset">Clear</button>
+      <button type="submit" id="lessonSave">Save lesson</button>
+    </div>
+  </form>
+  <div class="foot"><button type="button" class="ghost" id="lessonClose">Close</button></div>
+</dialog>
+
+<dialog id="toolDialog">
+  <form id="toolForm">
+    <h2 id="toolDialogTitle">Add tool</h2>
+    <label for="tName">Name</label>
+    <input id="tName" required>
+    <label for="tDesc">Description</label>
+    <textarea id="tDesc"></textarea>
+    <label for="tUrl">Tool link (optional)</label>
+    <input id="tUrl" type="url" placeholder="https://...">
+    <label for="tStatus">Status</label>
+    <select id="tStatus">
+      <option value="live">Live</option>
+      <option value="beta">Beta</option>
+      <option value="off">Off (hidden from learners)</option>
+    </select>
+    <div class="foot">
+      <button type="button" class="ghost" id="toolCancel">Cancel</button>
+      <button type="submit" id="toolSave">Save tool</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" role="status"></div>
 
 <script type="module">
+import { tr } from "./i18n.js";
+import { auth, db } from "./firebase.js";
+import { signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut }
+  from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { collection, doc, getDoc, getDocs, addDoc, setDoc, updateDoc, deleteDoc, query, where, serverTimestamp, getCountFromServer, Timestamp }
+  from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-import {
-    initializeApp
+import { attachImgbbUploader } from "./imgbb-upload.js";
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
+  ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const say = (t, ok) => { $("msg").textContent = t || ""; $("msg").style.color = ok ? "var(--green)" : ""; };
+function toast(t){
+  const el = $("toast"); el.textContent = t; el.style.display = "block";
+  clearTimeout(toast.t); toast.t = setTimeout(() => el.style.display = "none", 2800);
 }
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc,
-    addDoc,
-    updateDoc,
-    deleteDoc,
-    collection,
-    getDocs,
-    serverTimestamp
-}
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+/* ---------- Login ---------- */
+$("loginForm").addEventListener("submit", async e => {
+  e.preventDefault(); say("");
+  $("loginBtn").disabled = true; $("loginBtn").textContent = "Signing in...";
+  try {
+    await signInWithEmailAndPassword(auth, $("email").value.trim(), $("password").value);
+  } catch {
+    say("Incorrect email or password.");
+    $("loginBtn").disabled = false; $("loginBtn").textContent = "Sign in";
+  }
+});
+$("logoutBtn").addEventListener("click", () => signOut(auth));
 
-import {
-    getAuth,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
-}
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+document.querySelectorAll(".pwtoggle").forEach(b => b.addEventListener("click", () => {
+  const i = $(b.dataset.target), show = i.type === "password";
+  i.type = show ? "text" : "password";
+  b.textContent = show ? "Hide" : "Show";
+}));
 
+$("forgotBtn").addEventListener("click", async () => {
+  const email = $("email").value.trim();
+  if (!email) { say("Enter your email above first."); return; }
+  try {
+    await sendPasswordResetEmail(auth, email);
+    say("If an account exists for this email, a reset link has been sent. Check your inbox and spam folder.", true);
+  } catch (err) {
+    say(err.code === "auth/invalid-email" ? "Enter a valid email address." : "Could not send the reset email. Try again.");
+  }
+});
 
-const firebaseConfig = {
+onAuthStateChanged(auth, async user => {
+  if (!user) {
+    $("loginWrap").style.display = "flex";
+    $("dashboard").style.display = "none";
+    $("loginBtn").disabled = false; $("loginBtn").textContent = "Sign in";
+    return;
+  }
+  try {
+    const snap = await getDoc(doc(db, "admins", user.uid));
+    const d = snap.exists() ? snap.data() : null;
+    if (!d || d.active !== true) {
+      await signOut(auth);
+      say("This account is not an admin.");
+      return;
+    }
+    $("loginWrap").style.display = "none";
+    $("dashboard").style.display = "block";
+    $("who").textContent = user.email + " (" + d.role + ")";
+    myUid = user.uid;
+    applyRole(d.role);
+  } catch (err) {
+    console.error(err);
+    await signOut(auth);
+    say("Could not verify admin access: " + err.message);
+  }
+});
 
-    apiKey:
-        "AIzaSyAE44DxNnqz3m8ScqaZxoSj2FdQ7aJ2NIg",
-
-    authDomain:
-        "estate-pro-d564b.firebaseapp.com",
-
-    projectId:
-        "estate-pro-d564b",
-
-    storageBucket:
-        "estate-pro-d564b.firebasestorage.app",
-
-    messagingSenderId:
-        "600309829118",
-
-    appId:
-        "1:600309829118:web:60c61624ca8cdf05e884af",
-
-    measurementId:
-        "G-TG60FCJHXB"
-
+/* ---------- Roles & Tabs ---------- */
+const PERMS = {
+  superAdmin:     ["overview", "courses", "users", "tools", "settings", "admins"],
+  admin:          ["overview", "courses", "users", "tools", "settings"],
+  contentManager: ["overview", "courses", "tools"],
+  moderator:      ["users"],
+  support:        ["users"]
 };
-
-
-const firebaseApp =
-    initializeApp(firebaseConfig);
-
-const db =
-    getFirestore(firebaseApp);
-
-const auth =
-    getAuth(firebaseApp);
-
-
-let currentUser = null;
-let currentCompanyId = null;
-let currentCompany = null;
-let currentSubscription = null;
-let allProperties = [];
-let editingPropertyId = null;
-let propertyToDelete = null;
-
-
-const loginScreen =
-    document.getElementById("loginScreen");
-
-const adminScreen =
-    document.getElementById("adminScreen");
-
-const loginForm =
-    document.getElementById("loginForm");
-
-const loginEmail =
-    document.getElementById("loginEmail");
-
-const loginPassword =
-    document.getElementById("loginPassword");
-
-const loginButton =
-    document.getElementById("loginButton");
-
-const loginMessage =
-    document.getElementById("loginMessage");
-
-const message =
-    document.getElementById("message");
-
-
-function showMessage(
-    text,
-    type = "success"
-){
-
-    message.textContent = text;
-
-    message.className =
-        "message " + type;
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
+let myUid = null;
+let myPerms = [];
+function showTab(name){
+  document.querySelectorAll("nav button").forEach(x => x.classList.toggle("on", x.dataset.tab === name));
+  ["overview", "courses", "users", "tools", "settings", "admins"].forEach(t => { $("tab-" + t).hidden = t !== name; });
+}
+document.querySelectorAll("nav button").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
+function applyRole(role){
+  const allowed = PERMS[role] || [];
+  myPerms = allowed;
+  document.querySelectorAll("nav button").forEach(b => { b.hidden = !allowed.includes(b.dataset.tab); });
+  $("addCourseBtn").hidden = !allowed.includes("courses");
+  if (allowed.includes("overview")) loadOverview();
+  if (allowed.includes("courses")) loadCourses();
+  if (allowed.includes("users")) loadUsers();
+  if (allowed.includes("tools")) loadTools();
+  if (allowed.includes("settings")) loadSettings();
+  if (allowed.includes("admins")) loadAdmins();
+  showTab(allowed[0] || "users");
 }
 
-function clearMessage(){
+/* ---------- Overview (stats) ---------- */
+const countOf = q => getCountFromServer(q).then(s => s.data().count);
+async function loadOverview(){
+  const box = $("statGrid"), top = $("topCourses");
+  box.innerHTML = '<div class="empty" style="grid-column:1/-1">Loading...</div>';
+  top.innerHTML = "";
+  const canUsers = myPerms.includes("users");
+  const week = Timestamp.fromDate(new Date(Date.now() - 7 * 864e5));
+  const [cs, us, nu, en, dn] = await Promise.allSettled([
+    getDocs(collection(db, "courses")),
+    canUsers ? countOf(collection(db, "users")) : Promise.resolve(null),
+    canUsers ? countOf(query(collection(db, "users"), where("createdAt", ">=", week))) : Promise.resolve(null),
+    countOf(collection(db, "enrollments")),
+    countOf(query(collection(db, "enrollments"), where("progress", "==", 100)))
+  ]);
+  const val = r => r.status === "fulfilled" ? r.value : "—";
+  const list = cs.status === "fulfilled" ? cs.value.docs.map(d => ({ id: d.id, ...d.data() })) : [];
+  const published = list.filter(c => c.published).length;
+  const E = val(en), D = val(dn);
+  const rate = (typeof E === "number" && typeof D === "number") ? (E ? Math.round(D / E * 100) + "%" : "0%") : "—";
+  const card = (label, n, sub, cls) =>
+    `<div class="stat ${cls || ""}"><div class="n">${n}</div><div class="l">${label}</div>${sub ? `<div class="s">${sub}</div>` : ""}</div>`;
+  box.innerHTML =
+    (canUsers ? card("Learners", val(us)) + card("New this week", val(nu), "last 7 days") : "") +
+    card("Courses", cs.status === "fulfilled" ? list.length : "—", cs.status === "fulfilled" ? "Published: " + published + "/" + list.length : "") +
+    card("Enrollments", E) +
+    card("Completed", D, "finished 100%", "good") +
+    card("Completion rate", rate);
 
-    message.className =
-        "message hidden";
+  // enrollments per course (max 50 courses)
+  const part = await Promise.allSettled(list.slice(0, 50).map(c =>
+    countOf(query(collection(db, "enrollments"), where("courseId", "==", c.id)))));
+  const rows = list.slice(0, 50).map((c, i) => ({ c, n: part[i].status === "fulfilled" ? part[i].value : 0 }))
+    .filter(x => x.n > 0).sort((a, b) => b.n - a.n).slice(0, 5);
+  const max = rows.length ? rows[0].n : 1;
+  top.innerHTML = rows.length ? rows.map(({ c, n }) =>
+    `<div class="r"><b>${esc(c.title)}</b><span>${n}</span><i style="width:${Math.max(4, Math.round(n / max * 100))}%"></i></div>`).join("")
+    : '<div class="empty">No enrollments yet.</div>';
+}
+$("refreshStats").addEventListener("click", loadOverview);
 
-    message.textContent =
-        "";
+/* ---------- Courses ---------- */
+let courses = [];
+let editingId = null;
 
+const uploader = attachImgbbUploader({
+  fileInputId: "cImageFile",
+  urlInputId: "cImage",
+  statusId: "cImageStatus",
+  previewId: "cImagePreview",
+  onStart: () => { $("saveBtn").disabled = true; },
+  onDone:  () => { $("saveBtn").disabled = false; }
+});
+
+async function loadCourses(){
+  try {
+    const snap = await getDocs(collection(db, "courses"));
+    courses = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    courses.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+    renderCourses();
+  } catch (err) {
+    $("courseList").innerHTML = '<div class="empty">Could not load courses: ' + esc(err.message) + '</div>';
+  }
 }
 
-
-function showLoginMessage(
-    text,
-    type = "error"
-){
-
-    loginMessage.textContent =
-        text;
-
-    loginMessage.className =
-        "message " + type;
-
+function renderCourses(){
+  const box = $("courseList");
+  if (!courses.length) {
+    box.innerHTML = '<div class="empty">No courses yet. Click "Add course" to create your first one.</div>';
+    return;
+  }
+  box.innerHTML = courses.map(c => `
+    <div class="item">
+      ${c.imageUrl ? `<img src="${esc(c.imageUrl)}" alt="" style="width:100%;max-height:150px;object-fit:cover;border-radius:8px;margin-bottom:10px">` : ""}
+      <h3>${esc(c.title)}</h3>
+      <div class="meta">${esc(c.instructor)} · ${esc(c.category)} · ${esc(c.level)} · ${c.free ? "Free" : "$" + esc(c.price)}</div>
+      <span class="tag ${c.published ? "live" : "draft"}">${c.published ? "Published" : "Draft"}</span>
+      <div class="actions" style="margin-top:12px">
+        <button class="ghost" data-act="lessons" data-id="${esc(c.id)}">Lessons</button>
+        <button class="ghost" data-act="edit" data-id="${esc(c.id)}">Edit</button>
+        <button class="ghost" data-act="toggle" data-id="${esc(c.id)}">${c.published ? "Unpublish" : "Publish"}</button>
+        <button class="danger" data-act="delete" data-id="${esc(c.id)}">Delete</button>
+      </div>
+    </div>`).join("");
 }
 
+$("courseList").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  const c = courses.find(x => x.id === b.dataset.id); if (!c) return;
+  try {
+    if (b.dataset.act === "edit") openForm(c);
+    if (b.dataset.act === "lessons") openLessons(c);
+    if (b.dataset.act === "toggle") {
+      await updateDoc(doc(db, "courses", c.id), { published: !c.published, updatedAt: serverTimestamp() });
+      toast(c.published ? "Course unpublished" : "Course published");
+      loadCourses();
+    }
+    if (b.dataset.act === "delete" && confirm(tr("Delete") + ' "' + c.title + '"? ' + tr("This cannot be undone."))) {
+      await deleteDoc(doc(db, "courses", c.id));
+      toast("Course deleted");
+      loadCourses();
+    }
+  } catch (err) { toast("Error: " + err.message); }
+});
 
-function escapeHTML(value){
-
-    return String(value ?? "")
-
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
+function openForm(c){
+  editingId = c ? c.id : null;
+  $("dialogTitle").textContent = c ? "Edit course" : "Add course";
+  $("cTitle").value = c?.title || "";
+  $("cInstructor").value = c?.instructor || "";
+  $("cDesc").value = c?.description || "";
+  $("cCategory").value = c?.category || "AI & ML";
+  $("cLevel").value = c?.level || "Beginner";
+  $("cImage").value = c?.imageUrl || "";
+  $("cImageStatus").textContent = "";
+  uploader.showPreview(c?.imageUrl || "");
+  $("cFree").checked = c ? !!c.free : true;
+  $("cPrice").value = c?.price ?? "";
+  $("cPublished").checked = !!c?.published;
+  $("priceRow").hidden = $("cFree").checked;
+  $("courseDialog").showModal();
 }
+$("addCourseBtn").addEventListener("click", () => openForm(null));
+$("cancelBtn").addEventListener("click", () => $("courseDialog").close());
+$("cFree").addEventListener("change", () => { $("priceRow").hidden = $("cFree").checked; });
 
+$("courseForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const free = $("cFree").checked;
+  const data = {
+    title: $("cTitle").value.trim(),
+    instructor: $("cInstructor").value.trim(),
+    description: $("cDesc").value.trim(),
+    category: $("cCategory").value,
+    level: $("cLevel").value,
+    imageUrl: $("cImage").value.trim(),
+    free,
+    price: free ? 0 : Number($("cPrice").value || 0),
+    published: $("cPublished").checked,
+    updatedAt: serverTimestamp()
+  };
+  $("saveBtn").disabled = true;
+  try {
+    if (editingId) await updateDoc(doc(db, "courses", editingId), data);
+    else await addDoc(collection(db, "courses"), { ...data, createdAt: serverTimestamp() });
+    $("courseDialog").close();
+    toast("Course saved");
+    loadCourses();
+  } catch (err) { toast("Error: " + err.message); }
+  $("saveBtn").disabled = false;
+});
 
-function firebaseError(error){
-
-    console.error(
-        "Firebase error:",
-        error
-    );
-
-    return (
-        error?.message ||
-        "Something went wrong."
-    );
-
+/* ---------- Users ---------- */
+let users = [];
+async function loadUsers(){
+  try {
+    const snap = await getDocs(collection(db, "users"));
+    users = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderUsers();
+  } catch (err) {
+    $("userList").innerHTML = '<div class="empty">Could not load users: ' + esc(err.message) + '</div>';
+  }
 }
-
-
-function getRequestedCompanyId(){
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-    const id =
-        params.get("companyId");
-
-    if(
-        id &&
-        id.trim()
-    ){
-
-        return id.trim();
-
-    }
-
-    return null;
-
+function renderUsers(){
+  const q = $("userSearch").value.trim().toLowerCase();
+  const rows = users.filter(u => !q ||
+    (u.name || "").toLowerCase().includes(q) || (u.email || "").toLowerCase().includes(q));
+  $("userList").innerHTML = rows.length ? rows.map(u => `
+    <div class="item">
+      <h3>${esc(u.name || "No name")}</h3>
+      <div class="meta">${esc(u.email || "")}</div>
+      <span class="tag">${esc(u.role || "student")}</span>
+    </div>`).join("")
+    : '<div class="empty">' + (users.length ? "No users match your search." : "No users yet. They will appear here after they sign up.") + '</div>';
 }
-
-
-function getCompanyRef(){
-
-    return doc(
-        db,
-        "companies",
-        currentCompanyId
-    );
-
+$("userSearch").addEventListener("input", renderUsers);
+/* ---------- Lessons ---------- */
+let lessonCourse = null, lessons = [], editingLesson = null;
+function resetLessonForm(){
+  editingLesson = null;
+  $("lessonFormTitle").textContent = "Add lesson";
+  $("lTitle").value = ""; $("lVideo").value = ""; $("lContent").value = "";
+  $("lOrder").value = lessons.length ? Math.max(...lessons.map(l => l.order || 0)) + 1 : 1;
 }
-
-function getPropertiesRef(){
-
-    return collection(
-        db,
-        "companies",
-        currentCompanyId,
-        "properties"
-    );
-
+async function openLessons(c){
+  lessonCourse = c; lessons = [];
+  $("lessonsTitle").textContent = "Lessons: " + c.title;
+  $("lessonList").innerHTML = "";
+  $("lessonDialog").showModal();
+  await loadLessons();
 }
-
-function getSubscriptionRef(){
-
-    return doc(
-        db,
-        "subscriptions",
-        currentCompanyId
-    );
-
+async function loadLessons(){
+  try {
+    const snap = await getDocs(collection(db, "courses", lessonCourse.id, "lessons"));
+    lessons = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.order || 0) - (b.order || 0));
+    $("lessonList").innerHTML = lessons.map(l =>
+      '<div class="item"><h3>' + esc(l.order) + '. ' + esc(l.title) + '</h3>' +
+      '<div class="meta">' + (l.videoUrl ? "Video" : "") + (l.videoUrl && l.content ? " + " : "") + (l.content ? "Text" : "") + '</div>' +
+      '<div class="actions"><button class="ghost" data-act="edit" data-id="' + esc(l.id) + '">Edit</button>' +
+      '<button class="danger" data-act="delete" data-id="' + esc(l.id) + '">Delete</button></div></div>'
+    ).join("") || '<div class="empty">No lessons yet. Add the first one below.</div>';
+  } catch (err) {
+    $("lessonList").innerHTML = '<div class="empty">Could not load lessons: ' + esc(err.message) + '</div>';
+  }
+  resetLessonForm();
 }
-
-
-async function loadAdminProfile(){
-
-    if(!currentUser){
-
-        throw new Error(
-            "You must be logged in."
-        );
-
+$("lessonList").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  const l = lessons.find(x => x.id === b.dataset.id); if (!l) return;
+  try {
+    if (b.dataset.act === "edit") {
+      editingLesson = l.id;
+      $("lessonFormTitle").textContent = "Edit lesson";
+      $("lTitle").value = l.title || ""; $("lOrder").value = l.order || 1;
+      $("lVideo").value = l.videoUrl || ""; $("lContent").value = l.content || "";
+      $("lessonForm").scrollIntoView({ behavior: "smooth" });
     }
-
-
-    const adminRef =
-        doc(
-            db,
-            "admins",
-            currentUser.uid
-        );
-
-    const snapshot =
-        await getDoc(
-            adminRef
-        );
-
-
-    if(!snapshot.exists()){
-
-        throw new Error(
-            "Your account is not registered as an administrator."
-        );
-
+    if (b.dataset.act === "delete" && confirm(tr("Delete lesson") + ' "' + l.title + '"?')) {
+      await deleteDoc(doc(db, "courses", lessonCourse.id, "lessons", l.id));
+      toast("Lesson deleted"); loadLessons();
     }
+  } catch (err) { toast("Error: " + err.message); }
+});
+$("lessonForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const video = $("lVideo").value.trim(), content = $("lContent").value.trim();
+  if (!video && !content) { toast("Add a YouTube link or some lesson text."); return; }
+  const data = { title: $("lTitle").value.trim(), order: Number($("lOrder").value), videoUrl: video, content, updatedAt: serverTimestamp() };
+  $("lessonSave").disabled = true;
+  try {
+    const col = collection(db, "courses", lessonCourse.id, "lessons");
+    if (editingLesson) await updateDoc(doc(col, editingLesson), data);
+    else await addDoc(col, { ...data, createdAt: serverTimestamp() });
+    toast("Lesson saved"); loadLessons();
+  } catch (err) { toast("Error: " + err.message); }
+  $("lessonSave").disabled = false;
+});
+$("lessonReset").addEventListener("click", resetLessonForm);
+$("lessonClose").addEventListener("click", () => $("lessonDialog").close());
 
-
-    const data =
-        snapshot.data();
-
-
-    const companyId =
-        String(
-            data.companyId || ""
-        ).trim();
-
-
-    if(!companyId){
-
-        throw new Error(
-            "Your administrator account does not have a companyId."
-        );
-
-    }
-
-
-    const requestedId =
-        getRequestedCompanyId();
-
-
-    if(
-        requestedId &&
-        requestedId !== companyId
-    ){
-
-        throw new Error(
-            "Access denied. This company does not belong to your account."
-        );
-
-    }
-
-
-    currentCompanyId =
-        companyId;
-
+/* ---------- Tools ---------- */
+let tools = [];
+let editingTool = null;
+const STATUS = { live: ["Live", "tag live"], beta: ["Beta", "tag draft"], off: ["Off", "tag"] };
+async function loadTools(){
+  try {
+    const snap = await getDocs(collection(db, "tools"));
+    tools = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    tools.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    renderTools();
+  } catch (err) {
+    $("toolList").innerHTML = '<div class="empty">Could not load tools: ' + esc(err.message) + '</div>';
+  }
 }
-
-
-async function loadCompany(){
-
-    const snapshot =
-        await getDoc(
-            getCompanyRef()
-        );
-
-
-    if(!snapshot.exists()){
-
-        currentCompany = {};
-
-        updateCompanyUI();
-
-        return;
-
-    }
-
-
-    currentCompany =
-        snapshot.data();
-
-
-    updateCompanyUI();
-
-    fillCompanyForm();
-
+function renderTools(){
+  $("toolList").innerHTML = tools.map(t => {
+    const st = STATUS[t.status] || STATUS.off;
+    return '<div class="item"><h3>' + esc(t.name) + '</h3>' +
+      '<div class="meta">' + esc(t.description || "") + '</div>' +
+      '<span class="' + st[1] + '">' + st[0] + '</span>' +
+      '<div class="actions" style="margin-top:12px">' +
+      '<button class="ghost" data-act="edit" data-id="' + esc(t.id) + '">Edit</button>' +
+      '<button class="danger" data-act="delete" data-id="' + esc(t.id) + '">Delete</button></div></div>';
+  }).join("") || '<div class="empty">No tools yet. Click "Add tool" to create the first one.</div>';
 }
-
-
-function updateCompanyUI(){
-
-    const name =
-        currentCompany?.name ||
-        currentCompany?.companyName ||
-        currentCompanyId ||
-        "EstatePro";
-
-
-    document
-        .getElementById("brandName")
-        .textContent =
-            name;
-
-
-    document
-        .getElementById("companyTitle")
-        .textContent =
-            name;
-
-
-    document
-        .getElementById("companyId")
-        .textContent =
-            "Company ID: " +
-            currentCompanyId;
-
-
-    const logo =
-        currentCompany?.logo ||
-        currentCompany?.companyLogo ||
-        "";
-
-
-    const icon =
-        document.getElementById(
-            "brandIcon"
-        );
-
-
-    const loginLogo =
-        document.getElementById(
-            "loginLogo"
-        );
-
-
-    if(logo){
-
-        icon.innerHTML = "";
-
-        const img =
-            document.createElement("img");
-
-        img.src =
-            logo;
-
-        img.alt =
-            name;
-
-        icon.appendChild(img);
-
-
-        loginLogo.innerHTML = "";
-
-        const loginImg =
-            document.createElement("img");
-
-        loginImg.src =
-            logo;
-
-        loginImg.alt =
-            name;
-
-        loginLogo.appendChild(
-            loginImg
-        );
-
-    }else{
-
-        const first =
-            name
-                .charAt(0)
-                .toUpperCase() ||
-            "E";
-
-        icon.textContent =
-            first;
-
-        loginLogo.textContent =
-            first;
-
-    }
-
+function openTool(t){
+  editingTool = t ? t.id : null;
+  $("toolDialogTitle").textContent = t ? "Edit tool" : "Add tool";
+  $("tName").value = t?.name || "";
+  $("tDesc").value = t?.description || "";
+  $("tUrl").value = t?.url || "";
+  $("tStatus").value = t?.status || "live";
+  $("toolDialog").showModal();
 }
+$("addToolBtn").addEventListener("click", () => openTool(null));
+$("toolCancel").addEventListener("click", () => $("toolDialog").close());
+$("toolList").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  const t = tools.find(x => x.id === b.dataset.id); if (!t) return;
+  try {
+    if (b.dataset.act === "edit") openTool(t);
+    if (b.dataset.act === "delete" && confirm(tr("Delete") + ' "' + t.name + '"?')) {
+      await deleteDoc(doc(db, "tools", t.id));
+      toast("Tool deleted"); loadTools();
+    }
+  } catch (err) { toast("Error: " + err.message); }
+});
+$("toolForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const data = {
+    name: $("tName").value.trim(), description: $("tDesc").value.trim(),
+    url: $("tUrl").value.trim(), status: $("tStatus").value, updatedAt: serverTimestamp()
+  };
+  $("toolSave").disabled = true;
+  try {
+    if (editingTool) await updateDoc(doc(db, "tools", editingTool), data);
+    else await addDoc(collection(db, "tools"), { ...data, createdAt: serverTimestamp() });
+    $("toolDialog").close(); toast("Tool saved"); loadTools();
+  } catch (err) { toast("Error: " + err.message); }
+  $("toolSave").disabled = false;
+});
 
-
-function fillCompanyForm(){
-
-    document.getElementById(
-        "companyNameInput"
-    ).value =
-        currentCompany?.name ||
-        currentCompany?.companyName ||
-        "";
-
-
-    document.getElementById(
-        "companyPhone"
-    ).value =
-        currentCompany?.phone ||
-        "";
-
-
-    document.getElementById(
-        "companyWhatsApp"
-    ).value =
-        currentCompany?.whatsapp ||
-        currentCompany?.whatsApp ||
-        "";
-
-
-    document.getElementById(
-        "companyEmail"
-    ).value =
-        currentCompany?.email ||
-        "";
-
-
-    document.getElementById(
-        "companyAddress"
-    ).value =
-        currentCompany?.address ||
-        "";
-
-
-    document.getElementById(
-        "companyLogo"
-    ).value =
-        currentCompany?.logo ||
-        currentCompany?.companyLogo ||
-        "";
-
-
-    document.getElementById(
-        "companyDescription"
-    ).value =
-        currentCompany?.description ||
-        "";
-
-
-    updateLogoPreview();
-
+/* ---------- Community settings ---------- */
+async function loadSettings(){
+  try {
+    const snap = await getDoc(doc(db, "settings", "community"));
+    if (snap.exists()) {
+      $("sWhatsapp").value = snap.data().whatsappUrl || "";
+      $("sMembers").value = snap.data().membersText || "";
+    }
+  } catch (err) { toast("Could not load settings: " + err.message); }
 }
+$("settingsForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const url = $("sWhatsapp").value.trim();
+  if (url && !url.startsWith("https://")) { toast("The link must start with https://"); return; }
+  $("saveSettingsBtn").disabled = true;
+  try {
+    await setDoc(doc(db, "settings", "community"),
+      { whatsappUrl: url, membersText: $("sMembers").value.trim(), updatedAt: serverTimestamp() }, { merge: true });
+    toast("Settings saved");
+  } catch (err) { toast("Error: " + err.message); }
+  $("saveSettingsBtn").disabled = false;
+});
 
-
-function updateLogoPreview(){
-
-    const input =
-        document.getElementById(
-            "companyLogo"
-        );
-
-    const preview =
-        document.getElementById(
-            "companyLogoPreview"
-        );
-
-
-    const url =
-        input.value.trim();
-
-
-    if(!url){
-
-        preview.innerHTML =
-            "Logo Preview";
-
-        return;
-
-    }
-
-
-    preview.innerHTML =
-        "";
-
-
-    const img =
-        document.createElement("img");
-
-
-    img.src =
-        url;
-
-
-    img.alt =
-        "Company Logo";
-
-
-    img.onerror = () => {
-
-        preview.innerHTML =
-            "Invalid logo URL";
-
-    };
-
-
-    preview.appendChild(
-        img
-    );
-
+/* ---------- Admins (superAdmin only) ---------- */
+let admins = [];
+const ASSIGNABLE = ["admin", "contentManager", "moderator", "support"];
+async function loadAdmins(){
+  try {
+    const snap = await getDocs(collection(db, "admins"));
+    admins = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderAdmins();
+  } catch (err) {
+    $("adminList").innerHTML = '<div class="empty">Could not load admins: ' + esc(err.message) + '</div>';
+  }
 }
-
-
-document
-    .getElementById("companyLogo")
-    .addEventListener(
-        "input",
-        updateLogoPreview
-    );
-
-
-document
-    .getElementById("companyForm")
-    .addEventListener(
-        "submit",
-        async event => {
-
-            event.preventDefault();
-
-            clearMessage();
-
-
-            const button =
-                document.getElementById(
-                    "saveCompanyButton"
-                );
-
-
-            const companyData = {
-
-                name:
-                    document
-                        .getElementById(
-                            "companyNameInput"
-                        )
-                        .value
-                        .trim(),
-
-                phone:
-                    document
-                        .getElementById(
-                            "companyPhone"
-                        )
-                        .value
-                        .trim(),
-
-                whatsapp:
-                    document
-                        .getElementById(
-                            "companyWhatsApp"
-                        )
-                        .value
-                        .trim(),
-
-                email:
-                    document
-                        .getElementById(
-                            "companyEmail"
-                        )
-                        .value
-                        .trim(),
-
-                address:
-                    document
-                        .getElementById(
-                            "companyAddress"
-                        )
-                        .value
-                        .trim(),
-
-                logo:
-                    document
-                        .getElementById(
-                            "companyLogo"
-                        )
-                        .value
-                        .trim(),
-
-                description:
-                    document
-                        .getElementById(
-                            "companyDescription"
-                        )
-                        .value
-                        .trim(),
-
-                updatedAt:
-                    serverTimestamp()
-
-            };
-
-
-            if(!companyData.name){
-
-                showMessage(
-                    "Please enter company name.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            button.disabled =
-                true;
-
-            button.textContent =
-                "Saving...";
-
-
-            try{
-
-                await setDoc(
-                    getCompanyRef(),
-                    companyData,
-                    {
-                        merge:true
-                    }
-                );
-
-
-                currentCompany =
-                    {
-                        ...currentCompany,
-                        ...companyData
-                    };
-
-
-                updateCompanyUI();
-
-                showMessage(
-                    "Company settings saved successfully.",
-                    "success"
-                );
-
-            }
-
-            catch(error){
-
-                showMessage(
-                    firebaseError(error),
-                    "error"
-                );
-
-            }
-
-            finally{
-
-                button.disabled =
-                    false;
-
-                button.textContent =
-                    "Save Company Settings";
-
-            }
-
-        }
-    );
-
-
-async function loadSubscription(){
-
-    const snapshot =
-        await getDoc(
-            getSubscriptionRef()
-        );
-
-
-    const statusElement =
-        document.getElementById(
-            "subscriptionStatus"
-        );
-
-
-    if(!snapshot.exists()){
-
-        currentSubscription =
-            null;
-
-
-        statusElement.className =
-            "subscription-status expired";
-
-        statusElement.textContent =
-            "● No Subscription";
-
-
-        document.getElementById(
-            "subscriptionPlan"
-        ).textContent =
-            "Not available";
-
-
-        document.getElementById(
-            "subscriptionAmount"
-        ).textContent =
-            "--";
-
-
-        document.getElementById(
-            "subscriptionExpiry"
-        ).textContent =
-            "--";
-
-
-        document.getElementById(
-            "subscriptionRemaining"
-        ).textContent =
-            "--";
-
-
-        document.getElementById(
-            "subscriptionPayment"
-        ).textContent =
-            "--";
-
-
-        return;
-
-    }
-
-
-    currentSubscription =
-        snapshot.data();
-
-
-    renderSubscription();
-
+function renderAdmins(){
+  $("adminList").innerHTML = admins.map(a => {
+    const locked = a.id === myUid || a.role === "superAdmin";
+    const opts = ASSIGNABLE.map(r => '<option' + (r === a.role ? ' selected' : '') + '>' + r + '</option>').join("");
+    return '<div class="item"><h3>' + esc(a.email) + (a.id === myUid ? " (you)" : "") + '</h3>' +
+      (locked ? '<span class="tag">' + esc(a.role) + '</span>'
+              : '<select data-role="' + esc(a.id) + '" style="margin-bottom:10px">' + opts + '</select>') +
+      '<span class="tag ' + (a.active ? "live" : "draft") + '">' + (a.active ? "Active" : "Disabled") + '</span>' +
+      (locked ? "" : '<div class="actions" style="margin-top:12px">' +
+        '<button class="ghost" data-act="toggle" data-id="' + esc(a.id) + '">' + (a.active ? "Disable" : "Enable") + '</button>' +
+        '<button class="danger" data-act="remove" data-id="' + esc(a.id) + '">Remove</button></div>') +
+      '</div>';
+  }).join("") || '<div class="empty">No admins found.</div>';
 }
-
-
-function getDateValue(value){
-
-    if(!value){
-
-        return null;
-
+$("adminList").addEventListener("change", async e => {
+  const s = e.target.closest("select[data-role]"); if (!s) return;
+  try {
+    await updateDoc(doc(db, "admins", s.dataset.role), { role: s.value });
+    toast("Role updated"); loadAdmins();
+  } catch (err) { toast("Error: " + err.message); }
+});
+$("adminList").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  const a = admins.find(x => x.id === b.dataset.id); if (!a) return;
+  try {
+    if (b.dataset.act === "toggle") {
+      await updateDoc(doc(db, "admins", a.id), { active: !a.active });
+      toast(a.active ? "Admin disabled" : "Admin enabled");
     }
-
-
-    if(
-        typeof value === "object" &&
-        typeof value.toDate === "function"
-    ){
-
-        return value.toDate();
-
+    if (b.dataset.act === "remove") {
+      if (!confirm(tr("Remove admin: ") + a.email + "?")) return;
+      await deleteDoc(doc(db, "admins", a.id));
+      toast("Admin removed");
     }
-
-
-    if(
-        typeof value === "object" &&
-        typeof value.seconds === "number"
-    ){
-
-        return new Date(
-            value.seconds * 1000
-        );
-
+    loadAdmins();
+  } catch (err) { toast("Error: " + err.message); }
+});
+$("adminForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const email = $("aEmail").value.trim().toLowerCase();
+  $("addAdminBtn").disabled = true;
+  try {
+    const snap = await getDocs(query(collection(db, "users"), where("email", "==", email)));
+    if (snap.empty) { toast("No user with that email. They must sign up first."); }
+    else {
+      const uid = snap.docs[0].id;
+      await setDoc(doc(db, "admins", uid), {
+        email, role: $("aRole").value, active: true, addedBy: myUid, createdAt: serverTimestamp()
+      });
+      $("adminForm").reset();
+      toast("Admin added");
+      loadAdmins();
     }
-
-
-    const date =
-        new Date(value);
-
-
-    if(
-        Number.isNaN(
-            date.getTime()
-        )
-    ){
-
-        return null;
-
-    }
-
-
-    return date;
-
-}
-
-
-function formatDate(value){
-
-    const date =
-        getDateValue(value);
-
-
-    if(!date){
-
-        return "--";
-
-    }
-
-
-    return date.toLocaleDateString(
-        "en-NG",
-        {
-            day:"numeric",
-            month:"short",
-            year:"numeric"
-        }
-    );
-
-}
-
-
-function calculateDaysLeft(value){
-
-    const expiry =
-        getDateValue(value);
-
-
-    if(!expiry){
-
-        return null;
-
-    }
-
-
-    const difference =
-        expiry.getTime() -
-        Date.now();
-
-
-    return Math.max(
-        0,
-        Math.ceil(
-            difference /
-            (
-                1000 *
-                60 *
-                60 *
-                24
-            )
-        )
-    );
-
-}
-
-
-function formatMoney(amount){
-
-    const number =
-        Number(amount);
-
-
-    if(
-        !Number.isFinite(number)
-    ){
-
-        return "--";
-
-    }
-
-
-    return new Intl.NumberFormat(
-        "en-NG",
-        {
-            style:"currency",
-            currency:"NGN",
-            maximumFractionDigits:0
-        }
-    ).format(number);
-
-}
-
-
-function renderSubscription(){
-
-    const subscription =
-        currentSubscription;
-
-
-    if(!subscription){
-
-        return;
-
-    }
-
-
-    const firestoreStatus =
-        String(
-            subscription.status ||
-            ""
-        ).toLowerCase();
-
-
-    const paymentStatus =
-        String(
-            subscription.paymentStatus ||
-            ""
-        ).toLowerCase();
-
-
-    const expiry =
-        getDateValue(
-            subscription.expiryDate
-        );
-
-
-    let statusText =
-        firestoreStatus ||
-        "Unknown";
-
-
-    let statusClass =
-        "";
-
-
-    if(
-        expiry &&
-        expiry.getTime() < Date.now()
-    ){
-
-        statusText =
-            "Expired";
-
-        statusClass =
-            "expired";
-
-    }
-
-    else if(
-        firestoreStatus === "active"
-    ){
-
-        statusText =
-            "Active";
-
-    }
-
-    else if(
-        paymentStatus === "pending"
-    ){
-
-        statusText =
-            "Pending";
-
-        statusClass =
-            "pending";
-
-    }
-
-    else{
-
-        statusText =
-            firestoreStatus ||
-            "Unknown";
-
-        statusClass =
-            "expired";
-
-    }
-
-
-    const statusElement =
-        document.getElementById(
-            "subscriptionStatus"
-        );
-
-
-    statusElement.className =
-        "subscription-status " +
-        statusClass;
-
-
-    statusElement.textContent =
-        "● " +
-        statusText;
-
-
-    const planName =
-        subscription.planName ||
-        subscription.plan ||
-        "Unknown Plan";
-
-
-    const amount =
-        Number(
-            subscription.amount
-        );
-
-
-    document.getElementById(
-        "subscriptionPlan"
-    ).textContent =
-        planName;
-
-
-    document.getElementById(
-        "subscriptionAmount"
-    ).textContent =
-        Number.isFinite(amount)
-            ? formatMoney(amount)
-            : "--";
-
-
-    document.getElementById(
-        "subscriptionExpiry"
-    ).textContent =
-        formatDate(
-            subscription.expiryDate
-        );
-
-
-    const days =
-        calculateDaysLeft(
-            subscription.expiryDate
-        );
-
-
-    document.getElementById(
-        "subscriptionRemaining"
-    ).textContent =
-        days === null
-            ? "--"
-            : days + " days";
-
-
-    document.getElementById(
-        "subscriptionPayment"
-    ).textContent =
-        subscription.paymentStatus ||
-        "--";
-
-}
-
-
-document
-    .getElementById(
-        "subscriptionButton"
-    )
-    .addEventListener(
-        "click",
-        () => {
-
-            if(!currentCompanyId){
-
-                showMessage(
-                    "Company ID is not available.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            window.location.href =
-                "subscription.html?companyId=" +
-                encodeURIComponent(
-                    currentCompanyId
-                );
-
-        }
-    );
-
-
-function updatePropertyImagePreview(
-    number
-){
-
-    const input =
-        document.getElementById(
-            "propertyImage" + number
-        );
-
-    const preview =
-        document.getElementById(
-            "propertyImagePreview" + number
-        );
-
-
-    const url =
-        input.value.trim();
-
-
-    if(!url){
-
-        preview.className =
-            "image-preview";
-
-        preview.innerHTML =
-            "Image " +
-            number +
-            " Preview";
-
-        return;
-
-    }
-
-
-    preview.className =
-        "image-preview";
-
-    preview.innerHTML =
-        "";
-
-
-    const img =
-        document.createElement("img");
-
-
-    img.src =
-        url;
-
-
-    img.alt =
-        "Property Image " +
-        number;
-
-
-    img.onload = () => {
-
-        preview.className =
-            "image-preview";
-
-    };
-
-
-    img.onerror = () => {
-
-        preview.className =
-            "image-preview invalid";
-
-        preview.innerHTML =
-            "Invalid image URL";
-
-    };
-
-
-    preview.appendChild(
-        img
-    );
-
-}
-
-
-for(
-    let i = 1;
-    i <= 5;
-    i++
-){
-
-    document
-        .getElementById(
-            "propertyImage" + i
-        )
-        .addEventListener(
-            "input",
-            () =>
-                updatePropertyImagePreview(i)
-        );
-
-}
-
-
-function getPropertyImages(){
-
-    const images = [];
-
-
-    for(
-        let i = 1;
-        i <= 5;
-        i++
-    ){
-
-        const value =
-            document
-                .getElementById(
-                    "propertyImage" + i
-                )
-                .value
-                .trim();
-
-
-        if(value){
-
-            images.push(value);
-
-        }
-
-    }
-
-
-    return images;
-
-}
-
-
-function setPropertyImages(
-    images
-){
-
-    const safeImages =
-        Array.isArray(images)
-            ? images
-            : [];
-
-
-    for(
-        let i = 1;
-        i <= 5;
-        i++
-    ){
-
-        const input =
-            document.getElementById(
-                "propertyImage" + i
-            );
-
-
-        input.value =
-            safeImages[i - 1] ||
-            "";
-
-
-        updatePropertyImagePreview(
-            i
-        );
-
-    }
-
-}
-
-
-async function loadProperties(){
-
-    const container =
-        document.getElementById(
-            "propertiesList"
-        );
-
-
-    container.innerHTML = `
-
-        <div class="loading">
-
-            <div class="spinner"></div>
-
-            Loading properties...
-
-        </div>
-
-    `;
-
-
-    try{
-
-        const snapshot =
-            await getDocs(
-                getPropertiesRef()
-            );
-
-
-        allProperties = [];
-
-
-        snapshot.forEach(
-            propertyDoc => {
-
-                allProperties.push({
-
-                    id:
-                        propertyDoc.id,
-
-                    ...propertyDoc.data()
-
-                });
-
-            }
-        );
-
-
-        allProperties.sort(
-            (a,b) => {
-
-                const aTime =
-                    getDateValue(
-                        a.createdAt
-                    )?.getTime() ||
-                    0;
-
-
-                const bTime =
-                    getDateValue(
-                        b.createdAt
-                    )?.getTime() ||
-                    0;
-
-
-                return bTime - aTime;
-
-            }
-        );
-
-
-        updateStats();
-
-        renderProperties();
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        container.innerHTML = `
-
-            <div class="empty-state">
-
-                <strong>
-                    Unable to load properties
-                </strong>
-
-                ${escapeHTML(
-                    firebaseError(error)
-                )}
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-document
-    .getElementById(
-        "propertyForm"
-    )
-    .addEventListener(
-        "submit",
-        saveProperty
-    );
-
-
-async function saveProperty(
-    event
-){
-
-    event.preventDefault();
-
-    clearMessage();
-
-
-    if(!currentCompanyId){
-
-        showMessage(
-            "Company ID is not available.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    const button =
-        document.getElementById(
-            "savePropertyButton"
-        );
-
-
-    const title =
-        document
-            .getElementById(
-                "propertyTitle"
-            )
-            .value
-            .trim();
-
-
-    const propertyType =
-        document
-            .getElementById(
-                "propertyType"
-            )
-            .value;
-
-
-    const status =
-        document
-            .getElementById(
-                "propertyStatus"
-            )
-            .value;
-
-
-    const purpose =
-        document
-            .getElementById(
-                "propertyPurpose"
-            )
-            .value;
-
-
-    const location =
-        document
-            .getElementById(
-                "propertyLocation"
-            )
-            .value
-            .trim();
-
-
-    const price =
-        Number(
-            document
-                .getElementById(
-                    "propertyPrice"
-                )
-                .value
-        );
-
-
-    const bedrooms =
-        Number(
-            document
-                .getElementById(
-                    "propertyBedrooms"
-                )
-                .value
-        ) || 0;
-
-
-    const bathrooms =
-        Number(
-            document
-                .getElementById(
-                    "propertyBathrooms"
-                )
-                .value
-        ) || 0;
-
-
-    /* KITCHEN ADDED ONLY */
-
-    const kitchen =
-        document
-            .getElementById(
-                "propertyKitchen"
-            )
-            .value;
-
-
-    const area =
-        document
-            .getElementById(
-                "propertyArea"
-            )
-            .value
-            .trim();
-
-
-    const description =
-        document
-            .getElementById(
-                "propertyDescription"
-            )
-            .value
-            .trim();
-
-
-    const featured =
-        document
-            .getElementById(
-                "propertyFeatured"
-            )
-            .checked;
-
-
-    const images =
-        getPropertyImages();
-
-
-    if(!title){
-
-        showMessage(
-            "Property title is required.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    if(!propertyType){
-
-        showMessage(
-            "Please select property type.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    if(!location){
-
-        showMessage(
-            "Property location is required.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    if(
-        !Number.isFinite(price) ||
-        price < 0
-    ){
-
-        showMessage(
-            "Please enter a valid property price.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    if(
-        bedrooms < 0 ||
-        bedrooms > 20 ||
-        bathrooms < 0 ||
-        bathrooms > 20
-    ){
-
-        showMessage(
-            "Bedrooms and bathrooms must be between 0 and 20.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    const propertyData = {
-
-        title:
-            title,
-
-        propertyType:
-            propertyType,
-
-        status:
-            status,
-
-        purpose:
-            purpose,
-
-        location:
-            location,
-
-        price:
-            price,
-
-        bedrooms:
-            bedrooms,
-
-        bathrooms:
-            bathrooms,
-
-        kitchen:
-            kitchen,
-
-        area:
-            area,
-
-        imageUrl:
-            images[0] ||
-            "",
-
-        imageUrl1:
-            images[0] ||
-            "",
-
-        imageUrl2:
-            images[1] ||
-            "",
-
-        imageUrl3:
-            images[2] ||
-            "",
-
-        imageUrl4:
-            images[3] ||
-            "",
-
-        imageUrl5:
-            images[4] ||
-            "",
-
-        images:
-            images,
-
-        description:
-            description,
-
-        featured:
-            featured,
-
-        companyId:
-            currentCompanyId,
-
-        updatedAt:
-            serverTimestamp()
-
-    };
-
-
-    button.disabled =
-        true;
-
-
-    button.textContent =
-        editingPropertyId
-            ? "Updating..."
-            : "Saving...";
-
-
-    try{
-
-        if(editingPropertyId){
-
-            const propertyRef =
-                doc(
-                    db,
-                    "companies",
-                    currentCompanyId,
-                    "properties",
-                    editingPropertyId
-                );
-
-
-            await updateDoc(
-                propertyRef,
-                propertyData
-            );
-
-
-            showMessage(
-                "Property updated successfully.",
-                "success"
-            );
-
-        }
-
-        else{
-
-            propertyData.createdBy =
-                currentUser?.uid ||
-                "";
-
-            propertyData.createdAt =
-                serverTimestamp();
-
-
-            await addDoc(
-                getPropertiesRef(),
-                propertyData
-            );
-
-
-            showMessage(
-                "Property added successfully.",
-                "success"
-            );
-
-        }
-
-
-        resetPropertyForm();
-
-        await loadProperties();
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        showMessage(
-            firebaseError(error),
-            "error"
-        );
-
-    }
-
-    finally{
-
-        button.disabled =
-            false;
-
-        button.textContent =
-            "Save Property";
-
-    }
-
-}
-
-
-function editProperty(
-    id
-){
-
-    const property =
-        allProperties.find(
-            item =>
-                item.id === id
-        );
-
-
-    if(!property){
-
-        showMessage(
-            "Property not found.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    editingPropertyId =
-        id;
-
-
-    document.getElementById(
-        "propertyFormTitle"
-    ).textContent =
-        "Edit Property";
-
-
-    document.getElementById(
-        "savePropertyButton"
-    ).textContent =
-        "Update Property";
-
-
-    document.getElementById(
-        "cancelPropertyButton"
-    ).classList.remove(
-        "hidden"
-    );
-
-
-    document.getElementById(
-        "propertyTitle"
-    ).value =
-        property.title ||
-        "";
-
-
-    document.getElementById(
-        "propertyType"
-    ).value =
-        property.propertyType ||
-        "";
-
-
-    document.getElementById(
-        "propertyStatus"
-    ).value =
-        property.status ||
-        "available";
-
-
-    document.getElementById(
-        "propertyPurpose"
-    ).value =
-        property.purpose ||
-        "sale";
-
-
-    document.getElementById(
-        "propertyLocation"
-    ).value =
-        property.location ||
-        "";
-
-
-    document.getElementById(
-        "propertyPrice"
-    ).value =
-        property.price ??
-        "";
-
-
-    document.getElementById(
-        "propertyBedrooms"
-    ).value =
-        property.bedrooms ??
-        0;
-
-
-    document.getElementById(
-        "propertyBathrooms"
-    ).value =
-        property.bathrooms ??
-        0;
-
-
-    /* KITCHEN ADDED ONLY */
-
-    document.getElementById(
-        "propertyKitchen"
-    ).value =
-        property.kitchen ||
-        "";
-
-
-    document.getElementById(
-        "propertyArea"
-    ).value =
-        property.area ||
-        "";
-
-
-    document.getElementById(
-        "propertyDescription"
-    ).value =
-        property.description ||
-        "";
-
-
-    document.getElementById(
-        "propertyFeatured"
-    ).checked =
-        property.featured === true;
-
-
-    let images = [];
-
-
-    if(
-        Array.isArray(
-            property.images
-        )
-    ){
-
-        images =
-            property.images;
-
-    }
-
-    else{
-
-        images = [
-
-            property.imageUrl1 ||
-            property.imageUrl ||
-            property.image ||
-            "",
-
-            property.imageUrl2 ||
-            "",
-
-            property.imageUrl3 ||
-            "",
-
-            property.imageUrl4 ||
-            "",
-
-            property.imageUrl5 ||
-            ""
-
-        ];
-
-    }
-
-
-    setPropertyImages(
-        images
-    );
-
-
-    document
-        .getElementById(
-            "propertyForm"
-        )
-        .scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-        });
-
-}
-
-
-document
-    .getElementById(
-        "cancelPropertyButton"
-    )
-    .addEventListener(
-        "click",
-        resetPropertyForm
-    );
-
-
-function resetPropertyForm(){
-
-    editingPropertyId =
-        null;
-
-
-    document.getElementById(
-        "propertyForm"
-    ).reset();
-
-
-    document.getElementById(
-        "propertyStatus"
-    ).value =
-        "available";
-
-
-    document.getElementById(
-        "propertyPurpose"
-    ).value =
-        "sale";
-
-
-    document.getElementById(
-        "propertyBedrooms"
-    ).value =
-        "0";
-
-
-    document.getElementById(
-        "propertyBathrooms"
-    ).value =
-        "0";
-
-
-    /* KITCHEN ADDED ONLY */
-
-    document.getElementById(
-        "propertyKitchen"
-    ).value =
-        "";
-
-
-    setPropertyImages(
-        []
-    );
-
-
-    document.getElementById(
-        "propertyFormTitle"
-    ).textContent =
-        "Add Property";
-
-
-    document.getElementById(
-        "savePropertyButton"
-    ).textContent =
-        "Save Property";
-
-
-    document.getElementById(
-        "cancelPropertyButton"
-    ).classList.add(
-        "hidden"
-    );
-
-}
-
-
-async function duplicateProperty(
-    id
-){
-
-    const property =
-        allProperties.find(
-            item =>
-                item.id === id
-        );
-
-
-    if(!property){
-
-        showMessage(
-            "Property not found.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    const confirmed =
-        confirm(
-            "Duplicate this property?"
-        );
-
-
-    if(!confirmed){
-
-        return;
-
-    }
-
-
-    try{
-
-        const {
-
-            id:ignoredId,
-
-            createdAt:ignoredCreatedAt,
-
-            updatedAt:ignoredUpdatedAt,
-
-            ...copy
-
-        } = property;
-
-
-        const duplicateData = {
-
-            ...copy,
-
-            title:
-                (
-                    copy.title ||
-                    "Property"
-                ) +
-                " - Copy",
-
-            companyId:
-                currentCompanyId,
-
-            createdBy:
-                currentUser?.uid ||
-                "",
-
-            createdAt:
-                serverTimestamp(),
-
-            updatedAt:
-                serverTimestamp()
-
-        };
-
-
-        await addDoc(
-            getPropertiesRef(),
-            duplicateData
-        );
-
-
-        showMessage(
-            "Property duplicated successfully.",
-            "success"
-        );
-
-
-        await loadProperties();
-
-    }
-
-    catch(error){
-
-        showMessage(
-            firebaseError(error),
-            "error"
-        );
-
-    }
-
-}
-
-
-function openDeleteModal(
-    id
-){
-
-    const property =
-        allProperties.find(
-            item =>
-                item.id === id
-        );
-
-
-    if(!property){
-
-        return;
-
-    }
-
-
-    propertyToDelete =
-        id;
-
-
-    document.getElementById(
-        "deletePropertyName"
-    ).innerHTML = `
-
-        <div
-            style="
-                background:#f8fafc;
-                border:1px solid #e2e8f0;
-                border-radius:9px;
-                padding:10px;
-                font-size:12px;
-                font-weight:800;
-                margin-top:12px;
-            "
-        >
-            ${escapeHTML(
-                property.title ||
-                "Untitled Property"
-            )}
-        </div>
-
-    `;
-
-
-    document
-        .getElementById(
-            "deleteModal"
-        )
-        .classList.add(
-            "show"
-        );
-
-}
-
-
-function closeDeleteModal(){
-
-    propertyToDelete =
-        null;
-
-
-    document
-        .getElementById(
-            "deleteModal"
-        )
-        .classList.remove(
-            "show"
-        );
-
-}
-
-
-document
-    .getElementById(
-        "closeDeleteModal"
-    )
-    .addEventListener(
-        "click",
-        closeDeleteModal
-    );
-
-
-document
-    .getElementById(
-        "cancelDelete"
-    )
-    .addEventListener(
-        "click",
-        closeDeleteModal
-    );
-
-
-document
-    .getElementById(
-        "deleteModal"
-    )
-    .addEventListener(
-        "click",
-        event => {
-
-            if(
-                event.target.id ===
-                "deleteModal"
-            ){
-
-                closeDeleteModal();
-
-            }
-
-        }
-    );
-
-
-document
-    .getElementById(
-        "confirmDelete"
-    )
-    .addEventListener(
-        "click",
-        async () => {
-
-            if(!propertyToDelete){
-
-                return;
-
-            }
-
-
-            const button =
-                document.getElementById(
-                    "confirmDelete"
-                );
-
-
-            button.disabled =
-                true;
-
-            button.textContent =
-                "Deleting...";
-
-
-            try{
-
-                const propertyRef =
-                    doc(
-                        db,
-                        "companies",
-                        currentCompanyId,
-                        "properties",
-                        propertyToDelete
-                    );
-
-
-                await deleteDoc(
-                    propertyRef
-                );
-
-
-                closeDeleteModal();
-
-
-                showMessage(
-                    "Property deleted successfully.",
-                    "success"
-                );
-
-
-                await loadProperties();
-
-            }
-
-            catch(error){
-
-                showMessage(
-                    firebaseError(error),
-                    "error"
-                );
-
-            }
-
-            finally{
-
-                button.disabled =
-                    false;
-
-                button.textContent =
-                    "Delete Property";
-
-            }
-
-        }
-    );
-
-
-function getImageCount(
-    property
-){
-
-    if(
-        Array.isArray(
-            property.images
-        )
-    ){
-
-        return property.images.filter(
-            image =>
-                String(image || "").trim()
-        ).length;
-
-    }
-
-
-    let count = 0;
-
-
-    for(
-        let i = 1;
-        i <= 5;
-        i++
-    ){
-
-        if(
-            property[
-                "imageUrl" + i
-            ]
-        ){
-
-            count++;
-
-        }
-
-    }
-
-
-    if(
-        count === 0 &&
-        (
-            property.imageUrl ||
-            property.image
-        )
-    ){
-
-        count = 1;
-
-    }
-
-
-    return count;
-
-}
-
-
-function getMainImage(
-    property
-){
-
-    if(
-        property.imageUrl1
-    ){
-
-        return property.imageUrl1;
-
-    }
-
-
-    if(
-        property.imageUrl
-    ){
-
-        return property.imageUrl;
-
-    }
-
-
-    if(
-        Array.isArray(
-            property.images
-        ) &&
-        property.images[0]
-    ){
-
-        return property.images[0];
-
-    }
-
-
-    if(
-        property.image
-    ){
-
-        return property.image;
-
-    }
-
-
-    return "";
-
-}
-
-
-function renderProperties(){
-
-    const container =
-        document.getElementById(
-            "propertiesList"
-        );
-
-
-    const search =
-        document
-            .getElementById(
-                "propertySearch"
-            )
-            .value
-            .trim()
-            .toLowerCase();
-
-
-    const filterStatus =
-        document
-            .getElementById(
-                "filterStatus"
-            )
-            .value;
-
-
-    const filterType =
-        document
-            .getElementById(
-                "filterType"
-            )
-            .value;
-
-
-    const filterPurpose =
-        document
-            .getElementById(
-                "filterPurpose"
-            )
-            .value;
-
-
-    const filterFeatured =
-        document
-            .getElementById(
-                "filterFeatured"
-            )
-            .value;
-
-
-    const filtered =
-        allProperties.filter(
-            property => {
-
-                const searchable = [
-
-                    property.title,
-
-                    property.location,
-
-                    property.propertyType,
-
-                    property.status,
-
-                    property.purpose,
-
-                    property.description,
-
-                    ...(Array.isArray(property.images)
-                        ? property.images
-                        : [])
-
-                ]
-                .join(" ")
-                .toLowerCase();
-
-
-                if(
-                    search &&
-                    !searchable.includes(
-                        search
-                    )
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    filterStatus &&
-                    String(
-                        property.status ||
-                        ""
-                    ).toLowerCase() !==
-                    filterStatus.toLowerCase()
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    filterType &&
-                    String(
-                        property.propertyType ||
-                        ""
-                    ).toLowerCase() !==
-                    filterType.toLowerCase()
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    filterPurpose &&
-                    String(
-                        property.purpose ||
-                        ""
-                    ).toLowerCase() !==
-                    filterPurpose.toLowerCase()
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    filterFeatured === "featured" &&
-                    property.featured !== true
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    filterFeatured === "normal" &&
-                    property.featured === true
-                ){
-
-                    return false;
-
-                }
-
-
-                return true;
-
-            }
-        );
-
-
-    if(
-        filtered.length === 0
-    ){
-
-        container.innerHTML = `
-
-            <div class="empty-state">
-
-                <strong>
-                    No properties found
-                </strong>
-
-                ${
-                    allProperties.length
-                        ? "Try changing your search or filters."
-                        : "Add your first property above."
-                }
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        filtered
-            .map(
-                property => {
-
-                    const image =
-                        getMainImage(
-                            property
-                        );
-
-
-                    const status =
-                        String(
-                            property.status ||
-                            "available"
-                        ).toLowerCase();
-
-
-                    const statusLabel =
-                        status.charAt(0).toUpperCase() +
-                        status.slice(1);
-
-
-                    const price =
-                        Number(
-                            property.price
-                        );
-
-
-                    const imageCount =
-                        getImageCount(
-                            property
-                        );
-
-
-                    return `
-
-                        <article
-                            class="property-card"
-                        >
-
-                            <div
-                                class="property-image"
-                            >
-
-                                ${
-                                    image
-                                        ?
-                                        `
-                                        <img
-                                            src="${escapeHTML(image)}"
-                                            alt="${escapeHTML(
-                                                property.title ||
-                                                "Property"
-                                            )}"
-                                            onerror="this.style.display='none';this.nextElementSibling.style.display='grid';"
-                                        >
-
-                                        <div
-                                            class="property-placeholder"
-                                            style="display:none;"
-                                        >
-                                            Image unavailable
-                                        </div>
-                                        `
-                                        :
-                                        `
-                                        <div
-                                            class="property-placeholder"
-                                        >
-                                            No Image
-                                        </div>
-                                        `
-                                }
-
-                                <div
-                                    class="property-badges"
-                                >
-
-                                    <div>
-
-                                        <span
-                                            class="badge ${escapeHTML(status)}"
-                                        >
-                                            ${escapeHTML(
-                                                statusLabel
-                                            )}
-                                        </span>
-
-                                    </div>
-
-                                    <div>
-
-                                        ${
-                                            property.featured
-                                                ?
-                                                `
-                                                <span
-                                                    class="badge featured"
-                                                >
-                                                    ★ Featured
-                                                </span>
-                                                `
-                                                :
-                                                ""
-                                        }
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div
-                                class="property-content"
-                            >
-
-                                <div
-                                    class="property-title"
-                                >
-                                    ${escapeHTML(
-                                        property.title ||
-                                        "Untitled Property"
-                                    )}
-                                </div>
-
-                                <div
-                                    class="property-location"
-                                >
-                                    📍
-                                    ${escapeHTML(
-                                        property.location ||
-                                        "Location not specified"
-                                    )}
-                                </div>
-
-                                <div
-                                    class="property-price"
-                                >
-
-                                    ${
-                                        Number.isFinite(price)
-                                            ?
-                                            formatMoney(price)
-                                            :
-                                            "Price not set"
-                                    }
-
-                                </div>
-
-                                <div
-                                    class="property-meta"
-                                >
-
-                                    ${
-                                        property.propertyType
-                                            ?
-                                            `
-                                            <span class="meta">
-                                                ${escapeHTML(
-                                                    property.propertyType
-                                                )}
-                                            </span>
-                                            `
-                                            :
-                                            ""
-                                    }
-
-                                    ${
-                                        property.purpose
-                                            ?
-                                            `
-                                            <span class="meta">
-                                                ${escapeHTML(
-                                                    property.purpose
-                                                )}
-                                            </span>
-                                            `
-                                            :
-                                            ""
-                                    }
-
-                                    <span class="meta">
-                                        🛏
-                                        ${Number(
-                                            property.bedrooms
-                                        ) || 0}
-                                    </span>
-
-                                    <span class="meta">
-                                        🚿
-                                        ${Number(
-                                            property.bathrooms
-                                        ) || 0}
-                                    </span>
-
-                                    ${
-                                        property.area
-                                            ?
-                                            `
-                                            <span class="meta">
-                                                📐
-                                                ${escapeHTML(
-                                                    property.area
-                                                )}
-                                            </span>
-                                            `
-                                            :
-                                            ""
-                                    }
-
-                                    <span class="meta">
-                                        🖼
-                                        ${imageCount} photo${
-                                            imageCount === 1
-                                                ? ""
-                                                : "s"
-                                        }
-                                    </span>
-
-                                </div>
-
-                                <div
-                                    class="property-description"
-                                >
-                                    ${escapeHTML(
-                                        property.description ||
-                                        "No description available."
-                                    )}
-                                </div>
-
-                                <div
-                                    class="property-actions"
-                                >
-
-                                    <button
-                                        class="property-action"
-                                        type="button"
-                                        data-edit="${escapeHTML(
-                                            property.id
-                                        )}"
-                                    >
-                                        Edit
-                                    </button>
-
-                                    <button
-                                        class="property-action"
-                                        type="button"
-                                        data-duplicate="${escapeHTML(
-                                            property.id
-                                        )}"
-                                    >
-                                        Copy
-                                    </button>
-
-                                    <button
-                                        class="property-action delete"
-                                        type="button"
-                                        data-delete="${escapeHTML(
-                                            property.id
-                                        )}"
-                                    >
-                                        Delete
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </article>
-
-                    `;
-
-                }
-            )
-            .join("");
-
-
-    container
-        .querySelectorAll(
-            "[data-edit]"
-        )
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    () =>
-                        editProperty(
-                            button.dataset.edit
-                        )
-                );
-
-            }
-        );
-
-
-    container
-        .querySelectorAll(
-            "[data-duplicate]"
-        )
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    () =>
-                        duplicateProperty(
-                            button.dataset.duplicate
-                        )
-                );
-
-            }
-        );
-
-
-    container
-        .querySelectorAll(
-            "[data-delete]"
-        )
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    () =>
-                        openDeleteModal(
-                            button.dataset.delete
-                        )
-                );
-
-            }
-        );
-
-}
-
-
-function updateStats(){
-
-    const total =
-        allProperties.length;
-
-
-    const available =
-        allProperties.filter(
-            property =>
-                String(
-                    property.status ||
-                    ""
-                ).toLowerCase() ===
-                "available"
-        ).length;
-
-
-    const sold =
-        allProperties.filter(
-            property =>
-                String(
-                    property.status ||
-                    ""
-                ).toLowerCase() ===
-                "sold"
-        ).length;
-
-
-    const rented =
-        allProperties.filter(
-            property =>
-                String(
-                    property.status ||
-                    ""
-                ).toLowerCase() ===
-                "rented"
-        ).length;
-
-
-    document.getElementById(
-        "totalProperties"
-    ).textContent =
-        total;
-
-
-    document.getElementById(
-        "availableProperties"
-    ).textContent =
-        available;
-
-
-    document.getElementById(
-        "soldProperties"
-    ).textContent =
-        sold;
-
-
-    document.getElementById(
-        "rentedProperties"
-    ).textContent =
-        rented;
-
-}
-
-
-document
-    .getElementById(
-        "propertySearch"
-    )
-    .addEventListener(
-        "input",
-        renderProperties
-    );
-
-
-document
-    .getElementById(
-        "filterStatus"
-    )
-    .addEventListener(
-        "change",
-        renderProperties
-    );
-
-
-document
-    .getElementById(
-        "filterType"
-    )
-    .addEventListener(
-        "change",
-        renderProperties
-    );
-
-
-document
-    .getElementById(
-        "filterPurpose"
-    )
-    .addEventListener(
-        "change",
-        renderProperties
-    );
-
-
-document
-    .getElementById(
-        "filterFeatured"
-    )
-    .addEventListener(
-        "change",
-        renderProperties
-    );
-
-
-async function refreshAdmin(){
-
-    if(!currentUser){
-
-        return;
-
-    }
-
-
-    clearMessage();
-
-
-    try{
-
-        await loadCompany();
-
-        await loadSubscription();
-
-        await loadProperties();
-
-
-        showMessage(
-            "Admin data refreshed successfully.",
-            "success"
-        );
-
-    }
-
-    catch(error){
-
-        showMessage(
-            firebaseError(error),
-            "error"
-        );
-
-    }
-
-}
-
-
-document
-    .getElementById(
-        "refreshButton"
-    )
-    .addEventListener(
-        "click",
-        refreshAdmin
-    );
-
-
-loginForm.addEventListener(
-    "submit",
-    async event => {
-
-        event.preventDefault();
-
-
-        const email =
-            loginEmail.value.trim();
-
-
-        const password =
-            loginPassword.value;
-
-
-        if(!email || !password){
-
-            showLoginMessage(
-                "Please enter email and password.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        loginButton.disabled =
-            true;
-
-        loginButton.textContent =
-            "Signing in...";
-
-
-        try{
-
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-
-
-            showLoginMessage(
-                "Login successful.",
-                "success"
-            );
-
-        }
-
-        catch(error){
-
-            console.error(error);
-
-            showLoginMessage(
-                firebaseError(error),
-                "error"
-            );
-
-        }
-
-        finally{
-
-            loginButton.disabled =
-                false;
-
-            loginButton.textContent =
-                "Login";
-
-        }
-
-    }
-);
-
-
-document
-    .getElementById(
-        "logoutButton"
-    )
-    .addEventListener(
-        "click",
-        async () => {
-
-            try{
-
-                await signOut(auth);
-
-            }
-
-            catch(error){
-
-                console.error(
-                    "Logout error:",
-                    error
-                );
-
-            }
-
-        }
-    );
-
-
-onAuthStateChanged(
-    auth,
-    async user => {
-
-        if(!user){
-
-            currentUser =
-                null;
-
-            currentCompanyId =
-                null;
-
-            adminScreen.style.display =
-                "none";
-
-            loginScreen.style.display =
-                "flex";
-
-            return;
-
-        }
-
-
-        currentUser =
-            user;
-
-
-        try{
-
-            loginScreen.style.display =
-                "none";
-
-            adminScreen.style.display =
-                "block";
-
-
-            await loadAdminProfile();
-
-            await loadCompany();
-
-            await loadSubscription();
-
-            await loadProperties();
-
-        }
-
-        catch(error){
-
-            console.error(error);
-
-
-            adminScreen.style.display =
-                "none";
-
-            loginScreen.style.display =
-                "flex";
-
-
-            showLoginMessage(
-                firebaseError(error),
-                "error"
-            );
-
-
-            try{
-
-                await signOut(auth);
-
-            }
-
-            catch(signOutError){
-
-                console.error(
-                    signOutError
-                );
-
-            }
-
-        }
-
-    }
-);
-
-
-window.estatePro = {
-
-    get currentUser(){
-
-        return currentUser;
-
-    },
-
-    get currentCompanyId(){
-
-        return currentCompanyId;
-
-    },
-
-    get currentCompany(){
-
-        return currentCompany;
-
-    },
-
-    get currentSubscription(){
-
-        return currentSubscription;
-
-    },
-
-    get properties(){
-
-        return allProperties;
-
-    },
-
-    refresh:
-        refreshAdmin,
-
-    loadProperties:
-        loadProperties,
-
-    loadSubscription:
-        loadSubscription
-
-};
-
+  } catch (err) { toast("Error: " + err.message); }
+  $("addAdminBtn").disabled = false;
+});
 </script>
-
 </body>
-
 </html>

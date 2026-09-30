@@ -1,3687 +1,512 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta
-    name="description"
-    id="pageDescription"
-    content="Browse available properties."
->
-
-<meta name="theme-color" content="#0f766e">
-
-<title id="pageTitle">Properties</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepBuild.ai - Build your future with AI</title>
 <style>
-
-*{
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    margin:0;
-    font-family:Inter,Arial,sans-serif;
-    background:#f5f7f9;
-    color:#17202a;
-}
-
-button,
-input,
-select{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-.hidden{
-    display:none!important;
-}
-
-
-/* HEADER */
-
-.site-header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:#fff;
-    border-bottom:1px solid #e5e7eb;
-}
-
-.header-inner{
-    max-width:1200px;
-    margin:auto;
-    min-height:70px;
-    padding:10px 18px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    min-width:0;
-}
-
-.brand-logo{
-    width:45px;
-    height:45px;
-    border-radius:11px;
-    background:#ecfdf5;
-    color:#0f766e;
-
-    display:grid;
-    place-items:center;
-    overflow:hidden;
-
-    flex-shrink:0;
-    font-weight:800;
-    font-size:20px;
-}
-
-.brand-logo img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
-
-.brand-text{
-    min-width:0;
-}
-
-.brand-name{
-    font-size:16px;
-    font-weight:800;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.brand-location{
-    color:#64748b;
-    font-size:11px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.menu{
-    display:flex;
-    align-items:center;
-    gap:5px;
-}
-
-.menu a{
-    padding:9px 11px;
-    border-radius:8px;
-    font-size:13px;
-    font-weight:600;
-    color:#475569;
-}
-
-.menu a:hover{
-    background:#f1f5f9;
-    color:#0f766e;
-}
-
-.header-actions{
-    display:flex;
-    align-items:center;
-    gap:7px;
-}
-
-.header-button{
-    border:1px solid #d7dde3;
-    background:#fff;
-    color:#334155;
-    padding:9px 12px;
-    border-radius:8px;
-    font-weight:600;
-}
-
-.whatsapp-button{
-    border:0;
-    background:#0f766e;
-    color:#fff;
-    padding:10px 13px;
-    border-radius:8px;
-    font-weight:700;
-}
-
-.mobile-menu-button{
-    display:none;
-    border:1px solid #d7dde3;
-    background:#fff;
-    width:42px;
-    height:42px;
-    border-radius:9px;
-    font-size:20px;
-}
-
-
-/* MOBILE MENU */
-
-.mobile-menu{
-    display:none;
-    background:#fff;
-    border-top:1px solid #e5e7eb;
-    padding:10px 15px 15px;
-}
-
-.mobile-menu.show{
-    display:block;
-}
-
-.mobile-menu a{
-    display:block;
-    padding:12px;
-    border-radius:8px;
-    font-size:14px;
-    font-weight:600;
-}
-
-.mobile-menu a:hover{
-    background:#f1f5f9;
-}
-
-
-/* HERO */
-
-.hero{
-    background:linear-gradient(
-        135deg,
-        #0f766e,
-        #115e59
-    );
-
-    color:#fff;
-}
-
-.hero-inner{
-    max-width:1200px;
-    margin:auto;
-    padding:60px 18px 68px;
-}
-
-.hero-content{
-    max-width:720px;
-}
-
-.hero-label{
-    display:inline-block;
-    padding:7px 12px;
-    border-radius:999px;
-    background:rgba(255,255,255,.13);
-    font-size:12px;
-    font-weight:700;
-    margin-bottom:15px;
-}
-
-.hero h1{
-    margin:0 0 15px;
-    font-size:clamp(32px,6vw,55px);
-    line-height:1.08;
-}
-
-.hero p{
-    margin:0;
-    color:rgba(255,255,255,.86);
-    line-height:1.7;
-    max-width:650px;
-}
-
-
-/* SEARCH */
-
-.search-section{
-    max-width:1100px;
-    margin:-28px auto 0;
-    position:relative;
-    z-index:10;
-    padding:0 18px;
-}
-
-.search-box{
-    background:#fff;
-    border-radius:15px;
-    padding:15px;
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,.10);
-
-    display:grid;
-    grid-template-columns:
-        1.5fr 1fr 1fr auto;
-
-    gap:10px;
-}
-
-.search-control{
-    min-width:0;
-}
-
-.search-control input,
-.search-control select{
-    width:100%;
-    border:1px solid #d7dde3;
-    background:#fff;
-    padding:12px;
-    border-radius:9px;
-    outline:none;
-}
-
-.search-control input:focus,
-.search-control select:focus{
-    border-color:#0f766e;
-}
-
-.search-button{
-    border:0;
-    background:#0f766e;
-    color:#fff;
-    padding:0 22px;
-    border-radius:9px;
-    font-weight:700;
-}
-
-
-/* MAIN */
-
-.main-container{
-    max-width:1200px;
-    margin:auto;
-    padding:45px 18px 70px;
-}
-
-.section-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:20px;
-    margin-bottom:20px;
-}
-
-.section-header h2{
-    margin:0 0 5px;
-    font-size:26px;
-}
-
-.section-header p{
-    margin:0;
-    color:#64748b;
-    font-size:14px;
-}
-
-.property-count{
-    color:#64748b;
-    font-size:13px;
-}
-
-
-/* CATEGORIES */
-
-.categories{
-    display:flex;
-    gap:8px;
-    overflow-x:auto;
-    padding-bottom:10px;
-    margin-bottom:20px;
-}
-
-.category-button{
-    flex-shrink:0;
-    border:1px solid #d7dde3;
-    background:#fff;
-    color:#475569;
-    padding:9px 14px;
-    border-radius:999px;
-    font-size:13px;
-    font-weight:600;
-}
-
-.category-button.active{
-    background:#0f766e;
-    border-color:#0f766e;
-    color:#fff;
-}
-
-
-/* PROPERTY GRID */
-
-.properties-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.property-card{
-    background:#fff;
-    border-radius:15px;
-    overflow:hidden;
-    border:1px solid #e5e7eb;
-
-    box-shadow:
-        0 4px 18px rgba(0,0,0,.045);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-.property-card:hover{
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.08);
-}
-
-.property-image{
-    position:relative;
-    height:220px;
-    background:#e2e8f0;
-    overflow:hidden;
-}
-
-.property-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.image-placeholder{
-    width:100%;
-    height:100%;
-    display:grid;
-    place-items:center;
-    color:#94a3b8;
-    font-size:13px;
-}
-
-.featured-label{
-    position:absolute;
-    top:12px;
-    left:12px;
-    background:#6d28d9;
-    color:#fff;
-    padding:6px 9px;
-    border-radius:7px;
-    font-size:11px;
-    font-weight:700;
-}
-
-.purpose-label{
-    position:absolute;
-    top:12px;
-    right:12px;
-    background:rgba(15,118,110,.95);
-    color:#fff;
-    padding:6px 9px;
-    border-radius:7px;
-    font-size:11px;
-    font-weight:700;
-}
-
-.property-body{
-    padding:17px;
-}
-
-.property-type{
-    color:#0f766e;
-    font-size:11px;
-    font-weight:800;
-    text-transform:uppercase;
-    margin-bottom:6px;
-}
-
-.property-title{
-    margin:0 0 8px;
-    font-size:18px;
-    line-height:1.35;
-}
-
-.property-location{
-    color:#64748b;
-    font-size:13px;
-    line-height:1.5;
-    margin-bottom:12px;
-}
-
-.property-price{
-    font-size:20px;
-    font-weight:800;
-    color:#0f766e;
-    margin-bottom:12px;
-}
-
-.property-meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    margin-bottom:15px;
-}
-
-.meta-item{
-    background:#f1f5f9;
-    color:#475569;
-    padding:6px 8px;
-    border-radius:6px;
-    font-size:11px;
-    font-weight:600;
-}
-
-.property-description{
-    color:#64748b;
-    font-size:13px;
-    line-height:1.6;
-
-    display:-webkit-box;
-    -webkit-line-clamp:3;
-    -webkit-box-orient:vertical;
-
-    overflow:hidden;
-    margin-bottom:15px;
-}
-
-.view-button{
-    width:100%;
-    border:0;
-    background:#0f766e;
-    color:#fff;
-    padding:11px;
-    border-radius:8px;
-    font-weight:700;
-}
-
-.view-button:hover{
-    background:#115e59;
-}
-
-
-/* STATUS */
-
-.status-badge{
-    display:inline-block;
-    padding:5px 8px;
-    border-radius:999px;
-    background:#dcfce7;
-    color:#166534;
-    font-size:10px;
-    font-weight:800;
-    text-transform:uppercase;
-    margin-bottom:8px;
-}
-
-.status-sold{
-    background:#fee2e2;
-    color:#b91c1c;
-}
-
-.status-rented{
-    background:#fef3c7;
-    color:#92400e;
-}
-
-
-/* LOADING */
-
-.loading{
-    grid-column:1/-1;
-    background:#fff;
-    border-radius:14px;
-    padding:50px 20px;
-    text-align:center;
-    color:#64748b;
-}
-
-.spinner{
-    width:35px;
-    height:35px;
-
-    border:3px solid #d1fae5;
-    border-top-color:#0f766e;
-
-    border-radius:50%;
-
-    animation:spin .8s linear infinite;
-
-    margin:0 auto 15px;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-
-/* EMPTY */
-
-.empty-state{
-    grid-column:1/-1;
-    background:#fff;
-    border-radius:14px;
-    padding:55px 20px;
-    text-align:center;
-    border:1px solid #e5e7eb;
-}
-
-.empty-icon{
-    font-size:42px;
-    margin-bottom:10px;
-}
-
-.empty-state h3{
-    margin:0 0 7px;
-}
-
-.empty-state p{
-    margin:0;
-    color:#64748b;
-}
-
-
-/* ABOUT */
-
-.about-section{
-    margin-top:55px;
-    background:#fff;
-    border-radius:16px;
-    padding:30px;
-    border:1px solid #e5e7eb;
-
-    display:grid;
-    grid-template-columns:180px 1fr;
-    gap:30px;
-    align-items:center;
-}
-
-.about-logo{
-    width:160px;
-    height:160px;
-    border-radius:18px;
-    background:#ecfdf5;
-
-    display:grid;
-    place-items:center;
-
-    overflow:hidden;
-
-    color:#0f766e;
-    font-size:55px;
-    font-weight:800;
-}
-
-.about-logo img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
-
-.about-content h2{
-    margin:0 0 10px;
-    font-size:27px;
-}
-
-.about-content p{
-    color:#64748b;
-    line-height:1.7;
-    margin:0 0 15px;
-}
-
-.company-contact{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-}
-
-.contact-item{
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    border-radius:8px;
-    padding:9px 11px;
-    color:#475569;
-    font-size:12px;
-    font-weight:600;
-}
-
-
-/* SUBSCRIPTION LOCK */
-
-.subscription-lock{
-    position:fixed;
-    inset:0;
-    z-index:99999;
-
-    background:
-        radial-gradient(
-            circle at top,
-            rgba(15,118,110,.12),
-            transparent 45%
-        ),
-        #f8fafc;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-}
-
-.subscription-lock-card{
-    width:100%;
-    max-width:520px;
-
-    background:#fff;
-    border:1px solid #e5e7eb;
-    border-radius:22px;
-
-    padding:40px 28px;
-
-    text-align:center;
-
-    box-shadow:
-        0 20px 60px rgba(15,23,42,.12);
-}
-
-.subscription-lock-icon{
-    width:75px;
-    height:75px;
-
-    margin:0 auto 20px;
-
-    border-radius:50%;
-
-    display:grid;
-    place-items:center;
-
-    background:#fee2e2;
-    color:#b91c1c;
-
-    font-size:34px;
-}
-
-.subscription-lock-card h1{
-    margin:0 0 12px;
-    color:#0f172a;
-    font-size:28px;
-}
-
-.subscription-lock-card p{
-    margin:0 auto 12px;
-
-    max-width:440px;
-
-    color:#64748b;
-
-    font-size:14px;
-    line-height:1.7;
-}
-
-.subscription-company{
-    margin-top:20px;
-
-    padding:12px;
-
-    border-radius:10px;
-
-    background:#f8fafc;
-
-    color:#334155;
-
-    font-weight:700;
-}
-
-.subscription-reload{
-    margin-top:22px;
-
-    border:0;
-
-    background:#0f766e;
-    color:#fff;
-
-    padding:12px 20px;
-
-    border-radius:9px;
-
-    font-weight:700;
-}
-
-
-/* ERROR */
-
-.error-box{
-    grid-column:1/-1;
-
-    max-width:700px;
-
-    margin:30px auto;
-
-    padding:25px;
-
-    background:#fee2e2;
-    color:#991b1b;
-
-    border-radius:12px;
-
-    line-height:1.6;
-
-    text-align:center;
-}
-
-.error-box h2{
-    margin-top:0;
-}
-
-
-/* FOOTER */
-
-.footer{
-    background:#0f172a;
-    color:#fff;
-    margin-top:30px;
-}
-
-.footer-inner{
-    max-width:1200px;
-    margin:auto;
-
-    padding:35px 18px;
-
-    display:grid;
-
-    grid-template-columns:
-        1.5fr 1fr 1fr;
-
-    gap:30px;
-}
-
-.footer-brand{
-    font-size:20px;
-    font-weight:800;
-    margin-bottom:8px;
-}
-
-.footer p{
-    color:#94a3b8;
-    font-size:13px;
-    line-height:1.6;
-}
-
-.footer h3{
-    margin-top:0;
-    font-size:15px;
-}
-
-.footer-contact{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    color:#cbd5e1;
-    font-size:13px;
-}
-
-.footer-bottom{
-    border-top:1px solid #1e293b;
-
-    text-align:center;
-
-    padding:15px;
-
-    color:#64748b;
-
-    font-size:11px;
-}
-
-
-/* RESPONSIVE */
-
-@media(max-width:1000px){
-
-    .properties-grid{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .search-box{
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .search-button{
-        padding:12px;
-    }
-
-    .menu{
-        display:none;
-    }
-
-    .mobile-menu-button{
-        display:block;
-    }
-
-}
-
-@media(max-width:700px){
-
-    .header-inner{
-        padding:10px 14px;
-    }
-
-    .header-button{
-        display:none;
-    }
-
-    .brand-logo{
-        width:42px;
-        height:42px;
-    }
-
-    .brand-name{
-        font-size:15px;
-    }
-
-    .hero-inner{
-        padding:45px 18px 55px;
-    }
-
-    .search-box{
-        grid-template-columns:1fr;
-    }
-
-    .search-button{
-        width:100%;
-    }
-
-    .main-container{
-        padding-top:35px;
-    }
-
-    .section-header{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-
-    .properties-grid{
-        grid-template-columns:1fr;
-    }
-
-    .about-section{
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .about-logo{
-        margin:auto;
-    }
-
-    .company-contact{
-        justify-content:center;
-    }
-
-    .footer-inner{
-        grid-template-columns:1fr;
-    }
-
-}
-
-@media(max-width:500px){
-
-    .header-actions{
-        gap:5px;
-    }
-
-    .whatsapp-button{
-        padding:9px 10px;
-        font-size:12px;
-    }
-
-}
-
+  :root{--bg:#0b1020;--panel:#121a30;--line:#243052;--text:#e8ecf7;--muted:#8b97b8;--blue:#2f6bff;--red:#ff6b6b;--green:#3ddc97}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  html{scroll-behavior:smooth}
+  body{padding-bottom:76px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 18px}
+  header{border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;height:62px}
+  .logo{font-weight:700;font-size:1.2rem} .logo span{color:var(--blue)}
+  button{padding:10px 16px;border:0;border-radius:8px;background:var(--blue);color:#fff;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+  button:disabled{opacity:.6;cursor:wait}
+  input,select{width:100%;padding:12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--text);font-size:1rem;font-family:inherit}
+  input:focus,button:focus-visible,select:focus{outline:2px solid var(--blue);outline-offset:1px}
+  label{display:block;font-size:.85rem;color:var(--muted);margin:14px 0 6px}
+  .hero{padding:56px 0 40px}
+  .hero h1{font-size:clamp(2.2rem,8vw,3.6rem);line-height:1.08;margin:0 0 16px;max-width:14ch}
+  .hero h1 em{font-style:normal;color:var(--blue)}
+  .hero p{color:var(--muted);max-width:52ch;font-size:1.05rem;line-height:1.55;margin:0 0 26px}
+  .hero button{padding:14px 26px;font-size:1rem}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 18px}
+  .bar input{flex:1;min-width:200px} .bar select{width:auto}
+  h2{font-size:1.4rem;margin:30px 0 14px}
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));padding-bottom:50px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--bg)}
+  .card .b{padding:16px}
+  .card h3{margin:0 0 4px;font-size:1.05rem}
+  .meta{color:var(--muted);font-size:.85rem}
+  .desc{color:var(--muted);font-size:.9rem;line-height:1.5;margin:10px 0 0}
+  .tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.78rem;border:1px solid var(--line);margin-top:12px;margin-right:6px}
+  .tag.free{color:var(--green);border-color:var(--green)}
+  .empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px;grid-column:1/-1}
+  .card[data-id]{cursor:pointer}
+  dialog.wide{width:min(720px,96vw);max-height:92vh;overflow:auto}
+  .lsn{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+  .lsn button{background:transparent;border:1px solid var(--line);color:var(--text);font-weight:500}
+  .lsn button.on{border-color:var(--blue);color:var(--blue)}
+  .viewer{margin-top:14px}
+  .viewer iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:10px;background:#000}
+  .viewer .txt{white-space:pre-wrap;line-height:1.65;margin-top:14px}
+  .tag.beta{color:#f5b942;border-color:#f5b942}
+  .cta{display:inline-block;margin-top:14px;padding:12px 22px;border-radius:8px;background:#25d366;color:#04210f;font-weight:700;text-decoration:none}
+  .cta.off{background:var(--line);color:var(--muted)}
+  nav.bottom{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+  nav.bottom a,nav.bottom button{flex:1;text-align:center;padding:15px 2px;color:var(--muted);font-size:.74rem;font-weight:600;text-decoration:none;background:transparent;border:0;border-radius:0;font-family:inherit}
+.pbar{height:8px;border-radius:99px;background:var(--bg);border:1px solid var(--line);overflow:hidden;margin-top:10px}
+  .pbar i{display:block;height:100%;background:var(--blue);border-radius:99px;transition:width .3s}
+  .pbar.done i{background:var(--green)}
+  .prow{display:flex;justify-content:space-between;gap:10px;margin-top:12px;font-size:.85rem;color:var(--muted)}
+  .lsn button.done{color:var(--green)}
+  .lsn button.done.on{border-color:var(--green)}
+  #vProgress{margin-top:12px}
+  button.doneBtn{margin-top:16px}
+  button.doneBtn.isDone{background:transparent;border:1px solid var(--green);color:var(--green)}
+  #myGrid .card .b button{margin-top:14px;width:100%}
+  dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:14px;width:min(400px,94vw);padding:24px}
+  dialog::backdrop{background:rgba(0,0,0,.65)}
+  .tabs{display:flex;gap:8px;margin-bottom:6px}
+  .tabs button{flex:1;background:transparent;border:1px solid var(--line);color:var(--muted)}
+  .tabs button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .pw{position:relative}
+  .pw input{padding-right:70px}
+  .pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);padding:6px 10px;background:transparent;color:var(--muted);font-size:.85rem}
+  .link{background:transparent;color:var(--blue);padding:0;margin-top:14px;font-size:.9rem}
+  #authMsg{min-height:1.2em;margin-top:12px;font-size:.88rem;color:var(--red)}
+  #authSubmit{width:100%;margin-top:18px;padding:13px}
+  .close{float:right;background:transparent;color:var(--muted);padding:0 4px;font-size:1.4rem}
+  #userBox{display:none;align-items:center;gap:10px}
+  #userBox span{color:var(--muted);font-size:.9rem;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
-
 </head>
-
 <body>
 
+<header><div class="wrap">
+  <div class="logo">Deep<span>Build</span>.ai</div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <button class="ghost langBtn" type="button">Hausa</button>
+    <button id="openAuth">Sign in</button>
+    <div id="userBox"><span id="userName"></span><button class="ghost" id="signOutBtn">Sign out</button></div>
+  </div>
+</div></header>
 
-<!-- SUBSCRIPTION LOCK -->
+<main class="wrap">
+  <section class="hero" id="home">
+    <h1>Build your future with <em>AI</em></h1>
+    <p>World-class AI education and a community built for African youth ready to lead the future. Start free today.</p>
+    <button id="startBtn">Start learning free</button>
+  </section>
 
-<div
-    id="subscriptionLock"
-    class="subscription-lock hidden"
->
+  <section id="mycourses" hidden>
+    <h2>My Courses</h2>
+    <div class="grid" id="myGrid"><div class="empty">Loading courses...</div></div>
+  </section>
 
-    <div class="subscription-lock-card">
-
-        <div class="subscription-lock-icon">
-            🔒
-        </div>
-
-        <h1 id="subscriptionLockTitle">
-            Subscription Expired
-        </h1>
-
-        <p id="subscriptionLockMessage">
-            This company's website subscription has expired.
-        </p>
-
-        <div
-            id="subscriptionCompanyName"
-            class="subscription-company"
-        >
-            Company
-        </div>
-
-        <button
-            id="subscriptionReload"
-            class="subscription-reload"
-            type="button"
-        >
-            Try Again
-        </button>
-
+  <section id="courses">
+    <h2>Courses</h2>
+    <div class="bar">
+      <input id="search" placeholder="Search courses">
+      <select id="cat">
+        <option value="">All categories</option><option value="AI &amp; ML">AI &amp; ML</option>
+        <option value="Python">Python</option><option value="Data Science">Data Science</option><option value="General">General</option>
+      </select>
     </div>
-
-</div>
-
-
-<!-- WEBSITE -->
-
-<div id="websiteContent">
-
-<header class="site-header">
-
-<div class="header-inner">
-
-<a href="#top" class="brand">
-
-<div
-    id="brandLogo"
-    class="brand-logo"
->
-    E
-</div>
-
-<div class="brand-text">
-
-<div
-    id="brandName"
-    class="brand-name"
->
-    Loading...
-</div>
-
-<div
-    id="brandLocation"
-    class="brand-location"
->
-    Property Services
-</div>
-
-</div>
-
-</a>
-
-
-<nav class="menu">
-
-<a href="#top">
-    Home
-</a>
-
-<a href="#propertiesSection">
-    Properties
-</a>
-
-<a href="#aboutSection">
-    About
-</a>
-
-<a href="#contactSection">
-    Contact
-</a>
-
-</nav>
-
-
-<div class="header-actions">
-
-<button
-    id="headerCallButton"
-    class="header-button"
-    type="button"
->
-    Call
-</button>
-
-<button
-    id="headerWhatsAppButton"
-    class="whatsapp-button"
-    type="button"
->
-    WhatsApp
-</button>
-
-<button
-    id="mobileMenuButton"
-    class="mobile-menu-button"
-    type="button"
-    aria-label="Menu"
->
-    ☰
-</button>
-
-</div>
-
-</div>
-
-
-<div
-    id="mobileMenu"
-    class="mobile-menu"
->
-
-<a href="#top">
-    🏠 Home
-</a>
-
-<a href="#propertiesSection">
-    🏘 Properties
-</a>
-
-<a href="#aboutSection">
-    ℹ️ About
-</a>
-
-<a href="#contactSection">
-    📞 Contact
-</a>
-
-</div>
-
-</header>
-
-
-<section
-    id="top"
-    class="hero"
->
-
-<div class="hero-inner">
-
-<div class="hero-content">
-
-<span
-    id="heroLabel"
-    class="hero-label"
->
-    Property Listings
-</span>
-
-<h1 id="heroTitle">
-    Find Your Perfect Property
-</h1>
-
-<p id="heroDescription">
-    Browse available properties and find the right place for you.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="search-section">
-
-<div class="search-box">
-
-<div class="search-control">
-
-<input
-    id="searchInput"
-    type="search"
-    placeholder="Search properties..."
-    autocomplete="off"
->
-
-</div>
-
-
-<div class="search-control">
-
-<select id="purposeFilter">
-
-<option value="">
-    All Purposes
-</option>
-
-<option value="sale">
-    For Sale
-</option>
-
-<option value="rent">
-    For Rent
-</option>
-
-</select>
-
-</div>
-
-
-<div class="search-control">
-
-<select id="typeFilter">
-
-<option value="">
-    All Types
-</option>
-
-</select>
-
-</div>
-
-
-<button
-    id="searchButton"
-    class="search-button"
-    type="button"
->
-    Search
-</button>
-
-</div>
-
-</section>
-
-
-<main class="main-container">
-
-<section id="propertiesSection">
-
-<div class="section-header">
-
-<div>
-
-<h2>
-    Properties
-</h2>
-
-<p id="propertiesSubtitle">
-    Browse available properties.
-</p>
-
-</div>
-
-<div
-    id="propertyCount"
-    class="property-count"
->
-    0 properties
-</div>
-
-</div>
-
-
-<div
-    id="categories"
-    class="categories"
->
-
-<button
-    class="category-button active"
-    data-category=""
-    type="button"
->
-    All
-</button>
-
-</div>
-
-
-<div
-    id="propertiesGrid"
-    class="properties-grid"
->
-
-<div class="loading">
-
-<div class="spinner"></div>
-
-Loading properties...
-
-</div>
-
-</div>
-
-</section>
-
-
-<section
-    id="aboutSection"
-    class="about-section"
->
-
-<div
-    id="aboutLogo"
-    class="about-logo"
->
-    E
-</div>
-
-<div class="about-content">
-
-<h2 id="aboutCompanyName">
-    Company
-</h2>
-
-<p id="aboutDescription">
-    Loading company information...
-</p>
-
-<div
-    id="companyContact"
-    class="company-contact"
->
-</div>
-
-</div>
-
-</section>
-
+    <div class="grid" id="grid"><div class="empty">Loading courses...</div></div>
+  </section>
+
+  <section id="tools">
+    <h2>AI Tools</h2>
+    <div class="grid" id="toolGrid"><div class="empty">Loading tools...</div></div>
+  </section>
+
+  <section id="community" style="padding-bottom:40px">
+    <h2>Community</h2>
+    <div class="card"><div class="b">
+      <h3>WhatsApp Community</h3>
+      <div class="meta" id="commMembers"></div>
+      <p class="desc" id="commText">Connect, learn and grow together with other developers and creators. Instant updates, project sharing and direct mentor access.</p>
+      <a class="cta off" id="commBtn" href="#community">Coming soon</a>
+    </div></div>
+  </section>
 </main>
 
+<nav class="bottom">
+  <a href="#home">Home</a>
+  <a href="#mycourses" id="navMy" hidden>My Courses</a>
+  <a href="#courses">Courses</a>
+  <a href="#tools">Tools</a>
+  <a href="#community">Community</a>
+  <button id="navAuth">Sign in</button>
+</nav>
 
-<footer
-    id="contactSection"
-    class="footer"
->
+<dialog id="viewDialog" class="wide">
+  <button class="close" id="closeView" aria-label="Close">&times;</button>
+  <h2 id="vTitle" style="margin-top:0"></h2>
+  <div class="meta" id="vMeta"></div>
+  <p class="desc" id="vDesc"></p>
+  <div id="vAction" style="margin:14px 0"></div>
+  <div id="vProgress" hidden></div>
+  <div id="vLessons" class="lsn"></div>
+  <div id="vViewer" class="viewer"></div>
+</dialog>
 
-<div class="footer-inner">
-
-<div>
-
-<div
-    id="footerCompanyName"
-    class="footer-brand"
->
-    Company
-</div>
-
-<p id="footerDescription">
-    Property services and listings.
-</p>
-
-</div>
-
-
-<div>
-
-<h3>
-    Contact
-</h3>
-
-<div
-    id="footerContact"
-    class="footer-contact"
->
-</div>
-
-</div>
-
-
-<div>
-
-<h3>
-    Location
-</h3>
-
-<p id="footerAddress">
-    Loading...
-</p>
-
-</div>
-
-</div>
-
-
-<div class="footer-bottom">
-
-© <span id="footerYear"></span>
-
-<span id="footerCompany">
-    Company
-</span>
-
-— All rights reserved.
-
-</div>
-
-</footer>
-
-</div>
-
+<dialog id="authDialog">
+  <button class="close" id="closeAuth" aria-label="Close">&times;</button>
+  <div class="tabs">
+    <button class="on" data-mode="signup">Sign up</button>
+    <button data-mode="login">Log in</button>
+  </div>
+  <form id="authForm">
+    <div id="nameRow">
+      <label for="aName">Full name</label>
+      <input id="aName" autocomplete="name">
+    </div>
+    <label for="aEmail">Email</label>
+    <input id="aEmail" type="email" autocomplete="email" required>
+    <label for="aPass">Password</label>
+    <div class="pw">
+      <input id="aPass" type="password" minlength="6" autocomplete="new-password" required>
+      <button type="button" class="pwtoggle" data-target="aPass" aria-label="Show or hide password">Show</button>
+    </div>
+    <button type="button" class="link" id="forgotBtn" hidden>Forgot password?</button>
+    <button type="submit" id="authSubmit">Create account</button>
+    <div id="authMsg" role="alert"></div>
+  </form>
+</dialog>
 
 <script type="module">
+import "./i18n.js";
+import { auth, db } from "./firebase.js";
+import { issueCertificate, downloadCertificate } from "./certificate.js";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile, onAuthStateChanged, signOut }
+  from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { collection, query, where, getDocs, getDoc, doc, setDoc, updateDoc, deleteField, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
+  ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 
-/* =========================================================
-   FIREBASE
-========================================================= */
-
-import {
-    initializeApp
+/* ---------- Courses (published only) ---------- */
+let courses = [];
+async function loadCourses(){
+  try {
+    const snap = await getDocs(query(collection(db, "courses"), where("published", "==", true)));
+    courses = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    courses.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+    render();
+  } catch (err) {
+    console.error(err);
+    $("grid").innerHTML = '<div class="empty">Could not load courses. Please try again later.</div>';
+  }
 }
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
-import {
-    getFirestore,
-    doc,
-    getDoc,
-    collection,
-    getDocs,
-    query,
-    where
+function render(){
+  const q = $("search").value.trim().toLowerCase(), cat = $("cat").value;
+  const rows = courses.filter(c =>
+    (!cat || c.category === cat) &&
+    (!q || (c.title || "").toLowerCase().includes(q) || (c.instructor || "").toLowerCase().includes(q)));
+  $("grid").innerHTML = rows.length ? rows.map(c => `
+    <article class="card" data-id="${esc(c.id)}">
+      ${c.imageUrl ? `<img src="${esc(c.imageUrl)}" alt="" loading="lazy">` : ""}
+      <div class="b">
+        <h3>${esc(c.title)}</h3>
+        <div class="meta">${esc(c.instructor)}</div>
+        ${c.description ? `<p class="desc">${esc(c.description)}</p>` : ""}
+        <span class="tag">${esc(c.level)}</span>
+        <span class="tag ${c.free ? "free" : ""}">${c.free ? "Free" : "$" + esc(c.price)}</span>
+        <span class="tag" style="color:var(--blue);border-color:var(--blue)">View course</span>
+      </div>
+    </article>`).join("")
+    : '<div class="empty">' + (courses.length ? "No courses match your search." : "No courses yet. Check back soon.") + '</div>';
 }
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+$("search").addEventListener("input", render);
+$("cat").addEventListener("change", render);
+loadCourses();
 
-
-const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyAE44DxNnqz3m8ScqaZxoSj2Fd7aJ2NIg",
-
-    authDomain:
-        "estate-pro-d564b.firebaseapp.com",
-
-    projectId:
-        "estate-pro-d564b",
-
-    storageBucket:
-        "estate-pro-d564b.firebasestorage.app",
-
-    messagingSenderId:
-        "600309829118",
-
-    appId:
-        "1:600309829118:web:60c61624ca8cdf05e884af",
-
-    measurementId:
-        "G-TG60FCJHXB"
-
-};
-
-
-const app =
-    initializeApp(firebaseConfig);
-
-const db =
-    getFirestore(app);
-
-
-/* =========================================================
-   COLLECTIONS
-========================================================= */
-
-const COMPANIES_COLLECTION =
-    "companies";
-
-const PROPERTIES_SUBCOLLECTION =
-    "properties";
-
-const SUBSCRIPTIONS_COLLECTION =
-    "subscriptions";
-
-
-/* =========================================================
-   COMPANY ID
-========================================================= */
-
-function getCompanyId(){
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-    const companyId =
-        params.get("companyId");
-
-    if(
-        companyId &&
-        companyId.trim()
-    ){
-
-        return companyId.trim();
-
+/* ---------- Course page, enroll, lessons ---------- */
+let current = null;
+let curEnr = null;   // enrollment data of the open course
+function ytId(u){
+  try {
+    const x = new URL(u); let id = "";
+    if (x.hostname === "youtu.be") id = x.pathname.slice(1);
+    else if (x.hostname.endsWith("youtube.com")) {
+      id = x.searchParams.get("v") || (x.pathname.match(/\/(?:embed|shorts)\/([\w-]+)/) || [])[1] || "";
     }
-
-    return "Company_002";
-
+    return /^[\w-]{6,20}$/.test(id) ? id : "";
+  } catch { return ""; }
 }
-
-
-const currentCompanyId =
-    getCompanyId();
-
-
-/* =========================================================
-   STATE
-========================================================= */
-
-let currentCompany = null;
-
-let currentSubscription = null;
-
-let allProperties = [];
-
-let filteredProperties = [];
-
-let selectedCategory = "";
-
-
-/* =========================================================
-   DOM
-========================================================= */
-
-const websiteContent =
-    document.getElementById(
-        "websiteContent"
-    );
-
-const subscriptionLock =
-    document.getElementById(
-        "subscriptionLock"
-    );
-
-const brandLogo =
-    document.getElementById(
-        "brandLogo"
-    );
-
-const brandName =
-    document.getElementById(
-        "brandName"
-    );
-
-const brandLocation =
-    document.getElementById(
-        "brandLocation"
-    );
-
-const heroLabel =
-    document.getElementById(
-        "heroLabel"
-    );
-
-const heroDescription =
-    document.getElementById(
-        "heroDescription"
-    );
-
-const propertiesGrid =
-    document.getElementById(
-        "propertiesGrid"
-    );
-
-const propertyCount =
-    document.getElementById(
-        "propertyCount"
-    );
-
-const categories =
-    document.getElementById(
-        "categories"
-    );
-
-const searchInput =
-    document.getElementById(
-        "searchInput"
-    );
-
-const purposeFilter =
-    document.getElementById(
-        "purposeFilter"
-    );
-
-const typeFilter =
-    document.getElementById(
-        "typeFilter"
-    );
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(value){
-
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
+$("grid").addEventListener("click", e => {
+  const el = e.target.closest(".card[data-id]"); if (!el) return;
+  const c = courses.find(x => x.id === el.dataset.id); if (c) openCourse(c);
+});
+$("closeView").addEventListener("click", () => $("viewDialog").close());
+function openCourse(c){
+  current = c;
+  $("vTitle").textContent = c.title;
+  $("vMeta").textContent = [c.instructor, c.category, c.level, c.free ? "Free" : "$" + c.price].join(" · ");
+  $("vDesc").textContent = c.description || "";
+  $("vLessons").innerHTML = ""; $("vViewer").innerHTML = "";
+  $("viewDialog").showModal();
+  refreshAccess();
 }
-
-
-/* =========================================================
-   PHONE
-========================================================= */
-
-function normalizePhone(phone){
-
-    return String(phone || "")
-        .replace(/[^0-9+]/g,"");
-
+async function refreshAccess(){
+  const c = current, box = $("vAction");
+  $("vLessons").innerHTML = ""; $("vViewer").innerHTML = "";
+  $("vProgress").hidden = true; curEnr = null;
+  if (!me) {
+    box.innerHTML = '<button id="vSign">Sign in to enroll</button>';
+    $("vSign").onclick = () => open("signup");
+    return;
+  }
+  box.textContent = "Checking...";
+  try {
+    const enr = await getDoc(doc(db, "enrollments", me.uid + "_" + c.id));
+    if (enr.exists()) {
+      curEnr = enr.data();
+      box.innerHTML = '<span class="tag free" style="margin:0">Enrolled</span>';
+      loadLessons(c);
+    } else if (c.free) {
+      box.innerHTML = '<button id="vEnroll">Enroll for free</button>';
+      $("vEnroll").onclick = async () => {
+        $("vEnroll").disabled = true;
+        try {
+          await setDoc(doc(db, "enrollments", me.uid + "_" + c.id),
+            { uid: me.uid, courseId: c.id, courseTitle: c.title, completedLessons: [], progress: 0, createdAt: serverTimestamp() });
+          refreshAccess(); loadMyCourses();
+        } catch (err) { box.textContent = "Could not enroll: " + err.message; }
+      };
+    } else {
+      box.innerHTML = '<span class="meta">Paid courses are coming soon.</span>';
+    }
+  } catch (err) { box.textContent = "Could not check enrollment: " + err.message; }
 }
-
-
-function whatsappNumber(phone){
-
-    let number =
-        String(phone || "")
-        .replace(/\D/g,"");
-
-    if(number.startsWith("0")){
-
-        number =
-            "234" +
-            number.substring(1);
-
-    }
-
-    return number;
-
+function paintProgress(total){
+  const done = (curEnr.completedLessons || []).length, pct = curEnr.progress || 0, box = $("vProgress");
+  box.hidden = false;
+  box.innerHTML = `<div class="prow"><span>${pct}%</span><span>Lessons: ${done}/${total}</span></div>` +
+    `<div class="pbar ${pct === 100 ? "done" : ""}"><i style="width:${pct}%"></i></div>` +
+    (pct === 100 ? '<div class="meta" style="margin-top:8px;color:var(--green)">Course completed</div><button id="certBtn" style="margin-top:10px">Get certificate</button><div id="certMsg" class="meta" style="color:var(--red);margin-top:6px"></div>' : "");
+  const cb = $("certBtn");
+  if (cb) cb.onclick = async () => {
+    cb.disabled = true; cb.textContent = "Preparing...";
+    try { await downloadCertificate(await issueCertificate(me, curEnr, current)); cb.textContent = "Download certificate again"; }
+    catch (err) { $("certMsg").textContent = "Could not create certificate: " + err.message; cb.textContent = "Get certificate"; }
+    cb.disabled = false;
+  };
 }
-
-
-/* =========================================================
-   FIRESTORE REFERENCES
-========================================================= */
-
-function getCompanyRef(){
-
-    return doc(
-        db,
-        COMPANIES_COLLECTION,
-        currentCompanyId
-    );
-
+async function saveProgress(patch){
+  await updateDoc(doc(db, "enrollments", me.uid + "_" + current.id), { ...patch, updatedAt: serverTimestamp() });
+  Object.assign(curEnr, patch);
 }
-
-
-function getPropertiesRef(){
-
-    return collection(
-        db,
-        COMPANIES_COLLECTION,
-        currentCompanyId,
-        PROPERTIES_SUBCOLLECTION
-    );
-
-}
-
-
-function getSubscriptionsRef(){
-
-    return collection(
-        db,
-        SUBSCRIPTIONS_COLLECTION
-    );
-
-}
-
-
-/* =========================================================
-   DATE CONVERTER
-========================================================= */
-
-function timestampToDate(value){
-
-    if(!value){
-        return null;
-    }
-
-
-    if(
-        typeof value.toDate === "function"
-    ){
-
-        const date =
-            value.toDate();
-
-        return isNaN(
-            date.getTime()
-        )
-        ? null
-        : date;
-
-    }
-
-
-    if(
-        typeof value === "object" &&
-        typeof value.seconds === "number"
-    ){
-
-        const milliseconds =
-            value.seconds * 1000 +
-            (
-                typeof value.nanoseconds === "number"
-                ? value.nanoseconds / 1000000
-                : 0
-            );
-
-        const date =
-            new Date(milliseconds);
-
-        return isNaN(
-            date.getTime()
-        )
-        ? null
-        : date;
-
-    }
-
-
-    if(value instanceof Date){
-
-        return isNaN(
-            value.getTime()
-        )
-        ? null
-        : value;
-
-    }
-
-
-    if(typeof value === "number"){
-
-        const date =
-            new Date(value);
-
-        return isNaN(
-            date.getTime()
-        )
-        ? null
-        : date;
-
-    }
-
-
-    if(typeof value === "string"){
-
-        const text =
-            value.trim();
-
-        if(!text){
-            return null;
-        }
-
-        const date =
-            new Date(text);
-
-        return isNaN(
-            date.getTime()
-        )
-        ? null
-        : date;
-
-    }
-
-
-    return null;
-
-}
-
-
-/* =========================================================
-   SUBSCRIPTION CHECK
-========================================================= */
-
-function checkSubscription(subscription){
-
-    if(!subscription){
-
-        return {
-            active:false,
-            reason:"not-found"
-        };
-
-    }
-
-
-    const status =
-        String(
-            subscription.status || ""
-        )
-        .trim()
-        .toLowerCase();
-
-
-    const expiry =
-        timestampToDate(
-            subscription.expiryDate
-        );
-
-
-    console.log(
-        "SUBSCRIPTION CHECK:",
-        {
-            companyId:currentCompanyId,
-            status:status,
-            expiryDate:subscription.expiryDate,
-            parsedExpiry:expiry,
-            now:new Date()
-        }
-    );
-
-
-    if(status !== "active"){
-
-        if(status === "expired"){
-
-            return {
-                active:false,
-                reason:"expired"
-            };
-
-        }
-
-        return {
-            active:false,
-            reason:"inactive"
-        };
-
-    }
-
-
-    if(!expiry){
-
-        return {
-            active:false,
-            reason:"no-expiry"
-        };
-
-    }
-
-
-    if(
-        expiry.getTime() <=
-        Date.now()
-    ){
-
-        return {
-            active:false,
-            reason:"expired"
-        };
-
-    }
-
-
-    return {
-        active:true,
-        reason:"active"
+async function loadLessons(c){
+  try {
+    const snap = await getDocs(collection(db, "courses", c.id, "lessons"));
+    const rows = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.order || 0) - (b.order || 0));
+    if (!rows.length) { $("vViewer").innerHTML = '<div class="empty">Lessons are coming soon.</div>'; return; }
+    const ids = rows.map(r => r.id), total = rows.length;
+    const isDone = id => (curEnr.completedLessons || []).includes(id);
+    const paintList = i => {
+      $("vLessons").innerHTML = rows.map((l, n) =>
+        `<button data-i="${n}" class="${isDone(l.id) ? "done" : ""} ${n === i ? "on" : ""}">${isDone(l.id) ? "✓ " : ""}${esc(l.order)}. ${esc(l.title)}</button>`).join("");
     };
-
+    const show = i => {
+      const l = rows[i], id = ytId(l.videoUrl);
+      paintList(i);
+      $("vViewer").innerHTML = `<h3>${esc(l.title)}</h3>` +
+        (id ? `<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen loading="lazy"></iframe>` : "") +
+        (l.content ? `<div class="txt">${esc(l.content)}</div>` : "") +
+        `<button class="doneBtn ${isDone(l.id) ? "isDone" : ""}" id="doneBtn">${isDone(l.id) ? "Completed" : "Mark as complete"}</button>` +
+        '<div id="doneMsg" class="meta" style="color:var(--red);margin-top:8px"></div>';
+      $("doneBtn").onclick = async () => {
+        const btn = $("doneBtn"); btn.disabled = true;
+        const set = new Set(curEnr.completedLessons || []);
+        set.has(l.id) ? set.delete(l.id) : set.add(l.id);
+        const valid = [...set].filter(x => ids.includes(x));   // ignore lessons that were deleted
+        const progress = Math.round(valid.length / total * 100);
+        const patch = { completedLessons: valid, progress, totalLessons: total, lastLessonId: l.id,
+          completedAt: progress === 100 ? (curEnr.completedAt || serverTimestamp()) : deleteField() };
+        try {
+          await saveProgress(patch);
+          if (progress !== 100) delete curEnr.completedAt;
+          paintProgress(total); show(i);
+        } catch (err) { btn.disabled = false; $("doneMsg").textContent = "Could not save progress: " + err.message; }
+      };
+      paintProgress(total);
+      if (curEnr.lastLessonId !== l.id) {          // remember where the learner stopped
+        saveProgress({ lastLessonId: l.id }).catch(console.error);
+      }
+    };
+    $("vLessons").onclick = e => { const b = e.target.closest("button[data-i]"); if (b) show(Number(b.dataset.i)); };
+    const start = rows.findIndex(r => r.id === curEnr.lastLessonId);
+    show(start >= 0 ? start : 0);
+  } catch (err) { $("vViewer").innerHTML = '<div class="empty">Could not load lessons: ' + esc(err.message) + '</div>'; }
 }
 
-
-/* =========================================================
-   LOAD SUBSCRIPTION
-========================================================= */
-
-async function loadSubscription(){
-
-    const ref =
-        getSubscriptionsRef();
-
-
-    const q =
-        query(
-            ref,
-            where(
-                "companyId",
-                "==",
-                currentCompanyId
-            )
-        );
-
-
-    const snapshot =
-        await getDocs(q);
-
-
-    if(snapshot.empty){
-
-        currentSubscription =
-            null;
-
-        return {
-            active:false,
-            reason:"not-found"
-        };
-
+/* ---------- My Courses ---------- */
+async function loadMyCourses(){
+  const sec = $("mycourses"), grid = $("myGrid");
+  if (!me) { sec.hidden = true; $("navMy").hidden = true; grid.innerHTML = ""; return; }
+  sec.hidden = false; $("navMy").hidden = false;
+  try {
+    const snap = await getDocs(query(collection(db, "enrollments"), where("uid", "==", me.uid)));
+    const enrs = snap.docs.map(d => d.data())
+      .sort((a, b) => ((b.updatedAt || b.createdAt)?.seconds || 0) - ((a.updatedAt || a.createdAt)?.seconds || 0));
+    if (!enrs.length) {
+      grid.innerHTML = '<div class="empty">You have not enrolled in any course yet.<br><br><button type="button" id="browseBtn">Browse courses</button></div>';
+      $("browseBtn").onclick = () => $("courses").scrollIntoView();
+      return;
     }
-
-
-    const subscriptions = [];
-
-
-    snapshot.forEach(item => {
-
-        const data =
-            item.data();
-
-        subscriptions.push({
-
-            id:item.id,
-
-            ...data
-
-        });
-
-    });
-
-
-    console.log(
-        "ALL SUBSCRIPTIONS:",
-        subscriptions
-    );
-
-
-    subscriptions.forEach(item => {
-
-        const expiry =
-            timestampToDate(
-                item.expiryDate
-            );
-
-        console.log(
-            "=== SUBSCRIPTION DEBUG ==="
-        );
-
-        console.log(
-            "Company ID:",
-            currentCompanyId
-        );
-
-        console.log(
-            "Status:",
-            item.status
-        );
-
-        console.log(
-            "Expiry raw:",
-            item.expiryDate
-        );
-
-        console.log(
-            "Expiry parsed:",
-            expiry
-        );
-
-        console.log(
-            "Expiry ISO:",
-            expiry
-            ? expiry.toISOString()
-            : null
-        );
-
-        console.log(
-            "Now:",
-            new Date()
-        );
-
-        console.log(
-            "Now ISO:",
-            new Date().toISOString()
-        );
-
-        console.log(
-            "Expiry > Now:",
-            expiry
-            ? expiry.getTime() > Date.now()
-            : false
-        );
-
-    });
-
-
-    const valid =
-        subscriptions
-        .filter(item => {
-
-            const status =
-                String(
-                    item.status || ""
-                )
-                .trim()
-                .toLowerCase();
-
-            const expiry =
-                timestampToDate(
-                    item.expiryDate
-                );
-
-            return (
-                status === "active" &&
-                expiry &&
-                expiry.getTime() >
-                Date.now()
-            );
-
-        })
-        .sort((a,b) => {
-
-            const aDate =
-                timestampToDate(
-                    a.expiryDate
-                );
-
-            const bDate =
-                timestampToDate(
-                    b.expiryDate
-                );
-
-            return (
-                bDate.getTime()
-                -
-                aDate.getTime()
-            );
-
-        });
-
-
-    if(valid.length){
-
-        currentSubscription =
-            valid[0];
-
-        console.log(
-            "VALID ACTIVE SUBSCRIPTION:",
-            currentSubscription
-        );
-
-        return checkSubscription(
-            currentSubscription
-        );
-
-    }
-
-
-    subscriptions.sort((a,b) => {
-
-        const aDate =
-            timestampToDate(
-                a.expiryDate
-            );
-
-        const bDate =
-            timestampToDate(
-                b.expiryDate
-            );
-
-        const aTime =
-            aDate
-            ? aDate.getTime()
-            : 0;
-
-        const bTime =
-            bDate
-            ? bDate.getTime()
-            : 0;
-
-        return bTime - aTime;
-
-    });
-
-
-    currentSubscription =
-        subscriptions[0] || null;
-
-
-    console.log(
-        "NO VALID ACTIVE SUBSCRIPTION:",
-        currentSubscription
-    );
-
-
-    return checkSubscription(
-        currentSubscription
-    );
-
+    // one course document per enrollment; if it is unpublished/unreadable we fall back to the saved title
+    const list = await Promise.all(enrs.map(async e => {
+      let c = courses.find(x => x.id === e.courseId) || null;
+      if (!c) { try { const s = await getDoc(doc(db, "courses", e.courseId)); if (s.exists()) c = { id: s.id, ...s.data() }; } catch {} }
+      return { e, c };
+    }));
+    grid.innerHTML = list.map(({ e, c }) => {
+      const pct = e.progress || 0, n = (e.completedLessons || []).length;
+      const label = pct === 100 ? "Completed" : n || e.lastLessonId ? "Continue" : "Start";
+      return `<article class="card">
+        ${c?.imageUrl ? `<img src="${esc(c.imageUrl)}" alt="" loading="lazy">` : ""}
+        <div class="b">
+          <h3>${esc(c?.title || e.courseTitle)}</h3>
+          ${c?.instructor ? `<div class="meta">${esc(c.instructor)}</div>` : ""}
+          <div class="prow"><span>${pct}%</span>${e.totalLessons ? `<span>Lessons: ${n}/${esc(e.totalLessons)}</span>` : ""}</div>
+          <div class="pbar ${pct === 100 ? "done" : ""}"><i style="width:${pct}%"></i></div>
+          ${c ? `<button type="button" class="${pct === 100 ? "ghost" : ""}" data-open="${esc(c.id)}">${label}</button>` : ""}
+        </div></article>`;
+    }).join("");
+    grid._map = Object.fromEntries(list.filter(x => x.c).map(x => [x.c.id, x.c]));
+  } catch (err) {
+    console.error(err);
+    grid.innerHTML = '<div class="empty">Could not load your courses: ' + esc(err.message) + '</div>';
+  }
 }
+$("myGrid").addEventListener("click", e => {
+  const b = e.target.closest("button[data-open]"); if (!b) return;
+  const c = $("myGrid")._map?.[b.dataset.open]; if (c) openCourse(c);
+});
+$("viewDialog").addEventListener("close", () => { if (me) loadMyCourses(); });
 
-
-/* =========================================================
-   SUBSCRIPTION LOCK
-========================================================= */
-
-function showSubscriptionLock(
-    reason,
-    companyName
-){
-
-    websiteContent.classList.add(
-        "hidden"
-    );
-
-    subscriptionLock.classList.remove(
-        "hidden"
-    );
-
-
-    document
-        .getElementById(
-            "subscriptionCompanyName"
-        )
-        .textContent =
-        companyName ||
-        currentCompanyId;
-
-
-    const title =
-        document.getElementById(
-            "subscriptionLockTitle"
-        );
-
-    const message =
-        document.getElementById(
-            "subscriptionLockMessage"
-        );
-
-
-    if(reason === "expired"){
-
-        title.textContent =
-            "Subscription Expired";
-
-        message.textContent =
-            "This company's website subscription has expired. Please renew the subscription to continue.";
-
-    }
-
-    else if(reason === "not-found"){
-
-        title.textContent =
-            "Subscription Not Found";
-
-        message.textContent =
-            "No subscription was found for this company.";
-
-    }
-
-    else if(reason === "no-expiry"){
-
-        title.textContent =
-            "Subscription Error";
-
-        message.textContent =
-            "The subscription does not have a valid expiry date.";
-
-    }
-
-    else{
-
-        title.textContent =
-            "Website Inactive";
-
-        message.textContent =
-            "This company's website is currently inactive.";
-
-    }
-
+/* ---------- Tools ---------- */
+const safeUrl = u => (typeof u === "string" && u.startsWith("https://")) ? u : "";
+async function loadTools(){
+  try {
+    const snap = await getDocs(query(collection(db, "tools"), where("status", "in", ["live", "beta"])));
+    const rows = snap.docs.map(d => d.data()).sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    $("toolGrid").innerHTML = rows.length ? rows.map(t => {
+      const link = safeUrl(t.url);
+      return `<article class="card"><div class="b">
+        <h3>${esc(t.name)}</h3>
+        ${t.description ? `<p class="desc">${esc(t.description)}</p>` : ""}
+        <span class="tag ${t.status === "live" ? "free" : "beta"}">${t.status === "live" ? "Live" : "Beta"}</span>
+        ${link ? `<a class="tag" href="${esc(link)}" target="_blank" rel="noopener" style="color:var(--text);text-decoration:none">Open</a>` : ""}
+      </div></article>`;
+    }).join("") : '<div class="empty">AI tools are coming soon.</div>';
+  } catch (err) {
+    console.error(err);
+    $("toolGrid").innerHTML = '<div class="empty">Could not load tools.</div>';
+  }
 }
+loadTools();
 
-
-/* =========================================================
-   LOAD COMPANY
-========================================================= */
-
-async function loadCompany(){
-
-    const snapshot =
-        await getDoc(
-            getCompanyRef()
-        );
-
-
-    if(!snapshot.exists()){
-
-        propertiesGrid.innerHTML = `
-
-            <div class="error-box">
-
-                <h2>
-                    Company Not Found
-                </h2>
-
-                <p>
-                    Company ID:
-                    <strong>
-                        ${escapeHTML(
-                            currentCompanyId
-                        )}
-                    </strong>
-                </p>
-
-            </div>
-
-        `;
-
-        return false;
-
+/* ---------- Community ---------- */
+(async () => {
+  try {
+    const snap = await getDoc(doc(db, "settings", "community"));
+    const d = snap.exists() ? snap.data() : {};
+    if (d.membersText) $("commMembers").textContent = d.membersText;
+    const link = safeUrl(d.whatsappUrl);
+    if (link) {
+      $("commBtn").href = link; $("commBtn").target = "_blank"; $("commBtn").rel = "noopener";
+      $("commBtn").textContent = "Join WhatsApp"; $("commBtn").classList.remove("off");
     }
+  } catch (err) { console.error(err); }
+})();
 
-
-    currentCompany =
-        snapshot.data();
-
-
-    const subscription =
-        await loadSubscription();
-
-
-    if(!subscription.active){
-
-        showSubscriptionLock(
-            subscription.reason,
-            currentCompany.name ||
-            currentCompany.companyName ||
-            currentCompanyId
-        );
-
-        return false;
-
-    }
-
-
-    updateCompanyUI(
-        currentCompany
-    );
-
-
-    return true;
-
+/* ---------- Auth ---------- */
+let mode = "signup";
+function setMode(m){
+  mode = m;
+  document.querySelectorAll(".tabs button").forEach(b => b.classList.toggle("on", b.dataset.mode === m));
+  $("nameRow").hidden = m !== "signup";
+  $("authSubmit").textContent = m === "signup" ? "Create account" : "Log in";
+  $("aPass").autocomplete = m === "signup" ? "new-password" : "current-password";
+  $("authMsg").textContent = "";
+  $("authMsg").style.color = "";
+  $("forgotBtn").hidden = m !== "login";
 }
-
-
-/* =========================================================
-   COMPANY UI
-========================================================= */
-
-function updateCompanyUI(company){
-
-    const name =
-        company.name ||
-        company.companyName ||
-        "Company";
-
-
-    const logo =
-        company.logo ||
-        company.companyLogo ||
-        "";
-
-
-    const phone =
-        company.phone ||
-        company.companyPhone ||
-        "";
-
-
-    const whatsapp =
-        company.whatsapp ||
-        company.companyWhatsApp ||
-        phone;
-
-
-    const email =
-        company.email ||
-        company.companyEmail ||
-        "";
-
-
-    const address =
-        company.address ||
-        company.companyAddress ||
-        "";
-
-
-    const description =
-        company.description ||
-        company.companyDescription ||
-        "";
-
-
-    document.title =
-        name +
-        " | Properties";
-
-
-    document
-        .getElementById(
-            "pageDescription"
-        )
-        .setAttribute(
-            "content",
-            description ||
-            "Browse properties from " +
-            name
-        );
-
-
-    brandName.textContent =
-        name;
-
-
-    brandLocation.textContent =
-        address ||
-        "Property Services";
-
-
-    if(logo){
-
-        brandLogo.innerHTML = `
-
-            <img
-                src="${escapeHTML(logo)}"
-                alt="${escapeHTML(name)}"
-            >
-
-        `;
-
-    }
-    else{
-
-        brandLogo.textContent =
-            name.charAt(0)
-                .toUpperCase();
-
-    }
-
-
-    heroLabel.textContent =
-        name;
-
-
-    heroDescription.textContent =
-        description ||
-        "Browse available properties from " +
-        name +
-        " and find the right place for you.";
-
-
-    document
-        .getElementById(
-            "aboutCompanyName"
-        )
-        .textContent =
-        name;
-
-
-    document
-        .getElementById(
-            "aboutDescription"
-        )
-        .textContent =
-        description ||
-        "Explore our available properties and find the right property for your needs.";
-
-
-    const aboutLogo =
-        document.getElementById(
-            "aboutLogo"
-        );
-
-
-    if(logo){
-
-        aboutLogo.innerHTML = `
-
-            <img
-                src="${escapeHTML(logo)}"
-                alt="${escapeHTML(name)}"
-            >
-
-        `;
-
-    }
-    else{
-
-        aboutLogo.textContent =
-            name.charAt(0)
-                .toUpperCase();
-
-    }
-
-
-    const companyContact =
-        document.getElementById(
-            "companyContact"
-        );
-
-
-    let html = "";
-
-
-    if(phone){
-
-        html += `
-
-            <a
-                class="contact-item"
-                href="tel:${escapeHTML(
-                    normalizePhone(phone)
-                )}"
-            >
-                📞 ${escapeHTML(phone)}
-            </a>
-
-        `;
-
-    }
-
-
-    if(whatsapp){
-
-        html += `
-
-            <a
-                class="contact-item"
-                target="_blank"
-                rel="noopener"
-                href="https://wa.me/${escapeHTML(
-                    whatsappNumber(whatsapp)
-                )}"
-            >
-                💬 WhatsApp
-            </a>
-
-        `;
-
-    }
-
-
-    if(email){
-
-        html += `
-
-            <a
-                class="contact-item"
-                href="mailto:${escapeHTML(email)}"
-            >
-                ✉️ ${escapeHTML(email)}
-            </a>
-
-        `;
-
-    }
-
-
-    if(address){
-
-        html += `
-
-            <span class="contact-item">
-                📍 ${escapeHTML(address)}
-            </span>
-
-        `;
-
-    }
-
-
-    companyContact.innerHTML =
-        html;
-
-
-    const callButton =
-        document.getElementById(
-            "headerCallButton"
-        );
-
-
-    if(phone){
-
-        callButton.classList.remove(
-            "hidden"
-        );
-
-        callButton.onclick =
-            () => {
-
-                window.location.href =
-                    "tel:" +
-                    normalizePhone(phone);
-
-            };
-
-    }
-    else{
-
-        callButton.classList.add(
-            "hidden"
-        );
-
-    }
-
-
-    const whatsappButton =
-        document.getElementById(
-            "headerWhatsAppButton"
-        );
-
-
-    if(whatsapp){
-
-        whatsappButton.classList.remove(
-            "hidden"
-        );
-
-        whatsappButton.onclick =
-            () => {
-
-                window.open(
-                    "https://wa.me/" +
-                    whatsappNumber(whatsapp),
-                    "_blank"
-                );
-
-            };
-
-    }
-    else{
-
-        whatsappButton.classList.add(
-            "hidden"
-        );
-
-    }
-
-
-    document
-        .getElementById(
-            "footerCompanyName"
-        )
-        .textContent =
-        name;
-
-
-    document
-        .getElementById(
-            "footerCompany"
-        )
-        .textContent =
-        name;
-
-
-    document
-        .getElementById(
-            "footerDescription"
-        )
-        .textContent =
-        description ||
-        "Property services and listings.";
-
-
-    document
-        .getElementById(
-            "footerAddress"
-        )
-        .textContent =
-        address ||
-        "Contact us for more information.";
-
-
-    const footerContact =
-        document.getElementById(
-            "footerContact"
-        );
-
-
-    let footerHTML = "";
-
-
-    if(phone){
-
-        footerHTML += `
-
-            <a
-                href="tel:${escapeHTML(
-                    normalizePhone(phone)
-                )}"
-            >
-                📞 ${escapeHTML(phone)}
-            </a>
-
-        `;
-
-    }
-
-
-    if(email){
-
-        footerHTML += `
-
-            <a
-                href="mailto:${escapeHTML(email)}"
-            >
-                ✉️ ${escapeHTML(email)}
-            </a>
-
-        `;
-
-    }
-
-
-    if(whatsapp){
-
-        footerHTML += `
-
-            <a
-                target="_blank"
-                rel="noopener"
-                href="https://wa.me/${escapeHTML(
-                    whatsappNumber(whatsapp)
-                )}"
-            >
-                💬 WhatsApp
-            </a>
-
-        `;
-
-    }
-
-
-    footerContact.innerHTML =
-        footerHTML;
-
-}
-
-
-/* =========================================================
-   LOAD PROPERTIES
-========================================================= */
-
-async function loadProperties(){
-
-    propertiesGrid.innerHTML = `
-
-        <div class="loading">
-
-            <div class="spinner"></div>
-
-            Loading properties...
-
-        </div>
-
-    `;
-
-
-    const snapshot =
-        await getDocs(
-            getPropertiesRef()
-        );
-
-
-    allProperties = [];
-
-
-    snapshot.forEach(item => {
-
-        allProperties.push({
-
-            id:item.id,
-
-            ...item.data()
-
-        });
-
-    });
-
-
-    allProperties.sort((a,b) => {
-
-        if(
-            a.featured === true &&
-            b.featured !== true
-        ){
-
-            return -1;
-
-        }
-
-        if(
-            a.featured !== true &&
-            b.featured === true
-        ){
-
-            return 1;
-
-        }
-
-        return 0;
-
-    });
-
-
-    createCategories();
-
-    createTypeFilter();
-
-    applyFilters();
-
-}
-
-
-/* =========================================================
-   CATEGORIES
-========================================================= */
-
-function createCategories(){
-
-    const types =
-        [
-            ...new Set(
-                allProperties
-                .map(item =>
-                    item.propertyType ||
-                    item.type ||
-                    ""
-                )
-                .filter(Boolean)
-            )
-        ];
-
-
-    categories.innerHTML = `
-
-        <button
-            class="category-button active"
-            data-category=""
-            type="button"
-        >
-            All
-        </button>
-
-    `;
-
-
-    types.forEach(type => {
-
-        const button =
-            document.createElement(
-                "button"
-            );
-
-
-        button.type =
-            "button";
-
-        button.className =
-            "category-button";
-
-        button.dataset.category =
-            type;
-
-        button.textContent =
-            type;
-
-
-        categories.appendChild(
-            button
-        );
-
-    });
-
-
-    categories
-        .querySelectorAll(
-            ".category-button"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    categories
-                        .querySelectorAll(
-                            ".category-button"
-                        )
-                        .forEach(item => {
-
-                            item.classList.remove(
-                                "active"
-                            );
-
-                        });
-
-
-                    button.classList.add(
-                        "active"
-                    );
-
-
-                    selectedCategory =
-                        button.dataset.category;
-
-
-                    applyFilters();
-
-                }
-            );
-
-        });
-
-}
-
-
-/* =========================================================
-   TYPE FILTER
-========================================================= */
-
-function createTypeFilter(){
-
-    const types =
-        [
-            ...new Set(
-                allProperties
-                .map(item =>
-                    item.propertyType ||
-                    item.type ||
-                    ""
-                )
-                .filter(Boolean)
-            )
-        ];
-
-
-    typeFilter.innerHTML = `
-
-        <option value="">
-            All Types
-        </option>
-
-    `;
-
-
-    types.forEach(type => {
-
-        const option =
-            document.createElement(
-                "option"
-            );
-
-
-        option.value =
-            type;
-
-        option.textContent =
-            type;
-
-
-        typeFilter.appendChild(
-            option
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-   FILTER
-========================================================= */
-
-function applyFilters(){
-
-    const search =
-        searchInput.value
-            .trim()
-            .toLowerCase();
-
-
-    const purpose =
-        purposeFilter.value
-            .trim()
-            .toLowerCase();
-
-
-    const type =
-        typeFilter.value
-            .trim()
-            .toLowerCase();
-
-
-    filteredProperties =
-        allProperties.filter(property => {
-
-            const propertyType =
-                String(
-                    property.propertyType ||
-                    property.type ||
-                    ""
-                )
-                .toLowerCase();
-
-
-            const propertyPurpose =
-                String(
-                    property.purpose ||
-                    "sale"
-                )
-                .toLowerCase();
-
-
-            const text =
-                [
-
-                    property.title,
-
-                    property.propertyType,
-
-                    property.type,
-
-                    property.location,
-
-                    property.price,
-
-                    property.status,
-
-                    property.purpose,
-
-                    property.description,
-
-                    property.kitchen
-
-                ]
-                .join(" ")
-                .toLowerCase();
-
-
-            return (
-
-                (!search ||
-                    text.includes(search)
-                )
-
-                &&
-
-                (!purpose ||
-                    propertyPurpose === purpose
-                )
-
-                &&
-
-                (!type ||
-                    propertyType === type
-                )
-
-                &&
-
-                (!selectedCategory ||
-                    propertyType ===
-                    selectedCategory.toLowerCase()
-                )
-
-            );
-
-        });
-
-
-    renderProperties(
-        filteredProperties
-    );
-
-}
-
-
-/* =========================================================
-   RENDER PROPERTIES
-========================================================= */
-
-function renderProperties(properties){
-
-    propertyCount.textContent =
-        properties.length +
-        (
-            properties.length === 1
-            ? " property"
-            : " properties"
-        );
-
-
-    if(!properties.length){
-
-        propertiesGrid.innerHTML = `
-
-            <div class="empty-state">
-
-                <div class="empty-icon">
-                    🏠
-                </div>
-
-                <h3>
-                    No properties found
-                </h3>
-
-                <p>
-                    Try changing your search or filter.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    propertiesGrid.innerHTML =
-        properties
-        .map(
-            property =>
-                createPropertyCard(
-                    property
-                )
-        )
-        .join("");
-
-
-    propertiesGrid
-        .querySelectorAll(
-            ".view-button"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    const propertyId =
-                        button.dataset.propertyId;
-
-                    openPropertyPage(
-                        propertyId
-                    );
-
-                }
-            );
-
-        });
-
-}
-
-
-/* =========================================================
-   OPEN PROPERTY PAGE
-========================================================= */
-
-function openPropertyPage(propertyId){
-
-    if(!propertyId){
-
-        alert(
-            "Property ID is missing."
-        );
-
-        return;
-
-    }
-
-
-    const url =
-        "properties.html?companyId=" +
-        encodeURIComponent(
-            currentCompanyId
-        ) +
-        "&propertyId=" +
-        encodeURIComponent(
-            propertyId
-        );
-
-
-    window.open(
-        url,
-        "_blank"
-    );
-
-}
-
-
-/* =========================================================
-   PROPERTY CARD
-========================================================= */
-
-function createPropertyCard(property){
-
-    const id =
-        property.id;
-
-
-    const title =
-        property.title ||
-        "Untitled Property";
-
-
-    const type =
-        property.propertyType ||
-        property.type ||
-        "Property";
-
-
-    const status =
-        String(
-            property.status ||
-            "available"
-        )
-        .toLowerCase();
-
-
-    const purpose =
-        String(
-            property.purpose ||
-            "sale"
-        )
-        .toLowerCase();
-
-
-    const location =
-        property.location ||
-        "Location not specified";
-
-
-    const price =
-        property.price ||
-        "Price on request";
-
-
-    const image =
-        typeof property.imageUrl === "string"
-        ? property.imageUrl.trim()
-        : "";
-
-
-    let statusClass = "";
-
-
-    if(status === "sold"){
-
-        statusClass =
-            "status-sold";
-
-    }
-
-
-    if(status === "rented"){
-
-        statusClass =
-            "status-rented";
-
-    }
-
-
-    const imageHTML =
-        image
-
-        ?
-
-        `
-
-            <img
-                src="${escapeHTML(image)}"
-                alt="${escapeHTML(title)}"
-                loading="lazy"
-                onerror="
-                    this.style.display='none';
-                    this.nextElementSibling.style.display='grid';
-                "
-            >
-
-            <div
-                class="image-placeholder"
-                style="display:none"
-            >
-                No Image
-            </div>
-
-        `
-
-        :
-
-        `
-
-            <div class="image-placeholder">
-                No Image
-            </div>
-
-        `;
-
-
-    const bedrooms =
-        Number(
-            property.bedrooms || 0
-        );
-
-
-    const bathrooms =
-        Number(
-            property.bathrooms || 0
-        );
-
-
-    /* =====================================================
-       KITCHEN
-       Reads directly from Firestore property.kitchen
-    ===================================================== */
-
-    const kitchen =
-        property.kitchen ||
-        "";
-
-
-    return `
-
-        <article class="property-card">
-
-            <div class="property-image">
-
-                ${imageHTML}
-
-
-                ${
-                    property.featured === true
-
-                    ?
-
-                    `
-
-                        <span class="featured-label">
-                            Featured
-                        </span>
-
-                    `
-
-                    :
-
-                    ""
-                }
-
-
-                <span class="purpose-label">
-
-                    ${
-                        purpose === "rent"
-                        ? "For Rent"
-                        : "For Sale"
-                    }
-
-                </span>
-
-            </div>
-
-
-            <div class="property-body">
-
-                <div class="status-badge ${statusClass}">
-
-                    ${
-                        status === "sold"
-                        ? "Sold"
-                        : status === "rented"
-                        ? "Rented"
-                        : "Available"
-                    }
-
-                </div>
-
-
-                <div class="property-type">
-
-                    ${escapeHTML(type)}
-
-                </div>
-
-
-                <h3 class="property-title">
-
-                    ${escapeHTML(title)}
-
-                </h3>
-
-
-                <div class="property-location">
-
-                    📍 ${escapeHTML(location)}
-
-                </div>
-
-
-                <div class="property-price">
-
-                    ${escapeHTML(price)}
-
-                </div>
-
-
-                <div class="property-meta">
-
-                    ${
-                        bedrooms > 0
-
-                        ?
-
-                        `
-
-                            <span class="meta-item">
-
-                                🛏
-                                ${escapeHTML(
-                                    bedrooms
-                                )}
-                                Bedrooms
-
-                            </span>
-
-                        `
-
-                        :
-
-                        ""
-                    }
-
-
-                    ${
-                        bathrooms > 0
-
-                        ?
-
-                        `
-
-                            <span class="meta-item">
-
-                                🚿
-                                ${escapeHTML(
-                                    bathrooms
-                                )}
-                                Bathrooms
-
-                            </span>
-
-                        `
-
-                        :
-
-                        ""
-                    }
-
-
-                    ${
-                        kitchen
-
-                        ?
-
-                        `
-
-                            <span class="meta-item">
-
-                                🍳
-                                Kitchen:
-                                ${escapeHTML(
-                                    kitchen
-                                )}
-
-                            </span>
-
-                        `
-
-                        :
-
-                        ""
-                    }
-
-
-                    ${
-                        property.area
-
-                        ?
-
-                        `
-
-                            <span class="meta-item">
-
-                                📐
-                                ${escapeHTML(
-                                    property.area
-                                )}
-
-                            </span>
-
-                        `
-
-                        :
-
-                        ""
-                    }
-
-                </div>
-
-
-                <div class="property-description">
-
-                    ${escapeHTML(
-                        property.description ||
-                        "Contact the company for more information."
-                    )}
-
-                </div>
-
-
-                <button
-                    class="view-button"
-                    type="button"
-                    data-property-id="${escapeHTML(
-                        id
-                    )}"
-                >
-
-                    View Property
-
-                </button>
-
-            </div>
-
-        </article>
-
-    `;
-
-}
-
-
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-const mobileMenuButton =
-    document.getElementById(
-        "mobileMenuButton"
-    );
-
-
-const mobileMenu =
-    document.getElementById(
-        "mobileMenu"
-    );
-
-
-mobileMenuButton.addEventListener(
-    "click",
-    () => {
-
-        mobileMenu.classList.toggle(
-            "show"
-        );
-
-    }
-);
-
-
-mobileMenu
-    .querySelectorAll("a")
-    .forEach(link => {
-
-        link.addEventListener(
-            "click",
-            () => {
-
-                mobileMenu.classList.remove(
-                    "show"
-                );
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   SEARCH EVENTS
-========================================================= */
-
-searchInput.addEventListener(
-    "input",
-    applyFilters
-);
-
-
-purposeFilter.addEventListener(
-    "change",
-    applyFilters
-);
-
-
-typeFilter.addEventListener(
-    "change",
-    applyFilters
-);
-
-
-document
-    .getElementById(
-        "searchButton"
-    )
-    .addEventListener(
-        "click",
-        () => {
-
-            applyFilters();
-
-            document
-                .getElementById(
-                    "propertiesSection"
-                )
-                .scrollIntoView({
-                    behavior:"smooth"
-                });
-
-        }
-    );
-
-
-/* =========================================================
-   RELOAD
-========================================================= */
-
-document
-    .getElementById(
-        "subscriptionReload"
-    )
-    .addEventListener(
-        "click",
-        () => {
-
-            window.location.reload();
-
-        }
-    );
-
-
-/* =========================================================
-   START
-========================================================= */
-
-async function startApp(){
-
-    document
-        .getElementById(
-            "footerYear"
-        )
-        .textContent =
-        new Date()
-        .getFullYear();
-
-
-    try{
-
-        const active =
-            await loadCompany();
-
-
-        if(!active){
-
-            return;
-
-        }
-
-
-        await loadProperties();
-
-
-        console.log(
-            "EstatePro loaded:",
-            currentCompanyId
-        );
-
-
-        console.log(
-            "Subscription:",
-            currentSubscription
-        );
-
-
-        console.log(
-            "Properties:",
-            allProperties
-        );
-
-    }
-
-    catch(error){
-
-        console.error(
-            "EstatePro error:",
-            error
-        );
-
-
-        let message =
-            error?.message ||
-            "Something went wrong.";
-
-
-        if(
-            error?.code ===
-            "permission-denied"
-        ){
-
-            message =
-                "Firebase denied access. Check your Firestore Rules.";
-
-        }
-
-
-        propertiesGrid.innerHTML = `
-
-            <div class="error-box">
-
-                <h2>
-                    Unable to Load Website
-                </h2>
-
-                <p>
-                    ${escapeHTML(message)}
-                </p>
-
-                <p>
-
-                    Company ID:
-                    <strong>
-                        ${escapeHTML(
-                            currentCompanyId
-                        )}
-                    </strong>
-
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* =========================================================
-   DEBUG
-========================================================= */
-
-window.estateProWebsite = {
-
-    companyId:
-        currentCompanyId,
-
-    getCompany:
-        () => currentCompany,
-
-    getSubscription:
-        () => currentSubscription,
-
-    getProperties:
-        () => allProperties,
-
-    reload:
-        startApp
-
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
+const open = m => { setMode(m); $("authDialog").showModal(); };
+$("openAuth").addEventListener("click", () => open("login"));
+$("startBtn").addEventListener("click", () => open("signup"));
+$("closeAuth").addEventListener("click", () => $("authDialog").close());
+
+const errors = {
+  "auth/email-already-in-use": "This email already has an account. Try logging in.",
+  "auth/invalid-credential": "Incorrect email or password.",
+  "auth/invalid-email": "Enter a valid email address.",
+  "auth/weak-password": "Password must be at least 6 characters.",
+  "auth/too-many-requests": "Too many attempts. Please wait and try again.",
+  "auth/network-request-failed": "Network error. Check your connection."
 };
 
+document.querySelectorAll(".pwtoggle").forEach(b => b.addEventListener("click", () => {
+  const i = $(b.dataset.target), show = i.type === "password";
+  i.type = show ? "text" : "password";
+  b.textContent = show ? "Hide" : "Show";
+}));
 
-/* =========================================================
-   RUN
-========================================================= */
+$("forgotBtn").addEventListener("click", async () => {
+  const email = $("aEmail").value.trim(), m = $("authMsg");
+  m.style.color = "";
+  if (!email) { m.textContent = "Enter your email above first."; return; }
+  try {
+    await sendPasswordResetEmail(auth, email);
+    m.style.color = "var(--green)";
+    m.textContent = "If an account exists for this email, a reset link has been sent. Check your inbox and spam folder.";
+  } catch (err) {
+    m.textContent = err.code === "auth/invalid-email" ? "Enter a valid email address." : "Could not send the reset email. Try again.";
+  }
+});
 
-startApp();
+$("authForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  $("authMsg").style.color = "";
+  $("authMsg").textContent = "";
+  $("authSubmit").disabled = true;
+  const email = $("aEmail").value.trim(), pass = $("aPass").value;
+  try {
+    if (mode === "signup") {
+      const name = $("aName").value.trim();
+      if (!name) throw { code: "x", message: "Enter your full name." };
+      const cred = await createUserWithEmailAndPassword(auth, email, pass);
+      await updateProfile(cred.user, { displayName: name });
+      await setDoc(doc(db, "users", cred.user.uid), {
+        name, email: cred.user.email, role: "student", createdAt: serverTimestamp()
+      });
+    } else {
+      await signInWithEmailAndPassword(auth, email, pass);
+    }
+    $("authForm").reset();
+    $("authDialog").close();
+  } catch (err) {
+    $("authMsg").textContent = errors[err.code] || err.message;
+  }
+  $("authSubmit").disabled = false;
+});
 
+$("signOutBtn").addEventListener("click", () => signOut(auth));
+let me = null;
+$("navAuth").addEventListener("click", () => { me ? signOut(auth) : open("login"); });
+onAuthStateChanged(auth, user => {
+  me = user;
+  loadMyCourses();
+  if ($("viewDialog").open && current) refreshAccess();
+  $("navAuth").textContent = user ? "Sign out" : "Sign in";
+  $("openAuth").style.display = user ? "none" : "";
+  $("userBox").style.display = user ? "flex" : "none";
+  $("startBtn").style.display = user ? "none" : "";
+  $("userName").textContent = user ? (user.displayName || user.email) : "";
+});
 </script>
-
 </body>
 </html>

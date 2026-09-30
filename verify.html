@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verify certificate - DeepBuild.ai</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a30;--line:#243052;--text:#e8ecf7;--muted:#8b97b8;--blue:#2f6bff;--red:#ff6b6b;--green:#3ddc97}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px;max-width:460px;width:100%}
+.logo{font-weight:700;font-size:1.2rem;margin-bottom:22px}.logo span{color:var(--blue)}
+h1{font-size:1.4rem;margin:0 0 6px}.ok{color:var(--green)}.bad{color:var(--red)}
+dl{margin:20px 0 0}dt{color:var(--muted);font-size:.85rem;margin-top:14px}dd{margin:2px 0 0;font-size:1.1rem;font-weight:600}
+a{color:var(--blue)}
+</style></head><body><div class="box">
+<div class="logo">Deep<span>build</span>.ai</div><div id="out">Checking certificate...</div></div>
+<script type="module">
+import { db } from "./firebase.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+const out = document.getElementById("out"), id = (new URLSearchParams(location.search).get("id") || "").trim().toUpperCase();
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+(async () => {
+  if (!/^DB-\d{4}-[A-Z0-9]{6}$/.test(id)) { out.innerHTML = '<h1 class="bad">Invalid link</h1><p>No certificate ID was given.</p>'; return; }
+  try {
+    const s = await getDoc(doc(db, "certificates", id));
+    if (!s.exists()) { out.innerHTML = '<h1 class="bad">Not found</h1><p>No certificate with ID <b>' + esc(id) + '</b> exists.</p>'; return; }
+    const c = s.data();
+    out.innerHTML = '<h1 class="ok">✓ Certificate is genuine</h1><dl><dt>Awarded to</dt><dd>' + esc(c.name) +
+      '</dd><dt>Course</dt><dd>' + esc(c.courseTitle) + '</dd><dt>Date issued</dt><dd>' + esc(c.dateText) +
+      '</dd><dt>Certificate ID</dt><dd>' + esc(id) + '</dd></dl>';
+  } catch (e) { out.innerHTML = '<h1 class="bad">Could not check</h1><p>' + esc(e.message) + '</p>'; }
+})();
+</script></body></html>
