@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DeepBuild">
 <title>DeepBuild.ai - Build your future with AI</title>
 <style>
   :root{--bg:#0b1020;--panel:#121a30;--line:#243052;--text:#e8ecf7;--muted:#8b97b8;--blue:#2f6bff;--red:#ff6b6b;--green:#3ddc97}
@@ -644,6 +651,16 @@ onAuthStateChanged(auth, user => {
   $("startBtn").style.display = user ? "none" : "";
   $("userName").textContent = user ? (user.displayName || user.email) : "";
 });
+</script>
+<button id="installBtn" hidden style="position:fixed;right:14px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:6;width:auto;padding:10px 16px;border-radius:99px;box-shadow:0 6px 20px rgba(0,0,0,.4)">Install app</button>
+<script>
+if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(console.error));
+let dbInstall = null;
+addEventListener("beforeinstallprompt", e => { e.preventDefault(); dbInstall = e; document.getElementById("installBtn").hidden = false; });
+document.getElementById("installBtn").addEventListener("click", async () => {
+  if (!dbInstall) return; dbInstall.prompt(); await dbInstall.userChoice; dbInstall = null; document.getElementById("installBtn").hidden = true;
+});
+addEventListener("appinstalled", () => { document.getElementById("installBtn").hidden = true; });
 </script>
 </body>
 </html>
