@@ -29,6 +29,23 @@ export async function uploadToImgbb(file) {
   return json.data.url;
 }
 
+// Backup when imgbb is down: shrink the image and return it as a data: URL (stored directly in the database).
+async function toSmallDataUrl(file, maxDim = 900, maxLen = 140000) {
+  const img = await new Promise((ok, no) => {
+    const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error("Could not read this image."));
+    i.src = URL.createObjectURL(file);
+  });
+  const k = Math.min(1, maxDim / Math.max(img.width, img.height));
+  const cv = document.createElement("canvas");
+  cv.width = Math.round(img.width * k); cv.height = Math.round(img.height * k);
+  cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
+  for (let q = 0.75; q >= 0.3; q -= 0.1) {
+    const d = cv.toDataURL("image/jpeg", q);
+    if (d.length < maxLen) return d;
+  }
+  throw new Error("Image is too large. Please choose a smaller one.");
+}
+
 // Connects a file input to a URL input, with status text and preview.
 export function attachImgbbUploader({ fileInputId, urlInputId, statusId, previewId, onStart, onDone }) {
   const fileEl = document.getElementById(fileInputId);
@@ -49,10 +66,12 @@ export function attachImgbbUploader({ fileInputId, urlInputId, statusId, preview
     statusEl.style.color = "";
     onStart && onStart();
     try {
-      const url = await uploadToImgbb(file);
+      let url, backup = false;
+      try { url = await uploadToImgbb(file); }
+      catch (e1) { url = await toSmallDataUrl(file); backup = true; }
       urlEl.value = url;
       showPreview(url);
-      statusEl.textContent = "Uploaded.";
+      statusEl.textContent = backup ? "Uploaded (backup storage, imgbb is unavailable)." : "Uploaded.";
     } catch (err) {
       statusEl.textContent = err.message;
       statusEl.style.color = "var(--red)";

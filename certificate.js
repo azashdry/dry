@@ -10,7 +10,7 @@ const newId = () => "DB-" + new Date().getFullYear() + "-" +
 
 // verify.html sits next to index.html, on whatever address the site is hosted.
 // Canza wannan zuwa adireshin dandalin ka na dindindin (ka bar "" idan kana so ya bi adireshin da ake ciki).
-const VERIFY_BASE = "";   // misali: "https://deepbuild.ai/"
+const VERIFY_BASE = "https://azashdry.github.io/dry/";
 export const verifyUrl = id => new URL("verify.html?id=" + encodeURIComponent(id), VERIFY_BASE || location.href).href;
 
 function fmtDate(d) { return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }); }
