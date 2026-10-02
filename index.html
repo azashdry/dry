@@ -248,6 +248,7 @@ function render(){
         <div class="meta">${esc(c.instructor)}</div>
         ${c.description ? `<p class="desc">${esc(c.description)}</p>` : ""}
         <span class="tag">${esc(c.level)}</span>
+        ${c.lessonCount ? `<span class="tag">${esc(c.lessonCount)} lessons</span>` : ""}
         <span class="tag ${c.free ? "free" : ""}">${c.free ? "Free" : CUR + esc(c.price)}</span>
         <span class="tag" style="color:var(--blue);border-color:var(--blue)">View course</span>
       </div>
@@ -398,7 +399,9 @@ async function showPayBox(c, box){
 let lessonIds = [];
 const allDone = () => lessonIds.length > 0 && lessonIds.every(x => (curEnr.completedLessons || []).includes(x));
 function paintProgress(total){
-  const done = (curEnr.completedLessons || []).length, pct = curEnr.progress || 0, box = $("vProgress");
+  const mine = curEnr.completedLessons || [];
+  const done = lessonIds.length ? mine.filter(x => lessonIds.includes(x)).length : mine.length;
+  const pct = total ? Math.min(100, Math.round(done / total * 100)) : (curEnr.progress || 0), box = $("vProgress");
   box.hidden = false;
   box.innerHTML = `<div class="prow"><span>${pct}%</span><span>Lessons: ${done}/${total}</span></div>` +
     `<div class="pbar ${pct === 100 ? "done" : ""}"><i style="width:${pct}%"></i></div>` +
@@ -538,14 +541,16 @@ async function loadMyCourses(){
       return { e, c };
     }));
     grid.innerHTML = list.map(({ e, c }) => {
-      const pct = e.progress || 0, n = (e.completedLessons || []).length;
+      const n = (e.completedLessons || []).length;
+      const total = Number(c?.lessonCount) || Number(e.totalLessons) || 0;   // current count wins over the saved one
+      const pct = total ? Math.min(100, Math.round(n / total * 100)) : (e.progress || 0);
       const label = pct === 100 ? "Completed" : n || e.lastLessonId ? "Continue" : "Start";
       return `<article class="card">
         ${c?.imageUrl ? `<img src="${esc(c.imageUrl)}" alt="" loading="lazy">` : ""}
         <div class="b">
           <h3>${esc(c?.title || e.courseTitle)}</h3>
           ${c?.instructor ? `<div class="meta">${esc(c.instructor)}</div>` : ""}
-          <div class="prow"><span>${pct}%</span>${e.totalLessons ? `<span>Lessons: ${n}/${esc(e.totalLessons)}</span>` : ""}</div>
+          <div class="prow"><span>${pct}%</span>${total ? `<span>Lessons: ${Math.min(n, total)}/${total}</span>` : ""}</div>
           <div class="pbar ${pct === 100 ? "done" : ""}"><i style="width:${pct}%"></i></div>
           ${c ? `<button type="button" class="${pct === 100 ? "ghost" : ""}" data-open="${esc(c.id)}">${label}</button>` : ""}
         </div></article>`;
