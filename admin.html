@@ -23,6 +23,7 @@
     font-size:.95rem;font-weight:600;cursor:pointer}
   button:disabled{opacity:.6;cursor:wait}
   button.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+  a.btn{display:inline-block;background:var(--blue);color:#fff;font-weight:600;padding:9px 14px;border-radius:8px}
   button.danger{background:transparent;border:1px solid var(--red);color:var(--red)}
   .check{display:flex;align-items:center;gap:10px;margin-top:14px;color:var(--text);font-size:.95rem}
   .check input{width:auto}
@@ -145,7 +146,19 @@
   </section>
 
   <section id="tab-settings" hidden>
-    <div class="bar"><h2>Community settings</h2></div>
+    <div class="bar"><h2>Live class</h2></div>
+    <div class="item" id="liveCard">
+      <p id="liveStatus" class="meta" style="margin:0 0 10px">Loading…</p>
+      <label for="liveTitleIn">Class title</label>
+      <input id="liveTitleIn" maxlength="80" placeholder="e.g. Prompt Engineering: live Q&amp;A">
+      <div class="foot" style="justify-content:flex-start;gap:8px;flex-wrap:wrap">
+        <button type="button" id="liveStart">Start live class</button>
+        <a id="liveHost" class="btn" target="_blank" rel="noopener" hidden style="text-decoration:none">Open my camera</a>
+        <button type="button" id="liveEnd" class="danger" hidden>End live class</button>
+      </div>
+      <p class="meta" style="margin:10px 0 0">Students see a "Live now" banner on the site while the class is active. The first time, Jitsi may ask you to sign in (Google or GitHub) to start the meeting as host.</p>
+    </div>
+    <div class="bar" style="margin-top:24px"><h2>Community settings</h2></div>
     <form id="settingsForm" class="item">
       <label for="sWhatsapp">WhatsApp group link</label>
       <input id="sWhatsapp" type="url" placeholder="https://chat.whatsapp.com/...">
@@ -400,7 +413,7 @@ function applyRole(role){
   if (allowed.includes("courses")) loadCourses();
   if (allowed.includes("users")) loadUsers();
   if (allowed.includes("tools")) loadTools();
-  if (allowed.includes("settings")) { loadSettings(); loadPaySettings(); }
+  if (allowed.includes("settings")) { loadSettings(); loadPaySettings(); loadLive(); }
   if (allowed.includes("payments")) loadPayments();
   if (allowed.includes("admins")) loadAdmins();
   showTab(allowed[0] || "users");
@@ -735,6 +748,40 @@ $("toolForm").addEventListener("submit", async e => {
     $("toolDialog").close(); toast("Tool saved"); loadTools();
   } catch (err) { toast("Error: " + err.message); }
   $("toolSave").disabled = false;
+});
+
+/* ---------- Live class (Jitsi Meet; state lives in settings/live) ---------- */
+const JITSI = "https://meet.jit.si/";
+function newRoom(){ const a = new Uint8Array(8); crypto.getRandomValues(a); return "deepbuild-" + [...a].map(b => (b % 36).toString(36)).join(""); }
+let live = {};
+function paintLive(){
+  const on = !!live.active && !!live.room;
+  $("liveStatus").textContent = on ? "● Live now: " + (live.title || "Live class") : "No live class is running.";
+  $("liveStart").hidden = on; $("liveTitleIn").disabled = on;
+  $("liveEnd").hidden = !on; $("liveHost").hidden = !on;
+  if (on) $("liveHost").href = JITSI + live.room;
+}
+async function loadLive(){
+  try { const s = await getDoc(doc(db, "settings", "live")); live = s.exists() ? s.data() : {}; if (live.active && live.title) $("liveTitleIn").value = live.title; }
+  catch (err) { toast("Could not load live status: " + err.message); }
+  paintLive();
+}
+$("liveStart").addEventListener("click", async () => {
+  const title = $("liveTitleIn").value.trim();
+  if (!title) { toast("Enter a class title first"); return; }
+  $("liveStart").disabled = true;
+  try {
+    live = { active: true, title, room: newRoom() };
+    await setDoc(doc(db, "settings", "live"), { ...live, startedAt: serverTimestamp() });
+    toast("Live class started. Tap “Open my camera”.");
+  } catch (err) { live = {}; toast("Error: " + err.message); }
+  $("liveStart").disabled = false; paintLive();
+});
+$("liveEnd").addEventListener("click", async () => {
+  if (!confirm(tr("End the live class for everyone?"))) return;
+  try { await setDoc(doc(db, "settings", "live"), { active: false, endedAt: serverTimestamp() }, { merge: true }); live = { ...live, active: false }; toast("Live class ended"); }
+  catch (err) { toast("Error: " + err.message); }
+  paintLive();
 });
 
 /* ---------- Community settings ---------- */
