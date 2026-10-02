@@ -83,6 +83,25 @@
   #authMsg{min-height:1.2em;margin-top:12px;font-size:.88rem;color:var(--red)}
   #authSubmit{width:100%;margin-top:18px;padding:13px}
   .close{float:right;background:transparent;color:var(--muted);padding:0 4px;font-size:1.4rem}
+  .topnav{display:none;gap:4px}
+  .topnav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-size:.92rem;font-weight:600}
+  .topnav a:hover,.topnav a.on{color:var(--text);background:var(--panel)}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 14px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips button{flex:none;background:transparent;border:1px solid var(--line);color:var(--muted);font-weight:500;padding:8px 14px;border-radius:99px}
+  .chips button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  #cat{display:none}
+  .card:hover{border-color:var(--blue)}
+  .card .cat{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:6px}
+  header{position:sticky;top:0;z-index:6;background:var(--bg)}
+  section[id]{scroll-margin-top:76px}
+  @media (min-width:900px){
+    .topnav{display:flex}
+    nav.bottom{display:none}
+    body{padding-bottom:0}
+    header .wrap{max-width:1100px}.wrap{max-width:1100px}
+  }
+  @media (max-width:420px){#userBox span{display:none}}
   #userBox{display:none;align-items:center;gap:10px}
   #userBox span{color:var(--muted);font-size:.9rem;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
@@ -91,6 +110,9 @@
 
 <header><div class="wrap">
   <div class="logo">Deep<span>Build</span>.ai</div>
+  <nav class="topnav" aria-label="Main">
+    <a href="#home">Home</a><a href="#courses">Courses</a><a href="#tools">Tools</a><a href="#community">Community</a>
+  </nav>
   <div style="display:flex;align-items:center;gap:8px">
     <button class="ghost langBtn" type="button">Hausa</button>
     <button id="openAuth">Sign in</button>
@@ -112,8 +134,9 @@
 
   <section id="courses">
     <h2>Courses</h2>
+    <div class="chips" id="chips" role="group" aria-label="Course categories"></div>
     <div class="bar">
-      <input id="search" placeholder="Search courses">
+      <input id="search" placeholder="Search courses" aria-label="Search courses">
       <select id="cat">
         <option value="">All categories</option><option value="AI &amp; ML">AI &amp; ML</option>
         <option value="Python">Python</option><option value="Data Science">Data Science</option><option value="General">General</option>
@@ -220,6 +243,7 @@ function render(){
     <article class="card" data-id="${esc(c.id)}">
       ${c.imageUrl ? `<img src="${esc(c.imageUrl)}" alt="" loading="lazy">` : ""}
       <div class="b">
+        ${c.category ? `<div class="cat">${esc(c.category)}</div>` : ""}
         <h3>${esc(c.title)}</h3>
         <div class="meta">${esc(c.instructor)}</div>
         ${c.description ? `<p class="desc">${esc(c.description)}</p>` : ""}
@@ -232,6 +256,18 @@ function render(){
 }
 $("search").addEventListener("input", render);
 $("cat").addEventListener("change", render);
+/* Category chips: mirror the <select> so the filter logic stays in one place */
+function buildChips(){
+  const box = $("chips"), sel = $("cat");
+  box.innerHTML = [...sel.options].map(o => `<button type="button" data-v="${esc(o.value)}" class="${o.value === sel.value ? "on" : ""}">${o.textContent}</button>`).join("");
+}
+$("chips").addEventListener("click", e => {
+  const b = e.target.closest("button[data-v]"); if (!b) return;
+  $("cat").value = b.dataset.v;
+  [...$("chips").children].forEach(x => x.classList.toggle("on", x === b));
+  render();
+});
+buildChips();
 loadCourses();
 
 /* ---------- Course page, enroll, lessons ---------- */
@@ -654,6 +690,14 @@ onAuthStateChanged(auth, user => {
 </script>
 <button id="installBtn" hidden style="position:fixed;right:14px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:6;width:auto;padding:10px 16px;border-radius:99px;box-shadow:0 6px 20px rgba(0,0,0,.4)">Install app</button>
 <script>
+/* Highlight the nav link of the section currently in view */
+if ("IntersectionObserver" in window) {
+  const links = [...document.querySelectorAll('.topnav a, nav.bottom a')];
+  const io = new IntersectionObserver(es => es.forEach(en => {
+    if (en.isIntersecting) links.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + en.target.id));
+  }), { rootMargin: "-40% 0px -55% 0px" });
+  ["home", "courses", "tools", "community"].forEach(id => { const el = $(id); if (el) io.observe(el); });
+}
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(console.error));
 let dbInstall = null;
 addEventListener("beforeinstallprompt", e => { e.preventDefault(); dbInstall = e; document.getElementById("installBtn").hidden = false; });

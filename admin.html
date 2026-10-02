@@ -504,6 +504,13 @@ $("courseList").addEventListener("click", async e => {
       loadCourses();
     }
     if (b.dataset.act === "delete" && confirm(tr("Delete") + ' "' + c.title + '"? ' + tr("This cannot be undone."))) {
+      // Firestore does not cascade: remove lessons (and their PDF chunks) first, or they stay orphaned.
+      const ls = await getDocs(collection(db, "courses", c.id, "lessons"));
+      for (const l of ls.docs) {
+        const chunks = await getDocs(collection(db, "courses", c.id, "lessons", l.id, "pdf"));
+        for (const k of chunks.docs) await deleteDoc(k.ref);
+        await deleteDoc(l.ref);
+      }
       await deleteDoc(doc(db, "courses", c.id));
       toast("Course deleted");
       loadCourses();

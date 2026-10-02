@@ -131,6 +131,8 @@ function trText(s) {
   const core = m[2];
   if (!core) return s;
   let out = D[core];
+  const nl = core.match(/^(\d+) lessons?$/);
+  if (out === undefined && nl) out = nl[1] + " darussa";
   if (out === undefined) {
     if (core.includes(" · ")) {
       out = core.split(" · ").map(p => D[p] ?? p).join(" · ");

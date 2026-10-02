@@ -1,5 +1,5 @@
 // DeepBuild service worker: keeps the app installable and works offline for the app shell.
-const CACHE = "deepbuild-v1";
+const CACHE = "deepbuild-v2";
 const SHELL = ["./", "./index.html", "./i18n.js", "./firebase.js", "./certificate.js", "./imgbb-upload.js",
   "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
@@ -19,6 +19,6 @@ self.addEventListener("fetch", e => {
     fetch(r).then(res => {
       if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(r, copy)); }
       return res;
-    }).catch(() => caches.match(r).then(m => m || caches.match("./index.html")))
+    }).catch(() => caches.match(r).then(m => m || (r.mode === "navigate" && u.pathname.endsWith("/") ? caches.match("./index.html") : Response.error())))
   );
 });
