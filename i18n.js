@@ -3,10 +3,6 @@
 // this file translates exact strings to Hausa, including text added later.
 
 const D = {
-  "Live now": "A yanzu kai tsaye", "Join live class": "Shiga darasin kai tsaye", "Open in new tab": "Buɗe a sabon shafi",
-  "Live class": "Darasin kai tsaye", "Start live class": "Fara darasin kai tsaye", "End live class": "Kawo ƙarshen darasi",
-  "Open my camera": "Buɗe camera ta", "Class title": "Taken darasi", "No live class is running.": "Babu darasin kai tsaye a yanzu.",
-  "End the live class for everyone?": "Ka kawo ƙarshen darasin kai tsaye ga kowa?",
   // ---- shared / site ----
   "Sign in": "Shiga", "Sign out": "Fita", "Sign up": "Yi rajista", "Log in": "Shiga",
   "Start learning free": "Fara koyo kyauta",

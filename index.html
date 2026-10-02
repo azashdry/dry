@@ -83,18 +83,6 @@
   #authMsg{min-height:1.2em;margin-top:12px;font-size:.88rem;color:var(--red)}
   #authSubmit{width:100%;margin-top:18px;padding:13px}
   .close{float:right;background:transparent;color:var(--muted);padding:0 4px;font-size:1.4rem}
-  .livebar{background:#1a2a14;border-bottom:1px solid #2f6b2f;padding:10px 0}
-  .livebar .wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .livebar .dot{width:10px;height:10px;border-radius:50%;background:#34d058;box-shadow:0 0 0 0 #34d058;animation:pulse 1.6s infinite}
-  @keyframes pulse{70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
-  .livebar button{margin-left:auto;background:#34d058;color:#06210f;border:0;font-weight:700;padding:8px 14px;border-radius:8px}
-  .livem{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
-  .livem[hidden]{display:none}
-  .livebox{width:100%;height:100%;max-width:1100px;display:flex;flex-direction:column;background:var(--bg)}
-  .livehead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
-  .livehead span{display:flex;align-items:center;gap:12px}
-  .livehead button{background:transparent;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px}
-  #liveFrame{flex:1;width:100%;border:0;background:#000}
   .topnav{display:none;gap:4px}
   .topnav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-size:.92rem;font-weight:600}
   .topnav a:hover,.topnav a.on{color:var(--text);background:var(--panel)}
@@ -144,15 +132,6 @@
     <div class="grid" id="myGrid"><div class="empty">Loading courses...</div></div>
   </section>
 
-  <div id="liveBar" class="livebar" hidden role="status">
-    <div class="wrap"><span class="dot" aria-hidden="true"></span><strong>Live now</strong><span id="liveTitle"></span><button type="button" id="liveJoin">Join live class</button></div>
-  </div>
-  <div id="liveModal" class="livem" hidden role="dialog" aria-modal="true" aria-label="Live class">
-    <div class="livebox">
-      <div class="livehead"><strong id="liveMTitle"></strong><span><a id="liveNew" target="_blank" rel="noopener">Open in new tab</a><button type="button" id="liveClose" aria-label="Close">✕</button></span></div>
-      <iframe id="liveFrame" title="Live class" allow="camera; microphone; fullscreen; display-capture; autoplay"></iframe>
-    </div>
-  </div>
   <section id="courses">
     <h2>Courses</h2>
     <div class="chips" id="chips" role="group" aria-label="Course categories"></div>
@@ -233,7 +212,7 @@ import { uploadToImgbb } from "./imgbb-upload.js";
 import { issueCertificate, downloadCertificate } from "./certificate.js";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile, onAuthStateChanged, signOut }
   from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import { collection, query, where, getDocs, getDoc, doc, setDoc, updateDoc, deleteField, serverTimestamp, onSnapshot }
+import { collection, query, where, getDocs, getDoc, doc, setDoc, updateDoc, deleteField, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const $ = id => document.getElementById(id);
@@ -609,28 +588,6 @@ async function loadTools(){
   }
 }
 loadTools();
-
-/* ---------- Live class (settings/live, updates in real time) ---------- */
-let liveRoomId = "", liveName = "";
-function closeLive(){ $("liveModal").hidden = true; $("liveFrame").src = "about:blank"; document.body.style.overflow = ""; }
-onSnapshot(doc(db, "settings", "live"), snap => {
-  const d = snap.exists() ? snap.data() : {};
-  const on = !!d.active && /^deepbuild-[a-z0-9]{6,}$/.test(d.room || "");
-  $("liveBar").hidden = !on;
-  if (on) { liveRoomId = d.room; liveName = d.title || "Live class"; $("liveTitle").textContent = liveName; }
-  else { liveRoomId = ""; closeLive(); }
-}, err => console.error(err));
-$("liveJoin").addEventListener("click", () => {
-  if (!auth.currentUser) { open("login"); return; }          // sign in first
-  if (!liveRoomId) return;
-  const nm = encodeURIComponent(auth.currentUser.displayName || "Student");
-  const url = "https://meet.jit.si/" + liveRoomId;
-  $("liveMTitle").textContent = liveName; $("liveNew").href = url;
-  $("liveFrame").src = url + '#userInfo.displayName="' + nm + '"';
-  $("liveModal").hidden = false; document.body.style.overflow = "hidden";
-});
-$("liveClose").addEventListener("click", closeLive);
-document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("liveModal").hidden) closeLive(); });
 
 /* ---------- Community ---------- */
 (async () => {
