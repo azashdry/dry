@@ -242,16 +242,12 @@ function drivePreview(u){
   return m ? "https://drive.google.com/file/d/" + m[1] + "/preview" : "";
 }
 function ytId(u){
-  try {
-    u = String(u || "").trim(); if (!u) return "";
-    if (!/^https?:\/\//i.test(u)) u = "https://" + u;       // allow links pasted without https://
-    const x = new URL(u), h = x.hostname.replace(/^(www|m|music)\./, ""); let id = "";
-    if (h === "youtu.be") id = x.pathname.split("/")[1] || "";
-    else if (h.endsWith("youtube.com") || h.endsWith("youtube-nocookie.com")) {
-      id = x.searchParams.get("v") || (x.pathname.match(/\/(?:embed|shorts|live|v)\/([\w-]+)/) || [])[1] || "";
-    }
-    return /^[\w-]{6,20}$/.test(id) ? id : "";
-  } catch { return ""; }
+  u = String(u || "").trim().replace(/&amp;/g, "&");
+  const m = u.match(/(?:https?:\/\/)?(?:[\w-]+\.)?(?:youtube(?:-nocookie)?\.com|youtu\.be)\/\S*/i);   // finds the link even if extra words are around it
+  if (!m) return "";
+  const link = m[0], pats = [/[?&]v=([\w-]{11})(?![\w-])/, /youtu\.be\/([\w-]{11})(?![\w-])/, /\/(?:embed|shorts|live|v|watch|e)\/([\w-]{11})(?![\w-])/];
+  for (const p of pats) { const r = link.match(p); if (r) return r[1]; }
+  return "";
 }
 $("grid").addEventListener("click", e => {
   const el = e.target.closest(".card[data-id]"); if (!el) return;
@@ -417,7 +413,10 @@ async function loadLessons(c){
       let player;
       try { await loadYT(); } catch (e) { msg.textContent = "The video player could not load. Turn off your ad blocker and reload the page."; return; }
       if (!$("ytBox")) return;
-      player = new YT.Player("ytBox", { videoId: vid, playerVars: { rel: 0, modestbranding: 1 } });
+      player = new YT.Player("ytBox", { videoId: vid, playerVars: { rel: 0, modestbranding: 1, playsinline: 1, origin: location.origin },
+        events: { onError: code => { msg.textContent = [101, 150, 153].includes(code)
+          ? "The owner of this video turned off playing it on other sites. In YouTube Studio, open the video and switch on Allow embedding."
+          : "This video could not be played (error " + code + "). Check that the video is Public or Unlisted."; } } });
       watchTimer = setInterval(() => {
         if (!document.querySelector("#vViewer iframe:not(#pdfFrame)")) { if (!$("ytBox")) clearInterval(watchTimer); return; }
         try {
@@ -442,6 +441,7 @@ async function loadLessons(c){
         (id ? '<div id="ytBox"></div>' : (/^https?:\/\//i.test(String(l.videoUrl || "").trim())
           ? '<div style="margin-top:12px"><a href="' + esc(String(l.videoUrl).trim()) + '" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;border:1px solid var(--blue);border-radius:8px;color:var(--blue);text-decoration:none;font-weight:600">Open video</a></div>'
           : "")) +
+        (!id && /youtu/i.test(String(l.videoUrl || "")) ? '<div class="meta" style="margin-top:8px;color:var(--red)">This YouTube link is not a single video (it may be a playlist or channel). Ask the course owner to paste the link of one video.</div>' : "") +
         (String(l.pdfUrl || "").startsWith("https://")
           ? '<div style="margin-top:12px"><a class="pdfBtn" href="' + esc(l.pdfUrl) + '" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;border:1px solid var(--blue);border-radius:8px;color:var(--blue);text-decoration:none;font-weight:600">Open PDF</a></div>' +
             (drivePreview(l.pdfUrl) ? '<iframe id="pdfFrame" src="' + esc(drivePreview(l.pdfUrl)) + '" loading="lazy" style="margin-top:12px;aspect-ratio:auto;height:70vh"></iframe>' : "")
