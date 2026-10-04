@@ -83,25 +83,6 @@
   #authMsg{min-height:1.2em;margin-top:12px;font-size:.88rem;color:var(--red)}
   #authSubmit{width:100%;margin-top:18px;padding:13px}
   .close{float:right;background:transparent;color:var(--muted);padding:0 4px;font-size:1.4rem}
-  .topnav{display:none;gap:4px}
-  .topnav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-size:.92rem;font-weight:600}
-  .topnav a:hover,.topnav a.on{color:var(--text);background:var(--panel)}
-  .chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 14px;scrollbar-width:none}
-  .chips::-webkit-scrollbar{display:none}
-  .chips button{flex:none;background:transparent;border:1px solid var(--line);color:var(--muted);font-weight:500;padding:8px 14px;border-radius:99px}
-  .chips button.on{background:var(--blue);border-color:var(--blue);color:#fff}
-  #cat{display:none}
-  .card:hover{border-color:var(--blue)}
-  .card .cat{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:6px}
-  header{position:sticky;top:0;z-index:6;background:var(--bg)}
-  section[id]{scroll-margin-top:76px}
-  @media (min-width:900px){
-    .topnav{display:flex}
-    nav.bottom{display:none}
-    body{padding-bottom:0}
-    header .wrap{max-width:1100px}.wrap{max-width:1100px}
-  }
-  @media (max-width:420px){#userBox span{display:none}}
   #userBox{display:none;align-items:center;gap:10px}
   #userBox span{color:var(--muted);font-size:.9rem;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
@@ -110,9 +91,6 @@
 
 <header><div class="wrap">
   <div class="logo">Deep<span>Build</span>.ai</div>
-  <nav class="topnav" aria-label="Main">
-    <a href="#home">Home</a><a href="#courses">Courses</a><a href="#tools">Tools</a><a href="#community">Community</a>
-  </nav>
   <div style="display:flex;align-items:center;gap:8px">
     <button class="ghost langBtn" type="button">Hausa</button>
     <button id="openAuth">Sign in</button>
@@ -134,9 +112,8 @@
 
   <section id="courses">
     <h2>Courses</h2>
-    <div class="chips" id="chips" role="group" aria-label="Course categories"></div>
     <div class="bar">
-      <input id="search" placeholder="Search courses" aria-label="Search courses">
+      <input id="search" placeholder="Search courses">
       <select id="cat">
         <option value="">All categories</option><option value="AI &amp; ML">AI &amp; ML</option>
         <option value="Python">Python</option><option value="Data Science">Data Science</option><option value="General">General</option>
@@ -206,7 +183,7 @@
 </dialog>
 
 <script type="module">
-import { getLang } from "./i18n.js";
+import "./i18n.js";
 import { auth, db } from "./firebase.js";
 import { uploadToImgbb } from "./imgbb-upload.js";
 import { issueCertificate, downloadCertificate } from "./certificate.js";
@@ -243,12 +220,10 @@ function render(){
     <article class="card" data-id="${esc(c.id)}">
       ${c.imageUrl ? `<img src="${esc(c.imageUrl)}" alt="" loading="lazy">` : ""}
       <div class="b">
-        ${c.category ? `<div class="cat">${esc(c.category)}</div>` : ""}
         <h3>${esc(c.title)}</h3>
         <div class="meta">${esc(c.instructor)}</div>
         ${c.description ? `<p class="desc">${esc(c.description)}</p>` : ""}
         <span class="tag">${esc(c.level)}</span>
-        ${c.lessonCount ? `<span class="tag">${esc(c.lessonCount)} lessons</span>` : ""}
         <span class="tag ${c.free ? "free" : ""}">${c.free ? "Free" : CUR + esc(c.price)}</span>
         <span class="tag" style="color:var(--blue);border-color:var(--blue)">View course</span>
       </div>
@@ -257,18 +232,6 @@ function render(){
 }
 $("search").addEventListener("input", render);
 $("cat").addEventListener("change", render);
-/* Category chips: mirror the <select> so the filter logic stays in one place */
-function buildChips(){
-  const box = $("chips"), sel = $("cat");
-  box.innerHTML = [...sel.options].map(o => `<button type="button" data-v="${esc(o.value)}" class="${o.value === sel.value ? "on" : ""}">${o.textContent}</button>`).join("");
-}
-$("chips").addEventListener("click", e => {
-  const b = e.target.closest("button[data-v]"); if (!b) return;
-  $("cat").value = b.dataset.v;
-  [...$("chips").children].forEach(x => x.classList.toggle("on", x === b));
-  render();
-});
-buildChips();
 loadCourses();
 
 /* ---------- Course page, enroll, lessons ---------- */
@@ -280,10 +243,12 @@ function drivePreview(u){
 }
 function ytId(u){
   try {
-    const x = new URL(u); let id = "";
-    if (x.hostname === "youtu.be") id = x.pathname.slice(1);
-    else if (x.hostname.endsWith("youtube.com")) {
-      id = x.searchParams.get("v") || (x.pathname.match(/\/(?:embed|shorts)\/([\w-]+)/) || [])[1] || "";
+    u = String(u || "").trim(); if (!u) return "";
+    if (!/^https?:\/\//i.test(u)) u = "https://" + u;       // allow links pasted without https://
+    const x = new URL(u), h = x.hostname.replace(/^(www|m|music)\./, ""); let id = "";
+    if (h === "youtu.be") id = x.pathname.split("/")[1] || "";
+    else if (h.endsWith("youtube.com") || h.endsWith("youtube-nocookie.com")) {
+      id = x.searchParams.get("v") || (x.pathname.match(/\/(?:embed|shorts|live|v)\/([\w-]+)/) || [])[1] || "";
     }
     return /^[\w-]{6,20}$/.test(id) ? id : "";
   } catch { return ""; }
@@ -399,9 +364,7 @@ async function showPayBox(c, box){
 let lessonIds = [];
 const allDone = () => lessonIds.length > 0 && lessonIds.every(x => (curEnr.completedLessons || []).includes(x));
 function paintProgress(total){
-  const mine = curEnr.completedLessons || [];
-  const done = lessonIds.length ? mine.filter(x => lessonIds.includes(x)).length : mine.length;
-  const pct = total ? Math.min(100, Math.round(done / total * 100)) : (curEnr.progress || 0), box = $("vProgress");
+  const done = (curEnr.completedLessons || []).length, pct = curEnr.progress || 0, box = $("vProgress");
   box.hidden = false;
   box.innerHTML = `<div class="prow"><span>${pct}%</span><span>Lessons: ${done}/${total}</span></div>` +
     `<div class="pbar ${pct === 100 ? "done" : ""}"><i style="width:${pct}%"></i></div>` +
@@ -428,20 +391,6 @@ async function loadLessons(c){
     const paintList = i => {
       $("vLessons").innerHTML = rows.map((l, n) =>
         `<button data-i="${n}" class="${isDone(l.id) ? "done" : ""} ${n === i ? "on" : ""}">${isDone(l.id) ? "✓ " : ""}${esc(l.order)}. ${esc(l.title)}</button>`).join("");
-    };
-    // Up to two PDFs per lesson (Hausa / English); the learner's own language comes first.
-    const pdfList = l => {
-      const P = [];
-      for (const [L, code, name] of [["Ha", "ha", "Hausa"], ["En", "en", "English"]]) {
-        const url = String(l["pdf" + L + "Url"] || ""), chunks = l["pdf" + L + "Chunks"] || 0;
-        if (url.startsWith("https://") || chunks > 0)
-          P.push({ code, name, url, chunks, col: "pdf_" + code, file: l["pdf" + L + "Name"] || "lesson-" + code + ".pdf" });
-      }
-      const oldUrl = String(l.pdfUrl || ""), oldChunks = l.pdfChunks || 0;       // lessons saved before the two-language update
-      if ((oldUrl.startsWith("https://") || oldChunks > 0) && !P.some(p => p.code === "en"))
-        P.push({ code: "", name: "", url: oldUrl, chunks: oldChunks, col: "pdf", file: l.pdfName || "lesson.pdf" });
-      const first = getLang();
-      return P.sort((a, b) => (b.code === first) - (a.code === first));
     };
     let watchTimer = null;
     const loadYT = () => window.YT && window.YT.Player ? Promise.resolve() : new Promise((ok, no) => {
@@ -487,13 +436,17 @@ async function loadLessons(c){
     };
     const show = i => {
       clearInterval(watchTimer);
-      const l = rows[i], id = ytId(l.videoUrl), done = isDone(l.id), pdfs = pdfList(l);
+      const l = rows[i], id = ytId(l.videoUrl), done = isDone(l.id);
       paintList(i);
       $("vViewer").innerHTML = `<h3>${esc(l.title)}</h3>` +
-        (id ? '<div id="ytBox"></div>' : "") +
-        (pdfs.length ? '<div id="pdfTabs" class="lsn">' + (pdfs.length > 1 ? pdfs.map((p, k) =>
-          `<button type="button" data-k="${k}" class="${k === 0 ? "on" : ""}">PDF${p.name ? ' · <span data-no-i18n>' + p.name + '</span>' : ""}</button>`).join("") : "") +
-          '</div><div id="pdfArea" style="margin-top:12px"></div>' : "") +
+        (id ? '<div id="ytBox"></div>' : (/^https?:\/\//i.test(String(l.videoUrl || "").trim())
+          ? '<div style="margin-top:12px"><a href="' + esc(String(l.videoUrl).trim()) + '" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;border:1px solid var(--blue);border-radius:8px;color:var(--blue);text-decoration:none;font-weight:600">Open video</a></div>'
+          : "")) +
+        (String(l.pdfUrl || "").startsWith("https://")
+          ? '<div style="margin-top:12px"><a class="pdfBtn" href="' + esc(l.pdfUrl) + '" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;border:1px solid var(--blue);border-radius:8px;color:var(--blue);text-decoration:none;font-weight:600">Open PDF</a></div>' +
+            (drivePreview(l.pdfUrl) ? '<iframe id="pdfFrame" src="' + esc(drivePreview(l.pdfUrl)) + '" loading="lazy" style="margin-top:12px;aspect-ratio:auto;height:70vh"></iframe>' : "")
+          : "") +
+        (l.pdfChunks > 0 ? '<div id="pdfBox" style="margin-top:12px"><button id="pdfLoad" class="ghost">View PDF' + (l.pdfName ? " - " + esc(l.pdfName) : "") + '</button></div>' : "") +
         (l.content ? `<div class="txt">${esc(l.content)}</div>` : "") +
         `<button class="doneBtn ${done ? "isDone" : ""}" id="doneBtn" ${done ? "disabled" : ""}>${done ? "Completed" : "Mark as complete"}</button>` +
         '<div id="doneMsg" class="meta" style="color:var(--red);margin-top:8px"></div>';
@@ -510,31 +463,16 @@ async function loadLessons(c){
           paintProgress(total); show(i);
         } catch (err) { btn.disabled = false; $("doneMsg").textContent = "Could not save progress: " + err.message; }
       };
-      const showPdf = k => {
-        const p = pdfs[k], area = $("pdfArea");
-        document.querySelectorAll("#pdfTabs button").forEach(x => x.classList.toggle("on", Number(x.dataset.k) === k));
-        if (p.chunks > 0) {
-          area.innerHTML = '<button id="pdfLoad" class="ghost">View PDF' + (p.file ? " - " + esc(p.file) : "") + '</button>';
-          $("pdfLoad").onclick = async () => {
-            const bt = $("pdfLoad"); bt.disabled = true; bt.textContent = "Loading PDF...";
-            try {
-              const snap = await getDocs(collection(db, "courses", c.id, "lessons", l.id, p.col));
-              const parts = snap.docs.map(d => d.data()).sort((x, y) => x.i - y.i).map(d => Uint8Array.from(atob(d.data), ch => ch.charCodeAt(0)));
-              if (!parts.length) throw new Error("File not found");
-              const url = URL.createObjectURL(new Blob(parts, { type: "application/pdf" }));
-              area.innerHTML = '<a href="' + url + '" target="_blank" rel="noopener" download="' + esc(p.file || "lesson.pdf") + '" style="display:inline-block;padding:10px 16px;border:1px solid var(--blue);border-radius:8px;color:var(--blue);text-decoration:none;font-weight:600">Open / download PDF</a>' +
-                '<iframe id="pdfFrame" src="' + url + '" style="margin-top:12px;aspect-ratio:auto;height:70vh"></iframe>';
-            } catch (err) { bt.disabled = false; bt.textContent = "View PDF"; $("doneMsg").textContent = "Could not load PDF: " + err.message; }
-          };
-        } else {
-          area.innerHTML = '<a class="pdfBtn" href="' + esc(p.url) + '" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;border:1px solid var(--blue);border-radius:8px;color:var(--blue);text-decoration:none;font-weight:600">Open PDF</a>' +
-            (drivePreview(p.url) ? '<iframe id="pdfFrame" src="' + esc(drivePreview(p.url)) + '" loading="lazy" style="margin-top:12px;aspect-ratio:auto;height:70vh"></iframe>' : "");
-        }
+      if ($("pdfLoad")) $("pdfLoad").onclick = async () => {
+        const b = $("pdfLoad"); b.disabled = true; b.textContent = "Loading PDF...";
+        try {
+          const snap = await getDocs(collection(db, "courses", c.id, "lessons", l.id, "pdf"));
+          const parts = snap.docs.map(d => d.data()).sort((x, y) => x.i - y.i).map(d => Uint8Array.from(atob(d.data), ch => ch.charCodeAt(0)));
+          const url = URL.createObjectURL(new Blob(parts, { type: "application/pdf" }));
+          $("pdfBox").innerHTML = '<a href="' + url + '" target="_blank" rel="noopener" download="' + esc(l.pdfName || "lesson.pdf") + '" style="display:inline-block;padding:10px 16px;border:1px solid var(--blue);border-radius:8px;color:var(--blue);text-decoration:none;font-weight:600">Open / download PDF</a>' +
+            '<iframe id="pdfFrame" src="' + url + '" style="margin-top:12px;aspect-ratio:auto;height:70vh"></iframe>';
+        } catch (err) { b.disabled = false; b.textContent = "View PDF"; $("doneMsg").textContent = "Could not load PDF: " + err.message; }
       };
-      if (pdfs.length) {
-        showPdf(0);
-        $("pdfTabs").onclick = e => { const bt = e.target.closest("button[data-k]"); if (bt) showPdf(Number(bt.dataset.k)); };
-      }
       paintProgress(total);
       gate(l, id, done);
       if (curEnr.lastLessonId !== l.id) {          // remember where the learner stopped
@@ -568,16 +506,14 @@ async function loadMyCourses(){
       return { e, c };
     }));
     grid.innerHTML = list.map(({ e, c }) => {
-      const n = (e.completedLessons || []).length;
-      const total = Number(c?.lessonCount) || Number(e.totalLessons) || 0;   // current count wins over the saved one
-      const pct = total ? Math.min(100, Math.round(n / total * 100)) : (e.progress || 0);
+      const pct = e.progress || 0, n = (e.completedLessons || []).length;
       const label = pct === 100 ? "Completed" : n || e.lastLessonId ? "Continue" : "Start";
       return `<article class="card">
         ${c?.imageUrl ? `<img src="${esc(c.imageUrl)}" alt="" loading="lazy">` : ""}
         <div class="b">
           <h3>${esc(c?.title || e.courseTitle)}</h3>
           ${c?.instructor ? `<div class="meta">${esc(c.instructor)}</div>` : ""}
-          <div class="prow"><span>${pct}%</span>${total ? `<span>Lessons: ${Math.min(n, total)}/${total}</span>` : ""}</div>
+          <div class="prow"><span>${pct}%</span>${e.totalLessons ? `<span>Lessons: ${n}/${esc(e.totalLessons)}</span>` : ""}</div>
           <div class="pbar ${pct === 100 ? "done" : ""}"><i style="width:${pct}%"></i></div>
           ${c ? `<button type="button" class="${pct === 100 ? "ghost" : ""}" data-open="${esc(c.id)}">${label}</button>` : ""}
         </div></article>`;
@@ -722,14 +658,6 @@ onAuthStateChanged(auth, user => {
 </script>
 <button id="installBtn" hidden style="position:fixed;right:14px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:6;width:auto;padding:10px 16px;border-radius:99px;box-shadow:0 6px 20px rgba(0,0,0,.4)">Install app</button>
 <script>
-/* Highlight the nav link of the section currently in view */
-if ("IntersectionObserver" in window) {
-  const links = [...document.querySelectorAll('.topnav a, nav.bottom a')];
-  const io = new IntersectionObserver(es => es.forEach(en => {
-    if (en.isIntersecting) links.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + en.target.id));
-  }), { rootMargin: "-40% 0px -55% 0px" });
-  ["home", "courses", "tools", "community"].forEach(id => { const el = $(id); if (el) io.observe(el); });
-}
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(console.error));
 let dbInstall = null;
 addEventListener("beforeinstallprompt", e => { e.preventDefault(); dbInstall = e; document.getElementById("installBtn").hidden = false; });
