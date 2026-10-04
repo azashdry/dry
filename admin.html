@@ -261,11 +261,16 @@
     <input id="lOrder" type="number" min="1" required>
     <label for="lVideo">YouTube link (optional)</label>
     <input id="lVideo" type="url" placeholder="https://www.youtube.com/watch?v=...">
-    <label for="lPdfFile">PDF file (optional, max 5 MB)</label>
-    <input id="lPdfFile" type="file" accept="application/pdf">
-    <div id="lPdfStatus" class="meta" style="margin:6px 0 0"></div>
-    <label for="lPdf">Or paste a PDF link (optional)</label>
-    <input id="lPdf" type="url" placeholder="https://drive.google.com/file/d/.../view">
+    <label for="lPdfHaFile">PDF file: Hausa (optional, max 5 MB)</label>
+    <input id="lPdfHaFile" type="file" accept="application/pdf">
+    <div id="lPdfHaStatus" class="meta" style="margin:6px 0 0"></div>
+    <label for="lPdfHa">Or paste a Hausa PDF link (optional)</label>
+    <input id="lPdfHa" type="url" placeholder="https://drive.google.com/file/d/.../view">
+    <label for="lPdfEnFile">PDF file: English (optional, max 5 MB)</label>
+    <input id="lPdfEnFile" type="file" accept="application/pdf">
+    <div id="lPdfEnStatus" class="meta" style="margin:6px 0 0"></div>
+    <label for="lPdfEn">Or paste an English PDF link (optional)</label>
+    <input id="lPdfEn" type="url" placeholder="https://drive.google.com/file/d/.../view">
     <label for="lContent">Lesson text (optional)</label>
     <textarea id="lContent"></textarea>
     <div class="foot">
@@ -507,8 +512,7 @@ $("courseList").addEventListener("click", async e => {
       // Firestore does not cascade: remove lessons (and their PDF chunks) first, or they stay orphaned.
       const ls = await getDocs(collection(db, "courses", c.id, "lessons"));
       for (const l of ls.docs) {
-        const chunks = await getDocs(collection(db, "courses", c.id, "lessons", l.id, "pdf"));
-        for (const k of chunks.docs) await deleteDoc(k.ref);
+        await delPdfChunks(c.id, l.id);
         await deleteDoc(l.ref);
       }
       await deleteDoc(doc(db, "courses", c.id));
@@ -591,10 +595,19 @@ function renderUsers(){
 $("userSearch").addEventListener("input", renderUsers);
 /* ---------- Lessons ---------- */
 let lessonCourse = null, lessons = [], editingLesson = null;
+// Two PDFs per lesson. Chunks live in lessons/{id}/pdf_ha and pdf_en; the old single PDF used "pdf".
+const PDF_LANGS = [["Ha", "ha"], ["En", "en"]];
+async function delPdfChunks(cid, lid){
+  for (const col of ["pdf", "pdf_ha", "pdf_en"]) {
+    const s = await getDocs(collection(db, "courses", cid, "lessons", lid, col));
+    for (const k of s.docs) await deleteDoc(k.ref);
+  }
+}
 function resetLessonForm(){
   editingLesson = null;
   $("lessonFormTitle").textContent = "Add lesson";
-  $("lTitle").value = ""; $("lVideo").value = ""; $("lPdf").value = ""; $("lPdfFile").value = ""; $("lPdfStatus").textContent = ""; $("lContent").value = "";
+  $("lTitle").value = ""; $("lVideo").value = ""; $("lContent").value = "";
+  for (const [L] of PDF_LANGS) { $("lPdf" + L).value = ""; $("lPdf" + L + "File").value = ""; $("lPdf" + L + "Status").textContent = ""; }
   $("lOrder").value = lessons.length ? Math.max(...lessons.map(l => l.order || 0)) + 1 : 1;
 }
 async function openLessons(c){
@@ -615,7 +628,7 @@ async function loadLessons(){
     }
     $("lessonList").innerHTML = lessons.map(l =>
       '<div class="item"><h3>' + esc(l.order) + '. ' + esc(l.title) + '</h3>' +
-      '<div class="meta">' + [l.videoUrl && "Video", (l.pdfUrl || l.pdfChunks) && "PDF", l.content && "Text"].filter(Boolean).join(" + ") + '</div>' +
+      '<div class="meta">' + [l.videoUrl && "Video", (l.pdfUrl || l.pdfChunks || l.pdfHaUrl || l.pdfHaChunks) && "PDF Hausa", (l.pdfEnUrl || l.pdfEnChunks) && "PDF English", l.content && "Text"].filter(Boolean).join(" + ") + '</div>' +
       '<div class="actions"><button class="ghost" data-act="edit" data-id="' + esc(l.id) + '">Edit</button>' +
       '<button class="danger" data-act="delete" data-id="' + esc(l.id) + '">Delete</button></div></div>'
     ).join("") || '<div class="empty">No lessons yet. Add the first one below.</div>';
@@ -632,11 +645,18 @@ $("lessonList").addEventListener("click", async e => {
       editingLesson = l.id;
       $("lessonFormTitle").textContent = "Edit lesson";
       $("lTitle").value = l.title || ""; $("lOrder").value = l.order || 1;
-      $("lVideo").value = l.videoUrl || ""; $("lPdf").value = l.pdfUrl || ""; $("lPdfStatus").textContent = l.pdfName ? "Current PDF: " + l.pdfName + " (choose a file to replace it)" : ""; $("lContent").value = l.content || "";
+      $("lVideo").value = l.videoUrl || ""; $("lContent").value = l.content || "";
+      $("lPdfHa").value = l.pdfHaUrl || "";
+      $("lPdfEn").value = l.pdfEnUrl || l.pdfUrl || "";   // an old single PDF link is shown under English
+      for (const [L] of PDF_LANGS) {
+        const nm = l["pdf" + L + "Name"] || (L === "En" && l.pdfChunks ? l.pdfName : "");
+        $("lPdf" + L + "File").value = "";
+        $("lPdf" + L + "Status").textContent = nm ? "Current file: " + nm + " (choose a file to replace it)" : "";
+      }
       $("lessonForm").scrollIntoView({ behavior: "smooth" });
     }
     if (b.dataset.act === "delete" && confirm(tr("Delete lesson") + ' "' + l.title + '"?')) {
-      for (let i = 0; i < (l.pdfChunks || 0); i++) await deleteDoc(doc(db, "courses", lessonCourse.id, "lessons", l.id, "pdf", String(i)));
+      await delPdfChunks(lessonCourse.id, l.id);
       await deleteDoc(doc(db, "courses", lessonCourse.id, "lessons", l.id));
       toast("Lesson deleted"); loadLessons();
     }
@@ -645,28 +665,40 @@ $("lessonList").addEventListener("click", async e => {
 $("lessonForm").addEventListener("submit", async e => {
   e.preventDefault();
   const video = $("lVideo").value.trim(), content = $("lContent").value.trim();
-  const pdf = $("lPdf").value.trim();
-  const pf = $("lPdfFile").files[0];
-  if (pf && (pf.type !== "application/pdf" || pf.size > 5 * 1024 * 1024)) { toast("Choose a PDF file that is 5 MB or smaller."); return; }
-  if (!video && !content && !pdf && !pf && !(editingLesson && (lessons.find(x => x.id === editingLesson) || {}).pdfChunks)) { toast("Add a YouTube link, a PDF link, or some lesson text."); return; }
-  if (pdf && !pdf.startsWith("https://")) { toast("The PDF link must start with https://"); return; }
-  const data = { title: $("lTitle").value.trim(), order: Number($("lOrder").value), videoUrl: video, pdfUrl: pdf, content, updatedAt: serverTimestamp() };
+  const old = lessons.find(x => x.id === editingLesson) || {};
+  const link = {}, file = {};
+  for (const [L] of PDF_LANGS) {
+    link[L] = $("lPdf" + L).value.trim();
+    file[L] = $("lPdf" + L + "File").files[0] || null;
+    if (file[L] && (file[L].type !== "application/pdf" || file[L].size > 5 * 1024 * 1024)) { toast("Choose a PDF file that is 5 MB or smaller."); return; }
+    if (link[L] && !link[L].startsWith("https://")) { toast("The PDF link must start with https://"); return; }
+  }
+  const hasPdf = PDF_LANGS.some(([L]) => link[L] || file[L] || old["pdf" + L + "Chunks"]) || old.pdfChunks;
+  if (!video && !content && !hasPdf) { toast("Add a YouTube link, a PDF, or some lesson text."); return; }
+  const data = { title: $("lTitle").value.trim(), order: Number($("lOrder").value), videoUrl: video,
+    pdfHaUrl: link.Ha, pdfEnUrl: link.En, pdfUrl: "", content, updatedAt: serverTimestamp() };
   $("lessonSave").disabled = true;
   try {
     const col = collection(db, "courses", lessonCourse.id, "lessons");
     let lid = editingLesson;
     if (lid) await updateDoc(doc(col, lid), data);
     else lid = (await addDoc(col, { ...data, createdAt: serverTimestamp() })).id;
-    if (pf) {
-      $("lPdfStatus").textContent = "Uploading PDF...";
+    for (const [L, code] of PDF_LANGS) {
+      const pf = file[L]; if (!pf) continue;
+      $("lPdf" + L + "Status").textContent = "Uploading PDF...";
       const SZ = 600 * 1024, chunks = [];
       for (let o = 0; o < pf.size; o += SZ)
         chunks.push(await new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(",")[1]); r.onerror = () => no(new Error("Could not read the PDF")); r.readAsDataURL(pf.slice(o, o + SZ)); }));
-      const pcol = collection(db, "courses", lessonCourse.id, "lessons", lid, "pdf");
+      const pcol = collection(db, "courses", lessonCourse.id, "lessons", lid, "pdf_" + code);
       for (let i = 0; i < chunks.length; i++) await setDoc(doc(pcol, String(i)), { i, data: chunks[i] });
-      const old = (lessons.find(x => x.id === lid) || {}).pdfChunks || 0;
-      for (let i = chunks.length; i < old; i++) await deleteDoc(doc(pcol, String(i)));
-      await updateDoc(doc(col, lid), { pdfChunks: chunks.length, pdfName: pf.name, pdfSize: pf.size });
+      for (let i = chunks.length; i < (old["pdf" + L + "Chunks"] || 0); i++) await deleteDoc(doc(pcol, String(i)));
+      const patch = {}; patch["pdf" + L + "Chunks"] = chunks.length; patch["pdf" + L + "Name"] = pf.name; patch["pdf" + L + "Size"] = pf.size;
+      if (L === "En" && old.pdfChunks) {      // the new English file replaces the old single PDF
+        const oc = collection(db, "courses", lessonCourse.id, "lessons", lid, "pdf");
+        for (let i = 0; i < old.pdfChunks; i++) await deleteDoc(doc(oc, String(i)));
+        patch.pdfChunks = 0;
+      }
+      await updateDoc(doc(col, lid), patch);
     }
     toast("Lesson saved"); loadLessons();
   } catch (err) { toast("Error: " + err.message); }

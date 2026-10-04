@@ -118,7 +118,19 @@ const D = {
   "Learners": "Masu koyo", "New this week": "Sababbi a wannan mako", "last 7 days": "kwana 7 da suka wuce",
   "Enrollments": "Rajista", "finished 100%": "an kammala 100%", "Completion rate": "Kashi na kammalawa",
   "No enrollments yet.": "Babu rajista tukuna.", "Published: ": "An buga: ",
-  "Remove admin: ": "Cire mai gudanarwa: "
+  "Remove admin: ": "Cire mai gudanarwa: ",
+  // ---- lesson PDFs (Hausa / English) ----
+  "PDF file: Hausa (optional, max 5 MB)": "Fayil ɗin PDF na Hausa (zaɓi, bai wuce 5 MB ba)",
+  "PDF file: English (optional, max 5 MB)": "Fayil ɗin PDF na Turanci (zaɓi, bai wuce 5 MB ba)",
+  "Or paste a Hausa PDF link (optional)": "Ko ka manna link ɗin PDF na Hausa (zaɓi)",
+  "Or paste an English PDF link (optional)": "Ko ka manna link ɗin PDF na Turanci (zaɓi)",
+  "Current file: ": "Fayil na yanzu: ",
+  "Add a YouTube link, a PDF, or some lesson text.": "Ƙara link ɗin YouTube, PDF, ko rubutun darasi.",
+  "Open PDF": "Buɗe PDF",
+  "Open / download PDF": "Buɗe / sauke PDF",
+  "View PDF": "Duba PDF",
+  "Loading PDF...": "Ana ɗora PDF...",
+  "Could not load PDF: ": "Ba a iya ɗora PDF ba: "
 };
 
 const PREFIXES = Object.keys(D).filter(k => k.endsWith(": "));

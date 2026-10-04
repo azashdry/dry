@@ -206,7 +206,7 @@
 </dialog>
 
 <script type="module">
-import "./i18n.js";
+import { getLang } from "./i18n.js";
 import { auth, db } from "./firebase.js";
 import { uploadToImgbb } from "./imgbb-upload.js";
 import { issueCertificate, downloadCertificate } from "./certificate.js";
@@ -429,6 +429,20 @@ async function loadLessons(c){
       $("vLessons").innerHTML = rows.map((l, n) =>
         `<button data-i="${n}" class="${isDone(l.id) ? "done" : ""} ${n === i ? "on" : ""}">${isDone(l.id) ? "✓ " : ""}${esc(l.order)}. ${esc(l.title)}</button>`).join("");
     };
+    // Up to two PDFs per lesson (Hausa / English); the learner's own language comes first.
+    const pdfList = l => {
+      const P = [];
+      for (const [L, code, name] of [["Ha", "ha", "Hausa"], ["En", "en", "English"]]) {
+        const url = String(l["pdf" + L + "Url"] || ""), chunks = l["pdf" + L + "Chunks"] || 0;
+        if (url.startsWith("https://") || chunks > 0)
+          P.push({ code, name, url, chunks, col: "pdf_" + code, file: l["pdf" + L + "Name"] || "lesson-" + code + ".pdf" });
+      }
+      const oldUrl = String(l.pdfUrl || ""), oldChunks = l.pdfChunks || 0;       // lessons saved before the two-language update
+      if ((oldUrl.startsWith("https://") || oldChunks > 0) && !P.some(p => p.code === "en"))
+        P.push({ code: "", name: "", url: oldUrl, chunks: oldChunks, col: "pdf", file: l.pdfName || "lesson.pdf" });
+      const first = getLang();
+      return P.sort((a, b) => (b.code === first) - (a.code === first));
+    };
     let watchTimer = null;
     const loadYT = () => window.YT && window.YT.Player ? Promise.resolve() : new Promise((ok, no) => {
       window.onYouTubeIframeAPIReady = ok;
@@ -473,15 +487,13 @@ async function loadLessons(c){
     };
     const show = i => {
       clearInterval(watchTimer);
-      const l = rows[i], id = ytId(l.videoUrl), done = isDone(l.id);
+      const l = rows[i], id = ytId(l.videoUrl), done = isDone(l.id), pdfs = pdfList(l);
       paintList(i);
       $("vViewer").innerHTML = `<h3>${esc(l.title)}</h3>` +
         (id ? '<div id="ytBox"></div>' : "") +
-        (String(l.pdfUrl || "").startsWith("https://")
-          ? '<div style="margin-top:12px"><a class="pdfBtn" href="' + esc(l.pdfUrl) + '" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;border:1px solid var(--blue);border-radius:8px;color:var(--blue);text-decoration:none;font-weight:600">Open PDF</a></div>' +
-            (drivePreview(l.pdfUrl) ? '<iframe id="pdfFrame" src="' + esc(drivePreview(l.pdfUrl)) + '" loading="lazy" style="margin-top:12px;aspect-ratio:auto;height:70vh"></iframe>' : "")
-          : "") +
-        (l.pdfChunks > 0 ? '<div id="pdfBox" style="margin-top:12px"><button id="pdfLoad" class="ghost">View PDF' + (l.pdfName ? " - " + esc(l.pdfName) : "") + '</button></div>' : "") +
+        (pdfs.length ? '<div id="pdfTabs" class="lsn">' + (pdfs.length > 1 ? pdfs.map((p, k) =>
+          `<button type="button" data-k="${k}" class="${k === 0 ? "on" : ""}">PDF${p.name ? ' · <span data-no-i18n>' + p.name + '</span>' : ""}</button>`).join("") : "") +
+          '</div><div id="pdfArea" style="margin-top:12px"></div>' : "") +
         (l.content ? `<div class="txt">${esc(l.content)}</div>` : "") +
         `<button class="doneBtn ${done ? "isDone" : ""}" id="doneBtn" ${done ? "disabled" : ""}>${done ? "Completed" : "Mark as complete"}</button>` +
         '<div id="doneMsg" class="meta" style="color:var(--red);margin-top:8px"></div>';
@@ -498,16 +510,31 @@ async function loadLessons(c){
           paintProgress(total); show(i);
         } catch (err) { btn.disabled = false; $("doneMsg").textContent = "Could not save progress: " + err.message; }
       };
-      if ($("pdfLoad")) $("pdfLoad").onclick = async () => {
-        const b = $("pdfLoad"); b.disabled = true; b.textContent = "Loading PDF...";
-        try {
-          const snap = await getDocs(collection(db, "courses", c.id, "lessons", l.id, "pdf"));
-          const parts = snap.docs.map(d => d.data()).sort((x, y) => x.i - y.i).map(d => Uint8Array.from(atob(d.data), ch => ch.charCodeAt(0)));
-          const url = URL.createObjectURL(new Blob(parts, { type: "application/pdf" }));
-          $("pdfBox").innerHTML = '<a href="' + url + '" target="_blank" rel="noopener" download="' + esc(l.pdfName || "lesson.pdf") + '" style="display:inline-block;padding:10px 16px;border:1px solid var(--blue);border-radius:8px;color:var(--blue);text-decoration:none;font-weight:600">Open / download PDF</a>' +
-            '<iframe id="pdfFrame" src="' + url + '" style="margin-top:12px;aspect-ratio:auto;height:70vh"></iframe>';
-        } catch (err) { b.disabled = false; b.textContent = "View PDF"; $("doneMsg").textContent = "Could not load PDF: " + err.message; }
+      const showPdf = k => {
+        const p = pdfs[k], area = $("pdfArea");
+        document.querySelectorAll("#pdfTabs button").forEach(x => x.classList.toggle("on", Number(x.dataset.k) === k));
+        if (p.chunks > 0) {
+          area.innerHTML = '<button id="pdfLoad" class="ghost">View PDF' + (p.file ? " - " + esc(p.file) : "") + '</button>';
+          $("pdfLoad").onclick = async () => {
+            const bt = $("pdfLoad"); bt.disabled = true; bt.textContent = "Loading PDF...";
+            try {
+              const snap = await getDocs(collection(db, "courses", c.id, "lessons", l.id, p.col));
+              const parts = snap.docs.map(d => d.data()).sort((x, y) => x.i - y.i).map(d => Uint8Array.from(atob(d.data), ch => ch.charCodeAt(0)));
+              if (!parts.length) throw new Error("File not found");
+              const url = URL.createObjectURL(new Blob(parts, { type: "application/pdf" }));
+              area.innerHTML = '<a href="' + url + '" target="_blank" rel="noopener" download="' + esc(p.file || "lesson.pdf") + '" style="display:inline-block;padding:10px 16px;border:1px solid var(--blue);border-radius:8px;color:var(--blue);text-decoration:none;font-weight:600">Open / download PDF</a>' +
+                '<iframe id="pdfFrame" src="' + url + '" style="margin-top:12px;aspect-ratio:auto;height:70vh"></iframe>';
+            } catch (err) { bt.disabled = false; bt.textContent = "View PDF"; $("doneMsg").textContent = "Could not load PDF: " + err.message; }
+          };
+        } else {
+          area.innerHTML = '<a class="pdfBtn" href="' + esc(p.url) + '" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;border:1px solid var(--blue);border-radius:8px;color:var(--blue);text-decoration:none;font-weight:600">Open PDF</a>' +
+            (drivePreview(p.url) ? '<iframe id="pdfFrame" src="' + esc(drivePreview(p.url)) + '" loading="lazy" style="margin-top:12px;aspect-ratio:auto;height:70vh"></iframe>' : "");
+        }
       };
+      if (pdfs.length) {
+        showPdf(0);
+        $("pdfTabs").onclick = e => { const bt = e.target.closest("button[data-k]"); if (bt) showPdf(Number(bt.dataset.k)); };
+      }
       paintProgress(total);
       gate(l, id, done);
       if (curEnr.lastLessonId !== l.id) {          // remember where the learner stopped
