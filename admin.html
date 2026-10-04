@@ -310,7 +310,7 @@ import { tr } from "./i18n.js";
 import { auth, db } from "./firebase.js";
 import { signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut }
   from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import { collection, doc, getDoc, getDocs, addDoc, setDoc, updateDoc, deleteDoc, query, where, serverTimestamp, getCountFromServer, Timestamp }
+import { collection, doc, getDoc, getDocs, addDoc, setDoc, updateDoc, deleteDoc, query, where, serverTimestamp, getCountFromServer, Timestamp, getDocFromServer}
   from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 import { attachImgbbUploader } from "./imgbb-upload.js";
@@ -319,9 +319,9 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
   ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 const say = (t, ok) => { $("msg").textContent = t || ""; $("msg").style.color = ok ? "var(--green)" : ""; };
-function toast(t){
+function toast(t, ms){
   const el = $("toast"); el.textContent = t; el.style.display = "block";
-  clearTimeout(toast.t); toast.t = setTimeout(() => el.style.display = "none", 2800);
+  clearTimeout(toast.t); toast.t = setTimeout(() => el.style.display = "none", ms || 2800);
 }
 
 /* ---------- Login ---------- */
@@ -558,15 +558,19 @@ $("courseForm").addEventListener("submit", async e => {
     published: $("cPublished").checked,
     updatedAt: serverTimestamp()
   };
-  $("saveBtn").disabled = true;
+  const btn = $("saveBtn"); btn.disabled = true; btn.textContent = "Saving...";
+  const slow = setTimeout(() => toast("Still saving - the network is slow. Keep this page open.", 6000), 8000);
   try {
-    if (editingId) await updateDoc(doc(db, "courses", editingId), data);
-    else await addDoc(collection(db, "courses"), { ...data, createdAt: serverTimestamp() });
+    let id = editingId;
+    if (id) await updateDoc(doc(db, "courses", id), data);
+    else id = (await addDoc(collection(db, "courses"), { ...data, createdAt: serverTimestamp() })).id;
+    const check = await getDocFromServer(doc(db, "courses", id));      // make sure it is really on the server
+    if (!check.exists() || check.data().title !== data.title) throw new Error("Could not confirm the save. Please try again.");
     $("courseDialog").close();
-    toast("Course saved");
-    loadCourses();
-  } catch (err) { toast("Error: " + err.message); }
-  $("saveBtn").disabled = false;
+    toast("✓ Course saved", 4000);
+    await loadCourses();
+  } catch (err) { toast("NOT saved: " + err.message, 7000); }
+  clearTimeout(slow); btn.disabled = false; btn.textContent = "Save course";
 });
 
 /* ---------- Users ---------- */
