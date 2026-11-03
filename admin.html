@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DeepBuild Admin</title>
+<title>AdusTech Admin</title>
 <style>
   :root{
     --bg:#0b1020; --panel:#121a30; --line:#243052;
@@ -79,7 +79,7 @@
 <div id="loginWrap">
   <button class="ghost langBtn" type="button" style="position:fixed;top:14px;right:14px">Hausa</button>
   <div class="box">
-    <h1 data-no-i18n>Deep<span>Build</span> Admin</h1>
+    <h1 data-no-i18n>Adus<span>Tech</span> Admin</h1>
     <p class="sub">Sign in with your admin account.</p>
     <form id="loginForm">
       <label for="email">Email</label>
@@ -99,7 +99,7 @@
 <div id="dashboard">
   <div class="top">
     <div>
-      <h1 data-no-i18n>Deep<span>Build</span> Admin</h1>
+      <h1 data-no-i18n>Adus<span>Tech</span> Admin</h1>
       <div class="who" id="who"></div>
     </div>
     <div style="display:flex;gap:8px"><button class="ghost langBtn" type="button">Hausa</button><button class="ghost" id="logoutBtn">Sign out</button></div>
@@ -110,6 +110,8 @@
     <button data-tab="courses">Courses</button>
     <button data-tab="users">Users</button>
     <button data-tab="payments">Payments<span id="payBadge" class="tag" style="margin:0 0 0 6px;padding:0 7px;color:var(--amber);border-color:var(--amber)" hidden></span></button>
+    <button data-tab="campus">Campus</button>
+    <button data-tab="library">Library</button>
     <button data-tab="tools">Tools</button>
     <button data-tab="settings">Settings</button>
     <button data-tab="admins">Admins</button>
@@ -137,6 +139,18 @@
       <div style="display:flex;gap:8px"><select id="payFilter" style="width:auto"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select>
       <button class="ghost" id="payRefresh">Refresh</button></div></div>
     <div class="list" id="payList"></div>
+  </section>
+
+  <section id="tab-campus" hidden>
+    <div class="bar"><h2>Announcements</h2><button id="add-announcements">Add announcement</button></div>
+    <div class="list" id="list-announcements"></div>
+    <div class="bar" style="margin-top:28px"><h2>Lecture timetable</h2><button id="add-schedule">Add lecture</button></div>
+    <div class="list" id="list-schedule"></div>
+  </section>
+
+  <section id="tab-library" hidden>
+    <div class="bar"><h2>Library (past questions, notes)</h2><button id="add-materials">Add material</button></div>
+    <div class="list" id="list-materials"></div>
   </section>
 
   <section id="tab-tools" hidden>
@@ -169,7 +183,7 @@
       <label for="pBank">Bank name</label>
       <input id="pBank" placeholder="Example: First Bank">
       <label for="pAccName">Account name</label>
-      <input id="pAccName" placeholder="Example: DeepBuild Academy">
+      <input id="pAccName" placeholder="Example: AdusTech">
       <label for="pAccNo">Account number</label>
       <input id="pAccNo" inputmode="numeric" placeholder="10-digit account number">
       <label for="pInstr">Extra note for learners (optional)</label>
@@ -201,7 +215,7 @@
   <section id="tab-users" hidden>
     <div class="bar">
       <h2>Users</h2>
-      <input id="userSearch" placeholder="Search by name or email" style="max-width:280px">
+      <input id="userSearch" placeholder="Search by name, email, department or level" style="max-width:280px">
     </div>
     <div class="list" id="userList"></div>
   </section>
@@ -221,7 +235,7 @@
         <label for="cCategory">Category</label>
         <select id="cCategory">
           <option value="AI &amp; ML">AI &amp; ML</option><option value="Python">Python</option>
-          <option value="Data Science">Data Science</option><option value="General">General</option>
+          <option value="Data Science">Data Science</option><option value="Computer Science">Computer Science</option><option value="Engineering">Engineering</option><option value="Sciences">Sciences</option><option value="General">General</option>
         </select>
       </div>
       <div>
@@ -301,6 +315,38 @@
       <button type="submit" id="toolSave">Save tool</button>
     </div>
   </form>
+</dialog>
+
+<dialog id="crudDialog">
+  <form id="crudForm">
+    <h2 id="crudTitle"></h2>
+    <div id="crudFields"></div>
+    <div class="foot">
+      <button type="button" class="ghost" id="crudCancel">Cancel</button>
+      <button type="submit" id="crudSave">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="quizDialog" style="width:min(640px,94vw)">
+  <h2>Quizzes</h2>
+  <div class="meta" id="quizCourse" style="margin-top:4px"></div>
+  <div class="list" id="quizList" style="margin-top:12px"></div>
+  <form id="quizForm" class="item" style="margin-top:14px">
+    <h3 id="quizFormTitle">Add quiz</h3>
+    <label for="zTitle">Quiz title</label>
+    <input id="zTitle" required placeholder="Example: Week 1 quiz">
+    <label for="zPass">Pass mark (%)</label>
+    <input id="zPass" type="number" min="1" max="100" value="50">
+    <label class="check"><input type="checkbox" id="zPub" checked> Published (visible to enrolled students)</label>
+    <div id="zQs"></div>
+    <div class="foot" style="justify-content:flex-start"><button type="button" class="ghost" id="zAddQ">Add question</button></div>
+    <div class="foot">
+      <button type="button" class="ghost" id="zReset">Clear</button>
+      <button type="submit" id="zSave">Save quiz</button>
+    </div>
+  </form>
+  <div class="foot"><button type="button" class="ghost" id="quizClose">Close</button></div>
 </dialog>
 
 <div id="toast" role="status"></div>
@@ -383,9 +429,9 @@ onAuthStateChanged(auth, async user => {
 
 /* ---------- Roles & Tabs ---------- */
 const PERMS = {
-  superAdmin:     ["overview", "courses", "users", "payments", "tools", "settings", "admins"],
-  admin:          ["overview", "courses", "users", "payments", "tools", "settings"],
-  contentManager: ["overview", "courses", "tools"],
+  superAdmin:     ["overview", "courses", "campus", "library", "users", "payments", "tools", "settings", "admins"],
+  admin:          ["overview", "courses", "campus", "library", "users", "payments", "tools", "settings"],
+  contentManager: ["overview", "courses", "campus", "library", "tools"],
   moderator:      ["users"],
   support:        ["users"]
 };
@@ -393,7 +439,7 @@ let myUid = null;
 let myPerms = [];
 function showTab(name){
   document.querySelectorAll("nav button").forEach(x => x.classList.toggle("on", x.dataset.tab === name));
-  ["overview", "courses", "users", "payments", "tools", "settings", "admins"].forEach(t => { $("tab-" + t).hidden = t !== name; });
+  ["overview", "courses", "campus", "library", "users", "payments", "tools", "settings", "admins"].forEach(t => { $("tab-" + t).hidden = t !== name; });
 }
 document.querySelectorAll("nav button").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
 function applyRole(role){
@@ -404,6 +450,8 @@ function applyRole(role){
   if (allowed.includes("overview")) loadOverview();
   if (allowed.includes("courses")) loadCourses();
   if (allowed.includes("users")) loadUsers();
+  if (allowed.includes("campus")) { loadCrud("announcements"); loadCrud("schedule"); }
+  if (allowed.includes("library")) loadCrud("materials");
   if (allowed.includes("tools")) loadTools();
   if (allowed.includes("settings")) { loadSettings(); loadPaySettings(); }
   if (allowed.includes("payments")) loadPayments();
@@ -490,6 +538,7 @@ function renderCourses(){
       <span class="tag ${c.published ? "live" : "draft"}">${c.published ? "Published" : "Draft"}</span>
       <div class="actions" style="margin-top:12px">
         <button class="ghost" data-act="lessons" data-id="${esc(c.id)}">Lessons</button>
+        <button class="ghost" data-act="quiz" data-id="${esc(c.id)}">Quiz</button>
         <button class="ghost" data-act="edit" data-id="${esc(c.id)}">Edit</button>
         <button class="ghost" data-act="toggle" data-id="${esc(c.id)}">${c.published ? "Unpublish" : "Publish"}</button>
         <button class="danger" data-act="delete" data-id="${esc(c.id)}">Delete</button>
@@ -503,6 +552,7 @@ $("courseList").addEventListener("click", async e => {
   try {
     if (b.dataset.act === "edit") openForm(c);
     if (b.dataset.act === "lessons") openLessons(c);
+    if (b.dataset.act === "quiz") openQuizzes(c);
     if (b.dataset.act === "toggle") {
       await updateDoc(doc(db, "courses", c.id), { published: !c.published, updatedAt: serverTimestamp() });
       toast(c.published ? "Course unpublished" : "Course published");
@@ -587,11 +637,13 @@ async function loadUsers(){
 function renderUsers(){
   const q = $("userSearch").value.trim().toLowerCase();
   const rows = users.filter(u => !q ||
-    (u.name || "").toLowerCase().includes(q) || (u.email || "").toLowerCase().includes(q));
+    (u.name || "").toLowerCase().includes(q) || (u.email || "").toLowerCase().includes(q) ||
+    [u.university, u.faculty, u.department, u.level].some(v => (v || "").toLowerCase().includes(q)));
   $("userList").innerHTML = rows.length ? rows.map(u => `
     <div class="item">
       <h3>${esc(u.name || "No name")}</h3>
       <div class="meta">${esc(u.email || "")}</div>
+      ${[u.university, u.faculty, u.department, u.level].some(Boolean) ? `<div class="meta">${[u.university, u.faculty, u.department, u.level].filter(Boolean).map(esc).join(" · ")}</div>` : ""}
       <span class="tag">${esc(u.role || "student")}</span>
     </div>`).join("")
     : '<div class="empty">' + (users.length ? "No users match your search." : "No users yet. They will appear here after they sign up.") + '</div>';
@@ -771,6 +823,174 @@ $("toolForm").addEventListener("submit", async e => {
     $("toolDialog").close(); toast("Tool saved"); loadTools();
   } catch (err) { toast("Error: " + err.message); }
   $("toolSave").disabled = false;
+});
+
+
+/* ---------- Campus: announcements, timetable, library (one generic editor) ---------- */
+const FACULTIES = ["Computing & IT", "Engineering", "Sciences", "Social Sciences", "Arts & Humanities", "Education", "Management Sciences", "Health Sciences", "Law", "Agriculture", "Other"];
+const LEVELS = ["100 Level", "200 Level", "300 Level", "400 Level", "500 Level", "600 Level", "Postgraduate"];
+const MAT_TYPES = ["Past Question", "Lecture Notes", "Handout", "Textbook", "Other"];
+const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const FAC = { k: "faculty", l: "Faculty (empty = everyone)", t: "select", o: FACULTIES, blank: "Everyone" };
+const LVL = { k: "level", l: "Level (empty = everyone)", t: "select", o: LEVELS, blank: "Everyone" };
+const PUB = { k: "published", l: "Published (visible to students)", t: "check", d: true };
+const CRUD = {
+  announcements: { add: "Add announcement", edit: "Edit announcement", empty: "No announcements yet.",
+    fields: [{ k: "title", l: "Title", t: "text", req: 1 }, { k: "body", l: "Message", t: "textarea", req: 1 }, FAC, LVL,
+      { k: "pinned", l: "Pin to top", t: "check" }, PUB],
+    sort: (a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0),
+    title: x => x.title, meta: x => [x.faculty || "All faculties", x.level || "All levels"].join(" · ") },
+  schedule: { add: "Add lecture", edit: "Edit lecture", empty: "No lectures yet.",
+    fields: [{ k: "course", l: "Course (example: CSC 201 Data Structures)", t: "text", req: 1 }, { k: "day", l: "Day", t: "select", o: DAYS, req: 1 },
+      { k: "start", l: "Starts", t: "time", req: 1 }, { k: "end", l: "Ends", t: "time" }, { k: "venue", l: "Venue", t: "text" },
+      { k: "lecturer", l: "Lecturer", t: "text" }, FAC, LVL, { k: "note", l: "Note (optional)", t: "text" }, PUB],
+    sort: (a, b) => (DAYS.indexOf(a.day) - DAYS.indexOf(b.day)) || (a.start || "").localeCompare(b.start || ""),
+    title: x => x.course, meta: x => [x.day, (x.start || "") + (x.end ? " - " + x.end : ""), x.venue, x.faculty, x.level].filter(Boolean).join(" · ") },
+  materials: { add: "Add material", edit: "Edit material", empty: "No materials yet.",
+    fields: [{ k: "title", l: "Title", t: "text", req: 1 }, { k: "type", l: "Type", t: "select", o: MAT_TYPES, req: 1 },
+      { k: "courseCode", l: "Course code (example: CSC 201)", t: "text" }, { k: "department", l: "Department", t: "text" }, FAC, LVL,
+      { k: "session", l: "Session / year (example: 2024/2025)", t: "text" },
+      { k: "url", l: "File link (Google Drive, etc. - must start with https://)", t: "url", req: 1 }, PUB],
+    sort: (a, b) => (a.title || "").localeCompare(b.title || ""),
+    title: x => x.title, meta: x => [x.type, x.courseCode, x.department, x.level, x.session].filter(Boolean).join(" · ") }
+};
+const crudData = {};
+let crudKey = null, crudEditing = null;
+async function loadCrud(key){
+  const box = $("list-" + key), cfg = CRUD[key];
+  try {
+    const snap = await getDocs(collection(db, key));
+    crudData[key] = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort(cfg.sort);
+    box.innerHTML = crudData[key].map(x => `<div class="item"><h3>${esc(cfg.title(x))}</h3>
+      <div class="meta">${esc(cfg.meta(x))}</div>
+      <span class="tag ${x.published ? "live" : "draft"}">${x.published ? "Published" : "Draft"}</span>
+      <div class="actions" style="margin-top:12px">
+        <button class="ghost" data-act="edit" data-id="${esc(x.id)}">Edit</button>
+        <button class="ghost" data-act="toggle" data-id="${esc(x.id)}">${x.published ? "Unpublish" : "Publish"}</button>
+        <button class="danger" data-act="delete" data-id="${esc(x.id)}">Delete</button></div></div>`).join("")
+      || '<div class="empty">' + cfg.empty + '</div>';
+  } catch (err) { box.innerHTML = '<div class="empty">Could not load: ' + esc(err.message) + '</div>'; }
+}
+function openCrud(key, item){
+  crudKey = key; crudEditing = item ? item.id : null;
+  const cfg = CRUD[key];
+  $("crudTitle").textContent = item ? cfg.edit : cfg.add;
+  $("crudFields").innerHTML = cfg.fields.map(f => {
+    const id = "f_" + f.k, v = item ? item[f.k] : undefined;
+    if (f.t === "check") return `<label class="check"><input type="checkbox" id="${id}" ${(item ? v : f.d) ? "checked" : ""}> ${f.l}</label>`;
+    if (f.t === "select") return `<label for="${id}">${f.l}</label><select id="${id}" ${f.req ? "required" : ""}>${f.req ? "" : `<option value="">${f.blank || "-"}</option>`}${f.o.map(o => `<option value="${esc(o)}" ${v === o ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
+    if (f.t === "textarea") return `<label for="${id}">${f.l}</label><textarea id="${id}" ${f.req ? "required" : ""}>${esc(v || "")}</textarea>`;
+    return `<label for="${id}">${f.l}</label><input id="${id}" type="${f.t}" value="${esc(v || "")}" ${f.req ? "required" : ""}>`;
+  }).join("");
+  $("crudDialog").showModal();
+}
+for (const key of Object.keys(CRUD)) {
+  $("add-" + key).addEventListener("click", () => openCrud(key, null));
+  $("list-" + key).addEventListener("click", async e => {
+    const b = e.target.closest("button[data-act]"); if (!b) return;
+    const x = (crudData[key] || []).find(i => i.id === b.dataset.id); if (!x) return;
+    try {
+      if (b.dataset.act === "edit") openCrud(key, x);
+      if (b.dataset.act === "toggle") { await updateDoc(doc(db, key, x.id), { published: !x.published, updatedAt: serverTimestamp() }); loadCrud(key); }
+      if (b.dataset.act === "delete" && confirm(tr("Delete") + ' "' + CRUD[key].title(x) + '"? ' + tr("This cannot be undone."))) {
+        await deleteDoc(doc(db, key, x.id)); toast("Deleted"); loadCrud(key);
+      }
+    } catch (err) { toast("Error: " + err.message); }
+  });
+}
+$("crudCancel").addEventListener("click", () => $("crudDialog").close());
+$("crudForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const cfg = CRUD[crudKey], data = {};
+  for (const f of cfg.fields) { const el = $("f_" + f.k); data[f.k] = f.t === "check" ? el.checked : el.value.trim(); }
+  if (data.url && !data.url.startsWith("https://")) { toast("The link must start with https://"); return; }
+  $("crudSave").disabled = true;
+  try {
+    if (crudEditing) await updateDoc(doc(db, crudKey, crudEditing), { ...data, updatedAt: serverTimestamp() });
+    else await addDoc(collection(db, crudKey), { ...data, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    $("crudDialog").close(); toast("Saved"); loadCrud(crudKey);
+  } catch (err) { toast("Error: " + err.message); }
+  $("crudSave").disabled = false;
+});
+
+/* ---------- Quizzes per course ---------- */
+let quizCourse = null, quizzes = [], editingQuiz = null;
+const qBlock = (q = {}) => {
+  const L = ["A", "B", "C", "D"], opts = q.options || [];
+  return `<div class="item qrow" style="margin-top:12px"><label>Question</label><textarea class="qt" style="min-height:60px">${esc(q.q || "")}</textarea>` +
+    L.map((l, i) => `<label>Option ${l}${i > 1 ? " (optional)" : ""}</label><input class="qo" value="${esc(opts[i] || "")}">`).join("") +
+    `<label>Correct answer</label><select class="qa">${L.map((l, i) => `<option value="${i}" ${(q.answer || 0) === i ? "selected" : ""}>${l}</option>`).join("")}</select>` +
+    `<label>Explanation shown after the quiz (optional)</label><input class="qe" value="${esc(q.explain || "")}">` +
+    `<div class="actions" style="margin-top:12px"><button type="button" class="danger qdel">Remove question</button></div></div>`;
+};
+function resetQuizForm(q){
+  editingQuiz = q ? q.id : null;
+  $("quizFormTitle").textContent = q ? "Edit quiz" : "Add quiz";
+  $("zTitle").value = q?.title || ""; $("zPass").value = q?.passMark || 50; $("zPub").checked = q ? !!q.published : true;
+  $("zQs").innerHTML = (q?.questions?.length ? q.questions : [{}]).map(qBlock).join("");
+}
+async function loadQuizList(){
+  const box = $("quizList");
+  try {
+    const snap = await getDocs(query(collection(db, "quizzes"), where("courseId", "==", quizCourse.id)));
+    quizzes = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.createdAt?.seconds || 0) - (b.createdAt?.seconds || 0));
+    const stats = await Promise.all(quizzes.map(async q => {
+      try {
+        const r = await getDocs(query(collection(db, "quizResults"), where("quizId", "==", q.id)));
+        const rows = r.docs.map(d => d.data()); return { n: rows.length, p: rows.filter(x => x.passed).length };
+      } catch { return null; }
+    }));
+    box.innerHTML = quizzes.map((q, i) => `<div class="item"><h3>${esc(q.title)}</h3>
+      <div class="meta">Questions: ${(q.questions || []).length} · Pass mark: ${esc(q.passMark || 50)}%${stats[i] ? " · Students: " + stats[i].n + " · Passed: " + stats[i].p : ""}</div>
+      <span class="tag ${q.published ? "live" : "draft"}">${q.published ? "Published" : "Draft"}</span>
+      <div class="actions" style="margin-top:12px">
+        <button class="ghost" data-act="edit" data-id="${esc(q.id)}">Edit</button>
+        <button class="ghost" data-act="toggle" data-id="${esc(q.id)}">${q.published ? "Unpublish" : "Publish"}</button>
+        <button class="danger" data-act="delete" data-id="${esc(q.id)}">Delete</button></div></div>`).join("")
+      || '<div class="empty">No quizzes for this course yet.</div>';
+  } catch (err) { box.innerHTML = '<div class="empty">Could not load quizzes: ' + esc(err.message) + '</div>'; }
+}
+function openQuizzes(c){
+  quizCourse = c; $("quizCourse").textContent = c.title;
+  resetQuizForm(null); loadQuizList(); $("quizDialog").showModal();
+}
+$("quizClose").addEventListener("click", () => $("quizDialog").close());
+$("zReset").addEventListener("click", () => resetQuizForm(null));
+$("zAddQ").addEventListener("click", () => $("zQs").insertAdjacentHTML("beforeend", qBlock()));
+$("zQs").addEventListener("click", e => { const b = e.target.closest(".qdel"); if (b) b.closest(".qrow").remove(); });
+$("quizList").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  const q = quizzes.find(x => x.id === b.dataset.id); if (!q) return;
+  try {
+    if (b.dataset.act === "edit") { resetQuizForm(q); $("quizForm").scrollIntoView(); }
+    if (b.dataset.act === "toggle") { await updateDoc(doc(db, "quizzes", q.id), { published: !q.published, updatedAt: serverTimestamp() }); loadQuizList(); }
+    if (b.dataset.act === "delete" && confirm(tr("Delete") + ' "' + q.title + '"? ' + tr("This cannot be undone."))) {
+      await deleteDoc(doc(db, "quizzes", q.id)); toast("Deleted"); if (editingQuiz === q.id) resetQuizForm(null); loadQuizList();
+    }
+  } catch (err) { toast("Error: " + err.message); }
+});
+$("quizForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const questions = [];
+  for (const [n, row] of [...document.querySelectorAll("#zQs .qrow")].entries()) {
+    const text = row.querySelector(".qt").value.trim(), raw = [...row.querySelectorAll(".qo")].map(i => i.value.trim());
+    const ans = Number(row.querySelector(".qa").value);
+    if (!text) { toast("Question " + (n + 1) + " has no text."); return; }
+    if (!raw[0] || !raw[1]) { toast("Question " + (n + 1) + " needs at least options A and B."); return; }
+    if (!raw[ans]) { toast("Question " + (n + 1) + ": the correct answer is an empty option."); return; }
+    const options = raw.filter(Boolean);
+    questions.push({ q: text, options, answer: raw.slice(0, ans).filter(Boolean).length, explain: row.querySelector(".qe").value.trim() });
+  }
+  if (!questions.length) { toast("Add at least one question."); return; }
+  const data = { courseId: quizCourse.id, courseTitle: quizCourse.title, title: $("zTitle").value.trim(),
+    passMark: Math.min(100, Math.max(1, Number($("zPass").value) || 50)), published: $("zPub").checked, questions, updatedAt: serverTimestamp() };
+  $("zSave").disabled = true;
+  try {
+    if (editingQuiz) await updateDoc(doc(db, "quizzes", editingQuiz), data);
+    else await addDoc(collection(db, "quizzes"), { ...data, createdAt: serverTimestamp() });
+    toast("Quiz saved"); resetQuizForm(null); loadQuizList();
+  } catch (err) { toast("Error: " + err.message); }
+  $("zSave").disabled = false;
 });
 
 /* ---------- Community settings ---------- */
