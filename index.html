@@ -85,6 +85,22 @@
   .close{float:right;background:transparent;color:var(--muted);padding:0 4px;font-size:1.4rem}
   #userBox{display:none;align-items:center;gap:10px}
   #userBox span{color:var(--muted);font-size:.9rem;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  nav.bottom{overflow-x:auto}
+  nav.bottom a,nav.bottom button{flex:1 0 66px}
+  #authDialog,#profDialog{max-height:92vh;overflow:auto}
+  #userName{cursor:default}
+  @media(max-width:560px){#userName{display:none}}
+  h3.sub{font-size:1.05rem;margin:22px 0 12px;color:var(--muted)}
+  .slot{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .slot:last-child{border-bottom:0}
+  .slot b{min-width:104px;font-size:.9rem}
+  .body{white-space:pre-line}
+  .opt{display:flex;gap:10px;align-items:flex-start;margin:6px 0;padding:10px;border:1px solid var(--line);border-radius:8px;color:var(--text);font-size:.95rem;cursor:pointer}
+  .opt input{width:auto;margin-top:3px}
+  .opt.ok{border-color:var(--green)} .opt.bad{border-color:var(--red)}
+  .qq{font-weight:600;margin-top:18px;line-height:1.4}
+  .qbox{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:10px}
+  a.open{display:inline-block;margin-top:14px;padding:9px 16px;border:1px solid var(--blue);border-radius:8px;color:var(--blue);text-decoration:none;font-weight:600;font-size:.9rem}
 </style>
 </head>
 <body>
@@ -94,14 +110,14 @@
   <div style="display:flex;align-items:center;gap:8px">
     <button class="ghost langBtn" type="button">Hausa</button>
     <button id="openAuth">Sign in</button>
-    <div id="userBox"><span id="userName"></span><button class="ghost" id="signOutBtn">Sign out</button></div>
+    <div id="userBox"><span id="userName"></span><button class="ghost" id="profBtn">Profile</button><button class="ghost" id="signOutBtn">Sign out</button></div>
   </div>
 </div></header>
 
 <main class="wrap">
   <section class="hero" id="home">
-    <h1>Build your future with <em>AI</em></h1>
-    <p>World-class AI education and a community built for African youth ready to lead the future. Start free today.</p>
+    <h1>Learn smarter at <em>AdusTech</em></h1>
+    <p>Courses, quizzes, past questions, lecture timetable and campus updates in one place, made for university students. Start free today.</p>
     <button id="startBtn">Start learning free</button>
   </section>
 
@@ -116,10 +132,31 @@
       <input id="search" placeholder="Search courses">
       <select id="cat">
         <option value="">All categories</option><option value="AI &amp; ML">AI &amp; ML</option>
-        <option value="Python">Python</option><option value="Data Science">Data Science</option><option value="General">General</option>
+        <option value="Python">Python</option><option value="Data Science">Data Science</option><option value="Computer Science">Computer Science</option><option value="Engineering">Engineering</option><option value="Sciences">Sciences</option><option value="General">General</option>
       </select>
     </div>
     <div class="grid" id="grid"><div class="empty">Loading courses...</div></div>
+  </section>
+
+  <section id="updates">
+    <h2>Campus Updates</h2>
+    <div class="bar"><select id="upFac" aria-label="Faculty"></select><select id="upLvl" aria-label="Level"></select></div>
+    <h3 class="sub">Announcements</h3>
+    <div class="grid" id="annGrid" style="padding-bottom:10px"><div class="empty">Loading...</div></div>
+    <h3 class="sub">Lecture timetable</h3>
+    <div class="card" id="schBox" style="margin-bottom:50px"><div class="b"><div class="empty">Loading...</div></div></div>
+  </section>
+
+  <section id="library">
+    <h2>Library</h2>
+    <p class="meta" style="margin:-6px 0 14px">Past questions, notes and handouts shared by your lecturers.</p>
+    <div class="bar">
+      <input id="libQ" placeholder="Search title, course code or department">
+      <select id="libType" aria-label="Type"></select>
+      <select id="libFac" aria-label="Faculty"></select>
+      <select id="libLvl" aria-label="Level"></select>
+    </div>
+    <div class="grid" id="libGrid"><div class="empty">Loading...</div></div>
   </section>
 
   <section id="tools">
@@ -142,6 +179,8 @@
   <a href="#home" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span>Home</span></a>
   <a href="#mycourses" id="navMy" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></svg><span>My Courses</span></a>
   <a href="#courses"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h7a3 3 0 013 3v13a2 2 0 00-2-2H2z"/><path d="M22 4h-7a3 3 0 00-3 3v13a2 2 0 012-2h8z"/></svg><span>Courses</span></a>
+  <a href="#updates"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg><span>Updates</span></a>
+  <a href="#library"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h5v16H4z"/><path d="M10 4h5v16h-5z"/><path d="M16.5 5.5l4.5 1-3.4 14-4.5-1z"/></svg><span>Library</span></a>
   <a href="#tools"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 005 5L21 12.6 12.6 21a2.1 2.1 0 01-3-3L18 9.6"/><path d="M14.7 6.3L9 12"/><path d="M9 3l3 3-3 3-3-3z"/></svg><span>Tools</span></a>
   <a href="#community"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><path d="M16 4.6a3.5 3.5 0 010 6.8"/><path d="M18 14a6.5 6.5 0 013.5 6"/></svg><span>Community</span></a>
   <button id="navAuth"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h5a1 1 0 011 1v14a1 1 0 01-1 1h-5"/><path d="M4 12h10"/><path d="M10 8l4 4-4 4"/></svg><span id="navAuthTxt">Sign in</span></button>
@@ -156,6 +195,15 @@
   <div id="vProgress" hidden></div>
   <div id="vLessons" class="lsn"></div>
   <div id="vViewer" class="viewer"></div>
+  <div id="vQuiz"></div>
+</dialog>
+
+<dialog id="profDialog">
+  <button class="close" id="closeProf" aria-label="Close">&times;</button>
+  <h2 style="margin-top:0">My Profile</h2>
+  <div id="profFields"></div>
+  <button id="profSave" style="width:100%;margin-top:18px;padding:13px">Save profile</button>
+  <div id="profMsg" class="meta" style="margin-top:10px"></div>
 </dialog>
 
 <dialog id="authDialog">
@@ -169,6 +217,7 @@
       <label for="aName">Full name</label>
       <input id="aName" autocomplete="name">
     </div>
+    <div id="profRow"></div>
     <label for="aEmail">Email</label>
     <input id="aEmail" type="email" autocomplete="email" required>
     <label for="aPass">Password</label>
@@ -266,7 +315,7 @@ function openCourse(c){
 async function refreshAccess(){
   const c = current, box = $("vAction");
   $("vLessons").innerHTML = ""; $("vViewer").innerHTML = "";
-  $("vProgress").hidden = true; curEnr = null;
+  $("vProgress").hidden = true; $("vQuiz").innerHTML = ""; curEnr = null;
   if (!me) {
     box.innerHTML = '<button id="vSign">Sign in to enroll</button>';
     $("vSign").onclick = () => open("signup");
@@ -278,7 +327,7 @@ async function refreshAccess(){
     if (enr.exists()) {
       curEnr = enr.data();
       box.innerHTML = '<span class="tag free" style="margin:0">Enrolled</span>';
-      loadLessons(c);
+      loadLessons(c); loadQuizzes(c);
     } else if (c.free) {
       box.innerHTML = '<button id="vEnroll">Enroll for free</button>';
       $("vEnroll").onclick = async () => {
@@ -566,12 +615,183 @@ loadTools();
   } catch (err) { console.error(err); }
 })();
 
+/* ---------- University profile ---------- */
+const FACULTIES = ["Computing & IT", "Engineering", "Sciences", "Social Sciences", "Arts & Humanities", "Education", "Management Sciences", "Health Sciences", "Law", "Agriculture", "Other"];
+const LEVELS = ["100 Level", "200 Level", "300 Level", "400 Level", "500 Level", "600 Level", "Postgraduate"];
+const MAT_TYPES = ["Past Question", "Lecture Notes", "Handout", "Textbook", "Other"];
+const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const fillSel = (id, first, arr) => { $(id).innerHTML = '<option value="">' + first + '</option>' + arr.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join(""); };
+const profHtml = p => `<label for="${p}Uni">University / Institution</label><input id="${p}Uni" maxlength="80" autocomplete="organization">
+  <label for="${p}Fac">Faculty</label><select id="${p}Fac"></select>
+  <label for="${p}Dept">Department</label><input id="${p}Dept" maxlength="80">
+  <label for="${p}Lvl">Level</label><select id="${p}Lvl"></select>`;
+for (const [box, p] of [["profRow", "s"], ["profFields", "p"]]) {
+  $(box).innerHTML = profHtml(p);
+  fillSel(p + "Fac", "Select faculty", FACULTIES); fillSel(p + "Lvl", "Select level", LEVELS);
+}
+const readProf = p => ({ university: $(p + "Uni").value.trim(), faculty: $(p + "Fac").value, department: $(p + "Dept").value.trim(), level: $(p + "Lvl").value });
+let profile = null;
+async function loadProfile(){
+  profile = null;
+  if (me) { try { const s = await getDoc(doc(db, "users", me.uid)); if (s.exists()) profile = s.data(); } catch (e) {} }
+  $("upFac").value = profile?.faculty || ""; $("upLvl").value = profile?.level || "";
+  $("libFac").value = profile?.faculty || ""; $("libLvl").value = profile?.level || "";
+  renderUpdates(); renderLibrary();
+}
+$("profBtn").addEventListener("click", () => {
+  const p = profile || {};
+  $("pUni").value = p.university || ""; $("pFac").value = p.faculty || ""; $("pDept").value = p.department || ""; $("pLvl").value = p.level || "";
+  $("profMsg").textContent = ""; $("profDialog").showModal();
+});
+$("closeProf").addEventListener("click", () => $("profDialog").close());
+$("profSave").addEventListener("click", async () => {
+  const b = $("profSave"); b.disabled = true;
+  try {
+    const data = readProf("p");
+    await setDoc(doc(db, "users", me.uid), { ...data, updatedAt: serverTimestamp() }, { merge: true });
+    profile = { ...(profile || {}), ...data };
+    $("upFac").value = data.faculty; $("upLvl").value = data.level; $("libFac").value = data.faculty; $("libLvl").value = data.level;
+    renderUpdates(); renderLibrary();
+    $("profMsg").style.color = "var(--green)"; $("profMsg").textContent = "Profile saved";
+  } catch (err) { $("profMsg").style.color = "var(--red)"; $("profMsg").textContent = "Could not save: " + err.message; }
+  b.disabled = false;
+});
+
+/* ---------- Campus: announcements, timetable, library ---------- */
+let anns = [], sched = [], mats = [];
+const matchT = (it, fac, lvl) => (!fac || !it.faculty || it.faculty === fac) && (!lvl || !it.level || it.level === lvl);
+const fmtDay = ts => ts?.seconds ? new Date(ts.seconds * 1000).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "";
+fillSel("upFac", "All faculties", FACULTIES); fillSel("upLvl", "All levels", LEVELS);
+fillSel("libFac", "All faculties", FACULTIES); fillSel("libLvl", "All levels", LEVELS); fillSel("libType", "All types", MAT_TYPES);
+async function loadCampus(){
+  const pub = c => getDocs(query(collection(db, c), where("published", "==", true)));
+  const [a, s, m] = await Promise.allSettled([pub("announcements"), pub("schedule"), pub("materials")]);
+  const rows = r => r.status === "fulfilled" ? r.value.docs.map(d => ({ id: d.id, ...d.data() })) : null;
+  anns = rows(a); sched = rows(s); mats = rows(m);
+  renderUpdates(); renderLibrary();
+}
+function renderUpdates(){
+  const fac = $("upFac").value, lvl = $("upLvl").value;
+  if (anns === null) $("annGrid").innerHTML = '<div class="empty">Could not load updates.</div>';
+  else {
+    const rows = anns.filter(x => matchT(x, fac, lvl))
+      .sort((x, y) => (!!y.pinned - !!x.pinned) || ((y.createdAt?.seconds || 0) - (x.createdAt?.seconds || 0)));
+    $("annGrid").innerHTML = rows.length ? rows.map(x => `<article class="card"><div class="b">
+      <h3>${esc(x.title)}</h3><div class="meta">${esc(fmtDay(x.createdAt))}</div>
+      <p class="desc body">${esc(x.body)}</p>
+      ${x.pinned ? '<span class="tag" style="color:var(--blue);border-color:var(--blue)">Pinned</span>' : ""}
+      ${x.faculty ? `<span class="tag">${esc(x.faculty)}</span>` : ""}${x.level ? `<span class="tag">${esc(x.level)}</span>` : ""}
+    </div></article>`).join("") : '<div class="empty">No announcements yet.</div>';
+  }
+  const bx = $("schBox").firstElementChild;
+  if (sched === null) { bx.innerHTML = '<div class="empty">Could not load the timetable.</div>'; return; }
+  const today = DAYS[(new Date().getDay() + 6) % 7];
+  const rows = sched.filter(x => matchT(x, fac, lvl));
+  bx.innerHTML = DAYS.map(d => {
+    const it = rows.filter(x => x.day === d).sort((x, y) => (x.start || "").localeCompare(y.start || ""));
+    if (!it.length) return "";
+    return `<h3 style="margin:14px 0 4px;font-size:1rem">${d}${d === today ? ' <span class="tag free" style="margin:0 0 0 6px">Today</span>' : ""}</h3>` +
+      it.map(x => `<div class="slot"><b>${esc(x.start)}${x.end ? " - " + esc(x.end) : ""}</b><div><div>${esc(x.course)}</div>
+        <div class="meta">${[x.venue, x.lecturer].filter(Boolean).map(esc).join(" · ")}</div>${x.note ? `<div class="meta">${esc(x.note)}</div>` : ""}</div></div>`).join("");
+  }).join("") || '<div class="empty">No lectures on the timetable yet.</div>';
+}
+function renderLibrary(){
+  if (mats === null) { $("libGrid").innerHTML = '<div class="empty">Could not load the library.</div>'; return; }
+  const q = $("libQ").value.trim().toLowerCase(), ty = $("libType").value, fac = $("libFac").value, lvl = $("libLvl").value;
+  const rows = mats.filter(x => matchT(x, fac, lvl) && (!ty || x.type === ty) &&
+    (!q || [x.title, x.courseCode, x.department].some(v => (v || "").toLowerCase().includes(q))))
+    .sort((x, y) => (x.title || "").localeCompare(y.title || ""));
+  $("libGrid").innerHTML = rows.length ? rows.map(x => {
+    const link = safeUrl(x.url);
+    return `<article class="card"><div class="b">
+      <h3>${esc(x.title)}</h3>
+      <div class="meta">${[x.courseCode, x.department, x.session].filter(Boolean).map(esc).join(" · ")}</div>
+      <span class="tag" style="color:var(--blue);border-color:var(--blue)">${esc(x.type || "Other")}</span>
+      ${x.level ? `<span class="tag">${esc(x.level)}</span>` : ""}
+      ${link ? `<br><a class="open" href="${esc(link)}" target="_blank" rel="noopener">Open</a>` : ""}
+      ${x.pdfChunks > 0 ? `<div><button type="button" class="ghost" data-pdf="${esc(x.id)}" style="margin-top:14px">View PDF</button></div>` : ""}
+    </div></article>`;
+  }).join("") : '<div class="empty">' + (mats.length ? "Nothing matches your search." : "No materials yet. Check back soon.") + '</div>';
+}
+$("libGrid").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-pdf]"); if (!b) return;
+  const x = mats.find(m => m.id === b.dataset.pdf); if (!x) return;
+  const slot = b.parentElement; b.disabled = true; b.textContent = "Loading PDF...";
+  try {
+    const snap = await getDocs(collection(db, "materials", x.id, "pdf"));
+    const parts = snap.docs.map(d => d.data()).sort((p, q) => p.i - q.i).map(d => Uint8Array.from(atob(d.data), ch => ch.charCodeAt(0)));
+    const url = URL.createObjectURL(new Blob(parts, { type: "application/pdf" }));
+    slot.innerHTML = `<a class="open" href="${url}" target="_blank" rel="noopener" download="${esc(x.pdfName || "material.pdf")}">Open / download PDF</a>`;
+  } catch (err) {
+    b.disabled = false; b.textContent = "View PDF";
+    slot.insertAdjacentHTML("beforeend", '<div class="meta" style="color:var(--red);margin-top:6px">Could not load PDF: ' + esc(err.message) + '</div>');
+  }
+});
+["upFac", "upLvl"].forEach(i => $(i).addEventListener("change", renderUpdates));
+["libQ", "libType", "libFac", "libLvl"].forEach(i => $(i).addEventListener(i === "libQ" ? "input" : "change", renderLibrary));
+loadCampus();
+
+/* ---------- Quizzes (after the lessons of a course) ---------- */
+async function loadQuizzes(c){
+  const box = $("vQuiz");
+  try {
+    const snap = await getDocs(query(collection(db, "quizzes"), where("courseId", "==", c.id), where("published", "==", true)));
+    const qs = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(q => (q.questions || []).length)
+      .sort((a, b) => (a.createdAt?.seconds || 0) - (b.createdAt?.seconds || 0));
+    if (current?.id !== c.id) return;
+    if (!qs.length) { box.innerHTML = ""; return; }
+    const res = {};
+    await Promise.all(qs.map(async q => { try { const r = await getDoc(doc(db, "quizResults", me.uid + "_" + q.id)); if (r.exists()) res[q.id] = r.data(); } catch (e) {} }));
+    box._qs = qs; box._res = res;
+    box.innerHTML = '<h3 style="margin:24px 0 4px">Quizzes</h3>' + qs.map(q => {
+      const r = res[q.id], pass = q.passMark || 50;
+      return `<div class="qbox"><b>${esc(q.title)}</b>
+        <div class="meta" style="margin-top:4px">Questions: ${q.questions.length} · Pass mark: ${pass}%</div>
+        ${r ? `<div style="margin-top:8px"><span class="tag ${r.passed ? "free" : ""}" style="margin:0">${r.passed ? "Passed" : "Not passed yet"}</span> <span class="meta">Best score: ${r.bestPct}%</span></div>` : ""}
+        <button type="button" data-quiz="${esc(q.id)}" style="margin-top:12px">${r ? "Try again" : "Start quiz"}</button></div>`;
+    }).join("");
+  } catch (e) { box.innerHTML = ""; }
+}
+function startQuiz(q){
+  const box = $("vQuiz"), pass = q.passMark || 50;
+  box.innerHTML = `<h3 style="margin:24px 0 4px">${esc(q.title)}</h3><div class="meta">Pass mark: ${pass}%</div>` +
+    q.questions.map((x, n) => `<div class="qq">${n + 1}. ${esc(x.q)}</div>` +
+      (x.options || []).map((o, i) => `<label class="opt"><input type="radio" name="q${n}" value="${i}"><span>${esc(o)}</span></label>`).join("")).join("") +
+    '<button type="button" id="qSubmit" style="margin-top:18px">Submit answers</button> <button type="button" class="ghost" id="qBack" style="margin-top:18px">Back</button><div id="qMsg" class="meta" style="margin-top:10px;color:var(--red)"></div>';
+  $("qBack").onclick = () => loadQuizzes(current);
+  $("qSubmit").onclick = async () => {
+    const picks = q.questions.map((x, n) => { const el = box.querySelector(`input[name="q${n}"]:checked`); return el ? Number(el.value) : -1; });
+    if (picks.includes(-1)) { $("qMsg").textContent = "Please answer every question."; return; }
+    const total = q.questions.length, score = picks.filter((p, n) => p === q.questions[n].answer).length, pct = Math.round(score / total * 100);
+    const prev = (box._res || {})[q.id] || {}, best = Math.max(prev.bestPct || 0, pct), passed = best >= pass;
+    let saveErr = "";
+    try {
+      await setDoc(doc(db, "quizResults", me.uid + "_" + q.id), { uid: me.uid, userName: me.displayName || "", quizId: q.id, quizTitle: q.title,
+        courseId: current.id, lastPct: pct, bestPct: best, passed, attempts: (prev.attempts || 0) + 1, updatedAt: serverTimestamp() });
+      (box._res = box._res || {})[q.id] = { ...prev, bestPct: best, passed, lastPct: pct };
+    } catch (err) { saveErr = err.message; }
+    box.innerHTML = `<h3 style="margin:24px 0 4px">${esc(q.title)}</h3>
+      <div style="font-size:1.6rem;font-weight:700;color:${pct >= pass ? "var(--green)" : "var(--red)"}">${pct}%</div>
+      <div class="meta">Score: ${score}/${total} · ${pct >= pass ? "Passed" : "Not passed yet"}</div>
+      ${saveErr ? `<div class="meta" style="color:var(--red)">Could not save your result: ${esc(saveErr)}</div>` : ""}` +
+      q.questions.map((x, n) => `<div class="qq">${n + 1}. ${esc(x.q)}</div>` +
+        (x.options || []).map((o, i) => `<div class="opt ${i === x.answer ? "ok" : (i === picks[n] ? "bad" : "")}"><span>${i === x.answer ? "✓ " : (i === picks[n] ? "✗ " : "")}${esc(o)}</span></div>`).join("") +
+        (x.explain ? `<div class="meta" style="margin-top:6px">${esc(x.explain)}</div>` : "")).join("") +
+      '<button type="button" id="qBack2" style="margin-top:18px">Back to quizzes</button>';
+    $("qBack2").onclick = () => loadQuizzes(current);
+  };
+}
+$("vQuiz").addEventListener("click", e => {
+  const b = e.target.closest("button[data-quiz]"); if (!b) return;
+  const q = ($("vQuiz")._qs || []).find(x => x.id === b.dataset.quiz); if (q) startQuiz(q);
+});
+
 /* ---------- Auth ---------- */
 let mode = "signup";
 function setMode(m){
   mode = m;
   document.querySelectorAll(".tabs button").forEach(b => b.classList.toggle("on", b.dataset.mode === m));
-  $("nameRow").hidden = m !== "signup";
+  $("nameRow").hidden = m !== "signup"; $("profRow").hidden = m !== "signup";
   $("authSubmit").textContent = m === "signup" ? "Create account" : "Log in";
   $("aPass").autocomplete = m === "signup" ? "new-password" : "current-password";
   $("authMsg").textContent = "";
@@ -625,7 +845,7 @@ $("authForm").addEventListener("submit", async e => {
       const cred = await createUserWithEmailAndPassword(auth, email, pass);
       await updateProfile(cred.user, { displayName: name });
       await setDoc(doc(db, "users", cred.user.uid), {
-        name, email: cred.user.email, role: "student", createdAt: serverTimestamp()
+        name, email: cred.user.email, role: "student", ...readProf("s"), createdAt: serverTimestamp()
       });
     } else {
       await signInWithEmailAndPassword(auth, email, pass);
@@ -647,7 +867,7 @@ document.querySelector("nav.bottom").addEventListener("click", e => {
 $("navAuth").addEventListener("click", () => { me ? signOut(auth) : open("login"); });
 onAuthStateChanged(auth, user => {
   me = user;
-  loadMyCourses();
+  loadMyCourses(); loadProfile();
   if ($("viewDialog").open && current) refreshAccess();
   $("navAuthTxt").textContent = user ? "Sign out" : "Sign in";
   $("openAuth").style.display = user ? "none" : "";

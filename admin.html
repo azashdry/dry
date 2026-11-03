@@ -850,9 +850,10 @@ const CRUD = {
     fields: [{ k: "title", l: "Title", t: "text", req: 1 }, { k: "type", l: "Type", t: "select", o: MAT_TYPES, req: 1 },
       { k: "courseCode", l: "Course code (example: CSC 201)", t: "text" }, { k: "department", l: "Department", t: "text" }, FAC, LVL,
       { k: "session", l: "Session / year (example: 2024/2025)", t: "text" },
-      { k: "url", l: "File link (Google Drive, etc. - must start with https://)", t: "url", req: 1 }, PUB],
+      { k: "pdfFile", l: "Upload a PDF file (max 5 MB)", t: "file" },
+      { k: "url", l: "Or paste a file link (Google Drive, etc. - must start with https://)", t: "url" }, PUB],
     sort: (a, b) => (a.title || "").localeCompare(b.title || ""),
-    title: x => x.title, meta: x => [x.type, x.courseCode, x.department, x.level, x.session].filter(Boolean).join(" · ") }
+    title: x => x.title, meta: x => [x.type, x.courseCode, x.department, x.level, x.session, x.pdfChunks > 0 ? "PDF uploaded" : ""].filter(Boolean).join(" · ") }
 };
 const crudData = {};
 let crudKey = null, crudEditing = null;
@@ -879,6 +880,8 @@ function openCrud(key, item){
     const id = "f_" + f.k, v = item ? item[f.k] : undefined;
     if (f.t === "check") return `<label class="check"><input type="checkbox" id="${id}" ${(item ? v : f.d) ? "checked" : ""}> ${f.l}</label>`;
     if (f.t === "select") return `<label for="${id}">${f.l}</label><select id="${id}" ${f.req ? "required" : ""}>${f.req ? "" : `<option value="">${f.blank || "-"}</option>`}${f.o.map(o => `<option value="${esc(o)}" ${v === o ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
+    if (f.t === "file") return `<label for="${id}">${f.l}</label><input id="${id}" type="file" accept="application/pdf">` +
+      (item?.pdfChunks > 0 ? `<div class="meta" style="margin-top:6px">Current file: ${esc(item.pdfName || "PDF")}</div>` : "");
     if (f.t === "textarea") return `<label for="${id}">${f.l}</label><textarea id="${id}" ${f.req ? "required" : ""}>${esc(v || "")}</textarea>`;
     return `<label for="${id}">${f.l}</label><input id="${id}" type="${f.t}" value="${esc(v || "")}" ${f.req ? "required" : ""}>`;
   }).join("");
@@ -893,21 +896,42 @@ for (const key of Object.keys(CRUD)) {
       if (b.dataset.act === "edit") openCrud(key, x);
       if (b.dataset.act === "toggle") { await updateDoc(doc(db, key, x.id), { published: !x.published, updatedAt: serverTimestamp() }); loadCrud(key); }
       if (b.dataset.act === "delete" && confirm(tr("Delete") + ' "' + CRUD[key].title(x) + '"? ' + tr("This cannot be undone."))) {
+        if (key === "materials") await delMatChunks(x.id, 0, true);
         await deleteDoc(doc(db, key, x.id)); toast("Deleted"); loadCrud(key);
       }
     } catch (err) { toast("Error: " + err.message); }
   });
 }
+// PDF of a library material is stored in small chunks: materials/{id}/pdf/{0,1,2...}
+async function delMatChunks(id, from, all){
+  const col = collection(db, "materials", id, "pdf");
+  if (all) { (await getDocs(col)).docs.forEach(d => deleteDoc(d.ref)); return; }
+  for (let i = from; ; i++) { const r = doc(col, String(i)); if (!(await getDoc(r)).exists()) break; await deleteDoc(r); }
+}
+async function uploadMatPdf(id, pf, oldN){
+  const SZ = 600 * 1024, chunks = [];
+  for (let o = 0; o < pf.size; o += SZ)
+    chunks.push(await new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(",")[1]); r.onerror = () => no(new Error("Could not read the PDF")); r.readAsDataURL(pf.slice(o, o + SZ)); }));
+  const col = collection(db, "materials", id, "pdf");
+  for (let i = 0; i < chunks.length; i++) await setDoc(doc(col, String(i)), { i, data: chunks[i] });
+  for (let i = chunks.length; i < oldN; i++) await deleteDoc(doc(col, String(i)));
+  await updateDoc(doc(db, "materials", id), { pdfChunks: chunks.length, pdfName: pf.name, pdfSize: pf.size });
+}
 $("crudCancel").addEventListener("click", () => $("crudDialog").close());
 $("crudForm").addEventListener("submit", async e => {
   e.preventDefault();
   const cfg = CRUD[crudKey], data = {};
-  for (const f of cfg.fields) { const el = $("f_" + f.k); data[f.k] = f.t === "check" ? el.checked : el.value.trim(); }
+  for (const f of cfg.fields) { if (f.t === "file") continue; const el = $("f_" + f.k); data[f.k] = f.t === "check" ? el.checked : el.value.trim(); }
   if (data.url && !data.url.startsWith("https://")) { toast("The link must start with https://"); return; }
+  const pf = $("f_pdfFile")?.files[0], old = crudEditing ? (crudData[crudKey] || []).find(i => i.id === crudEditing) : null;
+  if (pf && (pf.type !== "application/pdf" || pf.size > 5 * 1024 * 1024)) { toast("Choose a PDF file that is 5 MB or smaller."); return; }
+  if (crudKey === "materials" && !data.url && !pf && !(old?.pdfChunks > 0)) { toast("Add a PDF file or a link."); return; }
   $("crudSave").disabled = true;
   try {
-    if (crudEditing) await updateDoc(doc(db, crudKey, crudEditing), { ...data, updatedAt: serverTimestamp() });
-    else await addDoc(collection(db, crudKey), { ...data, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    let id = crudEditing;
+    if (id) await updateDoc(doc(db, crudKey, id), { ...data, updatedAt: serverTimestamp() });
+    else id = (await addDoc(collection(db, crudKey), { ...data, createdAt: serverTimestamp(), updatedAt: serverTimestamp() })).id;
+    if (pf) { toast("Uploading PDF...", 60000); await uploadMatPdf(id, pf, old?.pdfChunks || 0); }
     $("crudDialog").close(); toast("Saved"); loadCrud(crudKey);
   } catch (err) { toast("Error: " + err.message); }
   $("crudSave").disabled = false;

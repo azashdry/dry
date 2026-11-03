@@ -250,7 +250,12 @@ const D = {
   "Search by name, email, department or level": "Nemo da suna, email, sashe ko mataki",
   "Saved": "An ajiye",
   "Deleted": "An share",
-  "Example: Week 1 quiz": "Misali: Quiz na mako na 1"
+  "Example: Week 1 quiz": "Misali: Quiz na mako na 1",
+  "Upload a PDF file (max 5 MB)": "Ɗora fayil ɗin PDF (har 5 MB)",
+  "Or paste a file link (Google Drive, etc. - must start with https://)": "Ko ka manna link ɗin fayil (Google Drive, da sauransu - dole ya fara da https://)",
+  "Add a PDF file or a link.": "Ƙara fayil ɗin PDF ko link.",
+  "Uploading PDF...": "Ana ɗora PDF...",
+  "Choose a PDF file that is 5 MB or smaller.": "Zaɓi PDF mai girman 5 MB ko ƙasa."
 };
 
 const PREFIXES = Object.keys(D).filter(k => k.endsWith(": "));
