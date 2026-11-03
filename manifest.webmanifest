@@ -1,7 +1,7 @@
 {
-  "name": "DeepBuild.ai",
-  "short_name": "DeepBuild",
-  "description": "AI education platform for African builders: courses, AI tools and community.",
+  "name": "AdusTech",
+  "short_name": "AdusTech",
+  "description": "Learning platform for university students: courses, quizzes, past questions, timetable and announcements.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

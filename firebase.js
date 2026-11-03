@@ -1,4 +1,4 @@
-// firebase.js - DeepBuild
+// firebase.js - AdusTech
 // Duk sauran fayiloli suna shigo da app, auth, db daga nan.
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";

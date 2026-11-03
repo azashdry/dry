@@ -1,0 +1,40 @@
+// AdusTech - Firestore rules ADDITIONS
+// Ka haɗa waɗannan cikin rules ɗin da kake da su a Firebase Console > Firestore > Rules.
+// Idan kana da function ɗin isAdmin() a rules ɗinka, yi amfani da shi maimakon wanda ke ƙasa.
+
+function isAdmin() {
+  return request.auth != null
+    && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.active == true;
+}
+
+// Sanarwa, jadawali, kayan karatu: kowa ya karanta abin da aka wallafa, admin ne kaɗai ke rubutawa
+match /announcements/{id} {
+  allow read: if resource.data.published == true || isAdmin();
+  allow write: if isAdmin();
+}
+match /schedule/{id} {
+  allow read: if resource.data.published == true || isAdmin();
+  allow write: if isAdmin();
+}
+match /materials/{id} {
+  allow read: if resource.data.published == true || isAdmin();
+  allow write: if isAdmin();
+}
+
+// Quiz: ɗalibi yana karanta wanda aka wallafa; admin ne ke rubutawa
+match /quizzes/{id} {
+  allow read: if resource.data.published == true || isAdmin();
+  allow write: if isAdmin();
+}
+
+// Sakamakon quiz: ɗalibi yana rubutawa/karanta nasa kaɗai (id = uid_quizId); admin yana karantawa
+match /quizResults/{id} {
+  allow read: if request.auth != null && (resource.data.uid == request.auth.uid || isAdmin());
+  allow create, update: if request.auth != null && request.resource.data.uid == request.auth.uid
+    && id == request.auth.uid + "_" + request.resource.data.quizId;
+}
+
+// Profile na jami'a: ɗalibi ya iya gyara bayanansa (university, faculty, department, level) amma ba role ba.
+// Idan rule ɗin users ɗinka ya riga ya ba da update ga mai asusun, ka tabbata bai ba shi damar canza "role" ba:
+//   allow update: if request.auth.uid == uid
+//     && !request.resource.data.diff(resource.data).affectedKeys().hasAny(["role"]);

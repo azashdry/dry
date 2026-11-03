@@ -1,11 +1,11 @@
-// certificate.js - DeepBuild
+// certificate.js - AdusTech
 // Issues a verifiable certificate (saved in Firestore) and draws it as a PNG.
 import { db } from "./firebase.js";
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-const newId = () => "DB-" + new Date().getFullYear() + "-" +
+const newId = () => "AT-" + new Date().getFullYear() + "-" +
   Array.from(crypto.getRandomValues(new Uint8Array(6)), b => CHARS[b % CHARS.length]).join("");
 
 // verify.html sits next to index.html, on whatever address the site is hosted.
@@ -72,9 +72,8 @@ export async function drawCertificate(c) {
   // logo
   x.save(); x.translate(84, 78); x.scale(.4, .4); x.strokeStyle = "#5c8bff"; x.lineWidth = 9; x.lineCap = "round";
   diamond(x, 50, 50, 44); x.stroke(); x.beginPath(); x.moveTo(40, 36); x.lineTo(26, 50); x.lineTo(40, 64); x.moveTo(60, 36); x.lineTo(74, 50); x.lineTo(60, 64); x.stroke(); x.restore();
-  x.textBaseline = "alphabetic"; x.font = "700 28px " + F; x.fillStyle = "#fff"; x.fillText("Deep", 136, 108);
-  let w = x.measureText("Deep").width; x.fillStyle = "#5c8bff"; x.fillText("build", 136 + w, 108);
-  w += x.measureText("build").width; x.fillStyle = "#fff"; x.fillText(".ai", 136 + w, 108);
+  x.textBaseline = "alphabetic"; x.font = "700 28px " + F; x.fillStyle = "#fff"; x.fillText("Adus", 136, 108);
+  const w = x.measureText("Adus").width; x.fillStyle = "#5c8bff"; x.fillText("Tech", 136 + w, 108);
   // tag
   x.font = "500 16px " + F; const tw = x.measureText("Certificate of completion").width + 36;
   x.strokeStyle = "#2a3a63"; x.lineWidth = 1; x.beginPath(); x.roundRect(1116 - tw, 80, tw, 38, 19); x.stroke();
@@ -104,5 +103,5 @@ export async function drawCertificate(c) {
 export async function downloadCertificate(c) {
   const cv = await drawCertificate(c);
   const a = document.createElement("a");
-  a.href = cv.toDataURL("image/png"); a.download = "DeepBuild-Certificate-" + c.id + ".png"; a.click();
+  a.href = cv.toDataURL("image/png"); a.download = "AdusTech-Certificate-" + c.id + ".png"; a.click();
 }

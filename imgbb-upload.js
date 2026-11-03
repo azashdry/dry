@@ -1,4 +1,4 @@
-// imgbb-upload.js - DeepBuild
+// imgbb-upload.js - AdusTech
 // Uploads an image to imgbb and returns its public URL.
 
 // Paste your imgbb API key here (get it at https://api.imgbb.com/)

@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdusTech Admin</title>
+<style>
+  :root{
+    --bg:#0b1020; --panel:#121a30; --line:#243052;
+    --text:#e8ecf7; --muted:#8b97b8; --blue:#2f6bff; --red:#ff6b6b; --green:#3ddc97; --amber:#f5b942;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  h1{margin:0;font-size:1.4rem} h1 span{color:var(--blue)}
+  h2{margin:0;font-size:1.15rem}
+  label{display:block;font-size:.85rem;color:var(--muted);margin:14px 0 6px}
+  input,select,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid var(--line);
+    background:var(--bg);color:var(--text);font-size:1rem;font-family:inherit}
+  textarea{min-height:90px;resize:vertical}
+  input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+  button{padding:11px 16px;border:0;border-radius:8px;background:var(--blue);color:#fff;
+    font-size:.95rem;font-weight:600;cursor:pointer}
+  button:disabled{opacity:.6;cursor:wait}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+  button.danger{background:transparent;border:1px solid var(--red);color:var(--red)}
+  .check{display:flex;align-items:center;gap:10px;margin-top:14px;color:var(--text);font-size:.95rem}
+  .check input{width:auto}
+
+  #loginWrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .box{width:100%;max-width:400px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px}
+  .box button{width:100%;margin-top:20px;padding:13px}
+  p.sub{margin:4px 0 20px;color:var(--muted);font-size:.95rem}
+  .pw{position:relative}
+  .pw input{padding-right:70px}
+  .box .pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:auto;margin:0;padding:6px 10px;background:transparent;color:var(--muted);font-size:.85rem}
+  .box .link{width:auto;margin:14px 0 0;padding:0;background:transparent;color:var(--blue);font-size:.9rem;font-weight:600}
+  #msg{margin-top:14px;font-size:.9rem;min-height:1.2em;color:var(--red);word-break:break-word}
+
+  #dashboard{display:none;max-width:980px;margin:0 auto;padding:18px}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .who{color:var(--green);font-size:.85rem;margin-top:4px}
+  nav{display:flex;gap:8px;border-bottom:1px solid var(--line);margin-bottom:18px}
+  nav button{background:transparent;color:var(--muted);border-radius:8px 8px 0 0;padding:12px 18px}
+  nav button.on{color:var(--text);box-shadow:inset 0 -2px 0 var(--blue)}
+  .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+  .list{display:grid;gap:12px}
+  .item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .item h3{margin:0 0 4px;font-size:1.05rem}
+  .meta{color:var(--muted);font-size:.85rem;margin-bottom:10px}
+  .tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.78rem;border:1px solid var(--line);margin-right:6px}
+  .tag.live{color:var(--green);border-color:var(--green)}
+  .tag.draft{color:var(--amber);border-color:var(--amber)}
+  .actions{display:flex;gap:8px;flex-wrap:wrap}
+  .actions button{padding:8px 14px;font-size:.85rem}
+  .empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+.stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin-bottom:22px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .stat .n{font-size:1.9rem;font-weight:700;line-height:1.1}
+  .stat .l{color:var(--muted);font-size:.85rem;margin-top:6px}
+  .stat .s{color:var(--muted);font-size:.78rem;margin-top:2px}
+  .stat.good .n{color:var(--green)}
+  .rank{display:grid;gap:12px}
+  .rank .r{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;font-size:.92rem}
+  .rank .r b{font-weight:600}
+  .rank .r span{color:var(--muted);font-size:.85rem}
+  .rank .r i{grid-column:1/-1;display:block;height:6px;border-radius:99px;background:var(--blue)}
+  dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:14px;
+    width:min(520px,94vw);padding:22px;max-height:92vh;overflow:auto}
+  dialog::backdrop{background:rgba(0,0,0,.6)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .foot{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+  #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--panel);
+    border:1px solid var(--line);padding:12px 18px;border-radius:10px;display:none;max-width:90vw}
+</style>
+</head>
+<body>
+
+<div id="loginWrap">
+  <button class="ghost langBtn" type="button" style="position:fixed;top:14px;right:14px">Hausa</button>
+  <div class="box">
+    <h1 data-no-i18n>Adus<span>Tech</span> Admin</h1>
+    <p class="sub">Sign in with your admin account.</p>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="username" required>
+      <label for="password">Password</label>
+      <div class="pw">
+        <input id="password" type="password" autocomplete="current-password" required>
+        <button type="button" class="pwtoggle" data-target="password" aria-label="Show or hide password">Show</button>
+      </div>
+      <button id="loginBtn" type="submit">Sign in</button>
+      <button type="button" class="link" id="forgotBtn">Forgot password?</button>
+    </form>
+    <div id="msg" role="alert"></div>
+  </div>
+</div>
+
+<div id="dashboard">
+  <div class="top">
+    <div>
+      <h1 data-no-i18n>Adus<span>Tech</span> Admin</h1>
+      <div class="who" id="who"></div>
+    </div>
+    <div style="display:flex;gap:8px"><button class="ghost langBtn" type="button">Hausa</button><button class="ghost" id="logoutBtn">Sign out</button></div>
+  </div>
+
+  <nav>
+    <button class="on" data-tab="overview">Overview</button>
+    <button data-tab="courses">Courses</button>
+    <button data-tab="users">Users</button>
+    <button data-tab="payments">Payments<span id="payBadge" class="tag" style="margin:0 0 0 6px;padding:0 7px;color:var(--amber);border-color:var(--amber)" hidden></span></button>
+    <button data-tab="campus">Campus</button>
+    <button data-tab="library">Library</button>
+    <button data-tab="tools">Tools</button>
+    <button data-tab="settings">Settings</button>
+    <button data-tab="admins">Admins</button>
+  </nav>
+
+  <section id="tab-overview">
+    <div class="bar"><h2>Overview</h2><button class="ghost" id="refreshStats">Refresh</button></div>
+    <div class="stats" id="statGrid"></div>
+    <div class="item">
+      <h3>Top courses by enrollments</h3>
+      <div class="rank" id="topCourses" style="margin-top:14px"></div>
+    </div>
+  </section>
+
+  <section id="tab-courses" hidden>
+    <div class="bar">
+      <h2>Courses</h2>
+      <button id="addCourseBtn">Add course</button>
+    </div>
+    <div class="list" id="courseList"></div>
+  </section>
+
+  <section id="tab-payments" hidden>
+    <div class="bar"><h2>Payments</h2>
+      <div style="display:flex;gap:8px"><select id="payFilter" style="width:auto"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select>
+      <button class="ghost" id="payRefresh">Refresh</button></div></div>
+    <div class="list" id="payList"></div>
+  </section>
+
+  <section id="tab-campus" hidden>
+    <div class="bar"><h2>Announcements</h2><button id="add-announcements">Add announcement</button></div>
+    <div class="list" id="list-announcements"></div>
+    <div class="bar" style="margin-top:28px"><h2>Lecture timetable</h2><button id="add-schedule">Add lecture</button></div>
+    <div class="list" id="list-schedule"></div>
+  </section>
+
+  <section id="tab-library" hidden>
+    <div class="bar"><h2>Library (past questions, notes)</h2><button id="add-materials">Add material</button></div>
+    <div class="list" id="list-materials"></div>
+  </section>
+
+  <section id="tab-tools" hidden>
+    <div class="bar"><h2>AI Tools</h2><button id="addToolBtn">Add tool</button></div>
+    <div class="list" id="toolList"></div>
+  </section>
+
+  <section id="tab-settings" hidden>
+    <div class="bar"><h2>Community settings</h2></div>
+    <form id="settingsForm" class="item">
+      <label for="sWhatsapp">WhatsApp group link</label>
+      <input id="sWhatsapp" type="url" placeholder="https://chat.whatsapp.com/...">
+      <label for="sMembers">Members text shown on the site</label>
+      <input id="sMembers" placeholder="5,000+ learners">
+      <div class="foot" style="justify-content:flex-start"><button type="submit" id="saveSettingsBtn">Save settings</button></div>
+    </form>
+    <div class="bar" style="margin-top:24px"><h2>Payment details</h2></div>
+    <form id="payForm" class="item">
+      <label for="pCurrency">Currency</label>
+      <select id="pCurrency">
+        <option value="₦">₦ Naira (Nigeria)</option>
+        <option value="$">$ US Dollar</option>
+        <option value="GH₵">GH₵ Cedi (Ghana)</option>
+        <option value="KSh ">KSh Shilling (Kenya)</option>
+        <option value="R">R Rand (South Africa)</option>
+        <option value="£">£ Pound</option>
+        <option value="€">€ Euro</option>
+        <option value="CFA ">CFA Franc</option>
+      </select>
+      <label for="pBank">Bank name</label>
+      <input id="pBank" placeholder="Example: First Bank">
+      <label for="pAccName">Account name</label>
+      <input id="pAccName" placeholder="Example: AdusTech">
+      <label for="pAccNo">Account number</label>
+      <input id="pAccNo" inputmode="numeric" placeholder="10-digit account number">
+      <label for="pInstr">Extra note for learners (optional)</label>
+      <textarea id="pInstr" placeholder="Example: Use your email as the transfer narration."></textarea>
+      <p class="meta">Learners see these details on any paid course and send their proof of payment here.</p>
+      <div class="foot" style="justify-content:flex-start"><button type="submit" id="savePayBtn">Save payment details</button></div>
+    </form>
+  </section>
+
+  <section id="tab-admins" hidden>
+    <div class="bar"><h2>Admins</h2></div>
+    <form id="adminForm" class="item" style="margin-bottom:14px">
+      <h3>Add an admin</h3>
+      <div class="meta">The person must have signed up on the website first.</div>
+      <label for="aEmail">Email</label>
+      <input id="aEmail" type="email" required>
+      <label for="aRole">Role</label>
+      <select id="aRole">
+        <option value="admin">Admin</option>
+        <option value="contentManager">Content Manager</option>
+        <option value="moderator">Moderator</option>
+        <option value="support">Support</option>
+      </select>
+      <div class="foot" style="justify-content:flex-start"><button type="submit" id="addAdminBtn">Add admin</button></div>
+    </form>
+    <div class="list" id="adminList"></div>
+  </section>
+
+  <section id="tab-users" hidden>
+    <div class="bar">
+      <h2>Users</h2>
+      <input id="userSearch" placeholder="Search by name, email, department or level" style="max-width:280px">
+    </div>
+    <div class="list" id="userList"></div>
+  </section>
+</div>
+
+<dialog id="courseDialog">
+  <form id="courseForm">
+    <h2 id="dialogTitle">Add course</h2>
+    <label for="cTitle">Title</label>
+    <input id="cTitle" required>
+    <label for="cInstructor">Instructor</label>
+    <input id="cInstructor" required>
+    <label for="cDesc">Description</label>
+    <textarea id="cDesc"></textarea>
+    <div class="two">
+      <div>
+        <label for="cCategory">Category</label>
+        <select id="cCategory">
+          <option value="AI &amp; ML">AI &amp; ML</option><option value="Python">Python</option>
+          <option value="Data Science">Data Science</option><option value="Computer Science">Computer Science</option><option value="Engineering">Engineering</option><option value="Sciences">Sciences</option><option value="General">General</option>
+        </select>
+      </div>
+      <div>
+        <label for="cLevel">Level</label>
+        <select id="cLevel">
+          <option value="Beginner">Beginner</option><option value="Intermediate">Intermediate</option><option value="Advanced">Advanced</option>
+        </select>
+      </div>
+    </div>
+    <label for="cImageFile">Cover image (optional)</label>
+    <input id="cImageFile" type="file" accept="image/*">
+    <div id="cImageStatus" class="meta" style="margin:6px 0 0"></div>
+    <img id="cImagePreview" alt="Cover preview" hidden style="margin-top:10px;width:100%;max-height:180px;object-fit:cover;border-radius:8px;border:1px solid var(--line)">
+    <label for="cImage">Or paste an image URL</label>
+    <input id="cImage" type="url" placeholder="https://...">
+    <label class="check"><input type="checkbox" id="cFree" checked> Free course</label>
+    <div id="priceRow" hidden>
+      <label for="cPrice">Price (in the currency chosen in Settings)</label>
+      <input id="cPrice" type="number" min="0" step="0.01">
+    </div>
+    <label class="check"><input type="checkbox" id="cPublished"> Published (visible to learners)</label>
+    <div class="foot">
+      <button type="button" class="ghost" id="cancelBtn">Cancel</button>
+      <button type="submit" id="saveBtn">Save course</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="lessonDialog">
+  <h2 id="lessonsTitle">Lessons</h2>
+  <div class="list" id="lessonList" style="margin-top:12px"></div>
+  <form id="lessonForm" class="item" style="margin-top:14px">
+    <h3 id="lessonFormTitle">Add lesson</h3>
+    <label for="lTitle">Title</label>
+    <input id="lTitle" required>
+    <label for="lOrder">Order (1, 2, 3...)</label>
+    <input id="lOrder" type="number" min="1" required>
+    <label for="lVideo">YouTube link (optional)</label>
+    <input id="lVideo" type="url" placeholder="https://www.youtube.com/watch?v=...">
+    <label for="lPdfHaFile">PDF file: Hausa (optional, max 5 MB)</label>
+    <input id="lPdfHaFile" type="file" accept="application/pdf">
+    <div id="lPdfHaStatus" class="meta" style="margin:6px 0 0"></div>
+    <label for="lPdfHa">Or paste a Hausa PDF link (optional)</label>
+    <input id="lPdfHa" type="url" placeholder="https://drive.google.com/file/d/.../view">
+    <label for="lPdfEnFile">PDF file: English (optional, max 5 MB)</label>
+    <input id="lPdfEnFile" type="file" accept="application/pdf">
+    <div id="lPdfEnStatus" class="meta" style="margin:6px 0 0"></div>
+    <label for="lPdfEn">Or paste an English PDF link (optional)</label>
+    <input id="lPdfEn" type="url" placeholder="https://drive.google.com/file/d/.../view">
+    <label for="lContent">Lesson text (optional)</label>
+    <textarea id="lContent"></textarea>
+    <div class="foot">
+      <button type="button" class="ghost" id="lessonReset">Clear</button>
+      <button type="submit" id="lessonSave">Save lesson</button>
+    </div>
+  </form>
+  <div class="foot"><button type="button" class="ghost" id="lessonClose">Close</button></div>
+</dialog>
+
+<dialog id="toolDialog">
+  <form id="toolForm">
+    <h2 id="toolDialogTitle">Add tool</h2>
+    <label for="tName">Name</label>
+    <input id="tName" required>
+    <label for="tDesc">Description</label>
+    <textarea id="tDesc"></textarea>
+    <label for="tUrl">Tool link (optional)</label>
+    <input id="tUrl" type="url" placeholder="https://...">
+    <label for="tStatus">Status</label>
+    <select id="tStatus">
+      <option value="live">Live</option>
+      <option value="beta">Beta</option>
+      <option value="off">Off (hidden from learners)</option>
+    </select>
+    <div class="foot">
+      <button type="button" class="ghost" id="toolCancel">Cancel</button>
+      <button type="submit" id="toolSave">Save tool</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="crudDialog">
+  <form id="crudForm">
+    <h2 id="crudTitle"></h2>
+    <div id="crudFields"></div>
+    <div class="foot">
+      <button type="button" class="ghost" id="crudCancel">Cancel</button>
+      <button type="submit" id="crudSave">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="quizDialog" style="width:min(640px,94vw)">
+  <h2>Quizzes</h2>
+  <div class="meta" id="quizCourse" style="margin-top:4px"></div>
+  <div class="list" id="quizList" style="margin-top:12px"></div>
+  <form id="quizForm" class="item" style="margin-top:14px">
+    <h3 id="quizFormTitle">Add quiz</h3>
+    <label for="zTitle">Quiz title</label>
+    <input id="zTitle" required placeholder="Example: Week 1 quiz">
+    <label for="zPass">Pass mark (%)</label>
+    <input id="zPass" type="number" min="1" max="100" value="50">
+    <label class="check"><input type="checkbox" id="zPub" checked> Published (visible to enrolled students)</label>
+    <div id="zQs"></div>
+    <div class="foot" style="justify-content:flex-start"><button type="button" class="ghost" id="zAddQ">Add question</button></div>
+    <div class="foot">
+      <button type="button" class="ghost" id="zReset">Clear</button>
+      <button type="submit" id="zSave">Save quiz</button>
+    </div>
+  </form>
+  <div class="foot"><button type="button" class="ghost" id="quizClose">Close</button></div>
+</dialog>
+
+<div id="toast" role="status"></div>
+
+<script type="module">
+import { tr } from "./i18n.js";
+import { auth, db } from "./firebase.js";
+import { signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut }
+  from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { collection, doc, getDoc, getDocs, addDoc, setDoc, updateDoc, deleteDoc, query, where, serverTimestamp, getCountFromServer, Timestamp, getDocFromServer}
+  from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+import { attachImgbbUploader } from "./imgbb-upload.js";
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
+  ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const say = (t, ok) => { $("msg").textContent = t || ""; $("msg").style.color = ok ? "var(--green)" : ""; };
+function toast(t, ms){
+  const el = $("toast"); el.textContent = t; el.style.display = "block";
+  clearTimeout(toast.t); toast.t = setTimeout(() => el.style.display = "none", ms || 2800);
+}
+
+/* ---------- Login ---------- */
+$("loginForm").addEventListener("submit", async e => {
+  e.preventDefault(); say("");
+  $("loginBtn").disabled = true; $("loginBtn").textContent = "Signing in...";
+  try {
+    await signInWithEmailAndPassword(auth, $("email").value.trim(), $("password").value);
+  } catch {
+    say("Incorrect email or password.");
+    $("loginBtn").disabled = false; $("loginBtn").textContent = "Sign in";
+  }
+});
+$("logoutBtn").addEventListener("click", () => signOut(auth));
+
+document.querySelectorAll(".pwtoggle").forEach(b => b.addEventListener("click", () => {
+  const i = $(b.dataset.target), show = i.type === "password";
+  i.type = show ? "text" : "password";
+  b.textContent = show ? "Hide" : "Show";
+}));
+
+$("forgotBtn").addEventListener("click", async () => {
+  const email = $("email").value.trim();
+  if (!email) { say("Enter your email above first."); return; }
+  try {
+    await sendPasswordResetEmail(auth, email);
+    say("If an account exists for this email, a reset link has been sent. Check your inbox and spam folder.", true);
+  } catch (err) {
+    say(err.code === "auth/invalid-email" ? "Enter a valid email address." : "Could not send the reset email. Try again.");
+  }
+});
+
+onAuthStateChanged(auth, async user => {
+  if (!user) {
+    $("loginWrap").style.display = "flex";
+    $("dashboard").style.display = "none";
+    $("loginBtn").disabled = false; $("loginBtn").textContent = "Sign in";
+    return;
+  }
+  try {
+    const snap = await getDoc(doc(db, "admins", user.uid));
+    const d = snap.exists() ? snap.data() : null;
+    if (!d || d.active !== true) {
+      await signOut(auth);
+      say("This account is not an admin.");
+      return;
+    }
+    $("loginWrap").style.display = "none";
+    $("dashboard").style.display = "block";
+    $("who").textContent = user.email + " (" + d.role + ")";
+    myUid = user.uid;
+    applyRole(d.role);
+  } catch (err) {
+    console.error(err);
+    await signOut(auth);
+    say("Could not verify admin access: " + err.message);
+  }
+});
+
+/* ---------- Roles & Tabs ---------- */
+const PERMS = {
+  superAdmin:     ["overview", "courses", "campus", "library", "users", "payments", "tools", "settings", "admins"],
+  admin:          ["overview", "courses", "campus", "library", "users", "payments", "tools", "settings"],
+  contentManager: ["overview", "courses", "campus", "library", "tools"],
+  moderator:      ["users"],
+  support:        ["users"]
+};
+let myUid = null;
+let myPerms = [];
+function showTab(name){
+  document.querySelectorAll("nav button").forEach(x => x.classList.toggle("on", x.dataset.tab === name));
+  ["overview", "courses", "campus", "library", "users", "payments", "tools", "settings", "admins"].forEach(t => { $("tab-" + t).hidden = t !== name; });
+}
+document.querySelectorAll("nav button").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
+function applyRole(role){
+  const allowed = PERMS[role] || [];
+  myPerms = allowed;
+  document.querySelectorAll("nav button").forEach(b => { b.hidden = !allowed.includes(b.dataset.tab); });
+  $("addCourseBtn").hidden = !allowed.includes("courses");
+  if (allowed.includes("overview")) loadOverview();
+  if (allowed.includes("courses")) loadCourses();
+  if (allowed.includes("users")) loadUsers();
+  if (allowed.includes("campus")) { loadCrud("announcements"); loadCrud("schedule"); }
+  if (allowed.includes("library")) loadCrud("materials");
+  if (allowed.includes("tools")) loadTools();
+  if (allowed.includes("settings")) { loadSettings(); loadPaySettings(); }
+  if (allowed.includes("payments")) loadPayments();
+  if (allowed.includes("admins")) loadAdmins();
+  showTab(allowed[0] || "users");
+}
+
+/* ---------- Overview (stats) ---------- */
+const countOf = q => getCountFromServer(q).then(s => s.data().count);
+async function loadOverview(){
+  const box = $("statGrid"), top = $("topCourses");
+  box.innerHTML = '<div class="empty" style="grid-column:1/-1">Loading...</div>';
+  top.innerHTML = "";
+  const canUsers = myPerms.includes("users");
+  const week = Timestamp.fromDate(new Date(Date.now() - 7 * 864e5));
+  const [cs, us, nu, en, dn] = await Promise.allSettled([
+    getDocs(collection(db, "courses")),
+    canUsers ? countOf(collection(db, "users")) : Promise.resolve(null),
+    canUsers ? countOf(query(collection(db, "users"), where("createdAt", ">=", week))) : Promise.resolve(null),
+    countOf(collection(db, "enrollments")),
+    countOf(query(collection(db, "enrollments"), where("progress", "==", 100)))
+  ]);
+  const val = r => r.status === "fulfilled" ? r.value : "—";
+  const list = cs.status === "fulfilled" ? cs.value.docs.map(d => ({ id: d.id, ...d.data() })) : [];
+  const published = list.filter(c => c.published).length;
+  const E = val(en), D = val(dn);
+  const rate = (typeof E === "number" && typeof D === "number") ? (E ? Math.round(D / E * 100) + "%" : "0%") : "—";
+  const card = (label, n, sub, cls) =>
+    `<div class="stat ${cls || ""}"><div class="n">${n}</div><div class="l">${label}</div>${sub ? `<div class="s">${sub}</div>` : ""}</div>`;
+  box.innerHTML =
+    (canUsers ? card("Learners", val(us)) + card("New this week", val(nu), "last 7 days") : "") +
+    card("Courses", cs.status === "fulfilled" ? list.length : "—", cs.status === "fulfilled" ? "Published: " + published + "/" + list.length : "") +
+    card("Enrollments", E) +
+    card("Completed", D, "finished 100%", "good") +
+    card("Completion rate", rate);
+
+  // enrollments per course (max 50 courses)
+  const part = await Promise.allSettled(list.slice(0, 50).map(c =>
+    countOf(query(collection(db, "enrollments"), where("courseId", "==", c.id)))));
+  const rows = list.slice(0, 50).map((c, i) => ({ c, n: part[i].status === "fulfilled" ? part[i].value : 0 }))
+    .filter(x => x.n > 0).sort((a, b) => b.n - a.n).slice(0, 5);
+  const max = rows.length ? rows[0].n : 1;
+  top.innerHTML = rows.length ? rows.map(({ c, n }) =>
+    `<div class="r"><b>${esc(c.title)}</b><span>${n}</span><i style="width:${Math.max(4, Math.round(n / max * 100))}%"></i></div>`).join("")
+    : '<div class="empty">No enrollments yet.</div>';
+}
+$("refreshStats").addEventListener("click", loadOverview);
+
+/* ---------- Courses ---------- */
+let courses = [];
+let editingId = null;
+
+const uploader = attachImgbbUploader({
+  fileInputId: "cImageFile",
+  urlInputId: "cImage",
+  statusId: "cImageStatus",
+  previewId: "cImagePreview",
+  onStart: () => { $("saveBtn").disabled = true; },
+  onDone:  () => { $("saveBtn").disabled = false; }
+});
+
+async function loadCourses(){
+  try {
+    const snap = await getDocs(collection(db, "courses"));
+    courses = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    courses.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+    renderCourses();
+  } catch (err) {
+    $("courseList").innerHTML = '<div class="empty">Could not load courses: ' + esc(err.message) + '</div>';
+  }
+}
+
+function renderCourses(){
+  const box = $("courseList");
+  if (!courses.length) {
+    box.innerHTML = '<div class="empty">No courses yet. Click "Add course" to create your first one.</div>';
+    return;
+  }
+  box.innerHTML = courses.map(c => `
+    <div class="item">
+      ${c.imageUrl ? `<img src="${esc(c.imageUrl)}" alt="" style="width:100%;max-height:150px;object-fit:cover;border-radius:8px;margin-bottom:10px">` : ""}
+      <h3>${esc(c.title)}</h3>
+      <div class="meta">${esc(c.instructor)} · ${esc(c.category)} · ${esc(c.level)} · ${c.free ? "Free" : CUR + esc(c.price)}</div>
+      <span class="tag ${c.published ? "live" : "draft"}">${c.published ? "Published" : "Draft"}</span>
+      <div class="actions" style="margin-top:12px">
+        <button class="ghost" data-act="lessons" data-id="${esc(c.id)}">Lessons</button>
+        <button class="ghost" data-act="quiz" data-id="${esc(c.id)}">Quiz</button>
+        <button class="ghost" data-act="edit" data-id="${esc(c.id)}">Edit</button>
+        <button class="ghost" data-act="toggle" data-id="${esc(c.id)}">${c.published ? "Unpublish" : "Publish"}</button>
+        <button class="danger" data-act="delete" data-id="${esc(c.id)}">Delete</button>
+      </div>
+    </div>`).join("");
+}
+
+$("courseList").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  const c = courses.find(x => x.id === b.dataset.id); if (!c) return;
+  try {
+    if (b.dataset.act === "edit") openForm(c);
+    if (b.dataset.act === "lessons") openLessons(c);
+    if (b.dataset.act === "quiz") openQuizzes(c);
+    if (b.dataset.act === "toggle") {
+      await updateDoc(doc(db, "courses", c.id), { published: !c.published, updatedAt: serverTimestamp() });
+      toast(c.published ? "Course unpublished" : "Course published");
+      loadCourses();
+    }
+    if (b.dataset.act === "delete" && confirm(tr("Delete") + ' "' + c.title + '"? ' + tr("This cannot be undone."))) {
+      // Firestore does not cascade: remove lessons (and their PDF chunks) first, or they stay orphaned.
+      const ls = await getDocs(collection(db, "courses", c.id, "lessons"));
+      for (const l of ls.docs) {
+        await delPdfChunks(c.id, l.id);
+        await deleteDoc(l.ref);
+      }
+      await deleteDoc(doc(db, "courses", c.id));
+      toast("Course deleted");
+      loadCourses();
+    }
+  } catch (err) { toast("Error: " + err.message); }
+});
+
+function openForm(c){
+  editingId = c ? c.id : null;
+  $("dialogTitle").textContent = c ? "Edit course" : "Add course";
+  $("cTitle").value = c?.title || "";
+  $("cInstructor").value = c?.instructor || "";
+  $("cDesc").value = c?.description || "";
+  $("cCategory").value = c?.category || "AI & ML";
+  $("cLevel").value = c?.level || "Beginner";
+  $("cImage").value = c?.imageUrl || "";
+  $("cImageStatus").textContent = "";
+  uploader.showPreview(c?.imageUrl || "");
+  $("cFree").checked = c ? !!c.free : true;
+  $("cPrice").value = c?.price ?? "";
+  $("cPublished").checked = !!c?.published;
+  $("priceRow").hidden = $("cFree").checked;
+  $("courseDialog").showModal();
+}
+$("addCourseBtn").addEventListener("click", () => openForm(null));
+$("cancelBtn").addEventListener("click", () => $("courseDialog").close());
+$("cFree").addEventListener("change", () => { $("priceRow").hidden = $("cFree").checked; });
+
+$("courseForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const free = $("cFree").checked;
+  const data = {
+    title: $("cTitle").value.trim(),
+    instructor: $("cInstructor").value.trim(),
+    description: $("cDesc").value.trim(),
+    category: $("cCategory").value,
+    level: $("cLevel").value,
+    imageUrl: $("cImage").value.trim(),
+    free,
+    price: free ? 0 : Number($("cPrice").value || 0),
+    published: $("cPublished").checked,
+    updatedAt: serverTimestamp()
+  };
+  const btn = $("saveBtn"); btn.disabled = true; btn.textContent = "Saving...";
+  const slow = setTimeout(() => toast("Still saving - the network is slow. Keep this page open.", 6000), 8000);
+  try {
+    let id = editingId;
+    if (id) await updateDoc(doc(db, "courses", id), data);
+    else id = (await addDoc(collection(db, "courses"), { ...data, createdAt: serverTimestamp() })).id;
+    const check = await getDocFromServer(doc(db, "courses", id));      // make sure it is really on the server
+    if (!check.exists() || check.data().title !== data.title) throw new Error("Could not confirm the save. Please try again.");
+    $("courseDialog").close();
+    toast("✓ Course saved", 4000);
+    await loadCourses();
+  } catch (err) { toast("NOT saved: " + err.message, 7000); }
+  clearTimeout(slow); btn.disabled = false; btn.textContent = "Save course";
+});
+
+/* ---------- Users ---------- */
+let users = [];
+async function loadUsers(){
+  try {
+    const snap = await getDocs(collection(db, "users"));
+    users = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderUsers();
+  } catch (err) {
+    $("userList").innerHTML = '<div class="empty">Could not load users: ' + esc(err.message) + '</div>';
+  }
+}
+function renderUsers(){
+  const q = $("userSearch").value.trim().toLowerCase();
+  const rows = users.filter(u => !q ||
+    (u.name || "").toLowerCase().includes(q) || (u.email || "").toLowerCase().includes(q) ||
+    [u.university, u.faculty, u.department, u.level].some(v => (v || "").toLowerCase().includes(q)));
+  $("userList").innerHTML = rows.length ? rows.map(u => `
+    <div class="item">
+      <h3>${esc(u.name || "No name")}</h3>
+      <div class="meta">${esc(u.email || "")}</div>
+      ${[u.university, u.faculty, u.department, u.level].some(Boolean) ? `<div class="meta">${[u.university, u.faculty, u.department, u.level].filter(Boolean).map(esc).join(" · ")}</div>` : ""}
+      <span class="tag">${esc(u.role || "student")}</span>
+    </div>`).join("")
+    : '<div class="empty">' + (users.length ? "No users match your search." : "No users yet. They will appear here after they sign up.") + '</div>';
+}
+$("userSearch").addEventListener("input", renderUsers);
+/* ---------- Lessons ---------- */
+let lessonCourse = null, lessons = [], editingLesson = null;
+// Two PDFs per lesson. Chunks live in lessons/{id}/pdf_ha and pdf_en; the old single PDF used "pdf".
+const PDF_LANGS = [["Ha", "ha"], ["En", "en"]];
+async function delPdfChunks(cid, lid){
+  for (const col of ["pdf", "pdf_ha", "pdf_en"]) {
+    const s = await getDocs(collection(db, "courses", cid, "lessons", lid, col));
+    for (const k of s.docs) await deleteDoc(k.ref);
+  }
+}
+function resetLessonForm(){
+  editingLesson = null;
+  $("lessonFormTitle").textContent = "Add lesson";
+  $("lTitle").value = ""; $("lVideo").value = ""; $("lContent").value = "";
+  for (const [L] of PDF_LANGS) { $("lPdf" + L).value = ""; $("lPdf" + L + "File").value = ""; $("lPdf" + L + "Status").textContent = ""; }
+  $("lOrder").value = lessons.length ? Math.max(...lessons.map(l => l.order || 0)) + 1 : 1;
+}
+async function openLessons(c){
+  lessonCourse = c; lessons = [];
+  $("lessonsTitle").textContent = "Lessons: " + c.title;
+  $("lessonList").innerHTML = "";
+  $("lessonDialog").showModal();
+  await loadLessons();
+}
+async function loadLessons(){
+  try {
+    const snap = await getDocs(collection(db, "courses", lessonCourse.id, "lessons"));
+    lessons = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.order || 0) - (b.order || 0));
+    // Keep the real lesson count on the course (the certificate rules check against it)
+    if (lessonCourse.lessonCount !== lessons.length) {
+      try { await updateDoc(doc(db, "courses", lessonCourse.id), { lessonCount: lessons.length }); lessonCourse.lessonCount = lessons.length; }
+      catch (e) { console.error("lessonCount sync failed", e); }
+    }
+    $("lessonList").innerHTML = lessons.map(l =>
+      '<div class="item"><h3>' + esc(l.order) + '. ' + esc(l.title) + '</h3>' +
+      '<div class="meta">' + [l.videoUrl && "Video", (l.pdfUrl || l.pdfChunks || l.pdfHaUrl || l.pdfHaChunks) && "PDF Hausa", (l.pdfEnUrl || l.pdfEnChunks) && "PDF English", l.content && "Text"].filter(Boolean).join(" + ") + '</div>' +
+      '<div class="actions"><button class="ghost" data-act="edit" data-id="' + esc(l.id) + '">Edit</button>' +
+      '<button class="danger" data-act="delete" data-id="' + esc(l.id) + '">Delete</button></div></div>'
+    ).join("") || '<div class="empty">No lessons yet. Add the first one below.</div>';
+  } catch (err) {
+    $("lessonList").innerHTML = '<div class="empty">Could not load lessons: ' + esc(err.message) + '</div>';
+  }
+  resetLessonForm();
+}
+$("lessonList").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  const l = lessons.find(x => x.id === b.dataset.id); if (!l) return;
+  try {
+    if (b.dataset.act === "edit") {
+      editingLesson = l.id;
+      $("lessonFormTitle").textContent = "Edit lesson";
+      $("lTitle").value = l.title || ""; $("lOrder").value = l.order || 1;
+      $("lVideo").value = l.videoUrl || ""; $("lContent").value = l.content || "";
+      $("lPdfHa").value = l.pdfHaUrl || "";
+      $("lPdfEn").value = l.pdfEnUrl || l.pdfUrl || "";   // an old single PDF link is shown under English
+      for (const [L] of PDF_LANGS) {
+        const nm = l["pdf" + L + "Name"] || (L === "En" && l.pdfChunks ? l.pdfName : "");
+        $("lPdf" + L + "File").value = "";
+        $("lPdf" + L + "Status").textContent = nm ? "Current file: " + nm + " (choose a file to replace it)" : "";
+      }
+      $("lessonForm").scrollIntoView({ behavior: "smooth" });
+    }
+    if (b.dataset.act === "delete" && confirm(tr("Delete lesson") + ' "' + l.title + '"?')) {
+      await delPdfChunks(lessonCourse.id, l.id);
+      await deleteDoc(doc(db, "courses", lessonCourse.id, "lessons", l.id));
+      toast("Lesson deleted"); loadLessons();
+    }
+  } catch (err) { toast("Error: " + err.message); }
+});
+$("lessonForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const video = $("lVideo").value.trim(), content = $("lContent").value.trim();
+  const old = lessons.find(x => x.id === editingLesson) || {};
+  const link = {}, file = {};
+  for (const [L] of PDF_LANGS) {
+    link[L] = $("lPdf" + L).value.trim();
+    file[L] = $("lPdf" + L + "File").files[0] || null;
+    if (file[L] && (file[L].type !== "application/pdf" || file[L].size > 5 * 1024 * 1024)) { toast("Choose a PDF file that is 5 MB or smaller."); return; }
+    if (link[L] && !link[L].startsWith("https://")) { toast("The PDF link must start with https://"); return; }
+  }
+  const hasPdf = PDF_LANGS.some(([L]) => link[L] || file[L] || old["pdf" + L + "Chunks"]) || old.pdfChunks;
+  if (!video && !content && !hasPdf) { toast("Add a YouTube link, a PDF, or some lesson text."); return; }
+  const data = { title: $("lTitle").value.trim(), order: Number($("lOrder").value), videoUrl: video,
+    pdfHaUrl: link.Ha, pdfEnUrl: link.En, pdfUrl: "", content, updatedAt: serverTimestamp() };
+  $("lessonSave").disabled = true;
+  try {
+    const col = collection(db, "courses", lessonCourse.id, "lessons");
+    let lid = editingLesson;
+    if (lid) await updateDoc(doc(col, lid), data);
+    else lid = (await addDoc(col, { ...data, createdAt: serverTimestamp() })).id;
+    for (const [L, code] of PDF_LANGS) {
+      const pf = file[L]; if (!pf) continue;
+      $("lPdf" + L + "Status").textContent = "Uploading PDF...";
+      const SZ = 600 * 1024, chunks = [];
+      for (let o = 0; o < pf.size; o += SZ)
+        chunks.push(await new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(",")[1]); r.onerror = () => no(new Error("Could not read the PDF")); r.readAsDataURL(pf.slice(o, o + SZ)); }));
+      const pcol = collection(db, "courses", lessonCourse.id, "lessons", lid, "pdf_" + code);
+      for (let i = 0; i < chunks.length; i++) await setDoc(doc(pcol, String(i)), { i, data: chunks[i] });
+      for (let i = chunks.length; i < (old["pdf" + L + "Chunks"] || 0); i++) await deleteDoc(doc(pcol, String(i)));
+      const patch = {}; patch["pdf" + L + "Chunks"] = chunks.length; patch["pdf" + L + "Name"] = pf.name; patch["pdf" + L + "Size"] = pf.size;
+      if (L === "En" && old.pdfChunks) {      // the new English file replaces the old single PDF
+        const oc = collection(db, "courses", lessonCourse.id, "lessons", lid, "pdf");
+        for (let i = 0; i < old.pdfChunks; i++) await deleteDoc(doc(oc, String(i)));
+        patch.pdfChunks = 0;
+      }
+      await updateDoc(doc(col, lid), patch);
+    }
+    toast("Lesson saved"); loadLessons();
+  } catch (err) { toast("Error: " + err.message); }
+  $("lessonSave").disabled = false;
+});
+$("lessonReset").addEventListener("click", resetLessonForm);
+$("lessonClose").addEventListener("click", () => $("lessonDialog").close());
+
+/* ---------- Tools ---------- */
+let tools = [];
+let editingTool = null;
+const STATUS = { live: ["Live", "tag live"], beta: ["Beta", "tag draft"], off: ["Off", "tag"] };
+async function loadTools(){
+  try {
+    const snap = await getDocs(collection(db, "tools"));
+    tools = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    tools.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    renderTools();
+  } catch (err) {
+    $("toolList").innerHTML = '<div class="empty">Could not load tools: ' + esc(err.message) + '</div>';
+  }
+}
+function renderTools(){
+  $("toolList").innerHTML = tools.map(t => {
+    const st = STATUS[t.status] || STATUS.off;
+    return '<div class="item"><h3>' + esc(t.name) + '</h3>' +
+      '<div class="meta">' + esc(t.description || "") + '</div>' +
+      '<span class="' + st[1] + '">' + st[0] + '</span>' +
+      '<div class="actions" style="margin-top:12px">' +
+      '<button class="ghost" data-act="edit" data-id="' + esc(t.id) + '">Edit</button>' +
+      '<button class="danger" data-act="delete" data-id="' + esc(t.id) + '">Delete</button></div></div>';
+  }).join("") || '<div class="empty">No tools yet. Click "Add tool" to create the first one.</div>';
+}
+function openTool(t){
+  editingTool = t ? t.id : null;
+  $("toolDialogTitle").textContent = t ? "Edit tool" : "Add tool";
+  $("tName").value = t?.name || "";
+  $("tDesc").value = t?.description || "";
+  $("tUrl").value = t?.url || "";
+  $("tStatus").value = t?.status || "live";
+  $("toolDialog").showModal();
+}
+$("addToolBtn").addEventListener("click", () => openTool(null));
+$("toolCancel").addEventListener("click", () => $("toolDialog").close());
+$("toolList").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  const t = tools.find(x => x.id === b.dataset.id); if (!t) return;
+  try {
+    if (b.dataset.act === "edit") openTool(t);
+    if (b.dataset.act === "delete" && confirm(tr("Delete") + ' "' + t.name + '"?')) {
+      await deleteDoc(doc(db, "tools", t.id));
+      toast("Tool deleted"); loadTools();
+    }
+  } catch (err) { toast("Error: " + err.message); }
+});
+$("toolForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const data = {
+    name: $("tName").value.trim(), description: $("tDesc").value.trim(),
+    url: $("tUrl").value.trim(), status: $("tStatus").value, updatedAt: serverTimestamp()
+  };
+  $("toolSave").disabled = true;
+  try {
+    if (editingTool) await updateDoc(doc(db, "tools", editingTool), data);
+    else await addDoc(collection(db, "tools"), { ...data, createdAt: serverTimestamp() });
+    $("toolDialog").close(); toast("Tool saved"); loadTools();
+  } catch (err) { toast("Error: " + err.message); }
+  $("toolSave").disabled = false;
+});
+
+
+/* ---------- Campus: announcements, timetable, library (one generic editor) ---------- */
+const FACULTIES = ["Computing & IT", "Engineering", "Sciences", "Social Sciences", "Arts & Humanities", "Education", "Management Sciences", "Health Sciences", "Law", "Agriculture", "Other"];
+const LEVELS = ["100 Level", "200 Level", "300 Level", "400 Level", "500 Level", "600 Level", "Postgraduate"];
+const MAT_TYPES = ["Past Question", "Lecture Notes", "Handout", "Textbook", "Other"];
+const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const FAC = { k: "faculty", l: "Faculty (empty = everyone)", t: "select", o: FACULTIES, blank: "Everyone" };
+const LVL = { k: "level", l: "Level (empty = everyone)", t: "select", o: LEVELS, blank: "Everyone" };
+const PUB = { k: "published", l: "Published (visible to students)", t: "check", d: true };
+const CRUD = {
+  announcements: { add: "Add announcement", edit: "Edit announcement", empty: "No announcements yet.",
+    fields: [{ k: "title", l: "Title", t: "text", req: 1 }, { k: "body", l: "Message", t: "textarea", req: 1 }, FAC, LVL,
+      { k: "pinned", l: "Pin to top", t: "check" }, PUB],
+    sort: (a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0),
+    title: x => x.title, meta: x => [x.faculty || "All faculties", x.level || "All levels"].join(" · ") },
+  schedule: { add: "Add lecture", edit: "Edit lecture", empty: "No lectures yet.",
+    fields: [{ k: "course", l: "Course (example: CSC 201 Data Structures)", t: "text", req: 1 }, { k: "day", l: "Day", t: "select", o: DAYS, req: 1 },
+      { k: "start", l: "Starts", t: "time", req: 1 }, { k: "end", l: "Ends", t: "time" }, { k: "venue", l: "Venue", t: "text" },
+      { k: "lecturer", l: "Lecturer", t: "text" }, FAC, LVL, { k: "note", l: "Note (optional)", t: "text" }, PUB],
+    sort: (a, b) => (DAYS.indexOf(a.day) - DAYS.indexOf(b.day)) || (a.start || "").localeCompare(b.start || ""),
+    title: x => x.course, meta: x => [x.day, (x.start || "") + (x.end ? " - " + x.end : ""), x.venue, x.faculty, x.level].filter(Boolean).join(" · ") },
+  materials: { add: "Add material", edit: "Edit material", empty: "No materials yet.",
+    fields: [{ k: "title", l: "Title", t: "text", req: 1 }, { k: "type", l: "Type", t: "select", o: MAT_TYPES, req: 1 },
+      { k: "courseCode", l: "Course code (example: CSC 201)", t: "text" }, { k: "department", l: "Department", t: "text" }, FAC, LVL,
+      { k: "session", l: "Session / year (example: 2024/2025)", t: "text" },
+      { k: "url", l: "File link (Google Drive, etc. - must start with https://)", t: "url", req: 1 }, PUB],
+    sort: (a, b) => (a.title || "").localeCompare(b.title || ""),
+    title: x => x.title, meta: x => [x.type, x.courseCode, x.department, x.level, x.session].filter(Boolean).join(" · ") }
+};
+const crudData = {};
+let crudKey = null, crudEditing = null;
+async function loadCrud(key){
+  const box = $("list-" + key), cfg = CRUD[key];
+  try {
+    const snap = await getDocs(collection(db, key));
+    crudData[key] = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort(cfg.sort);
+    box.innerHTML = crudData[key].map(x => `<div class="item"><h3>${esc(cfg.title(x))}</h3>
+      <div class="meta">${esc(cfg.meta(x))}</div>
+      <span class="tag ${x.published ? "live" : "draft"}">${x.published ? "Published" : "Draft"}</span>
+      <div class="actions" style="margin-top:12px">
+        <button class="ghost" data-act="edit" data-id="${esc(x.id)}">Edit</button>
+        <button class="ghost" data-act="toggle" data-id="${esc(x.id)}">${x.published ? "Unpublish" : "Publish"}</button>
+        <button class="danger" data-act="delete" data-id="${esc(x.id)}">Delete</button></div></div>`).join("")
+      || '<div class="empty">' + cfg.empty + '</div>';
+  } catch (err) { box.innerHTML = '<div class="empty">Could not load: ' + esc(err.message) + '</div>'; }
+}
+function openCrud(key, item){
+  crudKey = key; crudEditing = item ? item.id : null;
+  const cfg = CRUD[key];
+  $("crudTitle").textContent = item ? cfg.edit : cfg.add;
+  $("crudFields").innerHTML = cfg.fields.map(f => {
+    const id = "f_" + f.k, v = item ? item[f.k] : undefined;
+    if (f.t === "check") return `<label class="check"><input type="checkbox" id="${id}" ${(item ? v : f.d) ? "checked" : ""}> ${f.l}</label>`;
+    if (f.t === "select") return `<label for="${id}">${f.l}</label><select id="${id}" ${f.req ? "required" : ""}>${f.req ? "" : `<option value="">${f.blank || "-"}</option>`}${f.o.map(o => `<option value="${esc(o)}" ${v === o ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
+    if (f.t === "textarea") return `<label for="${id}">${f.l}</label><textarea id="${id}" ${f.req ? "required" : ""}>${esc(v || "")}</textarea>`;
+    return `<label for="${id}">${f.l}</label><input id="${id}" type="${f.t}" value="${esc(v || "")}" ${f.req ? "required" : ""}>`;
+  }).join("");
+  $("crudDialog").showModal();
+}
+for (const key of Object.keys(CRUD)) {
+  $("add-" + key).addEventListener("click", () => openCrud(key, null));
+  $("list-" + key).addEventListener("click", async e => {
+    const b = e.target.closest("button[data-act]"); if (!b) return;
+    const x = (crudData[key] || []).find(i => i.id === b.dataset.id); if (!x) return;
+    try {
+      if (b.dataset.act === "edit") openCrud(key, x);
+      if (b.dataset.act === "toggle") { await updateDoc(doc(db, key, x.id), { published: !x.published, updatedAt: serverTimestamp() }); loadCrud(key); }
+      if (b.dataset.act === "delete" && confirm(tr("Delete") + ' "' + CRUD[key].title(x) + '"? ' + tr("This cannot be undone."))) {
+        await deleteDoc(doc(db, key, x.id)); toast("Deleted"); loadCrud(key);
+      }
+    } catch (err) { toast("Error: " + err.message); }
+  });
+}
+$("crudCancel").addEventListener("click", () => $("crudDialog").close());
+$("crudForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const cfg = CRUD[crudKey], data = {};
+  for (const f of cfg.fields) { const el = $("f_" + f.k); data[f.k] = f.t === "check" ? el.checked : el.value.trim(); }
+  if (data.url && !data.url.startsWith("https://")) { toast("The link must start with https://"); return; }
+  $("crudSave").disabled = true;
+  try {
+    if (crudEditing) await updateDoc(doc(db, crudKey, crudEditing), { ...data, updatedAt: serverTimestamp() });
+    else await addDoc(collection(db, crudKey), { ...data, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    $("crudDialog").close(); toast("Saved"); loadCrud(crudKey);
+  } catch (err) { toast("Error: " + err.message); }
+  $("crudSave").disabled = false;
+});
+
+/* ---------- Quizzes per course ---------- */
+let quizCourse = null, quizzes = [], editingQuiz = null;
+const qBlock = (q = {}) => {
+  const L = ["A", "B", "C", "D"], opts = q.options || [];
+  return `<div class="item qrow" style="margin-top:12px"><label>Question</label><textarea class="qt" style="min-height:60px">${esc(q.q || "")}</textarea>` +
+    L.map((l, i) => `<label>Option ${l}${i > 1 ? " (optional)" : ""}</label><input class="qo" value="${esc(opts[i] || "")}">`).join("") +
+    `<label>Correct answer</label><select class="qa">${L.map((l, i) => `<option value="${i}" ${(q.answer || 0) === i ? "selected" : ""}>${l}</option>`).join("")}</select>` +
+    `<label>Explanation shown after the quiz (optional)</label><input class="qe" value="${esc(q.explain || "")}">` +
+    `<div class="actions" style="margin-top:12px"><button type="button" class="danger qdel">Remove question</button></div></div>`;
+};
+function resetQuizForm(q){
+  editingQuiz = q ? q.id : null;
+  $("quizFormTitle").textContent = q ? "Edit quiz" : "Add quiz";
+  $("zTitle").value = q?.title || ""; $("zPass").value = q?.passMark || 50; $("zPub").checked = q ? !!q.published : true;
+  $("zQs").innerHTML = (q?.questions?.length ? q.questions : [{}]).map(qBlock).join("");
+}
+async function loadQuizList(){
+  const box = $("quizList");
+  try {
+    const snap = await getDocs(query(collection(db, "quizzes"), where("courseId", "==", quizCourse.id)));
+    quizzes = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.createdAt?.seconds || 0) - (b.createdAt?.seconds || 0));
+    const stats = await Promise.all(quizzes.map(async q => {
+      try {
+        const r = await getDocs(query(collection(db, "quizResults"), where("quizId", "==", q.id)));
+        const rows = r.docs.map(d => d.data()); return { n: rows.length, p: rows.filter(x => x.passed).length };
+      } catch { return null; }
+    }));
+    box.innerHTML = quizzes.map((q, i) => `<div class="item"><h3>${esc(q.title)}</h3>
+      <div class="meta">Questions: ${(q.questions || []).length} · Pass mark: ${esc(q.passMark || 50)}%${stats[i] ? " · Students: " + stats[i].n + " · Passed: " + stats[i].p : ""}</div>
+      <span class="tag ${q.published ? "live" : "draft"}">${q.published ? "Published" : "Draft"}</span>
+      <div class="actions" style="margin-top:12px">
+        <button class="ghost" data-act="edit" data-id="${esc(q.id)}">Edit</button>
+        <button class="ghost" data-act="toggle" data-id="${esc(q.id)}">${q.published ? "Unpublish" : "Publish"}</button>
+        <button class="danger" data-act="delete" data-id="${esc(q.id)}">Delete</button></div></div>`).join("")
+      || '<div class="empty">No quizzes for this course yet.</div>';
+  } catch (err) { box.innerHTML = '<div class="empty">Could not load quizzes: ' + esc(err.message) + '</div>'; }
+}
+function openQuizzes(c){
+  quizCourse = c; $("quizCourse").textContent = c.title;
+  resetQuizForm(null); loadQuizList(); $("quizDialog").showModal();
+}
+$("quizClose").addEventListener("click", () => $("quizDialog").close());
+$("zReset").addEventListener("click", () => resetQuizForm(null));
+$("zAddQ").addEventListener("click", () => $("zQs").insertAdjacentHTML("beforeend", qBlock()));
+$("zQs").addEventListener("click", e => { const b = e.target.closest(".qdel"); if (b) b.closest(".qrow").remove(); });
+$("quizList").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  const q = quizzes.find(x => x.id === b.dataset.id); if (!q) return;
+  try {
+    if (b.dataset.act === "edit") { resetQuizForm(q); $("quizForm").scrollIntoView(); }
+    if (b.dataset.act === "toggle") { await updateDoc(doc(db, "quizzes", q.id), { published: !q.published, updatedAt: serverTimestamp() }); loadQuizList(); }
+    if (b.dataset.act === "delete" && confirm(tr("Delete") + ' "' + q.title + '"? ' + tr("This cannot be undone."))) {
+      await deleteDoc(doc(db, "quizzes", q.id)); toast("Deleted"); if (editingQuiz === q.id) resetQuizForm(null); loadQuizList();
+    }
+  } catch (err) { toast("Error: " + err.message); }
+});
+$("quizForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const questions = [];
+  for (const [n, row] of [...document.querySelectorAll("#zQs .qrow")].entries()) {
+    const text = row.querySelector(".qt").value.trim(), raw = [...row.querySelectorAll(".qo")].map(i => i.value.trim());
+    const ans = Number(row.querySelector(".qa").value);
+    if (!text) { toast("Question " + (n + 1) + " has no text."); return; }
+    if (!raw[0] || !raw[1]) { toast("Question " + (n + 1) + " needs at least options A and B."); return; }
+    if (!raw[ans]) { toast("Question " + (n + 1) + ": the correct answer is an empty option."); return; }
+    const options = raw.filter(Boolean);
+    questions.push({ q: text, options, answer: raw.slice(0, ans).filter(Boolean).length, explain: row.querySelector(".qe").value.trim() });
+  }
+  if (!questions.length) { toast("Add at least one question."); return; }
+  const data = { courseId: quizCourse.id, courseTitle: quizCourse.title, title: $("zTitle").value.trim(),
+    passMark: Math.min(100, Math.max(1, Number($("zPass").value) || 50)), published: $("zPub").checked, questions, updatedAt: serverTimestamp() };
+  $("zSave").disabled = true;
+  try {
+    if (editingQuiz) await updateDoc(doc(db, "quizzes", editingQuiz), data);
+    else await addDoc(collection(db, "quizzes"), { ...data, createdAt: serverTimestamp() });
+    toast("Quiz saved"); resetQuizForm(null); loadQuizList();
+  } catch (err) { toast("Error: " + err.message); }
+  $("zSave").disabled = false;
+});
+
+/* ---------- Community settings ---------- */
+async function loadSettings(){
+  try {
+    const snap = await getDoc(doc(db, "settings", "community"));
+    if (snap.exists()) {
+      $("sWhatsapp").value = snap.data().whatsappUrl || "";
+      $("sMembers").value = snap.data().membersText || "";
+    }
+  } catch (err) { toast("Could not load settings: " + err.message); }
+}
+$("settingsForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const url = $("sWhatsapp").value.trim();
+  if (url && !url.startsWith("https://")) { toast("The link must start with https://"); return; }
+  $("saveSettingsBtn").disabled = true;
+  try {
+    await setDoc(doc(db, "settings", "community"),
+      { whatsappUrl: url, membersText: $("sMembers").value.trim(), updatedAt: serverTimestamp() }, { merge: true });
+    toast("Settings saved");
+  } catch (err) { toast("Error: " + err.message); }
+  $("saveSettingsBtn").disabled = false;
+});
+
+/* ---------- Payments (manual, with proof) ---------- */
+let pays = [];
+async function loadPayments(){
+  try {
+    const snap = await getDocs(collection(db, "payments"));
+    pays = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((x, y) => (y.createdAt?.seconds || 0) - (x.createdAt?.seconds || 0));
+    renderPayments();
+    const n = pays.filter(p => p.status === "pending").length;
+    $("payBadge").textContent = n; $("payBadge").hidden = !n;
+  } catch (err) { $("payList").innerHTML = '<div class="empty">Could not load payments: ' + esc(err.message) + '</div>'; }
+}
+function renderPayments(){
+  const f = $("payFilter").value, rows = pays.filter(p => f === "all" || p.status === f);
+  $("payList").innerHTML = rows.length ? rows.map(p => `
+    <div class="item">
+      <h3>${esc(p.courseTitle)}</h3>
+      <div class="meta">Amount paid: <b>${esc(p.currency || CUR)}${esc(p.amountPaid ?? p.amount)}</b> (price: ${esc(p.currency || CUR)}${esc(p.amount)})</div>
+      <div class="meta">${esc(p.userName || "No name")} · ${esc(p.email)}</div>
+      <div class="meta">Reference: ${esc(p.reference || "Not provided")}</div>
+      <div class="meta">Payment date: ${esc(p.paymentDate || "Not provided")}</div>
+      <div class="meta">${p.createdAt?.toDate ? esc(p.createdAt.toDate().toLocaleString()) : ""}</div>
+      ${(() => { const src = String(p.proofUrl || "").startsWith("https://") ? p.proofUrl : (String(p.proofData || "").startsWith("data:image/") ? p.proofData : ""); return src ? `<img class="proof" src="${esc(src)}" alt="Payment proof (tap to enlarge)" style="width:90px;height:90px;object-fit:cover;border-radius:8px;margin-top:10px;border:1px solid var(--line);cursor:zoom-in">` : ""; })()}
+      <div class="foot" style="justify-content:flex-start">
+        ${p.status === "pending"
+          ? `<button data-pay="${esc(p.id)}" data-act="approve">Approve</button><button class="ghost" data-pay="${esc(p.id)}" data-act="reject">Reject</button>`
+          : `<span class="tag ${p.status === "approved" ? "live" : "draft"}">${esc(p.status)}</span>${p.note ? '<span class="meta">' + esc(p.note) + '</span>' : ""}`}
+      </div>
+    </div>`).join("")
+    : '<div class="empty">No payments here.</div>';
+}
+$("payFilter").addEventListener("change", renderPayments);
+$("payList").addEventListener("click", e => {
+  const im = e.target.closest("img.proof"); if (!im) return;
+  const big = im.style.width === "100%";
+  im.style.width = big ? "90px" : "100%"; im.style.height = big ? "90px" : "auto"; im.style.objectFit = big ? "cover" : "contain"; im.style.cursor = big ? "zoom-in" : "zoom-out";
+});
+$("payRefresh").addEventListener("click", loadPayments);
+$("payList").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-pay]"); if (!b) return;
+  const p = pays.find(x => x.id === b.dataset.pay); if (!p) return;
+  let note = "";
+  if (b.dataset.act === "approve") {
+    if (!confirm("Approve and unlock \"" + p.courseTitle + "\" for " + (p.email || "this user") + "?")) return;
+  } else {
+    note = prompt("Reason for rejecting (shown to the user):", "") ;
+    if (note === null) return;
+  }
+  b.disabled = true;
+  try {
+    if (b.dataset.act === "approve") {
+      const eref = doc(db, "enrollments", p.uid + "_" + p.courseId);
+      if (!(await getDoc(eref)).exists())
+        await setDoc(eref, { uid: p.uid, courseId: p.courseId, courseTitle: p.courseTitle, completedLessons: [], progress: 0, paymentId: p.id, createdAt: serverTimestamp() });
+    }
+    await updateDoc(doc(db, "payments", p.id), { status: b.dataset.act === "approve" ? "approved" : "rejected", note: note.trim(), reviewedBy: myUid, reviewedAt: serverTimestamp() });
+    toast(b.dataset.act === "approve" ? "Approved - course unlocked" : "Rejected");
+    loadPayments();
+  } catch (err) { toast("Error: " + err.message); b.disabled = false; }
+});
+let CUR = "₦";
+function setCur(v){ CUR = v || "₦"; if (typeof renderCourses === "function") try { renderCourses(); } catch (e) {} }
+async function loadPaySettings(){
+  try {
+    const s = await getDoc(doc(db, "settings", "payment"));
+    if (!s.exists()) return;
+    const d = s.data(), cu = d.currency || "₦", sel = $("pCurrency");
+    if (![...sel.options].some(o => o.value === cu)) sel.add(new Option(cu, cu));
+    sel.value = cu; $("pBank").value = d.bankName || ""; $("pAccName").value = d.accountName || "";
+    $("pAccNo").value = d.accountNumber || ""; $("pInstr").value = d.instructions || "";
+    setCur(cu);
+  } catch (err) { toast("Could not load payment details: " + err.message); }
+}
+$("payForm").addEventListener("submit", async e => {
+  e.preventDefault(); $("savePayBtn").disabled = true;
+  try {
+    const cu = $("pCurrency").value;
+    await setDoc(doc(db, "settings", "payment"), { currency: cu, bankName: $("pBank").value.trim(), accountName: $("pAccName").value.trim(),
+      accountNumber: $("pAccNo").value.trim(), instructions: $("pInstr").value.trim(), updatedAt: serverTimestamp() }, { merge: true });
+    setCur(cu); toast("Payment details saved");
+  } catch (err) { toast("Error: " + err.message); }
+  $("savePayBtn").disabled = false;
+});
+
+/* ---------- Admins (superAdmin only) ---------- */
+let admins = [];
+const ASSIGNABLE = ["admin", "contentManager", "moderator", "support"];
+async function loadAdmins(){
+  try {
+    const snap = await getDocs(collection(db, "admins"));
+    admins = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderAdmins();
+  } catch (err) {
+    $("adminList").innerHTML = '<div class="empty">Could not load admins: ' + esc(err.message) + '</div>';
+  }
+}
+function renderAdmins(){
+  $("adminList").innerHTML = admins.map(a => {
+    const locked = a.id === myUid || a.role === "superAdmin";
+    const opts = ASSIGNABLE.map(r => '<option' + (r === a.role ? ' selected' : '') + '>' + r + '</option>').join("");
+    return '<div class="item"><h3>' + esc(a.email) + (a.id === myUid ? " (you)" : "") + '</h3>' +
+      (locked ? '<span class="tag">' + esc(a.role) + '</span>'
+              : '<select data-role="' + esc(a.id) + '" style="margin-bottom:10px">' + opts + '</select>') +
+      '<span class="tag ' + (a.active ? "live" : "draft") + '">' + (a.active ? "Active" : "Disabled") + '</span>' +
+      (locked ? "" : '<div class="actions" style="margin-top:12px">' +
+        '<button class="ghost" data-act="toggle" data-id="' + esc(a.id) + '">' + (a.active ? "Disable" : "Enable") + '</button>' +
+        '<button class="danger" data-act="remove" data-id="' + esc(a.id) + '">Remove</button></div>') +
+      '</div>';
+  }).join("") || '<div class="empty">No admins found.</div>';
+}
+$("adminList").addEventListener("change", async e => {
+  const s = e.target.closest("select[data-role]"); if (!s) return;
+  try {
+    await updateDoc(doc(db, "admins", s.dataset.role), { role: s.value });
+    toast("Role updated"); loadAdmins();
+  } catch (err) { toast("Error: " + err.message); }
+});
+$("adminList").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  const a = admins.find(x => x.id === b.dataset.id); if (!a) return;
+  try {
+    if (b.dataset.act === "toggle") {
+      await updateDoc(doc(db, "admins", a.id), { active: !a.active });
+      toast(a.active ? "Admin disabled" : "Admin enabled");
+    }
+    if (b.dataset.act === "remove") {
+      if (!confirm(tr("Remove admin: ") + a.email + "?")) return;
+      await deleteDoc(doc(db, "admins", a.id));
+      toast("Admin removed");
+    }
+    loadAdmins();
+  } catch (err) { toast("Error: " + err.message); }
+});
+$("adminForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const email = $("aEmail").value.trim().toLowerCase();
+  $("addAdminBtn").disabled = true;
+  try {
+    const snap = await getDocs(query(collection(db, "users"), where("email", "==", email)));
+    if (snap.empty) { toast("No user with that email. They must sign up first."); }
+    else {
+      const uid = snap.docs[0].id;
+      await setDoc(doc(db, "admins", uid), {
+        email, role: $("aRole").value, active: true, addedBy: myUid, createdAt: serverTimestamp()
+      });
+      $("adminForm").reset();
+      toast("Admin added");
+      loadAdmins();
+    }
+  } catch (err) { toast("Error: " + err.message); }
+  $("addAdminBtn").disabled = false;
+});
+</script>
+</body>
+</html>

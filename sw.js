@@ -1,5 +1,5 @@
-// DeepBuild service worker: keeps the app installable and works offline for the app shell.
-const CACHE = "deepbuild-v2";
+// AdusTech service worker: keeps the app installable and works offline for the app shell.
+const CACHE = "adustech-v1";
 const SHELL = ["./", "./index.html", "./i18n.js", "./firebase.js", "./certificate.js", "./imgbb-upload.js",
   "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
