@@ -876,15 +876,35 @@ onAuthStateChanged(auth, user => {
   $("userName").textContent = user ? (user.displayName || user.email) : "";
 });
 </script>
-<button id="installBtn" hidden style="position:fixed;right:14px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:6;width:auto;padding:10px 16px;border-radius:99px;box-shadow:0 6px 20px rgba(0,0,0,.4)">Install app</button>
+<button id="installBtn" style="position:fixed;right:14px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:6;width:auto;padding:10px 16px;border-radius:99px;box-shadow:0 6px 20px rgba(0,0,0,.4)">&#128242; Download App</button>
 <script>
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(console.error));
+
+// Idan kana da APK, sa link dinsa a nan (misali "https://azashdry.github.io/adustech.apk"). Idan babu, a bar shi "".
+const APK_URL = "";
+
 let dbInstall = null;
-addEventListener("beforeinstallprompt", e => { e.preventDefault(); dbInstall = e; document.getElementById("installBtn").hidden = false; });
-document.getElementById("installBtn").addEventListener("click", async () => {
-  if (!dbInstall) return; dbInstall.prompt(); await dbInstall.userChoice; dbInstall = null; document.getElementById("installBtn").hidden = true;
+const ib = document.getElementById("installBtn");
+const isStandalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+if (isStandalone) ib.hidden = true;
+
+addEventListener("beforeinstallprompt", e => { e.preventDefault(); dbInstall = e; });
+addEventListener("appinstalled", () => { ib.hidden = true; });
+
+ib.addEventListener("click", async () => {
+  if (dbInstall) {
+    dbInstall.prompt();
+    await dbInstall.userChoice;
+    dbInstall = null;
+    return;
+  }
+  if (APK_URL) { location.href = APK_URL; return; }
+  if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
+    alert("iPhone: danna maballin Share (\u2B06\uFE0F) a Safari, sannan ka zabi 'Add to Home Screen'.");
+  } else {
+    alert("Bude wannan shafin a Chrome, danna digo uku (\u22EE) a sama, sannan ka zabi 'Install app' ko 'Add to Home screen'.");
+  }
 });
-addEventListener("appinstalled", () => { document.getElementById("installBtn").hidden = true; });
 </script>
 </body>
 </html>
